@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    tools:context="com.example.myapp.ui.SplashActivity">
+
+
+
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/splash_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="150dp"
+            android:src="@mipmap/logo_clean" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+
+                <TextView
+                    android:id="@+id/tv1"
+                    style="@style/TextStyle111"
+                    android:text="你" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    style="@style/TextStyle111"
+                    android:text="好" />
+
+                <TextView
+                    android:id="@+id/tv3"
+                    style="@style/TextStyle111"
+                    android:text="我" />
+
+                <TextView
+                    android:id="@+id/tv4"
+                    style="@style/TextStyle111"
+                    android:text="很" />
+
+                <TextView
+                    android:id="@+id/tv5"
+                    style="@style/TextStyle111"
+                    android:text="帅" />
+
+                <TextView
+                    android:id="@+id/tv6"
+                    style="@style/TextStyle111"
+                    android:text="谢" />
+
+                <TextView
+                    android:id="@+id/tv7"
+                    style="@style/TextStyle111"
+                    android:text="谢" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- 设置背景#F5F5F5 #BEBEBE-->
+    <item android:id="@android:id/background">
+        <shape>
+            <gradient
+                android:angle="270"
+                android:centerY="0.5"
+                android:endColor="#FFFFFF"
+                android:startColor="#FFFFFF" />
+        </shape>
+    </item>
+    <!-- 加载中的样式#165CBC   #85B0E9-->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <gradient
+                    android:angle="270"
+                    android:centerY="0.5"
+                    android:endColor="#A8A8A8"
+                    android:startColor="#CCCCCC" />
+            </shape>
+        </clip>
+    </item>
+    <!-- 加载进度的样式 start是上部，end是下半部分 -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <gradient
+                    android:angle="270"
+                    android:centerY="0.5"
+                    android:endColor="#A8A8A8"
+                    android:startColor="#CCCCCC" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

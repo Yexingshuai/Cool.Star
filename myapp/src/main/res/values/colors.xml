@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="xblue">#5B9CFE</color>
+    <color name="xxblue">#2C81FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="td_choose">#b3b3b3</color>
+    <color name="gray">#aaa</color>
+    <color name="black">#000000</color>
+    <color name="backGround">#ECECEC</color>
+    <color name="textNormalColor">#999899</color>
+    <color name="cardView">#fec34a</color>
+    <color name="cardView1">#30326b</color>
+    <color name="cardView2">#669900</color>
+    <color name="black_90">#dd000000</color>
+    <color name="text_gray_4">#444444</color>
+    <color name="red_base">#FB5B81</color>
+    <color name="text_gray_28">#282828</color>
+    <color name="bg_light_gray">#F2F2F2</color>
+    <color name="divider_gray_line">#cccccc</color>
+    <color name="text_gray_6">#666666</color>
+    <color name="movie_line">#66cccccc</color>
+
+
+    <color name="theme_red_base">#FB5B81</color>
+    <color name="theme_blue">#0077D9</color>
+    <color name="theme_blue_light">#03A9F4</color>
+    <color name="theme_balck">#000000</color>
+    <color name="theme_teal">#009688</color>
+    <color name="theme_brown">#795548</color>
+    <color name="theme_green">#4CAF50</color>
+    <color name="theme_red">#FF5252</color>
+
+</resources>

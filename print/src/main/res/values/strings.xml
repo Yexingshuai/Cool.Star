@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BTPrinter Demo</string>
+    <string name="app_title">BTPrinter Test</string>
+
+    <!--BTPrinterDemo-->
+    <string name="send">Send</string>
+    <string name="print">Print</string>
+    <string name="clear">clear</string>
+    <string name="not_connected">Not Connected</string>
+    <string name="bt_not_enabled_leaving">Bt not enabled,leaving</string>
+    <string name="title_connecting">Connecting…</string>
+    <string name="title_connected_to">Connected </string>
+    <string name="title_not_connected">Not Connected</string>
+    <string name="default_font_gray_scale">4</string>
+    <string name="fontGrayscaleName">Font Grayscale</string>
+    <string name="fontGrayScaleRange">(1~8)</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">Scanning…</string>
+    <string name="select_device">Select Device</string>
+    <string name="none_paired">None Paired</string>
+    <string name="none_found">Device None Found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Devices</string>
+    <string name="button_scan">scan</string>
+
+    <!-- Options Menu -->
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+</resources>

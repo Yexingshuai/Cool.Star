@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/xxblue"
+        android:gravity="bottom">
+
+        <ImageView
+            android:layout_marginBottom="8dp"
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/icon_back" />
+
+
+        <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/tv_web_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/iv_back"
+            android:text="正在加载中..."
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/pg_web"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        style="@style/ProgressBar_Mini"
+        />
+
+    <WebView
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
+</LinearLayout>
