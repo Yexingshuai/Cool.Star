@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/fg.iml" filepath="$PROJECT_DIR$/fg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cool.Star.iml" filepath="$PROJECT_DIR$/Cool.Star.iml" />
+      <module fileurl="file://E:\MyGitCode2\Cool.Star\fg.iml" filepath="E:\MyGitCode2\Cool.Star\fg.iml" />
       <module fileurl="file://$PROJECT_DIR$/myapp/myapp.iml" filepath="$PROJECT_DIR$/myapp/myapp.iml" />
+      <module fileurl="file://E:\MyGitCode2\Cool.Star\myapp\myapp.iml" filepath="E:\MyGitCode2\Cool.Star\myapp\myapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/print/print.iml" filepath="$PROJECT_DIR$/print/print.iml" />
+      <module fileurl="file://E:\MyGitCode2\Cool.Star\print\print.iml" filepath="E:\MyGitCode2\Cool.Star\print\print.iml" />
     </modules>
   </component>
 </project>
