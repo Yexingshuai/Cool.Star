@@ -28,5 +28,6 @@ public class app extends Application {
     public void onCreate() {
         super.onCreate();
         InitializeConfig.init(this);
+        //添加代码
     }
 }
