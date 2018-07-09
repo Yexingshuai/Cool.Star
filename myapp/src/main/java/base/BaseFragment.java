@@ -65,6 +65,7 @@ public abstract class BaseFragment extends Fragment {
         stateLayout.setConentView(mFragmentView);
         initView();
         return stateLayout;
+//        return mFragmentView;
     }
 
 

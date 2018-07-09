@@ -26,31 +26,37 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.SplashActivity">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
 
         </activity>
         <activity android:name=".ui.WebActivity" />
         <activity android:name=".ui.ShowBannerActivity" />
 
-        <service
-            android:name="service.MapLocationSerivce"
-            android:process=":live" />
+        <!--<service-->
+        <!--android:name="service.MapLocationSerivce"-->
+        <!--android:process=":live" />-->
 
         <activity android:name=".ui.FilmDetailActivity" />
-        <activity android:name=".ui.HomeActivity" />
+        <activity
+            android:name=".ui.HomeActivity"
+            android:label="主页" />
         <activity android:name=".ui.AboutActivity"></activity>
+
+
+        <activity android:name=".ui.TestAboutActivity"
+            android:theme="@style/TransparentTheme"/>
     </application>
 
 </manifest>

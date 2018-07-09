@@ -79,12 +79,14 @@ public class MainActivity extends BaseActivity {
             if (tab != null) {
                 tab.setCustomView(view);
             }
-            if (i == 0) {
-                // 设置第一个tab的TextView是被选择的样式
-                tab.getCustomView().findViewById(R.id.item_tab_img).setSelected(true);
-                TextView textOne = tab.getCustomView().findViewById(R.id.item_tab_text);
-                textOne.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            }
+
+            //无用代码。。。。。。
+//            if (i == 0) {
+//                // 设置第一个tab的TextView是被选择的样式
+//                tab.getCustomView().findViewById(R.id.item_tab_img).setSelected(true);
+//                TextView textOne = tab.getCustomView().findViewById(R.id.item_tab_text);
+//                textOne.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+//            }
         }
         tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

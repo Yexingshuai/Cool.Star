@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by daixiankade on 2018/4/26.
+ * Created by yexing on 2018/4/26.
  */
 
 public class MapLocationSerivce extends KeepliveService {

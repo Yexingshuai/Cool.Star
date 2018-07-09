@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/preview_zoom_delete"
+        android:icon="@drawable/ic_send_white_24dp"
+        android:menuCategory="container"
+        android:orderInCategory="100"
+        android:title="上报节点"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/preview_zoom_delete1"
+        android:icon="@drawable/ic_send_white_24dp"
+        android:menuCategory="container"
+        android:orderInCategory="100"
+        android:title="上报节点"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/action_item1"
+       
+        android:title="what"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_item2"
+        android:title="fuck"
+        app:showAsAction="never" />
+
+
+</menu>

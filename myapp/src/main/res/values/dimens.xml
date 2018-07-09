@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_16">16dp</dimen>
+    <dimen name="size_20">20dp</dimen>
+    <dimen name="size_24">24dp</dimen>
+    <dimen name="size_25">25dp</dimen>
+    <dimen name="size_26">26dp</dimen>
+    <dimen name="size_30">30dp</dimen>
+    <dimen name="size_40">40dp</dimen>
+    <dimen name="size_48">48dp</dimen>
+    <dimen name="size_0">0dp</dimen>
+    <dimen name="size_1">1dp</dimen>
+    <dimen name="size_2">2dp</dimen>
+    <dimen name="size_4">4dp</dimen>
+    <dimen name="size_5">5dp</dimen>
+    <dimen name="size_8">8dp</dimen>
+    <dimen name="size_10">10dp</dimen>
+    <dimen name="size_12">12dp</dimen>
+    <dimen name="size_14">14dp</dimen>
+    <dimen name="size_54">54dp</dimen>
+    <dimen name="size_56">56dp</dimen>
+    <dimen name="size_80">80dp</dimen>
+    <dimen name="size_100">100dp</dimen>
+    <dimen name="size_168">168dp</dimen>
+
+    <!--Icon size-->
+    <dimen name="ic_width">@dimen/size_24</dimen>
+    <dimen name="ic_height">@dimen/size_24</dimen>
+    <!--Padding-->
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="app_padding_default">16dp</dimen>
+
+    <!--Margin-->
+    <dimen name="app_card_view_margin_default">@dimen/size_16</dimen>
+    <dimen name="location_margin">@dimen/size_16</dimen>
+    <dimen name="location_padding">@dimen/size_16</dimen>
+
+    <!--App action bar sizes-->
+    <dimen name="app_action_bar_title_text_size_sp">18sp</dimen>
+    <dimen name="app_action_bar_status_bar_height_dp">24dp</dimen>
+    <dimen name="app_action_bar_tool_bar_height_dp">45dp</dimen>
+
+    <!--App indicator sizes-->
+    <dimen name="app_indicator_width">@dimen/size_5</dimen>
+    <dimen name="app_indicator_height">@dimen/size_20</dimen>
+    <dimen name="app_indicator_radius">@dimen/size_5</dimen>
+
+    <!--App shape stroke sizes-->
+    <dimen name="app_shape_stroke_width">@dimen/size_1</dimen>
+    <dimen name="app_shape_radius">@dimen/size_1</dimen>
+    <dimen name="app_shape_radius_5">@dimen/size_5</dimen>
+
+    <!-- text size -->
+    <dimen name="size_sp_12">12sp</dimen>
+    <dimen name="size_sp_14">14sp</dimen>
+    <dimen name="size_sp_15">15sp</dimen>
+    <dimen name="size_sp_16">16sp</dimen>
+    <dimen name="size_sp_18">18sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>

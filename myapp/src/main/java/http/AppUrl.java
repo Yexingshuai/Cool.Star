@@ -8,7 +8,7 @@ public class AppUrl {
 
     public static int index=1;
 
-   public static  boolean a=true;
+
 
     public static final String BASEURL="http://www.wanandroid.com/";
 

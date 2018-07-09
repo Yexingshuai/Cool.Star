@@ -9,7 +9,10 @@ import android.widget.Toast;
 import com.example.myapp.R;
 import com.example.myapp.ui.AboutActivity;
 import com.example.myapp.ui.HomeActivity;
+import com.example.myapp.ui.TestAboutActivity;
+
 import base.BaseFragment;
+import text.RxJavaTest;
 
 /**
  * Created by daixiankade on 2018/3/28.
@@ -45,6 +48,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         ll_design.setOnClickListener(this);
         ll_about = getView(R.id.ll_about);
         ll_about.setOnClickListener(this);
+        RxJavaTest.test2();
     }
 
     @Override
@@ -63,6 +67,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.ll_about:
                 startActivity(new Intent(mCtx, AboutActivity.class));
+//                startActivity(new Intent(mCtx, TestAboutActivity.class), ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity()).toBundle());
                 break;
 
         }

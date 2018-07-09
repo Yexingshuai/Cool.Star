@@ -8,15 +8,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.myapp.R;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import bean.ThemeColor;
 import utils.SPUtils;
 
 /**
- * Created by daixiankade on 2018/5/8.
+ * Created by yexing on 2018/5/8.
  */
 
 public class DesignDialog extends AppCompatDialogFragment implements View.OnClickListener {
@@ -34,6 +34,7 @@ public class DesignDialog extends AppCompatDialogFragment implements View.OnClic
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);   //这句话 是为了去除标题栏
         View view = inflater.inflate(R.layout.dialog_desgin, container, false);
         return view;
     }
@@ -41,8 +42,8 @@ public class DesignDialog extends AppCompatDialogFragment implements View.OnClic
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        EventBus.getDefault().register(this);
-        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_MinWidth);
+
+        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_MinWidth); //这句话不加上 会让dialog 显得很小很拥挤
 
     }
 
@@ -76,7 +77,7 @@ public class DesignDialog extends AppCompatDialogFragment implements View.OnClic
                     themeColor.setChosen(false);
                 }
                 themeColorList.get(position).setChosen(true);
-                SPUtils.put(view.getContext(),"color",themeColorList.get(position).getColor());
+                SPUtils.put(view.getContext(), "color", themeColorList.get(position).getColor());
                 desginAdapter.notifyDataSetChanged();
             }
         });
@@ -89,8 +90,21 @@ public class DesignDialog extends AppCompatDialogFragment implements View.OnClic
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+//        params.gravity = Gravity.BOTTOM;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//        params.x = 0;
+//        params.y = 0;
+        window.setAttributes(params);
+
+        window.setWindowAnimations(R.style.DialogStyle);
+        dialog.onWindowAttributesChanged(params);
+
+
+//        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         return dialog;
     }
@@ -100,8 +114,8 @@ public class DesignDialog extends AppCompatDialogFragment implements View.OnClic
         switch (view.getId()) {
             case R.id.tv_confirm:
                 Message message = new Message();
-                message.what=2;
-                EventBus.getDefault().post(message);
+                message.what = 2;
+//                EventBus.getDefault().post(message);
                 dismiss();
                 break;
         }

@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -20,7 +21,7 @@ import android.widget.ImageView;
  * Created by LRD on 2017/8/25.
  */
 
-public class CircleImageView extends ImageView {
+public class CircleImageView extends AppCompatImageView {
 
     private Paint mPaint;
 

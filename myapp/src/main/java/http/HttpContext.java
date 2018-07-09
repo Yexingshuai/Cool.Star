@@ -1,7 +1,5 @@
 package http;
 
-import bean.HomeItemBean;
-import retrofit2.Call;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;

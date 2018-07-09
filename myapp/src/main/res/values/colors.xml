@@ -23,6 +23,7 @@
     <color name="divider_gray_line">#cccccc</color>
     <color name="text_gray_6">#666666</color>
     <color name="movie_line">#66cccccc</color>
+    <color name="colorTransparent">#88808080</color>
 
 
     <color name="theme_red_base">#FB5B81</color>
@@ -33,5 +34,9 @@
     <color name="theme_brown">#795548</color>
     <color name="theme_green">#4CAF50</color>
     <color name="theme_red">#FF5252</color>
+
+
+    <color name="lift_item_head">#66cccccc</color>
+    <color name="transparent">#00000000</color>
 
 </resources>
