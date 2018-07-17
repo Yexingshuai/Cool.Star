@@ -1,1 +1,1 @@
-include ':myapp', ':print'
+include ':myapp'
