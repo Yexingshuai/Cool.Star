@@ -55,4 +55,6 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.carmelo:keeplive:1.0.0'  //进程保活
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    //fab
+    compile 'com.github.clans:fab:1.6.4'
 }

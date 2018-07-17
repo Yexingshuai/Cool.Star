@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:gravity="center"
-    tools:context="com.example.myapp.ui.ShowBannerActivity">
+    tools:context="com.example.myapp.myapp.ui.activity.ShowBannerActivity">
 
     <ImageView
         android:id="@+id/iv_banner"

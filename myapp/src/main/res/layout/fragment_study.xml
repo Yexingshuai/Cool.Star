@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGround"
-    tools:context="com.example.myapp.ui.SplashActivity">
+    tools:context="com.example.myapp.myapp.ui.activity.SplashActivity">
 
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -58,6 +58,50 @@
             android:textColor="@color/td_choose" />
 
     </RelativeLayout>
+
+
+    <!--fab-->
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/floatingMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingAttention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_menu_add"
+            app:fab_label="关注"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_menu_post"
+            app:fab_label="发帖"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_menu_switch"
+            app:fab_label="按发帖时间排序"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floatingRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_menu_refresh"
+            app:fab_label="刷新"
+            app:fab_size="mini" />
+
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 
 </RelativeLayout>

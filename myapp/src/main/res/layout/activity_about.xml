@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.myapp.ui.AboutActivity">
+    tools:context="com.example.myapp.myapp.ui.activity.AboutActivity">
 
 
     <RelativeLayout

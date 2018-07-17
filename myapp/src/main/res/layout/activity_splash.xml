@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
 
-    tools:context="com.example.myapp.ui.SplashActivity">
+    tools:context="com.example.myapp.myapp.ui.activity.SplashActivity">
 
 
 

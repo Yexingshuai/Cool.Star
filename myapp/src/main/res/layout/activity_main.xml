@@ -13,13 +13,13 @@
         android:orientation="vertical">
 
 
-        <view.MyViewPager
+        <com.example.myapp.myapp.ui.view.MyViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-        </view.MyViewPager>
+        </com.example.myapp.myapp.ui.view.MyViewPager>
 
 
         <android.support.design.widget.TabLayout

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backGround"
     android:orientation="vertical"
-    tools:context="com.example.myapp.ui.SplashActivity">
+    tools:context="com.example.myapp.myapp.ui.activity.SplashActivity">
 
 
     <RelativeLayout

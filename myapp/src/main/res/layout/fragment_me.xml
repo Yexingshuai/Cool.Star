@@ -55,7 +55,8 @@
         android:layout_marginTop="35dp"
         android:gravity="center_vertical">
 
-        <view.CircleImageView
+        <com.example.myapp.myapp.ui.view.CircleImageView
+
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@mipmap/white" />
@@ -80,7 +81,7 @@
         android:layout_marginTop="35dp"
         android:gravity="center_vertical">
 
-        <view.CircleImageView
+        <com.example.myapp.myapp.ui.view.CircleImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@mipmap/white" />
@@ -106,7 +107,7 @@
         android:layout_marginTop="35dp"
         android:gravity="center_vertical">
 
-        <view.CircleImageView
+        <com.example.myapp.myapp.ui.view.CircleImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@mipmap/white" />
