@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapp.R;
-
-import java.util.Collection;
-
 import com.example.myapp.myapp.ui.view.StateLayout;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Collection;
 
 /**
  * Created by daixiankade on 2018/3/28.

@@ -26,5 +26,10 @@ public class TestAboutActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
+
 
 }

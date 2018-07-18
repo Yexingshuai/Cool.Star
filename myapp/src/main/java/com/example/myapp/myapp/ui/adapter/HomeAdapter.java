@@ -38,13 +38,14 @@ import com.example.myapp.myapp.utils.Utils;
 public class HomeAdapter extends RecyclerView.Adapter {
     public static final int HEAD = 0;
     public static final int NORMAL = 1;
-    private List<BannerBean.DataBean> banner;
+    private List<BannerBean.DataBean> banner = new ArrayList<>();
     private Context mCtx;
     private ArrayList<HomeItemBean.DataBean.DatasBean> data = new ArrayList<>();
     private int[] array;
     public NormalHolder normalHolder;
     public HeadHolder headHolder;
     private ItemAnimHelper helper = new ItemAnimHelper();
+    private BannerAdapter bannerAdapter;
 
 
     public HomeAdapter(Context mCtx) {
@@ -56,7 +57,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
     }
 
     public void addBanner(List<BannerBean.DataBean> banner) {
-        this.banner = banner;
+        this.banner.clear();
+        this.banner.addAll(banner);
+        if (bannerAdapter != null) {
+            bannerAdapter.notifyDataSetChanged();
+        }
+        notifyDataSetChanged();
     }
 
     public void addHomeInfo(List<HomeItemBean.DataBean.DatasBean> datas, boolean clear) {
@@ -142,7 +148,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
 
     private void setBanner(final RecyclerView.ViewHolder holder) {
-        BannerAdapter bannerAdapter = new BannerAdapter(banner, mCtx);
+        bannerAdapter = new BannerAdapter(banner, mCtx);
 
 //        ((HeadHolder) holder).ll_guide_points.removeAllViews();
         if (((HeadHolder) holder).ll_guide_points.getChildCount() < 1) {

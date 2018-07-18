@@ -30,4 +30,9 @@ public class ShowBannerActivity extends BaseActivity {
     protected void initData() {
         Glide.with(this).load(url).into(iv_banner);
     }
+
+    @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
 }

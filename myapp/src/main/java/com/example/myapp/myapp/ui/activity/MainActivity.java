@@ -1,13 +1,21 @@
 package com.example.myapp.myapp.ui.activity;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +28,11 @@ import com.example.myapp.myapp.component.MainPresenter;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.ui.fragment.StudyFragment;
 import com.example.myapp.myapp.ui.view.MyViewPager;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by yexing on 2018/3/28.
@@ -33,6 +45,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     public TabLayout tab_layout;
     private MainPresenter mPresenter;
     private long mExitTime;
+    private boolean isShow = true;
 
 
     @Override
@@ -45,6 +58,19 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         new MainPresenter(this);
         mViewPager = findViewById(R.id.view_pager);
         tab_layout = findViewById(R.id.tab_layout);
+
+//        bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (isShow) {
+//                    hideBottomNav(tab_layout);
+//                } else {
+//                    showBottomNav(tab_layout);
+//                }
+//                isShow = !isShow;
+//
+//            }
+//        });
     }
 
     private void music() {
@@ -107,6 +133,11 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         });
     }
 
+    @Override
+    protected boolean isNeedToBeSubscriber() {
+        return true;
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -132,4 +163,59 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     public void setPresenter(MainPresenter presenter) {
         mPresenter = presenter;
     }
+
+
+    private void showBottomNav(final View mTarget) {
+
+//        ObjectAnimator anim = ObjectAnimator.ofFloat(mTarget, "translationY", mTarget.getY(),
+//                0);
+//        anim.setDuration(200);
+//        anim.start();
+
+//        mTarget.animate().translationY(mTarget.getHeight());
+
+        // 这种效果最好
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());
+        va.setDuration(200);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTarget.setY((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+        va.start();
+    }
+
+    private void hideBottomNav(final View mTarget) {
+
+//        ObjectAnimator anim = ObjectAnimator.ofFloat(mTarget, "translationY", mTarget.getY(),
+//                mTarget.getY() + mTarget.getHeight());
+//        anim.setDuration(200);
+//        anim.start();
+
+//        mTarget.animate().translationY(0);
+
+        //这种效果最好
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getBottom());
+        va.setDuration(200);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTarget.setY((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+
+        va.start();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(Message msg) {
+        if (msg.what == StudyFragment.NAVIGATION_HIDE) {
+            hideBottomNav(tab_layout);
+        } else if (msg.what == StudyFragment.NAVIGATION_SHOW) {
+            showBottomNav(tab_layout);
+        }
+        isShow = !isShow;
+    }
+
 }

@@ -22,6 +22,7 @@ import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -64,6 +65,9 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     private FloatingActionButton floatingSwitch;
     private FloatingActionButton floatingRefresh;
     private StudyFragmentContract.Presenter mPresenter;
+
+    public static final int NAVIGATION_HIDE = 1001;
+    public static final int NAVIGATION_SHOW = 1002;
 
     /**
      * 默认页码数
@@ -170,13 +174,16 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
                 super.onScrolled(recyclerView, dx, dy);
 
 
-                //控制底部导航栏隐藏或战士
-                if (dy > 50) {//up -> hide
+                //控制底部导航栏隐藏或展示
+                if (dy > 30) {//up -> hide
+                    Message message = new Message();
+                    message.what = NAVIGATION_HIDE;
+                    EventBus.getDefault().post(message);
 
-                    ((MainActivity) getActivity()).tab_layout.setVisibility(View.GONE);
-
-                } else if (dy < -50) {//down -> show
-                    ((MainActivity) getActivity()).tab_layout.setVisibility(View.VISIBLE);
+                } else if (dy < -30) {//down -> show
+                    Message message = new Message();
+                    message.what = NAVIGATION_SHOW;
+                    EventBus.getDefault().post(message);
                 }
 
 
@@ -249,10 +256,10 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void setBannerAndStudyInfo(Object result) {
+        showContentView();
         if (result instanceof BannerBean) {
             BannerBean bannerBean = (BannerBean) result;
             List<BannerBean.DataBean> datas = bannerBean.getData();
-            checkDatas(datas);
             homeAdapter.addBanner(datas);
 
         } else {

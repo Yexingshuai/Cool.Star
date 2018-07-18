@@ -7,18 +7,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.component.movie.FilmLiveFragment;
+import com.example.myapp.myapp.component.movie.FilmTop250Fragment;
+import com.example.myapp.myapp.ui.adapter.FilmPagerAdapter;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-
-import com.example.myapp.myapp.ui.adapter.FilmPagerAdapter;
-import com.example.myapp.myapp.base.BaseFragment;
-import com.example.myapp.myapp.component.movie.FilmLiveFragment;
-import com.example.myapp.myapp.component.movie.FilmTop250Fragment;
-import com.example.myapp.myapp.utils.SPUtils;
 
 /**
  * Created by daixiankade on 2018/3/28.

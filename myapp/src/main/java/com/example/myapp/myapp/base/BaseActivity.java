@@ -7,6 +7,9 @@ import android.util.Log;
 
 import com.example.myapp.myapp.ui.view.StateLayout;
 
+import org.greenrobot.eventbus.EventBus;
+
+
 /**
  * Created by daixiankade on 2018/5/2.
  */
@@ -20,6 +23,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(inflateContentView());
         initView(savedInstanceState);
+        if (isNeedToBeSubscriber()) {
+            EventBus.getDefault().register(this);
+        }
+
         initData();
     }
 
@@ -29,6 +36,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         Log.e(TAG_LOG, "==onResume===");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isNeedToBeSubscriber()) {
+            if (EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().unregister(this);
+            }
+        }
+    }
 
     public abstract int inflateContentView();
 
@@ -38,6 +54,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     protected abstract void initData();
+
+    protected abstract boolean isNeedToBeSubscriber();
 
     public <T> T getView(int id) {
         return (T) findViewById(id);

@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/myapp" />
-            <option value="$PROJECT_DIR$/print" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

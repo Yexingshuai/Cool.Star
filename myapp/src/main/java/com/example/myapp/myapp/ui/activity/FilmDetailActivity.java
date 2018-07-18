@@ -146,6 +146,11 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
+
 
     private List<FilmPeople> list = new ArrayList<>();
 
