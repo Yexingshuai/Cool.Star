@@ -30,6 +30,7 @@ import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.ui.fragment.StudyFragment;
 import com.example.myapp.myapp.ui.view.MyViewPager;
+import com.example.myapp.myapp.ui.view.NavigationButton;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -59,18 +60,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         mViewPager = findViewById(R.id.view_pager);
         tab_layout = findViewById(R.id.tab_layout);
 
-//        bt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (isShow) {
-//                    hideBottomNav(tab_layout);
-//                } else {
-//                    showBottomNav(tab_layout);
-//                }
-//                isShow = !isShow;
-//
-//            }
-//        });
     }
 
     private void music() {
@@ -94,28 +83,24 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         tab_layout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
 
+
         for (int i = 0; i < adapter.getCount(); i++) {
             TabLayout.Tab tab = tab_layout.getTabAt(i);
-            View view = LayoutInflater.from(this).inflate(R.layout.item_tablayout, null);
-            ImageView img = view.findViewById(R.id.item_tab_img);
-            TextView text = view.findViewById(R.id.item_tab_text);
-            img.setImageResource(mTabImg.get(i));
-            text.setText(mTabText.get(i));
+            NavigationButton button = new NavigationButton(this);
+            button.init(mTabImg.get(i), mTabText.get(i), null);
             if (tab != null) {
-                tab.setCustomView(view);
-            }
-            if (i == 0) {
-                TextView textOne = tab.getCustomView().findViewById(R.id.item_tab_text);
-                textOne.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                tab.setCustomView(button);
             }
         }
 
         tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tab.getCustomView().findViewById(R.id.item_tab_img).setSelected(true);
+//                tab.getCustomView().findViewById(R.id.item_tab_img).setSelected(true);
                 TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
                 text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                NavigationButton customView = (NavigationButton) tab.getCustomView();
+                customView.setSelected1(true);
                 mViewPager.setCurrentItem(tab.getPosition(), false);
 
             }
@@ -124,6 +109,9 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
                 text.setTextColor(getResources().getColor(R.color.textNormalColor));
+                NavigationButton customView = (NavigationButton) tab.getCustomView();
+                customView.setSelected1(false);
+
             }
 
             @Override
