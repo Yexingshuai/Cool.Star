@@ -36,6 +36,13 @@ import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.http.HttpContext;
 
 import com.example.myapp.myapp.utils.SPUtils;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 
 
 /**
@@ -43,6 +50,27 @@ import com.example.myapp.myapp.utils.SPUtils;
  */
 
 public class StudyFragment extends BaseFragment implements StudyFragmentContract.View {
+
+
+    private int[] imageResources = new int[]{
+            R.drawable.squirrel,
+            R.drawable.bear,
+            R.drawable.bee,
+            R.drawable.butterfly,
+            R.drawable.cat,
+            R.drawable.deer,
+            R.drawable.dolphin,
+            R.drawable.eagle,
+            R.drawable.horse,
+            R.drawable.elephant,
+            R.drawable.owl,
+            R.drawable.peacock,
+            R.drawable.pig,
+            R.drawable.rat,
+            R.drawable.snake,
+            R.drawable.bat
+
+    };
 
 
     private RecyclerView mRecylerview;
@@ -68,6 +96,9 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     public static final int NAVIGATION_HIDE = 1001;
     public static final int NAVIGATION_SHOW = 1002;
+
+    public int[] boomTitleNormal = {R.string.boom_tile1, R.string.boom_tile2, R.string.boom_tile3, R.string.boom_tile4};
+    public int[] boomTitleText = {R.string.boom_tile5, R.string.boom_tile2, R.string.boom_tile3, R.string.boom_tile4};
 
     /**
      * 默认页码数
@@ -128,14 +159,27 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         });
         mRecylerview = getView(R.id.rv);
         llTitleContainer = getView(R.id.title_bar);
-        //大菜单
-        floatingActionMenu = getView(R.id.floatingMenu);
-        floatingAttention = getView(R.id.floatingAttention);
-        floatingPost = getView(R.id.floatingPost);
-        floatingSwitch = getView(R.id.floatingSwitch);
-        floatingRefresh = getView(R.id.floatingRefresh);
 
-        floatingActionMenu.setClosedOnTouchOutside(true);
+
+        //BoomMenu
+        BoomMenuButton bmb = getView(R.id.boom_menu);
+
+        for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++) {
+            HamButton.Builder builder = new HamButton.Builder()
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            // When the boom-button corresponding this builder is clicked.
+                            Toast.makeText(getActivity(), "Clicked " + index, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            builder.normalTextRes(R.string.boom_tile1)
+                    .subNormalTextRes(boomTitleNormal[i])
+                    .normalTextRes(boomTitleText[i])
+                    .normalImageRes(imageResources[i]);
+            bmb.addBuilder(builder);
+        }
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mCtx, LinearLayoutManager.VERTICAL, false);

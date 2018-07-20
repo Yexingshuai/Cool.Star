@@ -20,7 +20,6 @@
     </string>
 
 
-
     <string name="about">项目全部数据来源 鸿洋 开放API,以及豆瓣API2.0，在此表示感谢.~\n\n
         项目整体采用MVC(MVP暂时还没有搞透彻)+RxJava+Retorift。\n\n
         以及简单涉及到Eventbus+WebView+属性动画\n
@@ -31,4 +30,29 @@
         请到Git上面给我点个赞吧\n
 
     </string>
+
+
+    <!--关于BoomMenu -->
+
+    <string name="boom_tile1">
+        <item>Crossing miles of frustrations </item>
+    </string>
+
+    <string name="boom_tile2">
+        <item>And rivers of raging</item>
+    </string>
+
+    <string name="boom_tile3">
+        <item>I found my freedom now</item>
+    </string>
+
+    <string name="boom_tile4">
+        <item>And I am traveling light!</item>
+    </string>
+
+    <string name="boom_tile5">
+        <item>种一棵树最好的时间是十年前，其次是现在。</item>
+    </string>
+
+
 </resources>

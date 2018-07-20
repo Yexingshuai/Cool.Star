@@ -13,6 +13,7 @@ import com.example.myapp.myapp.ui.activity.HomeActivity;
 
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.test.RxJavaTest;
+import com.example.myapp.myapp.ui.activity.TestMenuActivity;
 import com.example.myapp.myapp.ui.dialog.DesignDialog;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -70,7 +71,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 designDialog.show(getFragmentManager(),"tag");
                 break;
             case R.id.ll_about:
-                startActivity(new Intent(mCtx, AboutActivity.class));
+//                startActivity(new Intent(mCtx, AboutActivity.class));
+                startActivity(new Intent(mCtx, TestMenuActivity.class));
 //                startActivity(new Intent(mCtx, TestAboutActivity.class), ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity()).toBundle());
                 break;
 

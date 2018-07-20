@@ -29,4 +29,18 @@ public class Useless {
 //        }
 
 
+    /**
+     *
+     */
+
+    //大菜单
+//        floatingActionMenu = getView(R.id.floatingMenu);
+//        floatingAttention = getView(R.id.floatingAttention);
+//        floatingPost = getView(R.id.floatingPost);
+//        floatingSwitch = getView(R.id.floatingSwitch);
+//        floatingRefresh = getView(R.id.floatingRefresh);
+//
+//        floatingActionMenu.setClosedOnTouchOutside(true);
+
+
 }

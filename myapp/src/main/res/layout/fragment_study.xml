@@ -61,48 +61,85 @@
 
 
     <!--fab-->
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/floatingMenu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom|right"
+    <!--<com.github.clans.fab.FloatingActionMenu-->
+    <!--android:id="@+id/floatingMenu"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:layout_marginBottom="60dp"-->
+    <!--android:layout_marginRight="35dp">-->
+
+    <!--<com.github.clans.fab.FloatingActionButton-->
+    <!--android:id="@+id/floatingAttention"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/ic_menu_add"-->
+    <!--app:fab_label="关注"-->
+    <!--app:fab_size="mini" />-->
+
+    <!--<com.github.clans.fab.FloatingActionButton-->
+    <!--android:id="@+id/floatingPost"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/ic_menu_post"-->
+    <!--app:fab_label="发帖"-->
+    <!--app:fab_size="mini" />-->
+
+    <!--<com.github.clans.fab.FloatingActionButton-->
+    <!--android:id="@+id/floatingSwitch"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/ic_menu_switch"-->
+    <!--app:fab_label="按发帖时间排序"-->
+    <!--app:fab_size="mini" />-->
+
+    <!--<com.github.clans.fab.FloatingActionButton-->
+    <!--android:id="@+id/floatingRefresh"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/ic_menu_refresh"-->
+    <!--app:fab_label="刷新"-->
+    <!--app:fab_size="mini" />-->
+
+
+    <!--</com.github.clans.fab.FloatingActionMenu>-->
+
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/boom_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginRight="35dp">
+        android:layout_marginRight="35dp"
+        app:bmb_buttonEnum="ham"
+        app:bmb_buttonPlaceEnum="buttonPlace_ham_4"
+        app:bmb_hamHeight="0dp"
+        app:bmb_hamWidth="0dp"
+        app:bmb_piecePlaceEnum="piecePlace_ham_4"
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floatingAttention"
-            android:layout_width="wrap_content"
+        >
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/dolphin" />
+
+        <TextView
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_menu_add"
-            app:fab_label="关注"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floatingPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_menu_post"
-            app:fab_label="发帖"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floatingSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_menu_switch"
-            app:fab_label="按发帖时间排序"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floatingRefresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_menu_refresh"
-            app:fab_label="刷新"
-            app:fab_size="mini" />
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="BOOM!"
+            android:textColor="@android:color/white"
+            android:textSize="10sp" />
 
 
-    </com.github.clans.fab.FloatingActionMenu>
-
+    </com.nightonke.boommenu.BoomMenuButton>
 
 </RelativeLayout>

@@ -33,14 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".myapp.ui.activity.MainActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".myapp.ui.activity.MainActivity" />
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
 
-        </activity>
         <activity android:name=".myapp.ui.activity.WebActivity" />
         <activity android:name=".myapp.ui.activity.ShowBannerActivity" />
 
@@ -55,8 +50,11 @@
         <activity android:name=".myapp.ui.activity.AboutActivity"></activity>
 
 
-        <activity android:name=".myapp.ui.activity.TestAboutActivity"
-            android:theme="@style/TransparentTheme"/>
+        <activity
+            android:name=".myapp.ui.activity.TestAboutActivity"
+            android:theme="@style/TransparentTheme" />
+
+        <activity android:name=".myapp.ui.activity.TestMenuActivity" />
     </application>
 
 </manifest>

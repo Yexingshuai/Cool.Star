@@ -88,21 +88,21 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
             TabLayout.Tab tab = tab_layout.getTabAt(i);
             NavigationButton button = new NavigationButton(this);
             button.init(mTabImg.get(i), mTabText.get(i), null);
-            if (tab != null) {
-                tab.setCustomView(button);
+            tab.setCustomView(button);
+            if (i == 0) {
+                TextView textOne = tab.getCustomView().findViewById(R.id.item_tab_text);
+                textOne.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         }
 
         tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.item_tab_img).setSelected(true);
                 TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
                 text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 NavigationButton customView = (NavigationButton) tab.getCustomView();
                 customView.setSelected1(true);
                 mViewPager.setCurrentItem(tab.getPosition(), false);
-
             }
 
             @Override
