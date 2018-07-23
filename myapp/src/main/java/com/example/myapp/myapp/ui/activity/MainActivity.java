@@ -25,6 +25,7 @@ import java.util.List;
 
 import com.example.myapp.myapp.base.BaseView;
 import com.example.myapp.myapp.component.MainPresenter;
+import com.example.myapp.myapp.test.TestStatic;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
@@ -59,6 +60,8 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         new MainPresenter(this);
         mViewPager = findViewById(R.id.view_pager);
         tab_layout = findViewById(R.id.tab_layout);
+//       new TestStatic.TestSS()
+
 
     }
 

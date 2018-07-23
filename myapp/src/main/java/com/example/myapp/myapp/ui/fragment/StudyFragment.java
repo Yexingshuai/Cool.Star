@@ -69,7 +69,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
             R.drawable.rat,
             R.drawable.snake,
             R.drawable.bat
-
     };
 
 
