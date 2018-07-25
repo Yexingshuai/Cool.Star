@@ -1,7 +1,9 @@
 package com.example.myapp.myapp.ui.activity;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +25,17 @@ public class ShowBannerActivity extends BaseActivity {
     protected void initView(@Nullable Bundle savedInstanceState) {
         iv_banner = findViewById(R.id.iv_banner);
         url = getIntent().getStringExtra("url");
+        final String webUrl = getIntent().getStringExtra("webUrl");
+        iv_banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowBannerActivity.this, WebActivity.class);
+                intent.putExtra("webUrl", webUrl);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
     }
 

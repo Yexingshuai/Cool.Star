@@ -49,6 +49,7 @@ public class BannerAdapter extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, int position) {
         position = position % data.size();
         final String imagePath = data.get(position).getImagePath();
+        final String webUrl = data.get(position).getUrl();
         final ImageView imageView = new ImageView(mCtx);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,7 @@ public class BannerAdapter extends PagerAdapter {
                 Bundle bannerBundle = MyAnimationUtils.makeSceneTransition((Activity) container.getContext(), imageView, "bannerImage");
                 Intent intent = new Intent(mCtx, ShowBannerActivity.class);
                 intent.putExtra("url", imagePath);
+                intent.putExtra("webUrl",webUrl);
                 mCtx.startActivity(intent, bannerBundle);
             }
         });

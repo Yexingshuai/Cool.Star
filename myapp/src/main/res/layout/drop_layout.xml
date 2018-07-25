@@ -9,8 +9,7 @@
     <com.example.myapp.myapp.ui.view.DropDownMenu
         android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         app:dddividerColor="@color/white"
         app:ddmaskColor="@color/black"
         app:ddmenuBackgroundColor="@color/white"
@@ -22,9 +21,6 @@
         app:ddtextUnselectedColor="@color/black"
         app:ddunderlineColor="@color/theme_green" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/theme_green" />
+
 
 </LinearLayout>

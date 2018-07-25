@@ -45,7 +45,9 @@ public class TestMenuActivity extends BaseActivity {
         contentView.setGravity(Gravity.CENTER);
         contentView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
-        mDownMenu.setDropDownMenu(Arrays.asList(headers),popupViews,contentView);
+        View inflate = getLayoutInflater().inflate(R.layout.drop_layout, null);
+
+        mDownMenu.setDropDownMenu(Arrays.asList(headers),popupViews,inflate);
     }
 
     @Override

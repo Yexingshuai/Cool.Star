@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 
 /**
- * Created by daixiankade on 2018/4/16.
+ * Created by  on 2018/4/16.
  */
 
 public class MyAnimationUtils {

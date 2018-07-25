@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.example.myapp.R;
 
 /**
- * Created by daixiankade on 2018/3/30.
+ * Created by yexing on 2018/3/30.
  */
 
 public class WebActivity extends AppCompatActivity {
