@@ -70,8 +70,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
             data.clear();
         }
         data.addAll(datas);
-//        notifyDataSetChanged();
-        notifyItemRangeChanged(datas.size(), 20);
+
+        notifyItemRangeInserted(datas.size(),20);
+//        notifyItemRangeChanged(datas.size(), 20);
     }
 
 

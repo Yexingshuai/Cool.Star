@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -43,6 +44,10 @@ import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
 /**
@@ -126,6 +131,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
             super.handleMessage(msg);
         }
     };
+    private SmartRefreshLayout mRefreshLayout;
 
 
     @Override
@@ -140,7 +146,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void initData() {
-        mPresenter.requestBannerAndStutyInfo(mPageNum);
+//        mPresenter.requestBannerAndStutyInfo(mPageNum);
+        mRefreshLayout.autoRefresh();
 
     }
 
@@ -148,14 +155,23 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void initView() {
 
-        swipeRefreshLayout = getView(R.id.swipe);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRefreshLayout = getView(R.id.refreshLayout);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mPageNum = PAGE_NUMBER_DEFAULT;
                 mPresenter.requestBannerAndStutyInfo(mPageNum);
             }
         });
+
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                //加载更多功能的代码
+                mPresenter.requestStudyInfo(++mPageNum);
+            }
+        });
+
         mRecylerview = getView(R.id.rv);
         llTitleContainer = getView(R.id.title_bar);
 
@@ -240,20 +256,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 //                RecyclerView.SCROLL_STATE_IDLE        滚动空闲(滚动---->停止)
 //                RecyclerView.SCROLL_STATE_DRAGGING    拖拽recyclerView滚动
                 super.onScrollStateChanged(recyclerView, newState);
-                //设置什么布局管理器,就获取什么的布局管理器
-                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                // 当停止滑动时
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    //获取最后一个完全显示的ItemPosition ,角标值
-                    int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
-                    //所有条目,数量值
-                    int totalItemCount = manager.getItemCount();
-                    // 判断是否滚动到底部，并且是向右滚动
-                    if (lastVisibleItem == (totalItemCount - 1)) {
-                        //加载更多功能的代码
-                        mPresenter.requestStudyInfo(++mPageNum);
-                    }
-                }
 
             }
         });
@@ -291,14 +293,13 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void setStudyInfo(HomeItemBean result) {
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
+        mRefreshLayout.finishLoadMore();
         homeAdapter.addHomeInfo(result.getData().getDatas(), false);
     }
 
     @Override
     public void setBannerAndStudyInfo(Object result) {
+        mRefreshLayout.finishRefresh();
         showContentView();
         if (result instanceof BannerBean) {
             BannerBean bannerBean = (BannerBean) result;
@@ -315,16 +316,11 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void showLoading() {
-        if (swipeRefreshLayout != null && !swipeRefreshLayout.isRefreshing()) {
-//            swipeRefreshLayout.setRefreshing(true);
-        }
+
     }
 
     @Override
     public void hideLoading() {
-        if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
 
-            swipeRefreshLayout.setRefreshing(false);
-        }
     }
 }

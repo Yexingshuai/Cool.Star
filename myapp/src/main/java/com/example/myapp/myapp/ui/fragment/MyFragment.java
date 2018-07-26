@@ -60,7 +60,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_me:
-                Toast.makeText(mCtx, "别点我，我很帅..", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCtx, "别点我，我很帅...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_home:
 //                startActivity(new Intent(mCtx, HomeActivity.class));
