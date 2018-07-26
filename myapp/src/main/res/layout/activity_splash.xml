@@ -26,8 +26,9 @@
             android:layout_centerHorizontal="true"
             android:layout_width="130dp"
             android:layout_height="130dp"
+            android:tint="@color/white"
             android:layout_marginTop="150dp"
-            android:src="@mipmap/logo_clean" />
+            android:src="@drawable/haitun" />
 
 
 

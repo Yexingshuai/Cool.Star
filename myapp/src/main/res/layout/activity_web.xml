@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,23 +14,23 @@
         android:gravity="bottom">
 
         <ImageView
-            android:layout_marginBottom="8dp"
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/icon_back" />
 
 
         <TextView
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:layout_marginBottom="8dp"
             android:id="@+id/tv_web_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/iv_back"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="正在加载中..."
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -39,14 +40,40 @@
 
     <ProgressBar
         android:id="@+id/pg_web"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
         style="@style/ProgressBar_Mini"
-        />
-
-    <WebView
-        android:id="@+id/web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="3dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+
+
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/bmb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="35dp"
+            app:bmb_buttonEnum="textInsideCircle"
+            app:bmb_buttonPlaceEnum="buttonPlace_sc_6_1"
+            app:bmb_hideMoveEaseEnum="inExpo"
+            app:bmb_hideRotateEaseEnum="inExpo"
+            app:bmb_hideScaleEaseEnum="inExpo"
+            app:bmb_highlightedColor="@android:color/holo_blue_dark"
+            app:bmb_normalColor="@android:color/holo_blue_bright"
+            app:bmb_piecePlaceEnum="piecePlace_share"
+            app:bmb_showMoveEaseEnum="outExpo"
+            app:bmb_showRotateEaseEnum="outExpo"
+            app:bmb_showScaleEaseEnum="outExpo" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

@@ -21,12 +21,11 @@
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never">
-        </android.support.v7.widget.RecyclerView>
+            android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
 
         <!--<com.scwang.smartrefresh.layout.footer.BallPulseFooter-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"/>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 

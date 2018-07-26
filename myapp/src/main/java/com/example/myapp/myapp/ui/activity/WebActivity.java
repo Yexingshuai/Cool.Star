@@ -1,5 +1,7 @@
 package com.example.myapp.myapp.ui.activity;
 
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.myapp.R;
+import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
+import com.nightonke.boommenu.BoomMenuButton;
 
 /**
  * Created by yexing on 2018/3/30.
@@ -25,6 +29,8 @@ public class WebActivity extends AppCompatActivity {
     private WebView web;
     private ProgressBar pg_web;
     private String title;
+    private int[] imageResource = {R.drawable.weixin2, R.drawable.qq, R.drawable.qzone, R.drawable.qq, R.drawable.qq, R.drawable.qq};
+    private int[] des = {R.string.boom_tile2};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +45,14 @@ public class WebActivity extends AppCompatActivity {
         String webUrl = (String) extras.getString("webUrl");
         title = (String) extras.getString("title");
         ImageView iv_back = findViewById(R.id.iv_back);
+        BoomMenuButton bmb = findViewById(R.id.bmb);
+        for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++)
+            bmb.addBuilder(new TextInsideCircleButton.Builder()
+                    .normalImageRes(imageResource[i])
+                    .normalTextRes(des[0])
+                    .pieceColor(Color.WHITE)
+            );
+        bmb.setDraggable(true);
 
         tv_web_title = findViewById(R.id.tv_web_title);
         pg_web = findViewById(R.id.pg_web);
@@ -52,7 +66,6 @@ public class WebActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // 当网页加载完成后，回调
-//                tv_web_title.setText(title);
                 super.onPageFinished(view, url);
             }
         });
