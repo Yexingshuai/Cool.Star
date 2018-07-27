@@ -13,16 +13,17 @@ import com.umeng.socialize.PlatformConfig;
 import java.util.logging.Level;
 
 
-
 /**
  * Created by yexing on 2018/4/17.
  */
 
 public class InitializeConfig {
 
-    public static final boolean isDebug=true;
+    public static final boolean isDebug = true;
+
     public static void init(Application appContext) {
 
+        //Log
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
             public boolean isLoggable(int priority, String tag) {
@@ -31,12 +32,14 @@ public class InitializeConfig {
 
         });
 
-        UMConfigure.init(appContext,"5a12384aa40fa3551f0001d1"
-                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        //友盟第三方分享
+        UMConfigure.init(appContext, "5b598a94b27b0a77c30000d1"
+                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
 
-        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+//        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
+//        PlatformConfig.setSinaWeibo("3072140610", "faa0b4cf935fa6f3ee935b531190106c", "http://sns.whalecloud.com");
+//        PlatformConfig.setQQZone("1107157177", "ri5rEKt2ZU3zUaBI");
+        PlatformConfig.setQQZone("1107157177", "ri5rEKt2ZU3zfdsUaBI");
 
 
         //初始化框架

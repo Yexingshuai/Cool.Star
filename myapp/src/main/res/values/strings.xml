@@ -54,5 +54,25 @@
         <item>种一棵树最好的时间是十年前，其次是现在。</item>
     </string>
 
+    <!--share-->
+    <string name="share_wechat">
+        <item>分享至微信好友.</item>
+    </string>
+    <string name="share_qq">
+        <item>分享至qq好友.</item>
+    </string>
+    <string name="share_sina">
+        <item>分享至微博.</item>
+    </string>
+    <string name="share_wechat_fav">
+        <item>添加到微信收藏.</item>
+    </string>
+    <string name="share_qzone">
+        <item>分享至QQ空间.</item>
+    </string>
+    <string name="share_evernote">
+        <item>分享至印象笔记.</item>
+    </string>
+
 
 </resources>
