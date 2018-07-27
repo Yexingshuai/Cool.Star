@@ -1,7 +1,7 @@
 package com.example.myapp.myapp.data.api;
 
 /**
- * Created by daixiankade on 2018/3/28.
+ * Created by daixiankade on 2018/3/28.菊花星
  */
 
 public class AppUrl {
