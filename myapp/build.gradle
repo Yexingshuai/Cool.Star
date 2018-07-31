@@ -69,5 +69,7 @@ dependencies {
     implementation files('libs/umeng-share-QQ-simplify-6.9.3.jar')
     implementation files('libs/umeng-share-sina-simplify-6.9.3.jar')
     implementation files('libs/umeng-share-wechat-simplify-6.9.3.jar')
+    //LikeButton
+    implementation 'com.github.jd-alexander:LikeButton:+'
 
 }

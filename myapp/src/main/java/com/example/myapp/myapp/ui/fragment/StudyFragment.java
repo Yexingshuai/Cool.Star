@@ -85,9 +85,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private float duration = 350f;
     private HomeAdapter homeAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
-
-
     private ViewPager mViewPager;
 
     private int color = -1;

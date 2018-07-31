@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,8 @@ import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.utils.helper.ItemAnimHelper;
 import com.example.myapp.myapp.utils.Utils;
+
+import javax.security.auth.login.LoginException;
 
 /**
  * Created by yexing on 2018/3/29.
@@ -62,7 +66,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         if (bannerAdapter != null) {
             bannerAdapter.notifyDataSetChanged();
         }
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public void addHomeInfo(List<HomeItemBean.DataBean.DatasBean> datas, boolean clear) {
@@ -71,8 +75,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
         data.addAll(datas);
 
-        notifyItemRangeInserted(datas.size(),20);
-//        notifyItemRangeChanged(datas.size(), 20);
+//        notifyItemRangeInserted(datas.size(),20);
+        notifyItemRangeChanged(datas.size(), 20);
     }
 
 
@@ -84,6 +88,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
             return NORMAL;
         }
 
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -108,11 +117,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
         if (itemViewType == HEAD) {
             //轮播图处理
-            if (banner != null) {
+            if (banner != null && banner.size() > 0) {
                 setBanner(holder);
             }
 
         } else {
+
             //一般条目处理
             setNomal(holder, position - 1);
             helper.showItemAnim(holder.itemView, position - 1);
@@ -126,13 +136,13 @@ public class HomeAdapter extends RecyclerView.Adapter {
             ((NormalHolder) holder).tv_author.setText(data.get(position).getAuthor() != null ? data.get(position).getAuthor() : "");
             ((NormalHolder) holder).tv_time.setText(data.get(position).getNiceDate() != null ? data.get(position).getNiceDate() : "");
             ((NormalHolder) holder).tv_title.setText(data.get(position).getTitle() != null ? data.get(position).getTitle() : "");
-            ((NormalHolder) holder).tv_type.setText(data.get(position).getSuperChapterName() != null ? data.get(position).getSuperChapterName() : "");
+            ((NormalHolder) holder).tv_type.setText(data.get(position).getChapterName() != null ? data.get(position).getChapterName() : "");
 
             Random random = new Random();
             int i = random.nextInt(array.length);
             ((NormalHolder) holder).ll_normal.setCardBackgroundColor(array[i]);
 
-            ((NormalHolder) holder).ll_normal.setOnClickListener(new View.OnClickListener() {
+            ((NormalHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String link = data.get(position).getLink();

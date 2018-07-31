@@ -22,16 +22,17 @@
         card_view:cardUseCompatPadding="true"
         card_view:contentPadding="10dp">
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/rl1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -42,7 +43,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/squirrel" />
+                        android:src="@mipmap/blue_head" />
 
                     <TextView
                         android:id="@+id/tv_author"
@@ -69,6 +70,7 @@
 
 
                 <TextView
+                    android:layout_below="@+id/rl1"
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,7 +81,8 @@
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <RelativeLayout
+                <FrameLayout
+                    android:layout_below="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -91,8 +94,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text=""
-                        android:textColor="@color/black"
+                        android:text="777777"
+                        android:textColor="@color/xxblue"
                         android:textSize="14sp" />
 
 
@@ -108,28 +111,25 @@
                     <!--</com.like.LikeButton>-->
 
 
-                </RelativeLayout>
-            </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true">
-
-                <com.like.LikeButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-
-                    app:icon_size="18dp"
-                    app:icon_type="heart"
-                    card_view:liked="false"></com.like.LikeButton>
+                        <com.like.LikeButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            app:icon_size="20dp"
+                            app:icon_type="heart"
+                            card_view:liked="false"></com.like.LikeButton>
 
 
-            </FrameLayout>
 
-        </RelativeLayout>
+
+
+                </FrameLayout>
+            </RelativeLayout>
+
+
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
