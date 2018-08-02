@@ -1,0 +1,59 @@
+1.底部导航栏展示隐藏的动画
+    show:
+         //        ObjectAnimator anim = ObjectAnimator.ofFloat(mTarget, "translationY", mTarget.getY(),
+         //                0);
+         //        anim.setDuration(200);
+         //        anim.start();
+
+         //        mTarget.animate().translationY(mTarget.getHeight());
+
+     hide:
+         //        ObjectAnimator anim = ObjectAnimator.ofFloat(mTarget, "translationY", mTarget.getY(),
+         //                mTarget.getY() + mTarget.getHeight());
+         //        anim.setDuration(200);
+         //        anim.start();
+
+         //        mTarget.animate().translationY(0);
+
+
+ 2.选项卡：
+
+         //        for (int i = 0; i < adapter.getCount(); i++) {
+         //            TabLayout.Tab tab = tab_layout.getTabAt(i);
+         //            View view = LayoutInflater.from(this).inflate(R.layout.item_tablayout, null);
+         //            ImageView img = view.findViewById(R.id.item_tab_img);
+         //            TextView text = view.findViewById(R.id.item_tab_text);
+         //            img.setImageResource(mTabImg.get(i));
+         //            text.setText(mTabText.get(i));
+         //            if (tab != null) {
+         //                tab.setCustomView(view);
+         //            }
+         //            if (i == 0) {
+         //                TextView textOne = tab.getCustomView().findViewById(R.id.item_tab_text);
+         //                textOne.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+         //            }
+         //        }
+
+
+ 3.大菜单:
+
+         //        floatingActionMenu = getView(R.id.floatingMenu);
+         //        floatingAttention = getView(R.id.floatingAttention);
+         //        floatingPost = getView(R.id.floatingPost);
+         //        floatingSwitch = getView(R.id.floatingSwitch);
+         //        floatingRefresh = getView(R.id.floatingRefresh);
+         //
+         //        floatingActionMenu.setClosedOnTouchOutside(true);
+
+
+ 4.music
+
+             private void music() {
+                 try {
+                     MediaPlayer player = MediaPlayer.create(this, R.raw.baojing);
+                     player.start();
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                 }
+             }

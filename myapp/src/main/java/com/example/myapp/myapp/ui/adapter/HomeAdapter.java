@@ -66,7 +66,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         if (bannerAdapter != null) {
             bannerAdapter.notifyDataSetChanged();
         }
-//        notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public void addHomeInfo(List<HomeItemBean.DataBean.DatasBean> datas, boolean clear) {

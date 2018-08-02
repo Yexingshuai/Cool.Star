@@ -1,21 +1,19 @@
 package com.example.myapp.myapp.ui.activity;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +23,6 @@ import java.util.List;
 
 import com.example.myapp.myapp.base.BaseView;
 import com.example.myapp.myapp.component.MainPresenter;
-import com.example.myapp.myapp.test.TestStatic;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
@@ -44,10 +41,11 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
 
     private MyViewPager mViewPager;
-    public TabLayout tab_layout;
+    public TabLayout mTabLayout;
     private MainPresenter mPresenter;
     private long mExitTime;
-    private boolean isShow = true;
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -59,69 +57,39 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     protected void initView(@Nullable Bundle savedInstanceState) {
         new MainPresenter(this);
         mViewPager = findViewById(R.id.view_pager);
-        tab_layout = findViewById(R.id.tab_layout);
-//       new TestStatic.TestSS()
-
-
+        mTabLayout = findViewById(R.id.tab_layout);
+        mNavigationView = findViewById(R.id.nav_view);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
     }
 
-    private void music() {
-        try {
-            MediaPlayer player = MediaPlayer.create(this, R.raw.baojing);
-            player.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     protected void initData() {
         List<Integer> mTabImg = mPresenter.getTabImg();
         List<BaseFragment> fragments = mPresenter.getFragments();
         List<String> mTabText = mPresenter.getPageTitle();
+        mNavigationView.setNavigationItemSelectedListener(new NavigationItemSelectListener());
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(fragments.size());
-        tab_layout.setupWithViewPager(mViewPager);
+        mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
 
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            TabLayout.Tab tab = tab_layout.getTabAt(i);
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
             NavigationButton button = new NavigationButton(this);
             button.init(mTabImg.get(i), mTabText.get(i), null);
             tab.setCustomView(button);
             if (i == 0) {
                 TextView textOne = tab.getCustomView().findViewById(R.id.item_tab_text);
-                textOne.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                textOne.setTextColor(getResources().getColor(R.color.icon_select));
+                button.setSelected1(true);
             }
         }
 
-        tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
-                text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                NavigationButton customView = (NavigationButton) tab.getCustomView();
-                customView.setSelected1(true);
-                mViewPager.setCurrentItem(tab.getPosition(), false);
-            }
+        mTabLayout.addOnTabSelectedListener(new TabLayoutOnItemSelectListener());
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
-                text.setTextColor(getResources().getColor(R.color.textNormalColor));
-                NavigationButton customView = (NavigationButton) tab.getCustomView();
-                customView.setSelected1(false);
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override
@@ -130,10 +98,69 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     }
 
 
+    /**
+     * 接收presenter
+     *
+     * @param presenter presenter.
+     */
     @Override
+    public void setPresenter(MainPresenter presenter) {
+        mPresenter = presenter;
+    }
+
+
+    private void showBottomNav(final View mTarget) {
+        // 这种效果最好
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());
+        va.setDuration(200);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTarget.setY((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+        va.start();
+    }
+
+    private void hideBottomNav(final View mTarget) {
+        //这种效果最好
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getBottom());
+        va.setDuration(200);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTarget.setY((Float) valueAnimator.getAnimatedValue());
+            }
+        });
+        va.start();
+    }
+
+
+    /**
+     * 接收Recyclerview滑动事件
+     *
+     * @param msg
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(Message msg) {
+        if (msg.what == StudyFragment.NAVIGATION_HIDE) {
+            hideBottomNav(mTabLayout);
+        } else if (msg.what == StudyFragment.NAVIGATION_SHOW) {
+            showBottomNav(mTabLayout);
+        }
+    }
+
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+
+                mDrawerLayout.closeDrawers();
+
+                return true;
+            }
 
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
 
@@ -149,64 +176,59 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         return super.onKeyDown(keyCode, event);
     }
 
+    class NavigationItemSelectListener implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Override
-    public void setPresenter(MainPresenter presenter) {
-        mPresenter = presenter;
-    }
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
-    private void showBottomNav(final View mTarget) {
-
-//        ObjectAnimator anim = ObjectAnimator.ofFloat(mTarget, "translationY", mTarget.getY(),
-//                0);
-//        anim.setDuration(200);
-//        anim.start();
-
-//        mTarget.animate().translationY(mTarget.getHeight());
-
-        // 这种效果最好
-        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());
-        va.setDuration(200);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                mTarget.setY((Float) valueAnimator.getAnimatedValue());
+            switch (item.getItemId()) {
+                case R.id.navigation_item_like:
+                    Toast.makeText(MainActivity.this, "我喜欢的", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.navigation_item_weather:
+                    Toast.makeText(MainActivity.this, "天气", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.navigation_item_skin:
+                    Toast.makeText(MainActivity.this, "皮肤", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.navigation_item_setting:
+                    Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.navigation_item_about:
+                    Toast.makeText(MainActivity.this, "关于", Toast.LENGTH_SHORT).show();
+                    break;
             }
-        });
-        va.start();
-    }
-
-    private void hideBottomNav(final View mTarget) {
-
-//        ObjectAnimator anim = ObjectAnimator.ofFloat(mTarget, "translationY", mTarget.getY(),
-//                mTarget.getY() + mTarget.getHeight());
-//        anim.setDuration(200);
-//        anim.start();
-
-//        mTarget.animate().translationY(0);
-
-        //这种效果最好
-        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getBottom());
-        va.setDuration(200);
-        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                mTarget.setY((Float) valueAnimator.getAnimatedValue());
-            }
-        });
-
-        va.start();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(Message msg) {
-        if (msg.what == StudyFragment.NAVIGATION_HIDE) {
-            hideBottomNav(tab_layout);
-        } else if (msg.what == StudyFragment.NAVIGATION_SHOW) {
-            showBottomNav(tab_layout);
+            mDrawerLayout.closeDrawers();
+            return false;
         }
-        isShow = !isShow;
+    }
+
+    class TabLayoutOnItemSelectListener implements TabLayout.OnTabSelectedListener {
+
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
+            text.setTextColor(getResources().getColor(R.color.icon_select));
+            NavigationButton customView = (NavigationButton) tab.getCustomView();
+            Log.e("aaaa", tab.getPosition() + "...true");
+            customView.setSelected1(true);
+            mViewPager.setCurrentItem(tab.getPosition(), false);
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+            TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
+            text.setTextColor(getResources().getColor(R.color.textNormalColor));
+            NavigationButton customView = (NavigationButton) tab.getCustomView();
+            Log.e("aaaa", tab.getPosition() + "...false");
+            customView.setSelected1(false);
+
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+
+        }
     }
 
 }

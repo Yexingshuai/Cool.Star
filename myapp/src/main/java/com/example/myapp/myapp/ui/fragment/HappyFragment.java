@@ -52,12 +52,12 @@ public class HappyFragment extends BaseFragment implements View.OnClickListener 
 
         tab_layout.setTabGravity(TabLayout.GRAVITY_FILL);
         tab_layout.setTabMode(TabLayout.MODE_FIXED);
-//        tab_layout.setSelectedTabIndicatorColor(ThemeUtils.getThemeColor());
-//        tab_layout.setTabTextColors(getResources().getColor(R.color.text_gray_6),ThemeUtils.getThemeColor());
+//        mTabLayout.setSelectedTabIndicatorColor(ThemeUtils.getThemeColor());
+//        mTabLayout.setTabTextColors(getResources().getColor(R.color.text_gray_6),ThemeUtils.getThemeColor());
         // 将TabLayout和ViewPager进行关联，让两者联动起来
         tab_layout.setupWithViewPager(vp);
         // 设置Tablayout的Tab显示ViewPager的适配器中的getPageTitle函数获取到的标题
-//        tab_layout.setTabsFromPagerAdapter(filmPagerAdapter);
+//        mTabLayout.setTabsFromPagerAdapter(filmPagerAdapter);
         showContentView();
 
     }

@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         ActionBar actionBar = getSupportActionBar();
+
         //不显示默认的Title
 //        actionBar.setDisplayShowTitleEnabled(true);
 
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //是否显示左上角的返回按钮
-//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(false);
 
         //点击事件
         toolbar.setNavigationOnClickListener(mOnNavClickListener);
@@ -47,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         toolbar.setNavigationIcon(R.mipmap.icon_back);
+
 
         //Animation.
 //        getWindow().setEnterTransition(new Slide(Gravity.RIGHT).setDuration(500));

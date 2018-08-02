@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--只能单选  single-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_like"
+            android:icon="@drawable/nav_like"
+            android:title="我喜欢的" />
+        <item
+            android:id="@+id/navigation_item_weather"
+            android:icon="@drawable/nav_weather"
+            android:title="查询天气" />
+
+        <item
+            android:id="@+id/navigation_item_skin"
+            android:icon="@drawable/nav_skin"
+            android:title="切换皮肤" />
+
+    </group>
+
+    <!--其他item-->
+    <item android:title="其他">
+        <menu>
+            <item
+                android:id="@+id/navigation_item_setting"
+                android:checkable="true"
+                android:icon="@drawable/ic_settings"
+                android:title="设置" />
+
+            <item
+                android:id="@+id/navigation_item_about"
+                android:checkable="true"
+                android:icon="@drawable/ic_about"
+                android:title="关于" />
+        </menu>
+    </item>
+
+</menu>
