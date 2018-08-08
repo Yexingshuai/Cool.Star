@@ -97,9 +97,7 @@ public class DesignDialog extends AppCompatDialogFragment implements View.OnClic
                     themeColor.setChosen(false);
                 }
                 themeColorList.get(position).setChosen(true);
-                SPUtils.put(view.getContext(), "color", themeColorList.get(position).getColor());
-//                desginAdapter.notifyDataSetChanged();
-                desginAdapter.notifyItemChanged(position);
+                desginAdapter.notifyDataSetChanged();
             }
         });
         TextView tv_confirm = view.findViewById(R.id.tv_confirm);

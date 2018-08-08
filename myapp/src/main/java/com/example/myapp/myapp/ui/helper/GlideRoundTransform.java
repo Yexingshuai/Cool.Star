@@ -1,4 +1,4 @@
-package com.example.myapp.myapp.utils.helper;
+package com.example.myapp.myapp.ui.helper;
 
 import android.content.Context;
 import android.content.res.Resources;

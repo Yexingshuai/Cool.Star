@@ -16,7 +16,7 @@ import com.example.myapp.myapp.ui.activity.ShowBannerActivity;
 import java.util.List;
 
 import com.example.myapp.myapp.data.bean.BannerBean;
-import com.example.myapp.myapp.utils.helper.GlideRoundTransform;
+import com.example.myapp.myapp.ui.helper.GlideRoundTransform;
 import com.example.myapp.myapp.utils.MyAnimationUtils;
 
 /**

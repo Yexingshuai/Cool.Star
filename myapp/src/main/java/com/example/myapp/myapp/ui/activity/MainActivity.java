@@ -1,6 +1,7 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Message;
@@ -26,6 +27,7 @@ import com.example.myapp.myapp.component.MainPresenter;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.ui.dialog.DesignDialog;
 import com.example.myapp.myapp.ui.fragment.StudyFragment;
 import com.example.myapp.myapp.ui.view.MyViewPager;
 import com.example.myapp.myapp.ui.view.NavigationButton;
@@ -183,13 +185,16 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
             switch (item.getItemId()) {
                 case R.id.navigation_item_like:
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "我喜欢的", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_item_weather:
                     Toast.makeText(MainActivity.this, "天气", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_item_skin:
-                    Toast.makeText(MainActivity.this, "皮肤", Toast.LENGTH_SHORT).show();
+                    DesignDialog designDialog = new DesignDialog();
+                    designDialog.show(getSupportFragmentManager(), "tag");
                     break;
                 case R.id.navigation_item_setting:
                     Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
@@ -210,7 +215,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
             TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
             text.setTextColor(getResources().getColor(R.color.icon_select));
             NavigationButton customView = (NavigationButton) tab.getCustomView();
-            Log.e("aaaa", tab.getPosition() + "...true");
             customView.setSelected1(true);
             mViewPager.setCurrentItem(tab.getPosition(), false);
         }
@@ -220,9 +224,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
             TextView text = tab.getCustomView().findViewById(R.id.item_tab_text);
             text.setTextColor(getResources().getColor(R.color.textNormalColor));
             NavigationButton customView = (NavigationButton) tab.getCustomView();
-            Log.e("aaaa", tab.getPosition() + "...false");
             customView.setSelected1(false);
-
         }
 
         @Override

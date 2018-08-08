@@ -21,6 +21,7 @@ import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -114,7 +115,6 @@ public class WebActivity extends AppCompatActivity {
                         public void onBoomButtonClick(int index) {
                             // When the boom-button corresponding this builder is clicked.
                             share(index);
-                            Toast.makeText(WebActivity.this, "Clicked " + index, Toast.LENGTH_SHORT).show();
                         }
                     })
             );
@@ -169,6 +169,12 @@ public class WebActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();  //防止内存泄露
+    }
 
     //设置返回键动作（防止按返回键直接退出程序)
     @Override

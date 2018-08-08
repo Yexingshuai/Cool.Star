@@ -11,7 +11,7 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.ui.adapter.LifeHeadAdapter;
 
 import com.example.myapp.myapp.base.BaseFragment;
-import com.example.myapp.myapp.utils.helper.VpTransformer;
+import com.example.myapp.myapp.ui.helper.VpTransformer;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

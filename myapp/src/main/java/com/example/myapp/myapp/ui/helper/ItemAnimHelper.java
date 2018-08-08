@@ -1,4 +1,4 @@
-package com.example.myapp.myapp.utils.helper;
+package com.example.myapp.myapp.ui.helper;
 
 import android.view.View;
 import android.view.animation.Animation;

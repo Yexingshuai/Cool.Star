@@ -1,4 +1,4 @@
-package com.example.myapp.myapp.utils.helper;
+package com.example.myapp.myapp.ui.helper;
 
 import android.support.v4.view.ViewPager.PageTransformer;
 import android.view.View;

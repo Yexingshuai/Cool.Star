@@ -35,6 +35,7 @@
     <color name="theme_brown">#795548</color>
     <color name="theme_green">#4CAF50</color>
     <color name="theme_red">#FF5252</color>
+    <color name="login_bg">#000028</color>
 
 
     <color name="lift_item_head">#66cccccc</color>

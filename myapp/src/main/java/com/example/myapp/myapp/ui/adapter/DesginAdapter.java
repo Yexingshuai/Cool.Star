@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import com.example.myapp.myapp.data.bean.ThemeColor;
 
 /**
- * Created by daixiankade on 2018/5/8.
+ * Created by yexing on 2018/5/8.
  */
 
 public class DesginAdapter extends RecyclerView.Adapter {
