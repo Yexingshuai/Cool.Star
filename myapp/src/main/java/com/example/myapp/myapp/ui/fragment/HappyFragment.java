@@ -44,6 +44,7 @@ public class HappyFragment extends BaseFragment implements View.OnClickListener 
         tab_layout = getView(R.id.tab_layout);
         title_bar = getView(R.id.title_bar);
         vp = getView(R.id.vp);
+        Object view = getView(R.id.toolbar);
         ArrayList<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new FilmLiveFragment());
         fragments.add(new FilmTop250Fragment());

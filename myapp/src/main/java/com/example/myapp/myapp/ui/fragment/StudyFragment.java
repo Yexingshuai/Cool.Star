@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.myapp.R;
 import com.example.myapp.myapp.component.study.StudyFragmentContract;
 import com.example.myapp.myapp.ui.activity.MainActivity;
+import com.example.myapp.myapp.utils.ToastUtil;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -198,6 +199,20 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         mRecylerview.setLayoutManager(linearLayoutManager);
         mRecylerview.addItemDecoration(new SpaceItemDecoration(22));
         homeAdapter = new HomeAdapter(getActivity());
+        homeAdapter.setButtonLikeListener(new HomeAdapter.ButtonLikeListener() {
+            @Override
+            public void like(int id) {
+                mPresenter.collectArtist(id);
+
+                ToastUtil.showApp("like");
+            }
+
+            @Override
+            public void unLike(int id) {
+                mPresenter.unCollect(id);
+                ToastUtil.showApp("unlike");
+            }
+        });
         mRecylerview.setAdapter(homeAdapter);
         mRecylerview.setItemAnimator(new DefaultItemAnimator());
         mRecylerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -318,6 +333,26 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void hideLoading() {
+
+    }
+
+    @Override
+    public void collectSuccess() {
+        ToastUtil.showApp("收藏成功");
+    }
+
+    @Override
+    public void collectFail(String errorMsg) {
+        ToastUtil.showApp(errorMsg);
+    }
+
+    @Override
+    public void unCollectSuccess() {
+
+    }
+
+    @Override
+    public void unCollectFail() {
 
     }
 }

@@ -41,4 +41,7 @@
     <color name="lift_item_head">#66cccccc</color>
     <color name="transparent">#00000000</color>
 
+    <color name="colorTextDark">#424242</color>
+    <color name="colorTextDark2nd">#757575</color>
+
 </resources>

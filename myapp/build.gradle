@@ -71,6 +71,10 @@ dependencies {
     implementation files('libs/umeng-share-wechat-simplify-6.9.3.jar')
     //LikeButton
     implementation 'com.github.jd-alexander:LikeButton:+'
+    //Avloading
+    implementation 'com.github.ybq:Android-SpinKit:1.1.0'
+    //cookieJar
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
 
 }

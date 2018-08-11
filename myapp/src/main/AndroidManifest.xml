@@ -39,9 +39,6 @@
         <activity android:name=".myapp.ui.activity.WebActivity" />
         <activity android:name=".myapp.ui.activity.ShowBannerActivity" />
 
-        <!--<service-->
-        <!--android:naMapLocationSerivceivce"-->
-        <!--android:process=":live" />-->
 
         <activity android:name=".myapp.ui.activity.FilmDetailActivity" />
         <activity
@@ -56,8 +53,11 @@
 
         <activity android:name=".myapp.ui.activity.TestMenuActivity" />
 
-        <activity android:name=".myapp.ui.activity.LoginActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
+            android:name=".myapp.component.login.LoginActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <activity android:name=".myapp.component.favorite.MyFavoriteActivity" />
 
 
         <!--Share Start-->

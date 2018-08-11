@@ -28,7 +28,10 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import com.example.myapp.myapp.ui.helper.ItemAnimHelper;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 /**
  * Created by yexing on 2018/3/29.
@@ -45,6 +48,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public HeadHolder headHolder;
     private ItemAnimHelper helper = new ItemAnimHelper();
     private BannerAdapter bannerAdapter;
+    private ButtonLikeListener listener;
 
 
     public HomeAdapter(Context mCtx) {
@@ -132,7 +136,22 @@ public class HomeAdapter extends RecyclerView.Adapter {
             ((NormalHolder) holder).tv_time.setText(data.get(position).getNiceDate() != null ? data.get(position).getNiceDate() : "");
             ((NormalHolder) holder).tv_title.setText(data.get(position).getTitle() != null ? data.get(position).getTitle() : "");
             ((NormalHolder) holder).tv_type.setText(data.get(position).getChapterName() != null ? data.get(position).getChapterName() : "");
+            ((NormalHolder) holder).likebutton.setLiked(data.get(position).isCollect());
+            ((NormalHolder) holder).likebutton.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+                    if (listener != null) {
+                        listener.like(data.get(position).getId());
+                    }
+                }
 
+                @Override
+                public void unLiked(LikeButton likeButton) {
+                    if (listener != null) {
+                        listener.unLike(data.get(position).getId());
+                    }
+                }
+            });
             Random random = new Random();
             int i = random.nextInt(array.length);
             ((NormalHolder) holder).ll_normal.setCardBackgroundColor(array[i]);
@@ -245,6 +264,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         private TextView tv_title;
         private TextView tv_type;
         private CardView ll_normal;
+        private LikeButton likebutton;
 
         public NormalHolder(View itemView) {
             super(itemView);
@@ -253,7 +273,30 @@ public class HomeAdapter extends RecyclerView.Adapter {
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_type = itemView.findViewById(R.id.tv_type);
             ll_normal = itemView.findViewById(R.id.ll_normal);
+            likebutton = itemView.findViewById(R.id.likebutton);
+            likebutton.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+
+                }
+            });
         }
+    }
+
+    public void setButtonLikeListener(ButtonLikeListener listener) {
+
+        this.listener = listener;
+    }
+
+    public interface ButtonLikeListener {
+        void like(int id);
+
+        void unLike(int id);
     }
 
 

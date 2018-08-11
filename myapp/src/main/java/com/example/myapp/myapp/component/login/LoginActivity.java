@@ -1,4 +1,4 @@
-package com.example.myapp.myapp.ui.activity;
+package com.example.myapp.myapp.component.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,15 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
+import com.example.myapp.myapp.data.bean.RegisterResponse;
+import com.example.myapp.myapp.data.source.login.LoginResiporty;
+import com.example.myapp.myapp.utils.ToastUtil;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 /**
- * Created by YEXING on 2018/8/7.
+ * Created by yexing on 2018/8/7.
  */
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     private EditText mAccountEditext;  //账号
     private EditText mPasswordEdittext;//密码
@@ -25,6 +28,8 @@ public class LoginActivity extends BaseActivity {
     private ImageView mDelPsd;
     private Button mLogin;  //登录
     private Button mSignIn; //注册
+    private LoginContract.Presenter mPresenter;
+    private SpinKitView kitView;
 
     @Override
     public int inflateContentView() {
@@ -33,6 +38,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
+        new LoginPresenter(new LoginResiporty(), this); //传递引用
+
         mAccountEditext = getView(R.id.et_account);
         mAccountEditext.addTextChangedListener(new MyAccountWatcher());
         mPasswordEdittext = getView(R.id.et_password);
@@ -45,7 +52,7 @@ public class LoginActivity extends BaseActivity {
         setCommonClickListener(mLogin);
         mSignIn = getView(R.id.bt_sign_in);
         setCommonClickListener(mSignIn);
-
+        kitView = getView(R.id.spin_kit);
 
     }
 
@@ -59,6 +66,48 @@ public class LoginActivity extends BaseActivity {
         return false;
     }
 
+
+    @Override
+    public void setPresenter(LoginContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void loginSuccess(RegisterResponse response) {
+        ToastUtil.showApp("登录成功!");
+        finish();
+    }
+
+    @Override
+    public void loginFail(String errorMsg) {
+        ToastUtil.showApp(errorMsg);
+    }
+
+    @Override
+    public void registerSuccess(RegisterResponse response) {
+        ToastUtil.showApp("注册成功!");
+        finish();
+    }
+
+    @Override
+    public void registerFail(String errorMsg) {
+        ToastUtil.showApp(errorMsg);
+    }
+
+    @Override
+    public void showLoading() {
+        kitView.setVisibility(View.VISIBLE);
+        mSignIn.setEnabled(false);
+        mLogin.setEnabled(false);
+    }
+
+    @Override
+    public void hideLoading() {
+        kitView.setVisibility(View.INVISIBLE);
+        mSignIn.setEnabled(true);
+        mLogin.setEnabled(true);
+    }
+
     @Override
     protected void onClickImpl(View view) {
         switch (view.getId()) {
@@ -69,11 +118,18 @@ public class LoginActivity extends BaseActivity {
                 mPasswordEdittext.setText("");
                 break;
             case R.id.bt_login:
+                String loginAccount = mAccountEditext.getText().toString().trim();
+                String loginPassword = mPasswordEdittext.getText().toString().trim();
+                mPresenter.login(loginAccount, loginPassword);
                 break;
             case R.id.bt_sign_in:
+                String account = mAccountEditext.getText().toString().trim();
+                String password = mPasswordEdittext.getText().toString().trim();
+                mPresenter.register(account, password, password);
                 break;
         }
     }
+
 
     class MyAccountWatcher implements TextWatcher {
         @Override

@@ -2,7 +2,6 @@ package com.example.myapp.myapp.ui.activity;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +21,12 @@ import com.example.myapp.R;
 import java.util.List;
 
 import com.example.myapp.myapp.base.BaseView;
+import com.example.myapp.myapp.base.MyApp;
+import com.example.myapp.myapp.common.AppFlag;
 import com.example.myapp.myapp.component.MainPresenter;
+import com.example.myapp.myapp.component.favorite.MyFavoriteActivity;
+import com.example.myapp.myapp.component.login.LoginActivity;
+import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
@@ -31,6 +34,8 @@ import com.example.myapp.myapp.ui.dialog.DesignDialog;
 import com.example.myapp.myapp.ui.fragment.StudyFragment;
 import com.example.myapp.myapp.ui.view.MyViewPager;
 import com.example.myapp.myapp.ui.view.NavigationButton;
+import com.example.myapp.myapp.utils.PreferencesUtils;
+import com.example.myapp.myapp.utils.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -48,6 +53,8 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     private long mExitTime;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
+    private TextView mUserName;
+    private MenuItem logoutMenuItem;
 
 
     @Override
@@ -62,8 +69,21 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         mTabLayout = findViewById(R.id.tab_layout);
         mNavigationView = findViewById(R.id.nav_view);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        View headerView = mNavigationView.getHeaderView(0);
+        mUserName = headerView.findViewById(R.id.tv_username);
+        logoutMenuItem = mNavigationView.getMenu().findItem(R.id.navigation_item_logout);
     }
 
+    private void showNavigationHeadInfo() {
+        String userName = LoginContext.getInstance().getUserName();
+        if (userName != null) {
+            mUserName.setText(userName);
+            logoutMenuItem.setVisible(true);  // true 为显示，false 为隐藏
+        } else {
+            mUserName.setText("");
+            logoutMenuItem.setVisible(false);  // true 为显示，false 为隐藏
+        }
+    }
 
     @Override
     protected void initData() {
@@ -99,6 +119,12 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         return true;
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showNavigationHeadInfo();  //获取焦点时，即更新用户状态信息
+    }
 
     /**
      * 接收presenter
@@ -185,9 +211,14 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
             switch (item.getItemId()) {
                 case R.id.navigation_item_like:
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "我喜欢的", Toast.LENGTH_SHORT).show();
+                    if (LoginContext.getInstance().isLogined()) {
+                        Intent intent = new Intent(MainActivity.this, MyFavoriteActivity.class);
+                        startActivity(intent);
+                    } else {
+                        ToastUtil.showApp("请先登录呦");
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.navigation_item_weather:
                     Toast.makeText(MainActivity.this, "天气", Toast.LENGTH_SHORT).show();
@@ -196,8 +227,16 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     DesignDialog designDialog = new DesignDialog();
                     designDialog.show(getSupportFragmentManager(), "tag");
                     break;
+                case R.id.navigation_item_logout:
+                    if (LoginContext.getInstance().logout()) {
+                        showNavigationHeadInfo();
+                    } else {
+                        ToastUtil.showApp("退出失败！");
+                    }
+                    break;
+
                 case R.id.navigation_item_setting:
-                    Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showApp("没什么好设置的。。。");
                     break;
                 case R.id.navigation_item_about:
                     Toast.makeText(MainActivity.this, "关于", Toast.LENGTH_SHORT).show();

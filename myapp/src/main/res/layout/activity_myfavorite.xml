@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/xxblue"
+        android:clickable="true"
+        android:gravity="bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="13dp"
+            android:gravity="bottom"
+            android:text="我喜欢的"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="9dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/search"
+            android:drawableLeft="@mipmap/ic_find_in_page"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="关键词搜索"
+            android:textColor="@color/td_choose" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F7FA"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

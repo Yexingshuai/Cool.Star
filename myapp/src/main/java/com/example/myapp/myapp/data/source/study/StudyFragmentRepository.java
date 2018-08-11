@@ -28,7 +28,7 @@ public class StudyFragmentRepository implements StudyFragmentSource {
                 .subscribe(new Subscriber<Object>() {
                     @Override
                     public void onCompleted() {
-                       response.stop();
+                        response.stop();
                     }
 
                     @Override
@@ -54,9 +54,16 @@ public class StudyFragmentRepository implements StudyFragmentSource {
     }
 
     @Override
-    public void requestStudyInfo(int index,HttpContext.Response response) {
+    public void requestStudyInfo(int index, HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();
         WandroidApi api = httpContext.createApi(WandroidApi.class);
-        httpContext.execute(api.getHome(index),response);
+        httpContext.execute(api.getHome(index), response);
+    }
+
+    @Override
+    public void collect(int id, HttpContext.Response response) {
+        HttpContext httpContext = new HttpContext();
+        WandroidApi api = httpContext.createApi(WandroidApi.class);
+        httpContext.execute(api.collect(id), response);
     }
 }

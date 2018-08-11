@@ -13,4 +13,6 @@ public interface StudyFragmentSource {
     void requestBannerAndStutyInfo(int index, HttpContext.Response response);
 
     void requestStudyInfo(int index, HttpContext.Response response);
+
+    void collect(int id,HttpContext.Response response);
 }

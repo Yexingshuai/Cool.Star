@@ -34,17 +34,6 @@
     </FrameLayout>
 
 
-    <!--菜单界面-->
-
-    <!--<FrameLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="start"-->
-    <!--android:background="@mipmap/splash9"-->
-    <!--android:clickable="true">-->
-
-    <!--</FrameLayout>-->
-
     <!--使用NavigationView-->
 
     <android.support.design.widget.NavigationView

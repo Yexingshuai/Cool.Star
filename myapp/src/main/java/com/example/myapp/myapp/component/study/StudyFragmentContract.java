@@ -15,6 +15,10 @@ public interface StudyFragmentContract {
         void requestBannerAndStutyInfo(int index);
 
         void requestStudyInfo(int index);
+
+        void collectArtist(int id);
+
+        void unCollect(int id);
     }
 
     interface View extends BaseView<Presenter> {
@@ -28,6 +32,14 @@ public interface StudyFragmentContract {
         void showLoading();
 
         void hideLoading();
+
+        void collectSuccess();
+
+        void collectFail(String msg);
+
+        void unCollectSuccess();
+
+        void unCollectFail();
 
     }
 

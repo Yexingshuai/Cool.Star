@@ -2,6 +2,7 @@ package com.example.myapp.myapp.common;
 
 import android.app.Application;
 
+import com.example.myapp.myapp.utils.ToastUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -32,6 +33,8 @@ public class InitializeConfig {
 
         });
 
+        ToastUtil.initToastApp(appContext);
+
         //友盟第三方分享
         UMConfigure.init(appContext, "5b598a94b27b0a77c30000d1"
                 , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
@@ -39,7 +42,6 @@ public class InitializeConfig {
         PlatformConfig.setWeixin("wxdda8441a2fcd9957", "9dcf5851d8d807bbcf92f7dd56856eae");
         PlatformConfig.setSinaWeibo("3072140610", "faa0b4cf935fa6f3ee935b531190106c", "http://sns.whalecloud.com");
         PlatformConfig.setQQZone("1107157177", "ri5rEKt2ZU3zUaBI");
-
 
 
         //初始化框架

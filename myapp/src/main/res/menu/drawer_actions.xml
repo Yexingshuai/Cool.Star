@@ -17,6 +17,11 @@
             android:icon="@drawable/nav_skin"
             android:title="切换皮肤" />
 
+        <item
+            android:id="@+id/navigation_item_logout"
+            android:icon="@mipmap/logout"
+            android:title="退出登录" />
+
     </group>
 
     <!--其他item-->

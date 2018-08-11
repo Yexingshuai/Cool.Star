@@ -3,6 +3,7 @@ package com.example.myapp.myapp.component.study;
 import android.util.Log;
 
 import com.example.myapp.myapp.data.bean.HomeItemBean;
+import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.study.StudyFragmentSource;
 
@@ -73,5 +74,32 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 
 
         });
+    }
+
+    @Override
+    public void collectArtist(int id) {
+        mSource.collect(id, new HttpContext.Response<WanAndroidBaseReponse>() {
+            @Override
+            public void success(WanAndroidBaseReponse result) {
+                int errorCode = result.getErrorCode();
+                if (errorCode == 0) {
+                    mView.collectSuccess();
+                } else {
+                    mView.collectFail("");
+                }
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
+                mView.collectFail(error);
+            }
+        });
+
+    }
+
+    @Override
+    public void unCollect(int id) {
+
     }
 }

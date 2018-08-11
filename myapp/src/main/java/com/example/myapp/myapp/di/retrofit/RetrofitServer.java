@@ -2,11 +2,18 @@ package com.example.myapp.myapp.di.retrofit;
 
 import android.util.Log;
 
+import com.example.myapp.myapp.base.MyApp;
 import com.example.myapp.myapp.data.api.AppUrl;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -20,17 +27,17 @@ import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import com.example.myapp.myapp.utils.LogUtil;
 
 /**
- * Created by daixiankade on 2018/4/13.
+ * Created by yexing on 2018/4/13.
  */
 
 public class RetrofitServer {
 
     private static final String TAG_LOG = "RetrofitServer";
     private static final Charset UTF8 = Charset.forName("UTF-8");
-
 
 
     public static final Retrofit getRetrofit() {
@@ -47,7 +54,7 @@ public class RetrofitServer {
 
     public static final Retrofit getRetrofit2() {
 
-        OkHttpClient okHttpClient = getOkHttpClient();
+        OkHttpClient okHttpClient = getOkHttpClient2();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppUrl.BASEURL2)
                 .client(okHttpClient)
@@ -76,8 +83,14 @@ public class RetrofitServer {
      * @return {@link OkHttpClient}
      */
     private static OkHttpClient getOkHttpClient() {
+//        ClearableCookieJar cookieJar =
+//                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApp.mContext));
 
-        OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(new LoggingInterceptors())
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()      //注册应用拦截器
+                .addInterceptor(new AddCookiesInterceptor())        //添加Cookie
+                .addInterceptor(new ReceivedCookiesInterceptor())
+//                .cookieJar(cookieJar)          //还不知道怎么用
+                .addInterceptor(new LoggingInterceptors())
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS);
@@ -87,7 +100,33 @@ public class RetrofitServer {
 
 
     /**
-     * 网络日志处理
+     * 获取OkHttpClient
+     *
+     * @return {@link OkHttpClient}
+     */
+    private static OkHttpClient getOkHttpClient2() {
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(new LoggingInterceptors())      //注册应用拦截器
+                .addNetworkInterceptor(new Interceptor() {                                                        //注册网络拦截器
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Response originalResponse = chain.proceed(chain.request());
+                        if (!originalResponse.headers("Set-Cookie").isEmpty()) {
+
+                        }
+                        return originalResponse;
+                    }
+                })
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS);
+
+        return builder.build();
+    }
+
+
+    /**
+     * 网络日志处理   用来打印出去的请求和收到的相应
      * {@link LogUtil}
      */
     private static class LoggingInterceptors implements Interceptor {
@@ -95,6 +134,14 @@ public class RetrofitServer {
         public Response intercept(Chain chain) throws IOException {
             long t1 = System.nanoTime();
             Request request = chain.request();
+
+
+//            Request.Builder builder = request.newBuilder();
+//            HashSet<String> hashSet = new HashSet<>();
+//            for (String cookie : hashSet) {
+//                builder.addHeader("Cookie", cookie);
+//            }
+
             /*
             Request
              */
@@ -114,14 +161,15 @@ public class RetrofitServer {
 
             RequestBody requestBody = request.body();
 
-            Response response1 = chain.proceed(request);
-            BufferedSource source = response1.body().source();
+
+            Response response = chain.proceed(request);             // Response
+            BufferedSource source = response.body().source();
             source.request(Long.MAX_VALUE);
             //获得返回的数据
             Buffer buffer1 = source.buffer();
             //使用前clone()下，避免直接消耗
-            Log.e("Retrofit-data--" , buffer1.clone().readString(Charset.forName("UTF-8")));
-            Log.e("Retrofit-url--" , request.url()+"");
+            Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
+            Log.e("Retrofit-url--", request.url() + "");
 
             if (requestBody != null) {
                 sb.append("\nRequestBody");
@@ -151,12 +199,13 @@ public class RetrofitServer {
             /*
             Response
              */
-            Response response = chain.proceed(request);
+//            Response response = chain.proceed(request);
+            List<String> cookies = response.headers("Set-Cookie");
+
 
             long t2 = System.nanoTime();
             LogUtil.i(TAG_LOG, String.format("Received response for %s in %.1fms%n%s",
                     request.url(), (t2 - t1) / 1e6d, response.headers()));
-
 
 
             return response;

@@ -45,7 +45,7 @@
             android:layout_marginBottom="7dp"
             android:layout_marginLeft="13dp"
             android:gravity="bottom"
-            android:text="首页"
+            android:text="学习"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
