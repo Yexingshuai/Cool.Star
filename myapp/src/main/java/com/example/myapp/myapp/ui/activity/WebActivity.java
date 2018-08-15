@@ -45,6 +45,8 @@ public class WebActivity extends AppCompatActivity {
     private int[] des = {R.string.share_wechat, R.string.share_qq, R.string.share_sina, R.string.share_wechat_fav, R.string.share_qzone, R.string.share_evernote};
     public ArrayList<SnsPlatform> platforms = new ArrayList<SnsPlatform>();
     private String webUrl;
+    public static final String TITLE = "title";
+    public static final String WEBURL = "weburl";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,8 +103,8 @@ public class WebActivity extends AppCompatActivity {
 
     private void init() {
         Bundle extras = getIntent().getExtras();
-        webUrl = (String) extras.getString("webUrl");
-        title = (String) extras.getString("title");
+        webUrl = (String) extras.getString(WEBURL);
+        title = (String) extras.getString(TITLE);
         ImageView iv_back = findViewById(R.id.iv_back);
         BoomMenuButton bmb = findViewById(R.id.bmb);
         for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++)

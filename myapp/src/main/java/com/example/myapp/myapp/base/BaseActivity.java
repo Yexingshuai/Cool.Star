@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 
 
 /**
- * Created by daixiankade on 2018/5/2.
+ * Created by yexing on 2018/5/2.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {

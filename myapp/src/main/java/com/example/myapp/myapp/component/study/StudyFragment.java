@@ -1,4 +1,4 @@
-package com.example.myapp.myapp.ui.fragment;
+package com.example.myapp.myapp.component.study;
 
 import android.animation.ArgbEvaluator;
 import android.graphics.Color;
@@ -8,18 +8,15 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.myapp.R;
-import com.example.myapp.myapp.component.study.StudyFragmentContract;
-import com.example.myapp.myapp.ui.activity.MainActivity;
+import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -35,16 +32,10 @@ import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
-import com.example.myapp.myapp.data.http.HttpContext;
 
-import com.example.myapp.myapp.utils.SPUtils;
-import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
-import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
-import com.nightonke.boommenu.ButtonEnum;
-import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -89,11 +80,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     private ViewPager mViewPager;
 
     private int color = -1;
-    private FloatingActionMenu floatingActionMenu;
-    private FloatingActionButton floatingAttention;
-    private FloatingActionButton floatingPost;
-    private FloatingActionButton floatingSwitch;
-    private FloatingActionButton floatingRefresh;
     private StudyFragmentContract.Presenter mPresenter;
 
     public static final int NAVIGATION_HIDE = 1001;
@@ -202,15 +188,17 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         homeAdapter.setButtonLikeListener(new HomeAdapter.ButtonLikeListener() {
             @Override
             public void like(int id) {
-                mPresenter.collectArtist(id);
+                if (LoginContext.getInstance().isLogined()) {
+                    mPresenter.collectArtist(id);
+                }
 
-                ToastUtil.showApp("like");
             }
 
             @Override
             public void unLike(int id) {
-                mPresenter.unCollect(id);
-                ToastUtil.showApp("unlike");
+                if (LoginContext.getInstance().isLogined()) {
+                    mPresenter.unCollect(id);
+                }
             }
         });
         mRecylerview.setAdapter(homeAdapter);
@@ -352,7 +340,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     }
 
     @Override
-    public void unCollectFail() {
+    public void unCollectFail(String errorMsg) {
+        ToastUtil.showApp(errorMsg);
 
     }
 }

@@ -66,4 +66,17 @@ public class StudyFragmentRepository implements StudyFragmentSource {
         WandroidApi api = httpContext.createApi(WandroidApi.class);
         httpContext.execute(api.collect(id), response);
     }
+
+    /**
+     * 取消收藏
+     */
+    @Override
+    public void unCollect(int id, HttpContext.Response response) {
+        HttpContext httpContext = new HttpContext();
+        WandroidApi api = httpContext.createApi(WandroidApi.class);
+        httpContext.execute(api.unCollect(id), response);
+    }
+
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.myapp.myapp.ui.fragment;
+package com.example.myapp.myapp.component.life;
 
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;

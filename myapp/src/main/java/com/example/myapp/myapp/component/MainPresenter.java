@@ -6,10 +6,10 @@ import com.example.myapp.myapp.base.BasePresenter;
 import com.example.myapp.myapp.component.study.StudyFragmentPresenter;
 import com.example.myapp.myapp.data.source.study.StudyFragmentRepository;
 import com.example.myapp.myapp.ui.activity.MainActivity;
-import com.example.myapp.myapp.ui.fragment.HappyFragment;
-import com.example.myapp.myapp.ui.fragment.LifeFragment;
+import com.example.myapp.myapp.component.movie.HappyFragment;
+import com.example.myapp.myapp.component.life.LifeFragment;
 import com.example.myapp.myapp.ui.fragment.MyFragment;
-import com.example.myapp.myapp.ui.fragment.StudyFragment;
+import com.example.myapp.myapp.component.study.StudyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class MainPresenter implements BasePresenter {
 
         fragmentList.add(new HappyFragment());
         fragmentList.add(new LifeFragment());
-        fragmentList.add(new MyFragment());
+//        fragmentList.add(new MyFragment());
         return fragmentList;
     }
 
@@ -57,7 +57,7 @@ public class MainPresenter implements BasePresenter {
         titleList.add("学习");
         titleList.add("娱乐");
         titleList.add("生活");
-        titleList.add("我的");
+//        titleList.add("我的");
         return titleList;
     }
 
@@ -66,7 +66,7 @@ public class MainPresenter implements BasePresenter {
         mTabImg.add(R.drawable.tab_home_btn);
         mTabImg.add(R.drawable.tab_sm_btn);
         mTabImg.add(R.drawable.tab_shopping_btn);
-        mTabImg.add(R.drawable.tab_preson_btn);
+//        mTabImg.add(R.drawable.tab_preson_btn);
         return mTabImg;
     }
 }

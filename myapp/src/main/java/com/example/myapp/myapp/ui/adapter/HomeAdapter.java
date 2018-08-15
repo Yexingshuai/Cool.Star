@@ -1,6 +1,7 @@
 package com.example.myapp.myapp.ui.adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 
+import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,7 +68,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         if (bannerAdapter != null) {
             bannerAdapter.notifyDataSetChanged();
         }
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public void addHomeInfo(List<HomeItemBean.DataBean.DatasBean> datas, boolean clear) {
@@ -74,8 +77,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
         data.addAll(datas);
 
-//        notifyItemRangeInserted(datas.size(),20);
-        notifyItemRangeChanged(datas.size(), 20);
+//        notifyItemRangeInserted(datas.size(),20);    //局部插入
+
+        notifyItemRangeChanged(data.size() == 20 ? 0 : data.size(), 21); //如果集合数据是20，代表下拉刷新，则刷新前20条
     }
 
 
@@ -160,12 +164,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     String link = data.get(position).getLink();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title", data.get(position).getTitle());
-                    bundle.putString("webUrl", link);
-                    Intent intent = new Intent(mCtx, WebActivity.class);
-                    intent.putExtras(bundle);
-                    mCtx.startActivity(intent);
+                    String title = data.get(position).getTitle();
+                    UiHelper.skipWebActivity((Activity) mCtx, title, link);
                 }
             });
         }

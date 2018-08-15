@@ -1,5 +1,6 @@
 package com.example.myapp.myapp.ui.activity;
 
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +22,6 @@ import com.example.myapp.R;
 import java.util.List;
 
 import com.example.myapp.myapp.base.BaseView;
-import com.example.myapp.myapp.base.MyApp;
-import com.example.myapp.myapp.common.AppFlag;
 import com.example.myapp.myapp.component.MainPresenter;
 import com.example.myapp.myapp.component.favorite.MyFavoriteActivity;
 import com.example.myapp.myapp.component.login.LoginActivity;
@@ -31,10 +30,10 @@ import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.ui.dialog.DesignDialog;
-import com.example.myapp.myapp.ui.fragment.StudyFragment;
+import com.example.myapp.myapp.component.study.StudyFragment;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.MyViewPager;
 import com.example.myapp.myapp.ui.view.NavigationButton;
-import com.example.myapp.myapp.utils.PreferencesUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -139,7 +138,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
     private void showBottomNav(final View mTarget) {
         // 这种效果最好
-        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());//
         va.setDuration(200);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -212,12 +211,10 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
             switch (item.getItemId()) {
                 case R.id.navigation_item_like:
                     if (LoginContext.getInstance().isLogined()) {
-                        Intent intent = new Intent(MainActivity.this, MyFavoriteActivity.class);
-                        startActivity(intent);
+                        UiHelper.skipActivityNofinish(MainActivity.this, MyFavoriteActivity.class);
                     } else {
                         ToastUtil.showApp("请先登录呦");
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        UiHelper.skipActivityNofinish(MainActivity.this, LoginActivity.class);
                     }
                     break;
                 case R.id.navigation_item_weather:
@@ -239,7 +236,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     ToastUtil.showApp("没什么好设置的。。。");
                     break;
                 case R.id.navigation_item_about:
-                    Toast.makeText(MainActivity.this, "关于", Toast.LENGTH_SHORT).show();
+                    UiHelper.skipActivityNofinish(MainActivity.this, AboutActivity.class);
                     break;
             }
             mDrawerLayout.closeDrawers();

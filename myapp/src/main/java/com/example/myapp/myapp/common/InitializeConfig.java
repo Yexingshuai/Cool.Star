@@ -6,6 +6,7 @@ import com.example.myapp.myapp.utils.ToastUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.umeng.commonsdk.UMConfigure;

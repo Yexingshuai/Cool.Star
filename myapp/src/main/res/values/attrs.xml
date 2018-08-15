@@ -16,4 +16,16 @@
     </declare-styleable>
 
 
+    <!-- 加载状态切换Layout -->
+    <declare-styleable name="LoadingStatusLayout">
+        <attr name="status" format="enum">
+            <enum name="SUCCESS" value="0" />
+            <enum name="ERROR" value="1" />
+            <enum name="EMPTY" value="2" />
+            <enum name="LOADING" value="3" />
+            <enum name="NONET" value="4" />
+        </attr>
+    </declare-styleable>
+
+
 </resources>

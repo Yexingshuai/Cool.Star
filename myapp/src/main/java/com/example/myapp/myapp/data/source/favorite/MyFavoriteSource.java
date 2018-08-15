@@ -9,4 +9,6 @@ import com.example.myapp.myapp.data.http.HttpContext;
 public interface MyFavoriteSource {
 
     void getFavoriteList(int id, HttpContext.Response response);
+
+    void delCollectArtist(int id,HttpContext.Response response);
 }

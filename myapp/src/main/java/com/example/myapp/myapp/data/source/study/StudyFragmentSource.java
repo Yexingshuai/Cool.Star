@@ -14,5 +14,7 @@ public interface StudyFragmentSource {
 
     void requestStudyInfo(int index, HttpContext.Response response);
 
-    void collect(int id,HttpContext.Response response);
+    void collect(int id, HttpContext.Response response);
+
+    void unCollect(int id, HttpContext.Response response);
 }

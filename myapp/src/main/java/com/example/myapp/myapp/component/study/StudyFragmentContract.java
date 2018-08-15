@@ -39,7 +39,7 @@ public interface StudyFragmentContract {
 
         void unCollectSuccess();
 
-        void unCollectFail();
+        void unCollectFail(String msg);
 
     }
 

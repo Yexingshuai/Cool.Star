@@ -14,4 +14,11 @@ public class MyFavoriteRepository implements MyFavoriteSource {
         WandroidApi api = httpContext.createApi(WandroidApi.class);
         httpContext.execute(api.favorite(id), response);
     }
+
+    @Override
+    public void delCollectArtist(int id, HttpContext.Response response) {
+        HttpContext httpContext = new HttpContext();
+        WandroidApi api = httpContext.createApi(WandroidApi.class);
+        httpContext.execute(api.favorite(id), response);
+    }
 }

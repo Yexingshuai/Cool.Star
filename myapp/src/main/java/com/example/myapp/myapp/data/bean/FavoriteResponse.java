@@ -148,7 +148,7 @@ public class FavoriteResponse {
             private String link;
             private String niceDate;
             private String origin;
-            private int originId;
+            private String originId;
             private long publishTime;
             private String title;
             private int userId;
@@ -235,11 +235,11 @@ public class FavoriteResponse {
                 this.origin = origin;
             }
 
-            public int getOriginId() {
+            public String getOriginId() {
                 return originId;
             }
 
-            public void setOriginId(int originId) {
+            public void setOriginId(String originId) {
                 this.originId = originId;
             }
 

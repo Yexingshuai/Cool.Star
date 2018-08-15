@@ -4,13 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -19,11 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.base.BaseActivity;
+import com.example.myapp.myapp.ui.helper.UiHelper;
+import com.example.myapp.myapp.utils.Utils;
 
 import java.util.Random;
-
-import com.example.myapp.myapp.base.BaseActivity;
-import com.example.myapp.myapp.utils.Utils;
 
 public class SplashActivity extends BaseActivity {
 
@@ -47,7 +45,7 @@ public class SplashActivity extends BaseActivity {
         set.setDuration(1800);
         set.setInterpolator(new AccelerateDecelerateInterpolator());
         set.play(tranX).with(tranY).with(scaleX).with(scaleY).with(alpha);
-        if (t==findViewById(R.id.tv7)) {
+        if (t == findViewById(R.id.tv7)) {
             set.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
@@ -89,14 +87,12 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                     new Handler().postDelayed(new Runnable() {
-                         @Override
-                         public void run() {
-                             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                             startActivity(intent);
-                             finish();
-                         }
-                     },2000);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        UiHelper.skipToOtherActivity(SplashActivity.this, MainActivity.class);
+                    }
+                }, 2000);
             }
 
             @Override

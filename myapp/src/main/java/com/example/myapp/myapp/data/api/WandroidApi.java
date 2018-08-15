@@ -93,6 +93,15 @@ public interface WandroidApi {
     Observable<WanAndroidBaseReponse> collect(@Path("id") int id);
 
     /**
+     * 取消收藏
+     *
+     * @param id
+     * @return
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<WanAndroidBaseReponse> unCollect(@Path("id") int id);
+
+    /**
      * 获取收藏列表
      *
      * @param id
