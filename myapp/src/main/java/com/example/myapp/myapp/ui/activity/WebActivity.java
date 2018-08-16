@@ -1,10 +1,8 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -14,20 +12,16 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.base.BaseActivity;
+import com.example.myapp.myapp.ui.helper.UMengShareHelper;
+import com.example.myapp.myapp.utils.ToastUtil;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
-import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.ArrayList;
 
@@ -35,10 +29,10 @@ import java.util.ArrayList;
  * Created by yexing on 2018/3/30.
  */
 
-public class WebActivity extends AppCompatActivity {
+public class WebActivity extends BaseActivity {
 
     private TextView tv_web_title;
-    private WebView web;
+    private WebView mWebView;
     private ProgressBar pg_web;
     private String title;
     private int[] imageResource = {R.drawable.weixin2, R.drawable.qq, R.drawable.umeng_socialize_sina, R.drawable.umeng_socialize_fav, R.drawable.umeng_socialize_qzone, R.drawable.umeng_socialize_evernote};
@@ -47,61 +41,30 @@ public class WebActivity extends AppCompatActivity {
     private String webUrl;
     public static final String TITLE = "title";
     public static final String WEBURL = "weburl";
+    private ImageView iv_back;
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
-        init();
-        initData();
-
+    public int inflateContentView() {
+        return R.layout.activity_web;
     }
 
-    private void share(int index) {
-        UMWeb web = new UMWeb(webUrl);
-        web.setTitle("快来学习啦！");
-        web.setThumb(new UMImage(this, R.mipmap.meizi));  //分享图片
-        web.setDescription(title);
-        new ShareAction(WebActivity.this).withMedia(web)
-                .setPlatform(platforms.get(index).mPlatform)
-                .setCallback(shareListener).share();
+    @Override
+    protected void initView(@Nullable Bundle savedInstanceState) {
+        iv_back = findViewById(R.id.iv_back);
+        tv_web_title = findViewById(R.id.tv_web_title);
+        pg_web = findViewById(R.id.pg_web);
+        mWebView = findViewById(R.id.web);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
-
-    private UMShareListener shareListener = new UMShareListener() {
-        @Override
-        public void onStart(SHARE_MEDIA platform) {
-            Toast.makeText(WebActivity.this, "准备分享!", Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(WebActivity.this, "成功了", Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(WebActivity.this, "失败" + t.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(WebActivity.this, "取消了", Toast.LENGTH_LONG).show();
-
-        }
-    };
-
-    private void initData() {
-        platforms.add(SHARE_MEDIA.WEIXIN.toSnsPlatform());//微信
-        platforms.add(SHARE_MEDIA.QQ.toSnsPlatform());  //qq
-        platforms.add(SHARE_MEDIA.SINA.toSnsPlatform()); //新浪
-        platforms.add(SHARE_MEDIA.WEIXIN_FAVORITE.toSnsPlatform());//微信收藏
-        platforms.add(SHARE_MEDIA.QZONE.toSnsPlatform());
-        platforms.add(SHARE_MEDIA.EVERNOTE.toSnsPlatform());
-
-    }
-
-    private void init() {
+    @Override
+    protected void initData() {
         Bundle extras = getIntent().getExtras();
         webUrl = (String) extras.getString(WEBURL);
         title = (String) extras.getString(TITLE);
@@ -115,32 +78,34 @@ public class WebActivity extends AppCompatActivity {
                     .listener(new OnBMClickListener() {
                         @Override
                         public void onBoomButtonClick(int index) {
-                            // When the boom-button corresponding this builder is clicked.
-                            share(index);
+                            UMengShareHelper.getInstance().initialize(WebActivity.this).shareWithWeb(index, title, webUrl).setShareCallbackListener(new UMengShareHelper.ShareCallbackListener() {
+                                @Override
+                                public void shareError(String errorMsg) {
+                                    ToastUtil.showApp(errorMsg);
+                                }
+                            });
+
                         }
                     })
             );
-        bmb.setDraggable(true);
 
-        tv_web_title = findViewById(R.id.tv_web_title);
-        pg_web = findViewById(R.id.pg_web);
-        web = findViewById(R.id.web);
-        WebSettings settings = web.getSettings();
+        bmb.setDraggable(true);
+        WebSettings settings = mWebView.getSettings();
         settings.setBuiltInZoomControls(true);// 显示缩放按钮
         settings.setUseWideViewPort(true);// 支持双击缩放功能
         settings.setJavaScriptEnabled(true);// 支持JavaScript
         // 监听Webview加载数据完成
-        web.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // 当网页加载完成后，回调
                 super.onPageFinished(view, url);
             }
         });
-        web.loadUrl(webUrl);
+        mWebView.loadUrl(webUrl);
 
 
-        web.setWebChromeClient(new WebChromeClient() {
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
@@ -163,28 +128,28 @@ public class WebActivity extends AppCompatActivity {
                 tv_web_title.setText(title);
             }
         });
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 
+    @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();  //防止内存泄露
+        UMengShareHelper.release();
     }
+
 
     //设置返回键动作（防止按返回键直接退出程序)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO 自动生成的方法存根
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (web.canGoBack()) {//当webview不是处于第一页面时，返回上一个页面
-                web.goBack();
+            if (mWebView.canGoBack()) {//当webview不是处于第一页面时，返回上一个页面
+                mWebView.goBack();
                 return true;
             }
         }

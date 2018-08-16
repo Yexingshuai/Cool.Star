@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by daixiankade on 2018/5/14.
+ * Created by  on 2018/5/14.
  */
 
 public abstract class BasicAdapter<T> extends RecyclerView.Adapter {

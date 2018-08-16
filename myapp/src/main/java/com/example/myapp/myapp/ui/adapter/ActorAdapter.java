@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myapp.R;
-import com.example.myapp.myapp.ui.activity.FilmDetailActivity;
+import com.example.myapp.myapp.component.movie.detail.FilmDetailActivity;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 
 import java.util.List;

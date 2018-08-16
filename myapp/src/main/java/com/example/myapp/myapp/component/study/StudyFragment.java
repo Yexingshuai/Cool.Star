@@ -130,9 +130,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void initData() {
-//        mPresenter.requestBannerAndStutyInfo(mPageNum);
         mRefreshLayout.autoRefresh();
-
     }
 
 
@@ -267,7 +265,25 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         sumY = 0;
     }
 
+    @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
 
+    /**
+     * 第一次可见加载数据
+     */
+    @Override
+    protected void refreshData() {
+
+    }
+
+
+    /**
+     * 接受EveneBus响应事件
+     *
+     * @param msg
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(Message msg) {
         if (msg.what == 1) {
@@ -300,7 +316,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void setBannerAndStudyInfo(Object result) {
         mRefreshLayout.finishRefresh();
-        showContentView();
         if (result instanceof BannerBean) {
             BannerBean bannerBean = (BannerBean) result;
             List<BannerBean.DataBean> datas = bannerBean.getData();
@@ -343,5 +358,15 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     public void unCollectFail(String errorMsg) {
         ToastUtil.showApp(errorMsg);
 
+    }
+
+    /**
+     * 获取首页内容失败
+     *
+     * @param errorMsg
+     */
+    @Override
+    public void requestBannerAndStudyInfoFail(String errorMsg) {
+        mRefreshLayout.finishRefresh();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import com.example.myapp.myapp.base.BaseFragment;
 
 /**
- * Created by daixiankade on 2018/5/2.
+ * Created by yexing on 2018/5/2.
  */
 
 public class FilmPagerAdapter extends FragmentPagerAdapter {

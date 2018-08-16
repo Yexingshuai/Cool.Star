@@ -40,7 +40,7 @@
         <activity android:name=".myapp.ui.activity.ShowBannerActivity" />
 
 
-        <activity android:name=".myapp.ui.activity.FilmDetailActivity" />
+        <activity android:name=".myapp.component.movie.detail.FilmDetailActivity" />
         <activity
             android:name=".myapp.ui.activity.HomeActivity"
             android:label="主页" />

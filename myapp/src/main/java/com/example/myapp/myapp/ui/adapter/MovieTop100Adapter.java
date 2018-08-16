@@ -14,14 +14,14 @@ import com.example.myapp.myapp.data.bean.Subjects;
 import com.example.myapp.myapp.di.glide.GlideContext;
 
 /**
- * Created by daixiankade on 2018/5/7.
+ * Created by yexing on 2018/5/7.
  */
 
-public class MovieTop250Adapter extends BasicAdapter<Subjects> {
+public class MovieTop100Adapter extends BasicAdapter<Subjects> {
 
     private Context mCtx;
 
-    public MovieTop250Adapter(Context mCtx) {
+    public MovieTop100Adapter(Context mCtx) {
         this.mCtx = mCtx;
     }
 
@@ -44,15 +44,6 @@ public class MovieTop250Adapter extends BasicAdapter<Subjects> {
         } else {
             ((NoramlViewHolder) holder).tv_rank.setText("" + (position + 1));
         }
-//        ((NoramlViewHolder) holder).ll_item_view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String id = subjects.getId(); //电影ID
-//                Intent intent = new Intent(mCtx, FilmDetailActivity.class);
-//                intent.putExtra("movieId", id);
-//                mCtx.startActivity(intent);
-//            }
-//        });
     }
 
 

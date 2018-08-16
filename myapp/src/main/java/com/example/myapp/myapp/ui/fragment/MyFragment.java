@@ -33,13 +33,22 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout ll_about;
 
     @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
+
+    @Override
+    protected void refreshData() {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_me;
     }
 
     @Override
     public void initData() {
-        showContentView();//
     }
 
 

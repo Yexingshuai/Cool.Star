@@ -1,10 +1,14 @@
 package com.example.myapp.myapp.ui.helper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.myapp.myapp.component.movie.detail.FilmDetailActivity;
 import com.example.myapp.myapp.ui.activity.WebActivity;
+import com.example.myapp.myapp.utils.MyAnimationUtils;
 
 /**
  * Created by yexing on 2018/8/14.
@@ -49,9 +53,10 @@ public class UiHelper {
 
     /**
      * 跳转WebActivity
+     *
      * @param activity
-     * @param title
-     * @param url
+     * @param title    Web标题
+     * @param url      Web链接
      */
     public static void skipWebActivity(Activity activity, String title, String url) {
         Intent intent = new Intent();
@@ -61,5 +66,20 @@ public class UiHelper {
         bundle.putString(WebActivity.WEBURL, url);
         intent.putExtras(bundle);
         activity.startActivity(intent);
+    }
+
+    /**
+     * 跳转FilmDetailActivity
+     *
+     * @param context
+     * @param view     元素共享动画view
+     * @param id       电影名称id
+     */
+    public static void skipFilmActivity(Context context, View view, String id) {
+        Intent intent = new Intent();
+        Bundle bannerBundle = MyAnimationUtils.makeSceneTransition((Activity) context, view, "fileIv");
+        intent.setClass(context, FilmDetailActivity.class);
+        intent.putExtra(FilmDetailActivity.MOVIEID, id);
+        context.startActivity(intent, bannerBundle);
     }
 }

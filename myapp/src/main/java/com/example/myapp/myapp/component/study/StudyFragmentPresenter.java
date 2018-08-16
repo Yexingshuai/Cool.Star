@@ -60,7 +60,7 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 
             @Override
             public void error(String error) {
-
+              mView.requestBannerAndStudyInfoFail(error);
             }
 
             @Override

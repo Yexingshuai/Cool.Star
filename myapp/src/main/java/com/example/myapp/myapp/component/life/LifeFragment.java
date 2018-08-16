@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * Created by daixiankade on 2018/3/28.
+ * Created by yexing on 2018/3/28.
  */
 
 public class LifeFragment extends BaseFragment {
@@ -32,13 +32,22 @@ public class LifeFragment extends BaseFragment {
 
 
     @Override
+    protected boolean isNeedToBeSubscriber() {
+        return false;
+    }
+
+    @Override
+    protected void refreshData() {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment3;
     }
 
     @Override
     public void initData() {
-        showContentView();
         LifeHeadAdapter lifeHeadAdapter = new LifeHeadAdapter(getActivity());
         vp_module.setAdapter(lifeHeadAdapter);
     }

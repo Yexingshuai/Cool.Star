@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.ui.load.LoadingStatusLayout;
 import com.example.myapp.myapp.ui.view.StateLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,21 +18,22 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.Collection;
 
 /**
- * Created by daixiankade on 2018/3/28.
+ * Created by yexing on 2018/3/28.
  */
 
 public abstract class BaseFragment extends Fragment {
     protected String TAG_LOG = this.getClass().getSimpleName();
     protected View mFragmentView;
     protected Context mCtx;
-    protected StateLayout stateLayout;
+    private boolean mIsFirstVisible;
+    private boolean mHasCreatedView;//是否创建完视图
 
 
     @Override
     public void onStart() {
         super.onStart();
         //EventBus
-        if (!EventBus.getDefault().isRegistered(this)) {
+        if (isNeedToBeSubscriber()) {
             EventBus.getDefault().register(this);
         }
     }
@@ -68,21 +70,46 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e(TAG_LOG, "------------------onCreateView");
-        stateLayout = (StateLayout) inflater.inflate(R.layout.state_layout, container, false);
         mFragmentView = inflater.inflate(getLayoutId(), container, false);
-        stateLayout.setConentView(mFragmentView);
         initView();
-        return stateLayout;
-//        return mFragmentView;
+        return mFragmentView;
+
     }
 
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //初始化控件
+        //已经创建完视图
+        mHasCreatedView = true;
+        //是否是第一次可见
+        mIsFirstVisible = true;
+        if (mIsFirstVisible && getUserVisibleHint()) {
+            refreshData();
+            mIsFirstVisible = false;
+        }
+        //初始化数据
         initData();
+    }
+
+    /**
+     * 这个方法在onCreateView之前
+     * 当Fragment可见性发生改变时会调用这个方法
+     *
+     * @param isVisibleToUser
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (mIsFirstVisible && mHasCreatedView && getUserVisibleHint()) {
+            onFragmentVisibleToUser(isVisibleToUser);
+        }
+
+    }
+
+    @Override
+    public boolean getUserVisibleHint() {
+        return super.getUserVisibleHint();
     }
 
     /**
@@ -95,32 +122,24 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 根据集合中的数据决定显示哪一个状态的View，如果数据是OK的，则返回true
-     *
-     * @param datas
-     * @return
+     * Callback that Fragment visible to user.
      */
-    public boolean checkDatas(Collection<?> datas) {
-        boolean result = false;
-        if (datas == null) {
-            stateLayout.showFailView();
-        } else if (datas.isEmpty()) {
-            stateLayout.showEmptyView();
-        } else {
-            stateLayout.showContentView();
-            result = true;
-        }
-        return result;
+    protected void onFragmentVisibleToUser(boolean isVisibleToUser) {
     }
 
+
     /**
-     * 展示自己正常界面
+     * 是否需要接收广播
      *
      * @return
      */
-    public void showContentView() {
-        stateLayout.showContentView();
-    }
+    protected abstract boolean isNeedToBeSubscriber();
+
+    /**
+     * 刷新当前页面时所需要加载的数据
+     * 当前页面第一次加载时需要的数据
+     */
+    protected  void refreshData(){};
 
     public abstract int getLayoutId();
 

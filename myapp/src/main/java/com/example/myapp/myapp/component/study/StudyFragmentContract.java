@@ -41,6 +41,8 @@ public interface StudyFragmentContract {
 
         void unCollectFail(String msg);
 
+        void requestBannerAndStudyInfoFail(String errorMsg);
+
     }
 
 

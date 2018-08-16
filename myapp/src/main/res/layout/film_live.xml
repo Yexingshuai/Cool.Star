@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -8,17 +9,23 @@
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.myapp.myapp.ui.load.LoadingStatusLayout
+            android:id="@+id/loadingStatusLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"></android.support.v7.widget.RecyclerView>
+            app:status="LOADING">
 
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"></android.support.v7.widget.RecyclerView>
+        </com.example.myapp.myapp.ui.load.LoadingStatusLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
 
 </RelativeLayout>

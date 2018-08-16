@@ -37,7 +37,7 @@ public interface DoubanApi {
      */
 
     @GET("v2/movie/top250")
-    Observable<Root> getTop250(@Query("start") int start, @Query("count") int count);
+    Observable<Root> getTop100(@Query("start") int start, @Query("count") int count);
 
     /**
      * 获取电影详情
