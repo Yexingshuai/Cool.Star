@@ -73,16 +73,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         logoutMenuItem = mNavigationView.getMenu().findItem(R.id.navigation_item_logout);
     }
 
-    private void showNavigationHeadInfo() {
-        String userName = LoginContext.getInstance().getUserName();
-        if (userName != null) {
-            mUserName.setText(userName);
-            logoutMenuItem.setVisible(true);  // true 为显示，false 为隐藏
-        } else {
-            mUserName.setText("");
-            logoutMenuItem.setVisible(false);  // true 为显示，false 为隐藏
-        }
-    }
 
     @Override
     protected void initData() {
@@ -95,7 +85,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         mViewPager.setOffscreenPageLimit(fragments.size());
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
-
 
         for (int i = 0; i < adapter.getCount(); i++) {
             TabLayout.Tab tab = mTabLayout.getTabAt(i);
@@ -123,6 +112,17 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     protected void onResume() {
         super.onResume();
         showNavigationHeadInfo();  //获取焦点时，即更新用户状态信息
+    }
+
+    private void showNavigationHeadInfo() {
+        String userName = LoginContext.getInstance().getUserName();
+        if (userName != null) {
+            mUserName.setText(userName);
+            logoutMenuItem.setVisible(true);  // true 为显示，false 为隐藏
+        } else {
+            mUserName.setText("");
+            logoutMenuItem.setVisible(false);  // true 为显示，false 为隐藏
+        }
     }
 
     /**
@@ -177,7 +177,20 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         }
     }
 
+    /**
+     * 展开侧拉菜单 DrawerLayout
+     */
+    public void toggle() {
+        mDrawerLayout.openDrawer(GravityCompat.START);
+    }
 
+    /**
+     * 用户点击返回键
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -213,7 +226,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     if (LoginContext.getInstance().isLogined()) {
                         UiHelper.skipActivityNofinish(MainActivity.this, MyFavoriteActivity.class);
                     } else {
-                        ToastUtil.showApp("请先登录呦");
+                        ToastUtil.showApp(getString(R.string.request_login));
                         UiHelper.skipActivityNofinish(MainActivity.this, LoginActivity.class);
                     }
                     break;
@@ -228,12 +241,12 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     if (LoginContext.getInstance().logout()) {
                         showNavigationHeadInfo();
                     } else {
-                        ToastUtil.showApp("退出失败！");
+                        ToastUtil.showApp(getString(R.string.logout_error));
                     }
                     break;
 
                 case R.id.navigation_item_setting:
-                    ToastUtil.showApp("没什么好设置的。。。");
+                    ToastUtil.showApp(getString(R.string.setting));
                     break;
                 case R.id.navigation_item_about:
                     UiHelper.skipActivityNofinish(MainActivity.this, AboutActivity.class);

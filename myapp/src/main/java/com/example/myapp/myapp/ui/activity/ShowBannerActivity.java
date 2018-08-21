@@ -1,14 +1,14 @@
 package com.example.myapp.myapp.ui.activity;
 
-import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 
 public class ShowBannerActivity extends BaseActivity {
 
@@ -29,11 +29,8 @@ public class ShowBannerActivity extends BaseActivity {
         iv_banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShowBannerActivity.this, WebActivity.class);
-                intent.putExtra("webUrl", webUrl);
-                startActivity(intent);
+                UiHelper.skipWebActivity(ShowBannerActivity.this, null, webUrl);
                 finish();
-
             }
         });
 

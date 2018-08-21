@@ -56,7 +56,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     public HomeAdapter(Context mCtx) {
         this.mCtx = mCtx;
-        array = new int[]{mCtx.getResources().getColor(R.color.cardView),
+        array = new int[]{
+                mCtx.getResources().getColor(R.color.cardView),
                 mCtx.getResources().getColor(R.color.cardView2),
                 mCtx.getResources().getColor(R.color.colorAccent),
                 mCtx.getResources().getColor(R.color.xxblue)};

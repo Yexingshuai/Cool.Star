@@ -37,7 +37,7 @@ public class FilmLiveFragment extends BaseFragment implements FilmLiveContract.V
 
     @Override
     protected void refreshData() {
-        mPresenter.getLiveFilm();
+
     }
 
     @Override
@@ -47,6 +47,7 @@ public class FilmLiveFragment extends BaseFragment implements FilmLiveContract.V
 
     @Override
     public void initData() {
+        mPresenter.getLiveFilm();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

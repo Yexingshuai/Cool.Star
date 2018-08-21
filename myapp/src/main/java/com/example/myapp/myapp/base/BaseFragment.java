@@ -34,7 +34,9 @@ public abstract class BaseFragment extends Fragment {
         super.onStart();
         //EventBus
         if (isNeedToBeSubscriber()) {
-            EventBus.getDefault().register(this);
+            if (!EventBus.getDefault().isRegistered(this)) {//加上判断
+                EventBus.getDefault().register(this);
+            }
         }
     }
 
@@ -139,7 +141,10 @@ public abstract class BaseFragment extends Fragment {
      * 刷新当前页面时所需要加载的数据
      * 当前页面第一次加载时需要的数据
      */
-    protected  void refreshData(){};
+    protected void refreshData() {
+    }
+
+    ;
 
     public abstract int getLayoutId();
 

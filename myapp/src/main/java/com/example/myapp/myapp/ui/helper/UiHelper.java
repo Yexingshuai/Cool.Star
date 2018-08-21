@@ -41,31 +41,31 @@ public class UiHelper {
     /**
      * 普通界面跳转不需要finsh
      *
-     * @param activity
+     * @param context
      * @param clazz
      */
-    public static void skipActivityNofinish(Activity activity, Class<? extends Activity> clazz) {
+    public static void skipActivityNofinish(Context context, Class<? extends Activity> clazz) {
         Intent intent = new Intent();
-        intent.setClass(activity, clazz);
-        activity.startActivity(intent);
+        intent.setClass(context, clazz);
+        context.startActivity(intent);
     }
 
 
     /**
      * 跳转WebActivity
      *
-     * @param activity
+     * @param context
      * @param title    Web标题
      * @param url      Web链接
      */
-    public static void skipWebActivity(Activity activity, String title, String url) {
+    public static void skipWebActivity(Context context, String title, String url) {
         Intent intent = new Intent();
-        intent.setClass(activity, WebActivity.class);
+        intent.setClass(context, WebActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(WebActivity.TITLE, title);
         bundle.putString(WebActivity.WEBURL, url);
         intent.putExtras(bundle);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
     /**

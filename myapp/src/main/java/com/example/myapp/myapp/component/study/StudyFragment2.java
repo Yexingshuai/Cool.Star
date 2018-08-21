@@ -19,12 +19,11 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.component.study.adapter.BannerViewBinder;
+import com.example.myapp.myapp.component.study.adapter.StudyEntryBinder;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
-import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
-import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -46,9 +45,12 @@ import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * Created by yexing on 2018/3/28.
+ * <p>
+ * 改用MultiType  adapter填充Recyclerview
+ * </p>
  */
 
-public class StudyFragment extends BaseFragment implements StudyFragmentContract.View, View.OnClickListener {
+public class StudyFragment2 extends BaseFragment implements StudyFragmentContract.View {
 
 
     private int[] imageResources = new int[]{
@@ -80,7 +82,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     private float duration = 350f;
     private HomeAdapter homeAdapter;
     private ViewPager mViewPager;
-    private SmartRefreshLayout mRefreshLayout;
 
     private int color = -1;
     private StudyFragmentContract.Presenter mPresenter;
@@ -118,12 +119,10 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
             super.handleMessage(msg);
         }
     };
+    private SmartRefreshLayout mRefreshLayout;
+    private Items items;
+    private MultiTypeAdapter typeAdapter;
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacksAndMessages(null);//删除所有的消息，防止内存泄露
-    }
 
     @Override
     public int getLayoutId() {
@@ -131,8 +130,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     }
 
 
-    public static StudyFragment newInstance() {
-        return new StudyFragment();
+    public static StudyFragment2 newInstance() {
+        return new StudyFragment2();
     }
 
 
@@ -140,11 +139,24 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     public void initView() {
 
         mRefreshLayout = getView(R.id.refreshLayout);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mPageNum = PAGE_NUMBER_DEFAULT;
+                mPresenter.requestBannerAndStutyInfo(mPageNum);
+            }
+        });
+
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                //加载更多功能的代码
+                mPresenter.requestStudyInfo(++mPageNum);
+            }
+        });
+
         mRecylerview = getView(R.id.rv);
         llTitleContainer = getView(R.id.title_bar);
-        CircleImageView mHeadImg = getView(R.id.iv_head);
-        mHeadImg.setOnClickListener(this);
-
 
 
         //BoomMenu
@@ -171,46 +183,23 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void initData() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mPageNum = PAGE_NUMBER_DEFAULT;
-                mPresenter.requestBannerAndStutyInfo(mPageNum);
-            }
-        });
-
-        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                //加载更多功能的代码
-                mPresenter.requestStudyInfo(++mPageNum);
-            }
-        });
         mRefreshLayout.autoRefresh();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mCtx, LinearLayoutManager.VERTICAL, false);
         mRecylerview.setLayoutManager(linearLayoutManager);
         mRecylerview.addItemDecoration(new SpaceItemDecoration(22));
-        homeAdapter = new HomeAdapter(getActivity());
-        homeAdapter.setButtonLikeListener(new HomeAdapter.ButtonLikeListener() {
-            @Override
-            public void like(int id) {
-                if (LoginContext.getInstance().isLogined()) {
-                    mPresenter.collectArtist(id);
-                }
-
-            }
-
-            @Override
-            public void unLike(int id) {
-                if (LoginContext.getInstance().isLogined()) {
-                    mPresenter.unCollect(id);
-                }
-            }
-        });
-        mRecylerview.setAdapter(homeAdapter);
         mRecylerview.setItemAnimator(new DefaultItemAnimator());
         mRecylerview.addOnScrollListener(new MyRecyclerViewScrooListener());
+        typeAdapter = new MultiTypeAdapter();
+        typeAdapter.register(BannerBean.class, new BannerViewBinder());
+//        typeAdapter.register(HomeItemBean.class, new StudyEntryBinder(getActivity()));
+        typeAdapter.register(HomeItemBean.class, new StudyEntryBinder(getActivity()));
+        mRecylerview.setAdapter(typeAdapter);
+        items = new Items();
+        typeAdapter.setItems(items);
+
+
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -240,7 +229,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(Message msg) {
         if (msg.what == 1) {
-            StudyFragment.this.mViewPager = (ViewPager) msg.obj;
+            StudyFragment2.this.mViewPager = (ViewPager) msg.obj;
             handler.removeCallbacksAndMessages(null);
             handler.sendEmptyMessageDelayed(1, 3500);
 
@@ -263,24 +252,36 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void setStudyInfo(HomeItemBean result) {
         mRefreshLayout.finishLoadMore();
-        homeAdapter.addHomeInfo(result.getData().getDatas(), false);
+//        homeAdapter.addHomeInfo(result.getData().getDatas(), false);
     }
 
     @Override
     public void setBannerAndStudyInfo(Object result) {
         mRefreshLayout.finishRefresh();
+//        if (result instanceof BannerBean) {
+//            BannerBean bannerBean = (BannerBean) result;
+//            List<BannerBean.DataBean> datas = bannerBean.getData();
+//            homeAdapter.addBanner(datas);
+//
+//        } else {
+//            HomeItemBean homeItem = (HomeItemBean) result;
+//            HomeItemBean.DataBean data = homeItem.getData();
+//            List<HomeItemBean.DataBean.DatasBean> datas = data.getDatas();
+//            homeAdapter.addHomeInfo(datas, true);
+//        }
+
         if (result instanceof BannerBean) {
             BannerBean bannerBean = (BannerBean) result;
-            List<BannerBean.DataBean> datas = bannerBean.getData();
-            homeAdapter.addBanner(datas);
+            items.add(bannerBean);
 
         } else {
             HomeItemBean homeItem = (HomeItemBean) result;
             HomeItemBean.DataBean data = homeItem.getData();
             List<HomeItemBean.DataBean.DatasBean> datas = data.getDatas();
-            homeAdapter.addHomeInfo(datas, true);
-        }
+            items.add(datas);
 
+        }
+        typeAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -308,13 +309,10 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     }
 
-    /**
-     * 取消收藏失败
-     * @param errorMsg
-     */
     @Override
     public void unCollectFail(String errorMsg) {
         ToastUtil.showApp(errorMsg);
+
     }
 
     /**
@@ -325,15 +323,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void requestBannerAndStudyInfoFail(String errorMsg) {
         mRefreshLayout.finishRefresh();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.iv_head:
-                ((MainActivity)getActivity()).toggle();
-                break;
-        }
     }
 
 
@@ -364,6 +353,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
                 llTitleContainer.setVisibility(View.VISIBLE);
             }
             llTitleContainer.setBackgroundColor(bgColor);
+            super.onScrolled(recyclerView, dx, dy);
 
 
             //控制底部导航栏隐藏或展示
@@ -377,7 +367,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
                 message.what = NAVIGATION_SHOW;
                 EventBus.getDefault().post(message);
             }
-            super.onScrolled(recyclerView, dx, dy);
+
         }
 
         @Override

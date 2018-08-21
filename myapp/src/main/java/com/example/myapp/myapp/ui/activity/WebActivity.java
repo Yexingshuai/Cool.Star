@@ -67,7 +67,7 @@ public class WebActivity extends BaseActivity {
     protected void initData() {
         Bundle extras = getIntent().getExtras();
         webUrl = (String) extras.getString(WEBURL);
-        title = (String) extras.getString(TITLE);
+//        title = (String) extras.getString(TITLE);
         ImageView iv_back = findViewById(R.id.iv_back);
         BoomMenuButton bmb = findViewById(R.id.bmb);
         for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++)
@@ -123,8 +123,9 @@ public class WebActivity extends BaseActivity {
             }
 
             @Override
-            public void onReceivedTitle(WebView view, String title) {
+            public void onReceivedTitle(WebView view, String tit) {
                 super.onReceivedTitle(view, title);
+                title = tit;
                 tv_web_title.setText(title);
             }
         });

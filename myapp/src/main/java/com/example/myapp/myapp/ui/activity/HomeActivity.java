@@ -1,5 +1,6 @@
 package com.example.myapp.myapp.ui.activity;
 
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,7 +43,6 @@ public class HomeActivity extends AppCompatActivity {
 //        actionBar.setDisplayHomeAsUpEnabled(false);
 
 
-
         //点击事件
         toolbar.setNavigationOnClickListener(mOnNavClickListener);
 
@@ -52,13 +52,13 @@ public class HomeActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.mipmap.icon_back);
 
 
-
-
         //Animation.
 //        getWindow().setEnterTransition(new Slide(Gravity.RIGHT).setDuration(500));
 //        getWindow().setEnterTransition(new ChangeBounds().setDuration(500));
 //        getWindow().setEnterTransition(new Fade().setDuration(500));
-        getWindow().setEnterTransition(new Explode().setDuration(500));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Explode().setDuration(500));
+        }
     }
 
     @Override

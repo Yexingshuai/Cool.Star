@@ -19,6 +19,7 @@ import com.example.myapp.myapp.ui.activity.WebActivity;
 import java.util.List;
 
 import com.example.myapp.myapp.data.bean.FilmPeople;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 
 /**
  * Created by daixiankade on 2018/5/8.
@@ -82,10 +83,8 @@ public class ActorAdapter extends RecyclerView.Adapter {
             ll_actor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mctx, WebActivity.class);
                     String alt = filmPeople.getAlt();
-                    intent.putExtra("webUrl", alt);
-                    mctx.startActivity(intent);
+                    UiHelper.skipWebActivity(mctx,null,alt);
                 }
             });
         }

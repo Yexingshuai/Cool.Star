@@ -3,7 +3,9 @@ package com.example.myapp.myapp.component;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.base.BasePresenter;
+import com.example.myapp.myapp.component.study.StudyFragment2;
 import com.example.myapp.myapp.component.study.StudyFragmentPresenter;
+import com.example.myapp.myapp.component.study.adapter.StudyEntryBinder;
 import com.example.myapp.myapp.data.source.study.StudyFragmentRepository;
 import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.component.movie.HappyFragment;
@@ -43,8 +45,11 @@ public class MainPresenter implements BasePresenter {
         List<BaseFragment> fragmentList = new ArrayList<>();
 
         StudyFragment studyFragment = StudyFragment.newInstance();
-        fragmentList.add(studyFragment);
+
+//        StudyFragment2 studyFragment = StudyFragment2.newInstance();
         new StudyFragmentPresenter(new StudyFragmentRepository(),studyFragment);
+        fragmentList.add(studyFragment);
+
 
         fragmentList.add(new HappyFragment());
         fragmentList.add(new LifeFragment());

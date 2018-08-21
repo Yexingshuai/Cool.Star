@@ -20,5 +20,9 @@ public class MyApp extends Application {
         //添加代码
     }
 
+    public static Context getContext() {
+        return mContext;
+    }
+
 
 }

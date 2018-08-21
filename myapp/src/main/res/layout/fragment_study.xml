@@ -30,83 +30,35 @@
     <RelativeLayout
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="80dp"
         android:background="@color/xxblue"
         android:clickable="true"
         android:gravity="bottom"
         android:visibility="invisible">
 
+        <com.example.myapp.myapp.ui.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="13dp"
+            android:src="@mipmap/icon_head2" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="7dp"
-            android:layout_marginLeft="13dp"
-            android:gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/iv_head"
             android:text="学习"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="9dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/search"
-            android:drawableLeft="@mipmap/ic_find_in_page"
-            android:drawablePadding="6dp"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:text="关键词搜索"
-            android:textColor="@color/td_choose" />
 
     </RelativeLayout>
-
-
-    <!--fab-->
-    <!--<com.github.clans.fab.FloatingActionMenu-->
-    <!--android:id="@+id/floatingMenu"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="bottom|right"-->
-    <!--android:layout_marginBottom="60dp"-->
-    <!--android:layout_marginRight="35dp">-->
-
-    <!--<com.github.clans.fab.FloatingActionButton-->
-    <!--android:id="@+id/floatingAttention"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@mipmap/ic_menu_add"-->
-    <!--app:fab_label="关注"-->
-    <!--app:fab_size="mini" />-->
-
-    <!--<com.github.clans.fab.FloatingActionButton-->
-    <!--android:id="@+id/floatingPost"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@mipmap/ic_menu_post"-->
-    <!--app:fab_label="发帖"-->
-    <!--app:fab_size="mini" />-->
-
-    <!--<com.github.clans.fab.FloatingActionButton-->
-    <!--android:id="@+id/floatingSwitch"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@mipmap/ic_menu_switch"-->
-    <!--app:fab_label="按发帖时间排序"-->
-    <!--app:fab_size="mini" />-->
-
-    <!--<com.github.clans.fab.FloatingActionButton-->
-    <!--android:id="@+id/floatingRefresh"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@mipmap/ic_menu_refresh"-->
-    <!--app:fab_label="刷新"-->
-    <!--app:fab_size="mini" />-->
-
-
-    <!--</com.github.clans.fab.FloatingActionMenu>-->
 
 
     <com.nightonke.boommenu.BoomMenuButton
@@ -122,9 +74,7 @@
         app:bmb_buttonPlaceEnum="buttonPlace_ham_4"
         app:bmb_hamHeight="0dp"
         app:bmb_hamWidth="0dp"
-        app:bmb_piecePlaceEnum="piecePlace_ham_4"
-
-        >
+        app:bmb_piecePlaceEnum="piecePlace_ham_4">
 
 
         <ImageView

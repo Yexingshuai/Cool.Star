@@ -1,10 +1,8 @@
 package com.example.myapp.myapp.component.life;
 
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
-import android.widget.ImageView;
 
 import com.example.myapp.R;
 
@@ -22,12 +20,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class LifeFragment extends BaseFragment {
 
-    private ImageView iv;
-    private FloatingActionButton fab;
-    private boolean flag;
-    private int hypotenuse;
-    private int centerX;
-    private int centerY;
+
     private ViewPager vp_module;
 
 
@@ -43,7 +36,7 @@ public class LifeFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment3;
+        return R.layout.fragment_life;
     }
 
     @Override
@@ -67,25 +60,5 @@ public class LifeFragment extends BaseFragment {
 
     }
 
-//    private void loadAnimation() {
-//
-//        int[] vLocation = new int[2];
-//        fab.getLocationOnScreen(vLocation);
-//        centerX = vLocation[0] + fab.getWidth() / 2;
-//        centerY = vLocation[1] + fab.getHeight() / 2;
-//        int imgHeight = iv.getHeight();
-//        int imgWidth = iv.getWidth();
-//        hypotenuse = (int) Math.hypot(imgHeight, imgWidth);
-//        Animator animator;
-//        if (flag) {
-//            animator = MyAnimationUtils.makeCircularReveal(iv, centerX, centerY, hypotenuse, 0);
-//            animator.setDuration(2000);
-//            flag = false;
-//        } else {
-//            animator = MyAnimationUtils.makeCircularReveal(iv, centerX, centerY, 0, hypotenuse);
-//            animator.setDuration(2000);
-//            flag = true;
-//        }
-//        animator.start();
-//    }
+
 }

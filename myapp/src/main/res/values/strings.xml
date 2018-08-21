@@ -75,4 +75,12 @@
     </string>
 
 
+    <string name="open_source">• 鸿洋WanAndroid App开放接口\n• 豆瓣提供影视资讯接口\n• 聚合数据</string>
+    <string name="contact_me">• @夜空中最亮的我 \n• YeXingFreedom@163.com</string>
+    <string name="app_des">• 项目整体采用MVP(并不完全)+RxJava+Retrofit打造\n•简单涉及到Eventbus+WebView+属性动画\n•本人只是app开发中的一只菜鸟，努力前进中！</string>
+    <string name="request_login">请先登录呦</string>
+    <string name="logout_error">退出失败！</string>
+    <string name="setting">没什么好设置的。。。</string>
+
+
 </resources>

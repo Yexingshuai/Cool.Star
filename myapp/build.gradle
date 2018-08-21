@@ -12,6 +12,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true  //vercor
 
     }
     buildTypes {
@@ -75,6 +76,10 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.1.0'
     //cookieJar
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    //MuliType
+    implementation('me.drakeet.multitype:multitype:3.3.0', {
+        exclude group: 'com.android.support'
+    })
 
 
 }
