@@ -37,18 +37,18 @@ public class FilmLiveAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        FilmViewHolder filmViewHolder = (FilmViewHolder) holder;
+        final FilmViewHolder filmViewHolder = (FilmViewHolder) holder;
 
         final Subjects subjects = this.subjects.get(position);
         String url = subjects.getImages().getLarge();
-        ViewGroup.LayoutParams params = filmViewHolder.iV_film.getLayoutParams();
+        ViewGroup.LayoutParams params = filmViewHolder.iv_film.getLayoutParams();
         int width = Utils.getScreenWidthDp(mCtx);
         int ivWidth = (width - Utils.dp2px(mCtx, 80)) / 3;
 //        params.width = ivWidth;
         double height = (420.0 / 300.0) * ivWidth;
 //        params.height = (int) height;
 //        filmViewHolder.iV_film.setLayoutParams(params);
-        GlideContext.loadCommon(mCtx, url, filmViewHolder.iV_film);
+        GlideContext.loadCommon(mCtx, url, filmViewHolder.iv_film);
         if (!TextUtils.isEmpty("" + subjects.getRating().getAverage())) {
             filmViewHolder.tv_film_grade.setText("评分:" + String.valueOf(subjects.getRating().getAverage()));
         } else {
@@ -59,7 +59,7 @@ public class FilmLiveAdapter extends RecyclerView.Adapter {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mItemClickListener.OnItemClick(v, position, subjects);
+                    mItemClickListener.OnItemClick(filmViewHolder.iv_film, position, subjects);
                 }
             });
         }
@@ -89,13 +89,13 @@ public class FilmLiveAdapter extends RecyclerView.Adapter {
     }
 
     class FilmViewHolder extends RecyclerView.ViewHolder {
-        ImageView iV_film;
+        ImageView iv_film;
         TextView tv_film_grade;
         TextView tv_film_name;
 
         public FilmViewHolder(View itemView) {
             super(itemView);
-            iV_film = itemView.findViewById(R.id.iV_film);
+            iv_film = itemView.findViewById(R.id.iV_film);
             tv_film_grade = itemView.findViewById(R.id.tv_film_grade);
             tv_film_name = itemView.findViewById(R.id.tv_film_name);
         }

@@ -25,8 +25,7 @@ public class AboutActivity extends BaseActivity {
 
     private ImageView mHeadView;
     private Toolbar mToolBar;
-    public final String gitHubUrl = "https://github.com/Yexingshuai/Cool.Star";
-    private String url="https://github.com/Yexingshuai/Cool.Star/blob/master/joke";
+    private String gitHubUrl = "https://github.com/Yexingshuai/Cool.Star";
     private String imgUrl = "http://guolin.tech/api/bing_pic";
     private Button mWebHome;
     private Button mFeedBack;
@@ -58,13 +57,13 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        OkGo.get(url)
+        OkGo.get(imgUrl)
                 .tag(this)
                 .cacheMode(CacheMode.DEFAULT)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
+                        GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
                     }
 
                     @Override
