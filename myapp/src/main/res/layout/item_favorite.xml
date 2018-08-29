@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:stateListAnimator="@drawable/app_animate_press_90_scale"
         app:cardCornerRadius="4dp"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardUseCompatPadding="true">
 
         <LinearLayout

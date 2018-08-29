@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
 
-        <ImageView
-            android:id="@+id/iV_film"
+        android:id="@+id/ll_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:stateListAnimator="@drawable/app_animate_press_90_scale"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="7dp"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_film_grade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
+            <ImageView
+                android:id="@+id/iV_film"
+                android:layout_width="110dp"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop" />
 
-            android:maxLines="2"
-            android:padding="4dp"
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_film_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:padding="2dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="13sp" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_film_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:padding="3dp"
+                android:textColor="@color/text_gray_28"
+                android:textSize="14sp" />
 
+        </LinearLayout>
 
-    <TextView
-        android:maxLines="1"
-        android:layout_marginTop="5dp"
-        android:id="@+id/tv_film_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingTop="2dp"
-        android:textColor="@color/text_gray_28"
-        android:textSize="12sp" />
+    </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -52,6 +52,10 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private ItemAnimHelper helper = new ItemAnimHelper();
     private BannerAdapter bannerAdapter;
     private ButtonLikeListener listener;
+    /**
+     * 记录banner选中的索引
+     */
+    private int bannerPosition = 0;
 
 
     public HomeAdapter(Context mCtx) {
@@ -176,12 +180,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private void setBanner(final RecyclerView.ViewHolder holder) {
         bannerAdapter = new BannerAdapter(banner, mCtx);
 
-//        ((HeadHolder) holder).ll_guide_points.removeAllViews();
+//        ((HeadHolder) holder).ll_guide_points.removeAllViews();  都可以
         if (((HeadHolder) holder).ll_guide_points.getChildCount() < 1) {
 
             for (int i = 0; i < banner.size(); i++) {
                 ImageView imageView = new ImageView(mCtx);
-                imageView.setBackgroundResource(R.drawable.guide_point_normal);
+
                 // 获取10dp对应的像素值
                 int dp2px = Utils.dp2px(mCtx, 6);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dp2px, dp2px);
@@ -190,6 +194,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     params.leftMargin = dp2px;
                 }
                 imageView.setLayoutParams(params);
+
+                if (i == 0) {
+                    imageView.setBackgroundResource(R.drawable.guide_point_red);
+                } else {
+                    imageView.setBackgroundResource(R.drawable.guide_point_normal);
+                }
                 ((HeadHolder) holder).ll_guide_points.addView(imageView);
             }
         }
@@ -212,10 +222,14 @@ public class HomeAdapter extends RecyclerView.Adapter {
             @Override
             public void onPageSelected(int position) {
                 position = position % (banner.size());
-                int redPointX = (int) (position) * Utils.dp2px(mCtx, 12);// dp2px(14)
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ((HeadHolder) holder).iv_guide_whitepoint.getLayoutParams();
-                params.leftMargin = redPointX;
-                ((HeadHolder) holder).iv_guide_whitepoint.setLayoutParams(params);
+//                int redPointX = (int) (position) * Utils.dp2px(mCtx, 12);// dp2px(14)
+//                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ((HeadHolder) holder).iv_guide_whitepoint.getLayoutParams();
+//                params.leftMargin = redPointX;
+//                ((HeadHolder) holder).iv_guide_whitepoint.setLayoutParams(params);
+
+                ((HeadHolder) holder).ll_guide_points.getChildAt(position).setBackgroundResource(R.drawable.guide_point_red);
+                ((HeadHolder) holder).ll_guide_points.getChildAt(bannerPosition).setBackgroundResource(R.drawable.guide_point_normal);
+                bannerPosition = position;
             }
 
             @Override
@@ -249,7 +263,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             vp = itemView.findViewById(R.id.vp);
 
             ll_guide_points = itemView.findViewById(R.id.ll_guide_points);
-            iv_guide_whitepoint = itemView.findViewById(R.id.iv_guide_whitepoint);
+//            iv_guide_whitepoint = itemView.findViewById(R.id.iv_guide_whitepoint);
 
             Message message = new Message();
             message.what = 1;

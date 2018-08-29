@@ -204,7 +204,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
 
-                Toast.makeText(this, "再按一次退出程序哦", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.exitApp, Toast.LENGTH_SHORT).show();
 
                 mExitTime = System.currentTimeMillis();
             } else {
@@ -231,7 +231,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     }
                     break;
                 case R.id.navigation_item_weather:
-                    Toast.makeText(MainActivity.this, "天气", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.weather, Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navigation_item_skin:
                     DesignDialog designDialog = new DesignDialog();

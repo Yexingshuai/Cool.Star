@@ -13,6 +13,7 @@ import com.example.myapp.myapp.ui.adapter.MovieTop100Adapter;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.data.bean.Root;
 import com.example.myapp.myapp.data.bean.Subjects;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.load.LoadingStatusLayout;
 import com.example.myapp.myapp.utils.ToastUtil;
 
@@ -61,8 +62,10 @@ public class FilmTop100Fragment extends BaseFragment implements FilmTop100Contra
             @Override
             public void onClick(View view, int position, Subjects subjects) {
                 String id = subjects.getId(); //电影ID
+                String title = subjects.getTitle();
                 Intent intent = new Intent(mCtx, FilmDetailActivity.class);
                 intent.putExtra(FilmDetailActivity.MOVIEID, id);
+                intent.putExtra(FilmDetailActivity.MOVIENAME, title);
                 startActivity(intent);
             }
         });

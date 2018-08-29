@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,8 +28,8 @@ public class MovieTop100Adapter extends BasicAdapter<Subjects> {
 
 
     @Override
-    protected RecyclerView.ViewHolder onCreateHolder() {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.item_movie_top250, null, false);
+    protected RecyclerView.ViewHolder onCreateHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.item_movie_top250, parent, false);
         NoramlViewHolder noramlViewHolder = new NoramlViewHolder(view);
         return noramlViewHolder;
     }
@@ -62,7 +63,7 @@ public class MovieTop100Adapter extends BasicAdapter<Subjects> {
             tv_film = itemView.findViewById(R.id.tv_film);
             tv_film_english = itemView.findViewById(R.id.tv_film_english);
             tv_film_grade = itemView.findViewById(R.id.tv_film_grade);
-            ll_item_view = itemView.findViewById(R.id.ll_item_view);
+//            ll_item_view = itemView.findViewById(R.id.ll_item_view);
         }
     }
 

@@ -8,32 +8,7 @@
     android:orientation="vertical">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/xxblue">
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:scaleType="center"
-            android:src="@mipmap/icon_back" />
-
-        <TextView
-            android:id="@+id/tv_file_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="13dp"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@id/iv_back"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-    </RelativeLayout>
-
+    <include layout="@layout/app_toolbar"/>
 
     <com.example.myapp.myapp.ui.load.LoadingStatusLayout
         android:id="@+id/loadingStatusLayout"

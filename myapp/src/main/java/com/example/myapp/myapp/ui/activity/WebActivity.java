@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class WebActivity extends BaseActivity {
 
-    private TextView tv_web_title;
+
     private WebView mWebView;
     private ProgressBar pg_web;
     private String title;
@@ -41,7 +41,7 @@ public class WebActivity extends BaseActivity {
     private String webUrl;
     public static final String TITLE = "title";
     public static final String WEBURL = "weburl";
-    private ImageView iv_back;
+
 
 
     @Override
@@ -51,24 +51,14 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        iv_back = findViewById(R.id.iv_back);
-        tv_web_title = findViewById(R.id.tv_web_title);
         pg_web = findViewById(R.id.pg_web);
         mWebView = findViewById(R.id.web);
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 
     @Override
     protected void initData() {
         Bundle extras = getIntent().getExtras();
         webUrl = (String) extras.getString(WEBURL);
-//        title = (String) extras.getString(TITLE);
-        ImageView iv_back = findViewById(R.id.iv_back);
         BoomMenuButton bmb = findViewById(R.id.bmb);
         for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++)
             bmb.addBuilder(new TextInsideCircleButton.Builder()
@@ -124,9 +114,9 @@ public class WebActivity extends BaseActivity {
 
             @Override
             public void onReceivedTitle(WebView view, String tit) {
-                super.onReceivedTitle(view, title);
+                super.onReceivedTitle(view, tit);
                 title = tit;
-                tv_web_title.setText(title);
+                setActionTitle(tit);
             }
         });
     }

@@ -37,7 +37,7 @@ public class FilmLiveFragment extends BaseFragment implements FilmLiveContract.V
 
     @Override
     protected void refreshData() {
-
+        mPresenter.getLiveFilm();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class FilmLiveFragment extends BaseFragment implements FilmLiveContract.V
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mCtx, 3);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         SpaceItemDecoration spacesItemDecoration = new SpaceItemDecoration(Utils.dp2px(mCtx, 12), Utils.dp2px(mCtx, 12), Utils.dp2px(mCtx, 12), 0);
-        mRecyclerView.addItemDecoration(spacesItemDecoration);
+//        mRecyclerView.addItemDecoration(spacesItemDecoration);
         filmLiveAdapter = new FilmLiveAdapter(mCtx);
         mRecyclerView.setAdapter(filmLiveAdapter);
         filmLiveAdapter.setOnItemClickListener(new FilmLiveAdapter.OnItemClickListener() {
@@ -72,7 +72,8 @@ public class FilmLiveFragment extends BaseFragment implements FilmLiveContract.V
             public void OnItemClick(View view, int position, Object data) {
                 Subjects subjects = (Subjects) data;
                 String id = subjects.getId(); //电影ID
-                UiHelper.skipFilmActivity(mCtx, view, id);
+                String title = subjects.getTitle();
+                UiHelper.skipFilmActivity(mCtx, view, id,title);
             }
         });
     }

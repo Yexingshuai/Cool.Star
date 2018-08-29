@@ -1,9 +1,13 @@
 package com.example.myapp.myapp.base;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.transition.ChangeBounds;
 import android.transition.Explode;
 import android.transition.Fade;
@@ -12,7 +16,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
-import com.example.myapp.myapp.ui.view.StateLayout;
+import com.example.myapp.R;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,15 +27,41 @@ import org.greenrobot.eventbus.EventBus;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected String TAG_LOG = this.getClass().getSimpleName();
-    protected StateLayout stateLayout;
+
+    private View.OnClickListener mOnNavClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onBackPressed();
+        }
+    };
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(inflateContentView());
+        //ToolBar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            //不显示默认的Title
+            actionBar.setDisplayShowTitleEnabled(true);
+            //不显示默认的Home（an activity icon or logo.）
+            actionBar.setDisplayShowHomeEnabled(false);
+            //是否显示左上角的返回按钮
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            toolbar.setNavigationIcon(R.mipmap.icon_back);
+            toolbar.setTitle(getTitle());
+            toolbar.setNavigationOnClickListener(mOnNavClickListener);
+        }
+
         initView(savedInstanceState);
         if (isNeedToBeSubscriber()) {
-            EventBus.getDefault().register(this);
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this);
+            }
         }
 
         initData();
@@ -67,6 +97,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     protected abstract void initData();
+
+    /**
+     * 设置标题
+     *
+     * @param title
+     */
+    protected void setActionTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(title);
+    }
 
     /**
      * 是否需要接收广播
@@ -152,5 +192,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Explode().setDuration(500));
         }
+    }
+
+    protected void startActivityTransition(Intent intent) {
+        startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 }

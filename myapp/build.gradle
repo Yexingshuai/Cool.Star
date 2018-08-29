@@ -80,6 +80,7 @@ dependencies {
     implementation('me.drakeet.multitype:multitype:3.3.0', {
         exclude group: 'com.android.support'
     })
+    implementation 'com.github.mcxtzhang:ZLayoutManager:+'
 
 
 }

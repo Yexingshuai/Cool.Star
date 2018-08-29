@@ -6,18 +6,19 @@ package com.example.myapp.myapp.data.api;
 
 public class AppUrl {
 
-    public static int index=1;
+    public static int index = 1;
 
 
+    public static final String BASEURL = "http://www.wanandroid.com/";
 
-    public static final String BASEURL="http://www.wanandroid.com/";
+    public static final String BASEURL2 = "https://api.douban.com/";
 
-    public static final String BASEURL2="https://api.douban.com/";
+    public static final String BASEURL3 = "http://v.juhe.cn";
 
     /**
      * banner
      */
-    public static final String BANNER=BASEURL+"banner/json";
+    public static final String BANNER = BASEURL + "banner/json";
 
 
 }

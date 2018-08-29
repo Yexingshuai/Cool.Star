@@ -20,7 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * Created by daixiankade on 2018/3/28.
+ * Created by yexing on 2018/3/28.
  */
 
 public class MyFragment extends BaseFragment implements View.OnClickListener {

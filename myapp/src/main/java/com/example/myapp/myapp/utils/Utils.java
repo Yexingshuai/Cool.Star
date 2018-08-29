@@ -105,7 +105,7 @@ public class Utils {
 
 
     // 把dp转换成px
-    public static int dp2px(Context context,int dp) {
+    public static int dp2px(Context context, int dp) {
         // px = dp * 密度比 0.75 1 1.5 2
         float density = context.getResources().getDisplayMetrics().density;// 获取当前手机的密度比
         return (int) (dp * density + 0.5f);// 四舍五入
@@ -124,14 +124,24 @@ public class Utils {
 
     /**
      * 获取屏幕的宽度
+     *
      * @param context
      * @return
      */
-    public static  int getScreenWidthDp(Context context){
+    public static int getScreenWidthDp(Context context) {
         WindowManager wm = (WindowManager)
                 context.getSystemService(Context.WINDOW_SERVICE);
 
         int width = wm.getDefaultDisplay().getWidth();
         return width;
+    }
+
+    /**
+     * 获取时间戳
+     *
+     * @return
+     */
+    public static long getTimeStamp() {
+        return System.currentTimeMillis() / 1000;
     }
 }

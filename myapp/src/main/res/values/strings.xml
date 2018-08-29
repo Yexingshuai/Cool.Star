@@ -81,6 +81,8 @@
     <string name="request_login">请先登录呦</string>
     <string name="logout_error">退出失败！</string>
     <string name="setting">没什么好设置的。。。</string>
+    <string name="weather">天气</string>
+    <string name="exitApp">再按一次退出程序哦</string>
 
 
 </resources>

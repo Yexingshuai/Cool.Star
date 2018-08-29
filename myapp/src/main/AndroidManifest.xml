@@ -36,7 +36,9 @@
         <activity android:name=".myapp.ui.activity.MainActivity" />
 
 
-        <activity android:name=".myapp.ui.activity.WebActivity" />
+        <activity
+            android:name=".myapp.ui.activity.WebActivity"
+            android:label="加载中..." />
         <activity android:name=".myapp.ui.activity.ShowBannerActivity" />
 
 
@@ -57,7 +59,9 @@
             android:name=".myapp.component.login.LoginActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-        <activity android:name=".myapp.component.favorite.MyFavoriteActivity" />
+        <activity
+            android:name=".myapp.component.favorite.MyFavoriteActivity"
+            android:label="我喜欢的" />
 
 
         <!--Share Start-->

@@ -1,59 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_item_view"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_normal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:stateListAnimator="@drawable/app_animate_press_90_scale"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="7dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_light_gray"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.6dp"
-            android:background="@color/divider_gray_line" />
-
-        <TextView
-            android:id="@+id/tv_rank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:text="01"
-            android:textColor="@color/text_gray_4"
-            android:textSize="14sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.6dp"
-            android:background="@color/divider_gray_line" />
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_film"
-            android:layout_width="60dp"
-            android:layout_height="84dp"
+            android:layout_width="85dp"
+            android:layout_height="105dp"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tv_film"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/iv_film"
             android:text="hhha"
             android:textColor="@color/black"
@@ -64,26 +40,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_film"
-            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@+id/iv_film"
             android:text="hhha"
             android:textColor="@color/text_gray_6"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tv_film_grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_film_english"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="13dp"
             android:layout_toRightOf="@+id/iv_film"
+            android:paddingBottom="8dp"
             android:text="9.6"
             android:textColor="@color/red_base"
             android:textSize="13sp" />
 
 
+        <TextView
+            android:id="@+id/tv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13dp"
+            android:paddingLeft="10dp"
+            android:text="01"
+            android:textColor="@color/text_gray_4"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
     </RelativeLayout>
 
-</LinearLayout>
+</android.support.v7.widget.CardView>

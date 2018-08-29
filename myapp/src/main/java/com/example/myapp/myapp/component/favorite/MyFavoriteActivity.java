@@ -42,7 +42,6 @@ public class MyFavoriteActivity extends BaseActivity implements MyFavoriteContra
     private RecyclerAdapter<FavoriteResponse.DataBean.DatasBean> mAdapter;
     private int pageNum = 0;
     private int removePosition;  //删除item的position
-    private ProgressBar mProgressBar;
     private SmartRefreshLayout mRefreshLayout;
     /**
      * 默认的页码数
@@ -90,7 +89,6 @@ public class MyFavoriteActivity extends BaseActivity implements MyFavoriteContra
         new MyFavoritePresenter(new MyFavoriteRepository(), this);
         mRecyclerView = getView(R.id.recyclerview);
         mRefreshLayout = getView(R.id.refreshLayout);
-        mProgressBar = getView(R.id.pb);
         mLoadingStatusLayout = getView(R.id.loadingStatusLayout);
     }
 

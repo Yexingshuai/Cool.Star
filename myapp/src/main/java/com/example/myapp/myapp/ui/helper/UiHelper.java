@@ -9,6 +9,7 @@ import android.view.View;
 import com.example.myapp.myapp.component.movie.detail.FilmDetailActivity;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 import com.example.myapp.myapp.utils.MyAnimationUtils;
+import com.example.myapp.myapp.utils.ToastUtil;
 
 /**
  * Created by yexing on 2018/8/14.
@@ -27,14 +28,14 @@ public class UiHelper {
     /**
      * 普通界面跳转
      *
-     * @param activity
+     * @param context
      * @param clazz
      */
-    public static void skipToOtherActivity(Activity activity, Class<? extends Activity> clazz) {
+    public static void skipToOtherActivity(Context context, Class<? extends Activity> clazz) {
         Intent intent = new Intent();
-        intent.setClass(activity, clazz);
-        activity.startActivity(intent);
-        activity.finish();
+        intent.setClass(context, clazz);
+        context.startActivity(intent);
+        ((Activity) context).finish();
     }
 
 
@@ -55,8 +56,8 @@ public class UiHelper {
      * 跳转WebActivity
      *
      * @param context
-     * @param title    Web标题
-     * @param url      Web链接
+     * @param title   Web标题
+     * @param url     Web链接
      */
     public static void skipWebActivity(Context context, String title, String url) {
         Intent intent = new Intent();
@@ -72,14 +73,17 @@ public class UiHelper {
      * 跳转FilmDetailActivity
      *
      * @param context
-     * @param view     元素共享动画view
-     * @param id       电影名称id
+     * @param view    元素共享动画view
+     * @param id      电影名称id
+     * @param title   电影名称
      */
-    public static void skipFilmActivity(Context context, View view, String id) {
+    public static void skipFilmActivity(Context context, View view, String id, String title) {
         Intent intent = new Intent();
         Bundle bannerBundle = MyAnimationUtils.makeSceneTransition((Activity) context, view, "fileIv");
         intent.setClass(context, FilmDetailActivity.class);
         intent.putExtra(FilmDetailActivity.MOVIEID, id);
+        intent.putExtra(FilmDetailActivity.MOVIENAME, title);
         context.startActivity(intent, bannerBundle);
     }
+
 }

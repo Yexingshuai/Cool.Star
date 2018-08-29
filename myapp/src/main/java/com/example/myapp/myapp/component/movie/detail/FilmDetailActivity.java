@@ -51,11 +51,11 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
     private TextView tv_film_name_real;
     private String movieId;
     private TextView tv_description;
-    private ImageView iv_back;
     private RecyclerView mRecyclerView;
     private Button bt_buy;
     private String alt;
     public static final String MOVIEID = "movieId";
+    public static final String MOVIENAME = "movieName";
     private FilmDetailContract.Presenter mPresenter;
     private List<FilmPeople> list = new ArrayList<>();
     private LoadingStatusLayout loadingStatusLayout;
@@ -71,10 +71,12 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
         Intent intent = getIntent();
         if (intent != null) {
             movieId = intent.getStringExtra(MOVIEID);
+            String movieName = intent.getStringExtra(MOVIENAME);
+            setActionTitle(movieName);
+
         }
+
         loadingStatusLayout = getView(R.id.loadingStatusLayout);
-        //电影名称 标题栏
-        tv_file_name = getView(R.id.tv_file_name);
         //电影图片
         iv_film = getView(R.id.iv_film);
         iv_film.setOnClickListener(this);
@@ -92,7 +94,7 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
         tv_film_name_real = getView(R.id.tv_film_name_real);
         //电影描述
         tv_description = getView(R.id.tv_description);
-        iv_back = getView(R.id.iv_back);
+
         //演员
         mRecyclerView = getView(R.id.rv);
         bt_buy = getView(R.id.bt_buy);
@@ -100,7 +102,6 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new SpaceItemDecoration(40, 0, 0, 0));
-        iv_back.setOnClickListener(this);
 
 
     }
@@ -122,7 +123,6 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
             Glide.with(FilmDetailActivity.this).load(filmDetail.getImages().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(iv_film);
         }
         if (!TextUtils.isEmpty(filmDetail.getTitle())) {
-            tv_file_name.setText(filmDetail.getTitle());
         }
         if (filmDetail.getRating() != null) {
             tv_rating.setText("评分" + filmDetail.getRating().getAverage());
@@ -186,9 +186,6 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
             case R.id.bt_buy:
                 Toast.makeText(FilmDetailActivity.this, "wait...", Toast.LENGTH_SHORT).show();
                 break;

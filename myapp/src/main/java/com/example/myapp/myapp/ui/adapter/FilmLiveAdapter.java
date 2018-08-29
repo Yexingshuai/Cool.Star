@@ -44,10 +44,10 @@ public class FilmLiveAdapter extends RecyclerView.Adapter {
         ViewGroup.LayoutParams params = filmViewHolder.iV_film.getLayoutParams();
         int width = Utils.getScreenWidthDp(mCtx);
         int ivWidth = (width - Utils.dp2px(mCtx, 80)) / 3;
-        params.width = ivWidth;
+//        params.width = ivWidth;
         double height = (420.0 / 300.0) * ivWidth;
-        params.height = (int) height;
-        filmViewHolder.iV_film.setLayoutParams(params);
+//        params.height = (int) height;
+//        filmViewHolder.iV_film.setLayoutParams(params);
         GlideContext.loadCommon(mCtx, url, filmViewHolder.iV_film);
         if (!TextUtils.isEmpty("" + subjects.getRating().getAverage())) {
             filmViewHolder.tv_film_grade.setText("评分:" + String.valueOf(subjects.getRating().getAverage()));

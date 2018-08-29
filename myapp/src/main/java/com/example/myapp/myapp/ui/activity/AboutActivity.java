@@ -25,7 +25,8 @@ public class AboutActivity extends BaseActivity {
 
     private ImageView mHeadView;
     private Toolbar mToolBar;
-    public static final String gitHubUrl = "https://github.com/Yexingshuai/Cool.Star";
+    public final String gitHubUrl = "https://github.com/Yexingshuai/Cool.Star";
+    private String imgUrl = "http://guolin.tech/api/bing_pic";
     private Button mWebHome;
     private Button mFeedBack;
 
@@ -45,12 +46,18 @@ public class AboutActivity extends BaseActivity {
         setCommonClickListener(mFeedBack);
         setSupportActionBar(mToolBar);
         mToolBar.setNavigationIcon(R.mipmap.icon_back);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
     @Override
     protected void initData() {
-        OkGo.get("http://guolin.tech/api/bing_pic")
+        OkGo.get(imgUrl)
                 .tag(this)
                 .cacheMode(CacheMode.DEFAULT)
                 .execute(new StringCallback() {

@@ -3,9 +3,11 @@ package com.example.myapp.myapp.component;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.base.BasePresenter;
+import com.example.myapp.myapp.component.life.LifeFragmentPresenter;
 import com.example.myapp.myapp.component.study.StudyFragment2;
 import com.example.myapp.myapp.component.study.StudyFragmentPresenter;
 import com.example.myapp.myapp.component.study.adapter.StudyEntryBinder;
+import com.example.myapp.myapp.data.source.life.LifeFragmentResiporty;
 import com.example.myapp.myapp.data.source.study.StudyFragmentRepository;
 import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.component.movie.HappyFragment;
@@ -43,17 +45,16 @@ public class MainPresenter implements BasePresenter {
 
     public List getFragments() {
         List<BaseFragment> fragmentList = new ArrayList<>();
-
+        //学习
         StudyFragment studyFragment = StudyFragment.newInstance();
-
-//        StudyFragment2 studyFragment = StudyFragment2.newInstance();
-        new StudyFragmentPresenter(new StudyFragmentRepository(),studyFragment);
+        new StudyFragmentPresenter(new StudyFragmentRepository(), studyFragment);
         fragmentList.add(studyFragment);
-
-
+        //娱乐
         fragmentList.add(new HappyFragment());
-        fragmentList.add(new LifeFragment());
-//        fragmentList.add(new MyFragment());
+        //生活
+        LifeFragment lifeFragment = LifeFragment.newInstance();
+        new LifeFragmentPresenter(new LifeFragmentResiporty(), lifeFragment);
+        fragmentList.add(lifeFragment);
         return fragmentList;
     }
 

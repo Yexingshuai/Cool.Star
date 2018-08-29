@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jakewharton.rxbinding.view.ViewGroupHierarchyChildViewRemoveEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by  on 2018/5/14.
+ * Created by  yexing on 2018/5/14.
  */
 
 public abstract class BasicAdapter<T> extends RecyclerView.Adapter {
@@ -17,7 +19,7 @@ public abstract class BasicAdapter<T> extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return onCreateHolder();
+        return onCreateHolder(parent);
     }
 
 
@@ -72,7 +74,7 @@ public abstract class BasicAdapter<T> extends RecyclerView.Adapter {
      *
      * @return
      */
-    protected abstract RecyclerView.ViewHolder onCreateHolder();
+    protected abstract RecyclerView.ViewHolder onCreateHolder(ViewGroup parent);
 
     /**
      * 绑定数据

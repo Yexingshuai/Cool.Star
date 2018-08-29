@@ -23,7 +23,7 @@
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"></android.support.v7.widget.RecyclerView>
+                android:padding="6dp"></android.support.v7.widget.RecyclerView>
         </com.example.myapp.myapp.ui.load.LoadingStatusLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
