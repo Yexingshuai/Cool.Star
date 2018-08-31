@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.component.login.LoginActivity;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.component.study.adapter.BannerViewBinder;
 import com.example.myapp.myapp.data.bean.BannerBean;
@@ -24,6 +25,7 @@ import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.nightonke.boommenu.BoomButtons.HamButton;
@@ -118,6 +120,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
             super.handleMessage(msg);
         }
     };
+    private CircleImageView mHeadImg;
 
     @Override
     public void onDestroy() {
@@ -142,9 +145,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         mRefreshLayout = getView(R.id.refreshLayout);
         mRecylerview = getView(R.id.rv);
         llTitleContainer = getView(R.id.title_bar);
-        CircleImageView mHeadImg = getView(R.id.iv_head);
+        mHeadImg = getView(R.id.iv_head);
         mHeadImg.setOnClickListener(this);
-
 
 
         //BoomMenu
@@ -197,7 +199,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
                 if (LoginContext.getInstance().isLogined()) {
                     mPresenter.collectArtist(id);
                 }
-
             }
 
             @Override
@@ -310,6 +311,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     /**
      * 取消收藏失败
+     *
      * @param errorMsg
      */
     @Override
@@ -331,7 +333,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
-                ((MainActivity)getActivity()).toggle();
+                ((MainActivity) getActivity()).toggle();
                 break;
         }
     }

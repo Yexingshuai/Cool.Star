@@ -54,7 +54,6 @@ public class MovieTop100Adapter extends BasicAdapter<Subjects> {
         TextView tv_film;
         TextView tv_film_english;
         TextView tv_film_grade;
-        LinearLayout ll_item_view;
 
         public NoramlViewHolder(View itemView) {
             super(itemView);
@@ -63,7 +62,6 @@ public class MovieTop100Adapter extends BasicAdapter<Subjects> {
             tv_film = itemView.findViewById(R.id.tv_film);
             tv_film_english = itemView.findViewById(R.id.tv_film_english);
             tv_film_grade = itemView.findViewById(R.id.tv_film_grade);
-//            ll_item_view = itemView.findViewById(R.id.ll_item_view);
         }
     }
 

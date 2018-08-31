@@ -23,3 +23,14 @@
 # AvloadingView------------
 -keep class com.wang.avi.** { *; }
 -keep class com.wang.avi.indicators.** { *; }
+
+#HeWeather
+#排除okhttp
+  -dontwarn com.squareup.**
+  -dontwarn okio.**
+  -keep public class org.codehaus.* { *; }
+  -keep public class java.nio.* { *; }
+
+#排除HeWeather
+  -dontwarn interfaces.heweather.com.interfacesmodule.**
+  -keep class interfaces.heweather.com.interfacesmodule.** { *;}

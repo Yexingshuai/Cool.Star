@@ -34,6 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             onBackPressed();
         }
     };
+    private View mStatus_bar;
 
 
     @Override
@@ -56,6 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             toolbar.setTitle(getTitle());
             toolbar.setNavigationOnClickListener(mOnNavClickListener);
         }
+        mStatus_bar = findViewById(R.id.status_bar);
 
         initView(savedInstanceState);
         if (isNeedToBeSubscriber()) {
@@ -194,7 +196,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 跳转并执行动画
+     *
+     * @param intent
+     */
     protected void startActivityTransition(Intent intent) {
         startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
+     */
+    protected void setStatusBarColor(int color) {
+        if (mStatus_bar != null) {
+            mStatus_bar.setBackgroundResource(color);
+        }
     }
 }

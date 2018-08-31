@@ -124,7 +124,7 @@ public class SplashActivity extends BaseActivity {
                         getResources().getColor(R.color.xblue),
                         getResources().getColor(R.color.xxblue)
                 });
-        ll.setBackground(gradientDrawable);
+//        ll.setBackground(gradientDrawable);
         ts = new TextView[]{
                 (TextView) findViewById(R.id.tv1),
                 (TextView) findViewById(R.id.tv2),

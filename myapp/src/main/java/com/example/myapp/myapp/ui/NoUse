@@ -57,3 +57,10 @@
                      Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
                  }
              }
+
+  5.ViewPager
+            //        vp_module.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            //                50, getResources().getDisplayMetrics()));
+            //        vp_module.setPageTransformer(true, new VpTransformer());
+            //        lifeHeadAdapter = new LifeHeadAdapter(getActivity(), jokeList);
+            //        vp_module.setAdapter(lifeHeadAdapter);

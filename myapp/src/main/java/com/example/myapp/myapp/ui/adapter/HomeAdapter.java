@@ -263,7 +263,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
             vp = itemView.findViewById(R.id.vp);
 
             ll_guide_points = itemView.findViewById(R.id.ll_guide_points);
-//            iv_guide_whitepoint = itemView.findViewById(R.id.iv_guide_whitepoint);
 
             Message message = new Message();
             message.what = 1;
@@ -289,17 +288,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
             tv_type = itemView.findViewById(R.id.tv_type);
             ll_normal = itemView.findViewById(R.id.ll_normal);
             likebutton = itemView.findViewById(R.id.likebutton);
-            likebutton.setOnLikeListener(new OnLikeListener() {
-                @Override
-                public void liked(LikeButton likeButton) {
-
-                }
-
-                @Override
-                public void unLiked(LikeButton likeButton) {
-
-                }
-            });
         }
     }
 

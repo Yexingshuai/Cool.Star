@@ -26,6 +26,7 @@ import com.example.myapp.myapp.component.MainPresenter;
 import com.example.myapp.myapp.component.favorite.MyFavoriteActivity;
 import com.example.myapp.myapp.component.login.LoginActivity;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
+import com.example.myapp.myapp.component.weather.WeatherActivity;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
@@ -231,7 +232,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     }
                     break;
                 case R.id.navigation_item_weather:
-                    Toast.makeText(MainActivity.this, R.string.weather, Toast.LENGTH_SHORT).show();
+                    UiHelper.skipActivityNofinish(MainActivity.this, WeatherActivity.class);
                     break;
                 case R.id.navigation_item_skin:
                     DesignDialog designDialog = new DesignDialog();

@@ -14,6 +14,8 @@ import com.umeng.socialize.PlatformConfig;
 
 import java.util.logging.Level;
 
+import interfaces.heweather.com.interfacesmodule.view.HeConfig;
+
 
 /**
  * Created by yexing on 2018/4/17.
@@ -33,6 +35,9 @@ public class InitializeConfig {
             }
 
         });
+
+        HeConfig.init("HE1808301440141327", "3e1177549ed84b319a68aa94681cf204");
+        HeConfig.switchToFreeServerNode();
 
         ToastUtil.initToastApp(appContext);
 

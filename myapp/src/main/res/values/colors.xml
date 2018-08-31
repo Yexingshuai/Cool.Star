@@ -8,6 +8,7 @@
     <color name="xblue">#5B9CFE</color>
     <color name="xxblue">#2C81FF</color>
     <color name="white">#FFFFFF</color>
+    <color name="shallow_white">#B4C4E7</color>
     <color name="td_choose">#b3b3b3</color>
     <color name="gray">#aaa</color>
     <color name="black">#000000</color>
@@ -43,6 +44,15 @@
 
     <color name="colorTextDark">#424242</color>
     <color name="colorTextDark2nd">#757575</color>
+
+    <!--weather-->
+    <color name="weather">#051433</color>
+    <color name="weather1">#142446</color>
+    <color name="weather2">#051433</color>
+    <color name="weather3">#1A3254</color>
+    <color name="weather4">#29426A</color>
+    <color name="weather5">#385881</color>
+    <color name="weather6">#39608B</color>
 
 
 </resources>

@@ -1,10 +1,7 @@
 package com.example.myapp.myapp.component.life;
 
-import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,13 +11,8 @@ import com.example.myapp.myapp.data.bean.JokeResponse;
 import com.example.myapp.myapp.ui.adapter.LifeHeadAdapter;
 import com.example.myapp.myapp.ui.adapter.SwipeFlingAdater;
 import com.example.myapp.myapp.ui.flingswipe.SwipeFlingAdapterView;
-import com.example.myapp.myapp.ui.helper.VpTransformer;
 import com.example.myapp.myapp.ui.load.LoadingStatusLayout;
 import com.example.myapp.myapp.utils.ToastUtil;
-import com.example.myapp.myapp.utils.Utils;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,9 +58,7 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
 
     @Override
     public void initView() {
-//        vp_module = getView(R.id.vp_module);
         swipeFlingAdapterView = getView(R.id.swipe);
-
 
     }
 
@@ -102,11 +92,7 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
             public void onScroll(float scrollProgressPercent) {
             }
         });
-//        vp_module.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-//                50, getResources().getDisplayMetrics()));
-//        vp_module.setPageTransformer(true, new VpTransformer());
-//        lifeHeadAdapter = new LifeHeadAdapter(getActivity(), jokeList);
-//        vp_module.setAdapter(lifeHeadAdapter);
+
     }
 
     @Override
@@ -117,7 +103,6 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
     @Override
     public void setJokeInfo(JokeResponse response) {
         jokeList.addAll(response.getResult().getData());
-//        lifeHeadAdapter.notifyDataSetChanged();
         swipeFlingAdater.notifyDataSetChanged();
     }
 

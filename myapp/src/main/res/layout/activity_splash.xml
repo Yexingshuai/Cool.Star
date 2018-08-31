@@ -5,12 +5,9 @@
     android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:gravity="center"
-
     tools:context="com.example.myapp.myapp.ui.activity.SplashActivity">
-
-
-
 
 
     <RelativeLayout
@@ -21,15 +18,14 @@
         android:orientation="vertical">
 
         <ImageView
-            android:visibility="invisible"
             android:id="@+id/splash_logo"
-            android:layout_centerHorizontal="true"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:tint="@color/white"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="150dp"
-            android:src="@drawable/haitun" />
-
+            android:src="@drawable/haitun"
+            android:tint="@color/white"
+            android:visibility="invisible" />
 
 
         <RelativeLayout

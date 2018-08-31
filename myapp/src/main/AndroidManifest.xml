@@ -11,10 +11,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 指纹 -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 读写短信 -->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--location-->
+    <!--访问网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".myapp.base.MyApp"
@@ -62,6 +68,10 @@
         <activity
             android:name=".myapp.component.favorite.MyFavoriteActivity"
             android:label="我喜欢的" />
+
+        <!--天气-->
+        <activity android:name=".myapp.component.weather.WeatherActivity"
+            android:label=""/>
 
 
         <!--Share Start-->
