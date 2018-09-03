@@ -8,11 +8,11 @@
 ![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/4.png)
 ![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/5.png)
 ### 简介
-此项目为本人练手随意写的app，没有很好的架构和编码，一起努力学习吧。
+- 此项目为本人练手随意写的app，没有很好的架构和编码，一起努力学习吧。
 ---
-###感谢
--[鸿洋开放接口]
--[豆瓣开放接口]
+### 感谢
+- 鸿洋开放接口
+- 豆瓣开放接口
 ---
 ###免责声明
 - 项目中部分图片素材来自网络，版权归属原作者，侵立删
