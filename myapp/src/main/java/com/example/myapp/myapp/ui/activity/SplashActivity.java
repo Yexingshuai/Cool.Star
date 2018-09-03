@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -32,11 +33,11 @@ public class SplashActivity extends BaseActivity {
     private void startTextInAnim(TextView t) {
         Random r = new Random();
         DisplayMetrics metrics = Utils.getMetrics(this);
-        int x = r.nextInt(metrics.widthPixels * 4 / 3);   //1440不在内，只产生0-1439
+        int x = r.nextInt(metrics.widthPixels * 4 / 3);   //1440不在内，只产生0-1439   乐事:1080*1920
         int y = r.nextInt(metrics.heightPixels * 4 / 3);  //2560
         float s = r.nextFloat() + 4.0f;  //r.nextFloat会产生一个0.0-1.0之间的  float
-        ValueAnimator tranY = ObjectAnimator.ofFloat(t, "translationY", y - t.getY(), 0);
-        ValueAnimator tranX = ObjectAnimator.ofFloat(t, "translationX", x - t.getX(), 0);
+        ValueAnimator tranY = ObjectAnimator.ofFloat(t, "translationY", y - t.getY() , 0);//
+        ValueAnimator tranX = ObjectAnimator.ofFloat(t, "translationX", x - t.getX(), 0);//
         ValueAnimator scaleX = ObjectAnimator.ofFloat(t, "scaleX", s, 1.0f);
         ValueAnimator scaleY = ObjectAnimator.ofFloat(t, "scaleY", s, 1.0f);
         ValueAnimator alpha = ObjectAnimator.ofFloat(t, "alpha", 0.0f, 1.0f);

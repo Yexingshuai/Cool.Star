@@ -84,5 +84,7 @@ dependencies {
         exclude group: 'com.android.support'
     })
     implementation 'com.github.mcxtzhang:ZLayoutManager:+'
+    //permisson
+    implementation 'com.karumi:dexter:5.0.0'
 
 }

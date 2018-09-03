@@ -1,8 +1,6 @@
 package com.example.myapp.myapp.ui.activity;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -112,10 +110,10 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     @Override
     protected void onResume() {
         super.onResume();
-        showNavigationHeadInfo();  //获取焦点时，即更新用户状态信息
+        updateNavigationHeadInfo();  //获取焦点时，即更新用户状态信息
     }
 
-    private void showNavigationHeadInfo() {
+    private void updateNavigationHeadInfo() {
         String userName = LoginContext.getInstance().getUserName();
         if (userName != null) {
             mUserName.setText(userName);
@@ -240,7 +238,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     break;
                 case R.id.navigation_item_logout:
                     if (LoginContext.getInstance().logout()) {
-                        showNavigationHeadInfo();
+                        updateNavigationHeadInfo();
                     } else {
                         ToastUtil.showApp(getString(R.string.logout_error));
                     }

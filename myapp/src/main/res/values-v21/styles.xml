@@ -7,7 +7,12 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--防白屏-->
+        <!--<item name="android:windowBackground">@color/black</item>-->
     </style>
 
-
+    <!--splashTheme-->
+    <style name="splashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/black</item>
+    </style>
 </resources>

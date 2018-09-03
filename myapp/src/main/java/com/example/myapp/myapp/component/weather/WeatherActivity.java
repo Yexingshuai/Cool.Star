@@ -1,5 +1,6 @@
 package com.example.myapp.myapp.component.weather;
 
+import android.app.AlertDialog;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +15,6 @@ import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseView;
 import com.example.myapp.myapp.ui.adapter.RecyclerAdapter;
 import com.example.myapp.myapp.ui.adapter.RecyclerHolder;
-import com.example.myapp.myapp.ui.layoutmanager.ScrollLinearManager;
 import com.example.myapp.myapp.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -71,8 +71,7 @@ public class WeatherActivity extends BaseActivity implements BaseView<WeatherPre
 
     @Override
     protected void initData() {
-        mPresenter.getWeatherNow();
-
+        mPresenter.checkPermisson();
         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
                 new int[]{
                         getResources().getColor(R.color.weather),

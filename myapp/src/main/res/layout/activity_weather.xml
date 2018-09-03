@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="5dp"
-                    android:text="上次更新：2020-08-31 13:45"
+                    android:text="上次更新："
                     android:textColor="@color/shallow_white"
                     android:textSize="12sp" />
 

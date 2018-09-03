@@ -30,7 +30,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".myapp.ui.activity.SplashActivity">
+        <activity
+            android:name=".myapp.ui.activity.SplashActivity"
+            android:theme="@style/splashTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,8 +72,9 @@
             android:label="我喜欢的" />
 
         <!--天气-->
-        <activity android:name=".myapp.component.weather.WeatherActivity"
-            android:label=""/>
+        <activity
+            android:name=".myapp.component.weather.WeatherActivity"
+            android:label="" />
 
 
         <!--Share Start-->
