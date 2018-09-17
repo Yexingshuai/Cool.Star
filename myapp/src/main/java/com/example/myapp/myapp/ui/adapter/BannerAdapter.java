@@ -34,7 +34,6 @@ public class BannerAdapter extends PagerAdapter {
         this.mCtx = context;
 
 
-
     }
 
     @Override
@@ -58,13 +57,15 @@ public class BannerAdapter extends PagerAdapter {
                 Bundle bannerBundle = MyAnimationUtils.makeSceneTransition((Activity) container.getContext(), imageView, "bannerImage");
                 Intent intent = new Intent(mCtx, ShowBannerActivity.class);
                 intent.putExtra("url", imagePath);
-                intent.putExtra("webUrl",webUrl);
+                intent.putExtra("webUrl", webUrl);
                 mCtx.startActivity(intent, bannerBundle);
             }
         });
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        Glide.with(mCtx).load(imagePath).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade(500).into(imageView);
 //        Glide.with(mCtx).load(imagePath).into(imageView);
-        Glide.with(mCtx).load(imagePath).transform(new GlideRoundTransform(mCtx,2)).diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);
+        //圆角
+//        Glide.with(mCtx).load(imagePath).transform(new GlideRoundTransform(mCtx,2)).diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);
         container.addView(imageView);
         return imageView;
     }

@@ -107,4 +107,13 @@ public class GlideContext {
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
+
+    //Transformer
+    public static void loadWithTransformer(Context context, String url, ImageView imageView) {
+        Glide.with(context)
+                .load(url)
+//                .transform(mBlurTransformation)
+                .crossFade()
+                .into(imageView);
+    }
 }

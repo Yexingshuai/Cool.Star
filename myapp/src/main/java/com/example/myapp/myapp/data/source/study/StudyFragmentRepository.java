@@ -1,10 +1,6 @@
 package com.example.myapp.myapp.data.source.study;
-
 import com.example.myapp.myapp.data.api.WandroidApi;
-import com.example.myapp.myapp.data.bean.BannerBean;
-import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.http.HttpContext;
-
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

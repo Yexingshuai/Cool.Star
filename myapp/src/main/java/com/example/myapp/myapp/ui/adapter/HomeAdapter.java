@@ -19,11 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 
 import com.example.myapp.myapp.ui.helper.UiHelper;
+import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -52,6 +54,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private ItemAnimHelper helper = new ItemAnimHelper();
     private BannerAdapter bannerAdapter;
     private ButtonLikeListener listener;
+    private boolean isDispatch;
     /**
      * 记录banner选中的索引
      */
@@ -71,7 +74,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         this.banner.clear();
         this.banner.addAll(banner);
         if (bannerAdapter != null) {
-            bannerAdapter.notifyDataSetChanged();
+//            bannerAdapter.notifyDataSetChanged();
         }
 //        notifyDataSetChanged();
     }
@@ -84,7 +87,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
 //        notifyItemRangeInserted(datas.size(),20);    //局部插入
 
-        notifyItemRangeChanged(data.size() == 20 ? 0 : data.size(), 21); //如果集合数据是20，代表下拉刷新，则刷新前20条
+        notifyItemRangeChanged(data.size() == 20 ? 1 : data.size(), 21); //如果集合数据是20，代表下拉刷新，则刷新前20条
     }
 
 
@@ -195,17 +198,18 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 }
                 imageView.setLayoutParams(params);
 
-                if (i == 0) {
-                    imageView.setBackgroundResource(R.drawable.guide_point_red);
-                } else {
+//                if (i == 0) {
+//                    imageView.setBackgroundResource(R.drawable.guide_point_red);
+//                } else {
                     imageView.setBackgroundResource(R.drawable.guide_point_normal);
-                }
+//                }
                 ((HeadHolder) holder).ll_guide_points.addView(imageView);
             }
         }
         ((HeadHolder) holder).vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //不执行
                 if (false) {
                     position = position % (banner.size());
                     int redPointX = (int) ((positionOffset + position) * Utils.dp2px(mCtx, 12));// dp2px(14)
@@ -221,15 +225,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
             @Override
             public void onPageSelected(int position) {
-                position = position % (banner.size());
-//                int redPointX = (int) (position) * Utils.dp2px(mCtx, 12);// dp2px(14)
-//                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ((HeadHolder) holder).iv_guide_whitepoint.getLayoutParams();
-//                params.leftMargin = redPointX;
-//                ((HeadHolder) holder).iv_guide_whitepoint.setLayoutParams(params);
 
-                ((HeadHolder) holder).ll_guide_points.getChildAt(position).setBackgroundResource(R.drawable.guide_point_red);
-                ((HeadHolder) holder).ll_guide_points.getChildAt(bannerPosition).setBackgroundResource(R.drawable.guide_point_normal);
-                bannerPosition = position;
+                position = position % (banner.size());
+                int redPointX = (int) (position) * Utils.dp2px(mCtx, 12);// dp2px(14)
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ((HeadHolder) holder).iv_guide_whitepoint.getLayoutParams();
+                params.leftMargin = redPointX;
+                ((HeadHolder) holder).iv_guide_whitepoint.setLayoutParams(params);
+
+//                ((HeadHolder) holder).ll_guide_points.getChildAt(position).setBackgroundResource(R.drawable.guide_point_red);
+//                ((HeadHolder) holder).ll_guide_points.getChildAt(bannerPosition).setBackgroundResource(R.drawable.guide_point_normal);
+//                bannerPosition = position;
             }
 
             @Override
@@ -263,11 +268,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
             vp = itemView.findViewById(R.id.vp);
 
             ll_guide_points = itemView.findViewById(R.id.ll_guide_points);
-
+            iv_guide_whitepoint = itemView.findViewById(R.id.iv_guide_whitepoint);
             Message message = new Message();
             message.what = 1;
             message.obj = vp;
-            EventBus.getDefault().post(message);
+            if (true) {
+                EventBus.getDefault().post(message);
+                isDispatch = !isDispatch;
+            }
+
 
         }
     }

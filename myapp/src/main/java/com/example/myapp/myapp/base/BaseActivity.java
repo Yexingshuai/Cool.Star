@@ -157,6 +157,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 内存紧张时回调，资源释放
+     *
+     * @param level
+     */
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+    }
+
+    /**
      * Add current activity with transition animation.
      */
     protected void showDefaultActivityTransition() {

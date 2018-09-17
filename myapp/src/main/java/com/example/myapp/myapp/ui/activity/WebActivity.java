@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -41,7 +43,6 @@ public class WebActivity extends BaseActivity {
     private String webUrl;
     public static final String TITLE = "title";
     public static final String WEBURL = "weburl";
-
 
 
     @Override
@@ -128,9 +129,23 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        if (mWebView != null) {
+            ViewParent parent = mWebView.getParent();
+            if (parent != null) {
+                ((ViewGroup) parent).removeView(mWebView);
+            }
+            mWebView.stopLoading();
+            // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
+            mWebView.getSettings().setJavaScriptEnabled(false);
+            mWebView.clearHistory();
+            mWebView.clearView();
+            mWebView.removeAllViews();
+            mWebView.destroy();
+        }
+
         UMShareAPI.get(this).release();  //防止内存泄露
         UMengShareHelper.release();
+        super.onDestroy();
     }
 
 

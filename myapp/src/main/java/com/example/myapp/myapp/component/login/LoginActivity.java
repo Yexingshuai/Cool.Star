@@ -116,6 +116,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 break;
             case R.id.iv_password_delete:
                 mPasswordEdittext.setText("");
+                //可以用键盘和用户做交互:指定输入法窗口中的回车键的功能
+//                mPasswordEdittext.setImeOptions(0);
                 break;
             case R.id.bt_login:
                 String loginAccount = mAccountEditext.getText().toString().trim();

@@ -241,7 +241,9 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(Message msg) {
         if (msg.what == 1) {
-            StudyFragment.this.mViewPager = (ViewPager) msg.obj;
+            if (mViewPager == null) {
+                StudyFragment.this.mViewPager = (ViewPager) msg.obj;
+            }
             handler.removeCallbacksAndMessages(null);
             handler.sendEmptyMessageDelayed(1, 3500);
 
