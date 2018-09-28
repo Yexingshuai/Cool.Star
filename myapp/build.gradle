@@ -56,7 +56,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:26.1.0'
     //EventBus
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.carmelo:keeplive:1.0.0'
+
     //进程保活
     compile 'de.hdodenhof:circleimageview:2.0.0'
     //fab
@@ -85,8 +85,9 @@ dependencies {
     implementation('me.drakeet.multitype:multitype:3.3.0', {
         exclude group: 'com.android.support'
     })
-    implementation 'com.github.mcxtzhang:ZLayoutManager:+'
     //permisson
     implementation 'com.karumi:dexter:5.0.0'
+    compile 'com.sunfusheng:marqueeview:+'
+
 
 }

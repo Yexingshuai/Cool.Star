@@ -25,13 +25,14 @@
     <application
         android:name=".myapp.base.MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/icon_head2"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".myapp.ui.activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/splashTheme">
 
             <intent-filter>
@@ -41,7 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".myapp.ui.activity.MainActivity" />
+        <activity
+            android:name=".myapp.ui.activity.MainActivity"
+            android:screenOrientation="portrait" />
 
 
         <activity
@@ -75,6 +78,15 @@
         <activity
             android:name=".myapp.component.weather.WeatherActivity"
             android:label="" />
+
+        <!--设置-->
+        <activity
+            android:name=".myapp.ui.activity.SettingActivity"
+            android:label="设置" />
+
+        <activity
+            android:name=".myapp.ui.activity.VocalConcertTextActivity"
+            android:screenOrientation="landscape" />
 
 
         <!--Share Start-->

@@ -1,6 +1,5 @@
 package com.example.myapp.myapp.component.movie.detail;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,14 +17,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
-import com.example.myapp.myapp.data.api.DoubanApi;
 import com.example.myapp.myapp.data.bean.Casts;
 import com.example.myapp.myapp.data.bean.Directors;
 import com.example.myapp.myapp.data.bean.FilmDetail;
 import com.example.myapp.myapp.data.bean.FilmPeople;
-import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.film.detail.FilmDetailRespository;
-import com.example.myapp.myapp.data.source.film.detail.FilmDetailSource;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 import com.example.myapp.myapp.ui.adapter.ActorAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;

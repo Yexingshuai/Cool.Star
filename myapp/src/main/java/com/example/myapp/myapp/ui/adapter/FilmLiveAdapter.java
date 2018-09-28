@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myapp.R;
 
 import java.util.List;
@@ -49,6 +51,7 @@ public class FilmLiveAdapter extends RecyclerView.Adapter {
 //        params.height = (int) height;
 //        filmViewHolder.iV_film.setLayoutParams(params);
         GlideContext.loadCommon(mCtx, url, filmViewHolder.iv_film);
+//        Glide.with(mCtx).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade(500).into(filmViewHolder.iv_film);
         if (!TextUtils.isEmpty("" + subjects.getRating().getAverage())) {
             filmViewHolder.tv_film_grade.setText("评分:" + String.valueOf(subjects.getRating().getAverage()));
         } else {

@@ -38,6 +38,21 @@ public class UiHelper {
         ((Activity) context).finish();
     }
 
+    /**
+     * 普通界面跳转携带数据
+     *
+     * @param context
+     * @param clazz
+     * @param key
+     * @param value
+     */
+    public static void skipToOtherActivityWithExtra(Context context, Class<? extends Activity> clazz, String key, String value) {
+        Intent intent = new Intent();
+        intent.setClass(context, clazz);
+        intent.putExtra(key, value);
+        context.startActivity(intent);
+    }
+
 
     /**
      * 普通界面跳转不需要finsh

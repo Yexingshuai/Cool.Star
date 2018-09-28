@@ -4,13 +4,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.data.bean.JokeResponse;
+import com.example.myapp.myapp.ui.activity.VocalConcertTextActivity;
 import com.example.myapp.myapp.ui.adapter.LifeHeadAdapter;
 import com.example.myapp.myapp.ui.adapter.SwipeFlingAdater;
+import com.example.myapp.myapp.ui.dialog.EditTextDialog;
 import com.example.myapp.myapp.ui.flingswipe.SwipeFlingAdapterView;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.load.LoadingStatusLayout;
 import com.example.myapp.myapp.utils.ToastUtil;
 
@@ -21,7 +25,7 @@ import java.util.List;
  * Created by yexing on 2018/3/28.
  */
 
-public class LifeFragment extends BaseFragment implements LifeFragmentContract.View {
+public class LifeFragment extends BaseFragment implements LifeFragmentContract.View, View.OnClickListener {
 
 
     private ViewPager vp_module;
@@ -30,6 +34,7 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
     private int pageSize = 20;
     private int pageNum = 1;
     private List<JokeResponse.ResultBean.DataBean> jokeList = new ArrayList<>();
+    private EditTextDialog mDialog = new EditTextDialog();
     /**
      * 默认页码数
      */
@@ -59,6 +64,14 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
     @Override
     public void initView() {
         swipeFlingAdapterView = getView(R.id.swipe);
+        RelativeLayout singing = getView(R.id.rl_singing);
+        singing.setOnClickListener(this);
+        mDialog.setDialogConfirmCallback(new EditTextDialog.DialogConfirmCallback() {
+            @Override
+            public void confirm(String message) {
+                UiHelper.skipToOtherActivityWithExtra(getActivity(), VocalConcertTextActivity.class, VocalConcertTextActivity.TEXT, message);
+            }
+        });
 
     }
 
@@ -122,30 +135,12 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
     }
 
 
-    class MyAdapter extends RecyclerView.Adapter {
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.item_favorite, parent, false);
-            return new ViewHolder(view);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rl_singing:
+                mDialog.show(getFragmentManager(), "edittext");
+                break;
         }
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public ViewHolder(View itemView) {
-                super(itemView);
-            }
-        }
-
     }
-
-
 }

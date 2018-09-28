@@ -245,7 +245,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     break;
 
                 case R.id.navigation_item_setting:
-                    ToastUtil.showApp(getString(R.string.setting));
+                    UiHelper.skipActivityNofinish(MainActivity.this, SettingActivity.class);
                     break;
                 case R.id.navigation_item_about:
                     UiHelper.skipActivityNofinish(MainActivity.this, AboutActivity.class);

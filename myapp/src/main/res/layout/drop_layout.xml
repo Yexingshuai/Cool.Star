@@ -14,9 +14,9 @@
         app:ddmaskColor="@color/black"
         app:ddmenuBackgroundColor="@color/white"
         app:ddmenuMenuHeightPercent="0.5"
-        app:ddmenuSelectedIcon="@mipmap/ic_launcher"
+
         app:ddmenuTextSize="13sp"
-        app:ddmenuUnselectedIcon="@mipmap/ic_launcher"
+
         app:ddtextSelectedColor="@color/theme_green"
         app:ddtextUnselectedColor="@color/black"
         app:ddunderlineColor="@color/theme_green" />

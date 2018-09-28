@@ -63,7 +63,9 @@ public class AboutActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
+                        if (!AboutActivity.this.isFinishing()) {
+                            GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
+                        }
                     }
 
                     @Override
@@ -99,7 +101,7 @@ public class AboutActivity extends BaseActivity {
     private void feedBack() {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "YeXingFreedom@163.com", null));
-        intent.putExtra(Intent.EXTRA_EMAIL, "me@liyuyu.cn");
+        intent.putExtra(Intent.EXTRA_EMAIL, "");
         intent.putExtra(Intent.EXTRA_SUBJECT, "反馈");
         startActivity(Intent.createChooser(intent, "反馈"));
     }
