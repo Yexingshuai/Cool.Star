@@ -2,6 +2,7 @@ package com.example.myapp.myapp.ui.helper;
 
 import android.app.Activity;
 import android.content.Context;
+
 import com.example.myapp.R;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -86,7 +87,7 @@ public class UMengShareHelper {
      */
     public UMengShareHelper shareWithWeb(int index, String title, String url) {
         UMWeb web = new UMWeb(url);
-        web.setTitle("快来学习啦！");
+        web.setTitle("Cool.Star");
         web.setThumb(new UMImage(mCtx, R.mipmap.meizi));  //分享图片
         web.setDescription(title);
         new ShareAction((Activity) mCtx).withMedia(web)

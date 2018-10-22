@@ -3,6 +3,7 @@ package com.example.myapp.myapp.component.study;
 import com.example.myapp.myapp.base.BasePresenter;
 import com.example.myapp.myapp.base.BaseView;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
+import com.example.myapp.myapp.data.bean.KeyWordResponse;
 
 /**
  * Created by yexing on 2018/7/16.
@@ -19,6 +20,8 @@ public interface StudyFragmentContract {
         void collectArtist(int id);
 
         void unCollect(int id);
+
+        void searchKeyWord(String message);
     }
 
     interface View extends BaseView<Presenter> {
@@ -42,6 +45,8 @@ public interface StudyFragmentContract {
         void unCollectFail(String msg);
 
         void requestBannerAndStudyInfoFail(String errorMsg);
+
+        void setKeyWordInfo(KeyWordResponse response);
 
     }
 

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myapp.R;
@@ -21,7 +20,7 @@ import com.example.myapp.myapp.data.bean.Casts;
 import com.example.myapp.myapp.data.bean.Directors;
 import com.example.myapp.myapp.data.bean.FilmDetail;
 import com.example.myapp.myapp.data.bean.FilmPeople;
-import com.example.myapp.myapp.data.source.film.detail.FilmDetailRespository;
+import com.example.myapp.myapp.data.source.film.detail.FilmDetailRepository;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 import com.example.myapp.myapp.ui.adapter.ActorAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
@@ -63,7 +62,7 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        new FilmDetailPresenter(new FilmDetailRespository(), this);
+        new FilmDetailPresenter(new FilmDetailRepository(), this);
         Intent intent = getIntent();
         if (intent != null) {
             movieId = intent.getStringExtra(MOVIEID);
@@ -98,8 +97,6 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new SpaceItemDecoration(40, 0, 0, 0));
-
-
     }
 
     @Override

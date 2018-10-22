@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
+import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.study.StudyFragmentSource;
@@ -60,7 +61,7 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 
             @Override
             public void error(String error) {
-              mView.requestBannerAndStudyInfoFail(error);
+                mView.requestBannerAndStudyInfoFail(error);
             }
 
             @Override
@@ -174,5 +175,22 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
                     }
                 });
 
+    }
+
+    @Override
+    public void searchKeyWord(String message) {
+        mSource.searchKeyWord(message, new HttpContext.Response<KeyWordResponse>() {
+            @Override
+            public void success(KeyWordResponse result) {
+                mView.setKeyWordInfo(result);
+            }
+
+            @Override
+            public void error(String error) {
+                Log.e("[][][][", error);
+                super.error(error);
+            }
+
+        });
     }
 }

@@ -3,16 +3,16 @@
 
     <declare-styleable name="DropDownMenu">
 
-        <attr name="ddunderlineColor" format="color"/>
-        <attr name="dddividerColor" format="color"/>
-        <attr name="ddtextSelectedColor" format="color"/>
-        <attr name="ddtextUnselectedColor" format="color"/>
-        <attr name="ddmenuBackgroundColor" format="color"/>
-        <attr name="ddmaskColor" format="color"/>
-        <attr name="ddmenuTextSize" format="dimension"/>
-        <attr name="ddmenuSelectedIcon" format="reference"/>
-        <attr name="ddmenuUnselectedIcon" format="reference"/>
-        <attr name="ddmenuMenuHeightPercent" format="float"/>
+        <attr name="ddunderlineColor" format="color" />
+        <attr name="dddividerColor" format="color" />
+        <attr name="ddtextSelectedColor" format="color" />
+        <attr name="ddtextUnselectedColor" format="color" />
+        <attr name="ddmenuBackgroundColor" format="color" />
+        <attr name="ddmaskColor" format="color" />
+        <attr name="ddmenuTextSize" format="dimension" />
+        <attr name="ddmenuSelectedIcon" format="reference" />
+        <attr name="ddmenuUnselectedIcon" format="reference" />
+        <attr name="ddmenuMenuHeightPercent" format="float" />
     </declare-styleable>
 
 
@@ -33,6 +33,12 @@
         <attr name="rotation_degrees" format="float" />
         <attr name="min_adapter_stack" format="integer" />
         <attr name="max_visible" format="integer" />
+    </declare-styleable>
+
+    <!--functionView-->
+    <declare-styleable name="function">
+        <attr name="icon" format="reference" />
+        <attr name="text" format="string" />
     </declare-styleable>
 
 

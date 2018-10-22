@@ -22,6 +22,7 @@ import com.example.myapp.myapp.component.study.adapter.BannerViewBinder;
 import com.example.myapp.myapp.component.study.adapter.StudyEntryBinder;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
+import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
 import com.example.myapp.myapp.utils.ToastUtil;
@@ -323,6 +324,11 @@ public class StudyFragment2 extends BaseFragment implements StudyFragmentContrac
     @Override
     public void requestBannerAndStudyInfoFail(String errorMsg) {
         mRefreshLayout.finishRefresh();
+    }
+
+    @Override
+    public void setKeyWordInfo(KeyWordResponse response) {
+
     }
 
 

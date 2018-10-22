@@ -16,8 +16,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/scan"
           android:icon="@android:drawable/ic_menu_search"
-          android:title="@string/connect" />
+          android:mTitle="@string/connect" />
     <item android:id="@+id/disconnect"
           android:icon="@android:drawable/ic_menu_mylocation"
-          android:title="@string/disconnect" />
+          android:mTitle="@string/disconnect" />
 </menu>

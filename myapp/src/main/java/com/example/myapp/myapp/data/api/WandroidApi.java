@@ -5,6 +5,7 @@ import java.util.Map;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.FavoriteResponse;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
+import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.data.bean.RegisterResponse;
 import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
 
@@ -19,6 +20,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -35,7 +37,8 @@ public interface WandroidApi {
      *
      * @return
      */
-    @GET(AppUrl.BANNER)
+//    @GET(AppUrl.BANNER)
+    @GET("banner/json")
     Observable<BannerBean> getBanner();
 
     /**
@@ -110,5 +113,15 @@ public interface WandroidApi {
     @GET("lg/collect/list/{id}/json")
     Observable<FavoriteResponse> favorite(@Path("id") int id);
 
+    /**
+     * 搜索关键词
+     *
+     * @param id
+     * @param k
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("article/query/{id}/json")
+    Observable<KeyWordResponse> searchKeyWord(@Path("id") int id, @Field("k") String k);
 
 }

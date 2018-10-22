@@ -76,6 +76,18 @@ public class RetrofitServer {
         return retrofit;
     }
 
+    public static final Retrofit getRetrofit4() {
+
+        OkHttpClient okHttpClient = getOkHttpClient2();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppUrl.BASEURL4)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return retrofit;
+    }
+
 
     /**
      * 创建网络所需的API

@@ -34,3 +34,8 @@
 #排除HeWeather
   -dontwarn interfaces.heweather.com.interfacesmodule.**
   -keep class interfaces.heweather.com.interfacesmodule.** { *;}
+
+#引导
+-keep class com.wooplr.spotlight.** { *; }
+-keep interface com.wooplr.spotlight.**
+-keep enum com.wooplr.spotlight.**

@@ -12,7 +12,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true  //vertor
+        vectorDrawables.useSupportLibrary = true  //vector
 
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -42,30 +42,28 @@ dependencies {
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:+'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:+'
     //glide
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.android.support:design:26.1.0'
     //RxJava
-    compile 'io.reactivex.rxjava2:rxjava:+'
-    compile 'com.trello:rxlifecycle:+'
-    compile 'com.trello:rxlifecycle-components:+'
+    implementation 'io.reactivex.rxjava2:rxjava:+'
+    implementation 'com.trello:rxlifecycle:+'
+    implementation 'com.trello:rxlifecycle-components:+'
     //Logger
-    compile 'com.orhanobut:logger:2.1.1'
+    implementation 'com.orhanobut:logger:2.1.1'
     //CardView
-    compile 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
     //EventBus
-    compile 'org.greenrobot:eventbus:3.0.0'
-
-    //进程保活
-    compile 'de.hdodenhof:circleimageview:2.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'de.hdodenhof:circleimageview:2.0.0'
     //fab
-    compile 'com.github.clans:fab:1.6.4'
+    implementation 'com.github.clans:fab:1.6.4'
     //BoomMenu
-    compile 'com.nightonke:boommenu:+'
+    implementation 'com.nightonke:boommenu:+'
     //SmartRefreshLayout
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-12'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-12'
     //分享
     implementation files('libs/umeng-common-1.5.3.jar')
     implementation files('libs/umeng-share-core-6.9.3.jar')
@@ -87,7 +85,10 @@ dependencies {
     })
     //permisson
     implementation 'com.karumi:dexter:5.0.0'
-    compile 'com.sunfusheng:marqueeview:+'
+    implementation 'com.sunfusheng:marqueeview:+'
+    implementation  'com.github.wooplr:Spotlight:1.2.3'
+    //指示器
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
 
 
 }

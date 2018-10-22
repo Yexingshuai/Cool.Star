@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/title_news_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text=""
+                android:textColor="#212121" />
+
+            <TextView
+                android:id="@+id/title_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+
+                android:textColor="#757575" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_news"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:alpha="0.5"
+        android:background="#BDBDBD" />
+
+</LinearLayout>

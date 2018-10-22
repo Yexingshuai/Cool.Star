@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
 
 /**
@@ -27,6 +29,7 @@ public class EditTextDialog extends AppCompatDialogFragment implements View.OnCl
 
     private DialogConfirmCallback mCallback;
     private EditText edit_text;
+    private TextView mTitle;
 
     @Nullable
     @Override
@@ -39,10 +42,9 @@ public class EditTextDialog extends AppCompatDialogFragment implements View.OnCl
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         edit_text = view.findViewById(R.id.edit_text);
+        mTitle = view.findViewById(R.id.title);
         TextView tv_confirm = view.findViewById(R.id.tv_confirm);
         tv_confirm.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -59,6 +61,14 @@ public class EditTextDialog extends AppCompatDialogFragment implements View.OnCl
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(params);
         dialog.onWindowAttributesChanged(params);
+    }
+
+    public void setTitleText(String title) {
+        mTitle.setText(title);
+    }
+
+    public void setEditTextHint(String hint) {
+        edit_text.setHint(hint);
     }
 
     @Override

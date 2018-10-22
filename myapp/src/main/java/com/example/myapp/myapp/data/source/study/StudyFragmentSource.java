@@ -17,4 +17,6 @@ public interface StudyFragmentSource {
     void collect(int id, HttpContext.Response response);
 
     void unCollect(int id, HttpContext.Response response);
+
+    void searchKeyWord(String message, HttpContext.Response response);
 }

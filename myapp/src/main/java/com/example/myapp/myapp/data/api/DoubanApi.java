@@ -1,10 +1,10 @@
 package com.example.myapp.myapp.data.api;
 
 
-
 import com.example.myapp.myapp.data.bean.FilmDetail;
 import com.example.myapp.myapp.data.bean.FilmLive;
 import com.example.myapp.myapp.data.bean.Root;
+
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;

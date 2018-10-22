@@ -38,18 +38,19 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
+        showExplodeActivityTransition();
         mHeadView = getView(R.id.iv);
         mToolBar = getView(R.id.toolbar);
         mWebHome = getView(R.id.btn_web_home);
-        setCommonClickListener(mWebHome);
         mFeedBack = getView(R.id.btn_feedback);
+        setCommonClickListener(mWebHome);
         setCommonClickListener(mFeedBack);
         setSupportActionBar(mToolBar);
         mToolBar.setNavigationIcon(R.mipmap.icon_back);
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -63,9 +64,9 @@ public class AboutActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        if (!AboutActivity.this.isFinishing()) {
-                            GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
-                        }
+//                        if (!AboutActivity.this.isFinishing()) {
+                        GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
+//                        }
                     }
 
                     @Override
@@ -104,5 +105,11 @@ public class AboutActivity extends BaseActivity {
         intent.putExtra(Intent.EXTRA_EMAIL, "");
         intent.putExtra(Intent.EXTRA_SUBJECT, "反馈");
         startActivity(Intent.createChooser(intent, "反馈"));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkGo.getInstance().cancelAll();
     }
 }

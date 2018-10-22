@@ -20,7 +20,7 @@ import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.utils.Utils;
 
 /**
- * Created by daixiankade on 2018/5/2.
+ * Created by yexing on 2018/5/2.
  */
 
 public class FilmLiveAdapter extends RecyclerView.Adapter {

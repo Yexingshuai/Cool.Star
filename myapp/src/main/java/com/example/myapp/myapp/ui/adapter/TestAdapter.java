@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by daixiankade on 2018/6/7.
+ * Created by yexing on 2018/6/7.
  */
 
 public class TestAdapter extends RecyclerView.Adapter {

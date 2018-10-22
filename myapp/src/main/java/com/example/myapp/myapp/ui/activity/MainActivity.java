@@ -1,6 +1,7 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -9,27 +10,22 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapp.R;
-
-import java.util.List;
-
+import com.example.myapp.myapp.base.BaseActivity;
+import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.base.BaseView;
 import com.example.myapp.myapp.component.MainPresenter;
 import com.example.myapp.myapp.component.favorite.MyFavoriteActivity;
 import com.example.myapp.myapp.component.login.LoginActivity;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
+import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.component.weather.WeatherActivity;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
-import com.example.myapp.myapp.base.BaseActivity;
-import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.ui.dialog.DesignDialog;
-import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.MyViewPager;
 import com.example.myapp.myapp.ui.view.NavigationButton;
@@ -38,17 +34,18 @@ import com.example.myapp.myapp.utils.ToastUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 /**
  * Created by yexing on 2018/3/28.
  */
 
-public class MainActivity extends BaseActivity implements BaseView<MainPresenter> {
+public class MainActivity extends BaseActivity implements BaseView<MainPresenter>, BaseActivity.TurnBackListener {
 
 
     private MyViewPager mViewPager;
     public TabLayout mTabLayout;
     private MainPresenter mPresenter;
-    private long mExitTime;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
     private TextView mUserName;
@@ -63,6 +60,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
         new MainPresenter(this);
+        addOnTurnBackListener(this);
         mViewPager = findViewById(R.id.view_pager);
         mTabLayout = findViewById(R.id.tab_layout);
         mNavigationView = findViewById(R.id.nav_view);
@@ -183,37 +181,15 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
-    /**
-     * 用户点击返回键
-     *
-     * @param keyCode
-     * @param event
-     * @return
-     */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-
-                mDrawerLayout.closeDrawers();
-
-                return true;
-            }
-
-            if ((System.currentTimeMillis() - mExitTime) > 2000) {
-
-                Toast.makeText(this, R.string.exitApp, Toast.LENGTH_SHORT).show();
-
-                mExitTime = System.currentTimeMillis();
-            } else {
-
-                System.exit(0);
-            }
+    @Override
+    public boolean onTurnBack() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
+
 
     class NavigationItemSelectListener implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -248,7 +224,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
                     UiHelper.skipActivityNofinish(MainActivity.this, SettingActivity.class);
                     break;
                 case R.id.navigation_item_about:
-                    UiHelper.skipActivityNofinish(MainActivity.this, AboutActivity.class);
+                    startActivityTransition(new Intent(MainActivity.this, AboutActivity.class));
                     break;
             }
             mDrawerLayout.closeDrawers();

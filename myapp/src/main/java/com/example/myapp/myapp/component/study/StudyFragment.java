@@ -1,6 +1,7 @@
 package com.example.myapp.myapp.component.study;
 
 import android.animation.ArgbEvaluator;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,21 +13,26 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.component.login.LoginActivity;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.component.study.adapter.BannerViewBinder;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
+import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
+import com.example.myapp.myapp.ui.helper.GuidanceHelper;
 import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.CircleImageView;
+import com.example.myapp.myapp.ui.view.SearchView;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -35,6 +41,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.wooplr.spotlight.SpotlightView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -50,7 +57,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by yexing on 2018/3/28.
  */
 
-public class StudyFragment extends BaseFragment implements StudyFragmentContract.View, View.OnClickListener {
+public class StudyFragment extends BaseFragment implements StudyFragmentContract.View, View.OnClickListener, BaseActivity.TurnBackListener {
 
 
     private int[] imageResources = new int[]{
@@ -121,6 +128,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         }
     };
     private CircleImageView mHeadImg;
+    private ImageView mSearch;
+    private SearchView mSearchView;
 
     @Override
     public void onDestroy() {
@@ -140,13 +149,22 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
 
     @Override
-    public void initView() {
+    public void onAttach(Context context) {
+        BaseActivity activity = (BaseActivity) context;
+        activity.addOnTurnBackListener(this);
+        super.onAttach(context);
+    }
 
+    @Override
+    public void initView() {
         mRefreshLayout = getView(R.id.refreshLayout);
         mRecylerview = getView(R.id.rv);
         llTitleContainer = getView(R.id.title_bar);
         mHeadImg = getView(R.id.iv_head);
+        mSearch = getView(R.id.iv_search);
+        mSearchView = getView(R.id.searchView);
         mHeadImg.setOnClickListener(this);
+        mSearch.setOnClickListener(this);
 
 
         //BoomMenu
@@ -173,6 +191,15 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void initData() {
+        mSearchView.setEditTextListener(new SearchView.EditTextListener() {
+            @Override
+            public void editTextMessage(String message) {
+//                ToastUtil.showApp(message);
+                mPresenter.searchKeyWord(message);
+            }
+        });
+
+
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -331,13 +358,32 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         mRefreshLayout.finishRefresh();
     }
 
+    /**
+     * 获取关键词搜索内容
+     *
+     * @param response
+     */
+    @Override
+    public void setKeyWordInfo(KeyWordResponse response) {
+        mSearchView.setKeyWordData(response);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head:
                 ((MainActivity) getActivity()).toggle();
                 break;
+
+            case R.id.iv_search:
+                mSearchView.showView();
+                break;
         }
+    }
+
+    @Override
+    public boolean onTurnBack() {
+        return mSearchView.onTurnBack();
     }
 
 
@@ -375,11 +421,17 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
                 Message message = new Message();
                 message.what = NAVIGATION_HIDE;
                 EventBus.getDefault().post(message);
+                if (mSearchView.isShown()) {
+                    mSearchView.hideView();
+                }
 
             } else if (dy < -30) {//down -> show
                 Message message = new Message();
                 message.what = NAVIGATION_SHOW;
                 EventBus.getDefault().post(message);
+                if (mSearchView.isShown()) {
+                    mSearchView.hideView();
+                }
             }
             super.onScrolled(recyclerView, dx, dy);
         }
@@ -390,6 +442,11 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 //                RecyclerView.SCROLL_STATE_SETTLING    惯性滑动
 //                RecyclerView.SCROLL_STATE_IDLE        滚动空闲(滚动---->停止)
 //                RecyclerView.SCROLL_STATE_DRAGGING    拖拽recyclerView滚动
+
+            if (newState == RecyclerView.SCROLL_STATE_IDLE && sumY > 300) {
+                //执行引导动画
+                GuidanceHelper.guide(getContext(), mHeadImg, "mHeadImg", "点击我展开侧拉菜单哦！\n 手指侧拉也可以的。");
+            }
             super.onScrollStateChanged(recyclerView, newState);
 
         }

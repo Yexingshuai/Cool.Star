@@ -43,6 +43,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="adjustResize"
             android:name=".myapp.ui.activity.MainActivity"
             android:screenOrientation="portrait" />
 

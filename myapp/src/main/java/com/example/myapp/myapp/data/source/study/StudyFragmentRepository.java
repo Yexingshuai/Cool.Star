@@ -1,6 +1,8 @@
 package com.example.myapp.myapp.data.source.study;
+
 import com.example.myapp.myapp.data.api.WandroidApi;
 import com.example.myapp.myapp.data.http.HttpContext;
+
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -14,6 +16,7 @@ public class StudyFragmentRepository implements StudyFragmentSource {
     public void requestBannerAndStutyInfo(int index, final HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();
         WandroidApi api = httpContext.createApi(WandroidApi.class);
+
         /**
          * 改用RxJava合并方式
          */
@@ -73,6 +76,12 @@ public class StudyFragmentRepository implements StudyFragmentSource {
         httpContext.execute(api.unCollect(id), response);
     }
 
+    @Override
+    public void searchKeyWord(String message, HttpContext.Response response) {
+        HttpContext httpContext = new HttpContext();
+        WandroidApi api = httpContext.createApi(WandroidApi.class);
+        httpContext.execute(api.searchKeyWord(0, message), response);
+    }
 
 
 }

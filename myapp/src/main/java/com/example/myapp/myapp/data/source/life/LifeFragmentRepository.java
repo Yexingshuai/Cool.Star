@@ -8,7 +8,7 @@ import com.example.myapp.myapp.data.http.HttpContext;
  * Created by yexing on 2018/8/28.
  */
 
-public class LifeFragmentResiporty implements LifeFragmentSource {
+public class LifeFragmentRepository implements LifeFragmentSource {
     @Override
     public void requestJokeInfo(int pageNum, int pageSize, HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();

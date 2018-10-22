@@ -7,7 +7,7 @@ import com.example.myapp.myapp.data.http.HttpContext;
  * Created by yexing on 2018/8/8.
  */
 
-public class LoginResiporty implements LoginSource {
+public class LoginRepository implements LoginSource {
     @Override
     public void register(String account, String password, String repassword, HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();

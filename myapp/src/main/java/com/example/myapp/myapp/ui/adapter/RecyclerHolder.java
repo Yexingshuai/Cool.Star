@@ -1,8 +1,12 @@
 package com.example.myapp.myapp.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.myapp.myapp.di.glide.GlideContext;
 
 public class RecyclerHolder extends RecyclerView.ViewHolder {
 
@@ -60,6 +64,11 @@ public class RecyclerHolder extends RecyclerView.ViewHolder {
         }
         textView.setText(text);
 
+    }
+
+    public void image(Context context, int imgId, String url) {
+        ImageView imageView = getViewById(imgId);
+        GlideContext.loadCommon(context, url, imageView);
     }
 
     public void textWithColor(int textId, String text, int color) {

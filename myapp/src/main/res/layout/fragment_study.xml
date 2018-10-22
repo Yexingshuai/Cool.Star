@@ -57,8 +57,30 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="14dp"
+            android:layout_marginRight="12dp"
+            android:src="@mipmap/fangdajing" />
+
 
     </RelativeLayout>
+
+    <com.example.myapp.myapp.ui.view.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible">
+
+
+    </com.example.myapp.myapp.ui.view.SearchView>
 
 
     <com.nightonke.boommenu.BoomMenuButton

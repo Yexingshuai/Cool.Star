@@ -22,7 +22,7 @@ import com.example.myapp.myapp.data.bean.FilmPeople;
 import com.example.myapp.myapp.ui.helper.UiHelper;
 
 /**
- * Created by daixiankade on 2018/5/8.
+ * Created by yexing on 2018/5/8.
  */
 
 public class ActorAdapter extends RecyclerView.Adapter {

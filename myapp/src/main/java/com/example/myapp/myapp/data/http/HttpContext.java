@@ -41,6 +41,10 @@ public class HttpContext {
         return RetrofitServer.getRetrofit3().create(service);
     }
 
+    public <T> T createApi4(Class<T> service) {
+        return RetrofitServer.getRetrofit4().create(service);
+    }
+
 
     /**
      * 执行网络操作

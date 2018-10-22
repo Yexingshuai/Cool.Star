@@ -7,7 +7,7 @@ import com.example.myapp.myapp.data.http.HttpContext;
  * Created by yexing on 2018/8/16.
  */
 
-public class FilmDetailRespository implements FilmDetailSource {
+public class FilmDetailRepository implements FilmDetailSource {
     @Override
     public void getFilmDetail(String movieId, HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();

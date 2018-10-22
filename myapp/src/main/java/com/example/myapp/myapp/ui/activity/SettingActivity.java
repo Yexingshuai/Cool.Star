@@ -1,17 +1,16 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.utils.CacheCleanUtil;
 import com.example.myapp.myapp.utils.ToastUtil;
-import com.kongqw.radarscanviewlibrary.RadarScanView;
 
 /**
  * Created by Yexing on 2018/9/18.

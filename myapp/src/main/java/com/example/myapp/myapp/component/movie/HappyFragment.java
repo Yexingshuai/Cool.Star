@@ -9,6 +9,7 @@ import com.example.myapp.myapp.component.movie.live.FilmLiveFragment;
 import com.example.myapp.myapp.component.movie.live.FilmLivePresenter;
 import com.example.myapp.myapp.component.movie.top.FilmTop100Fragment;
 import com.example.myapp.myapp.component.movie.top.FilmTop100Presenter;
+import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.data.source.film.live.FilmLiveRepository;
 import com.example.myapp.myapp.data.source.film.top.FilmTopRepository;
 import com.example.myapp.myapp.ui.adapter.FilmPagerAdapter;
@@ -33,6 +34,10 @@ public class HappyFragment extends BaseFragment {
     @Override
     protected void refreshData() {
 
+    }
+
+    public static HappyFragment newInstance() {
+        return new HappyFragment();
     }
 
     @Override

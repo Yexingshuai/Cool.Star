@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.data.bean.RegisterResponse;
-import com.example.myapp.myapp.data.source.login.LoginResiporty;
+import com.example.myapp.myapp.data.source.login.LoginRepository;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.github.ybq.android.spinkit.SpinKitView;
 
@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initView(@Nullable Bundle savedInstanceState) {
-        new LoginPresenter(new LoginResiporty(), this); //传递引用
+        new LoginPresenter(new LoginRepository(), this); //传递引用
 
         mAccountEditext = getView(R.id.et_account);
         mAccountEditext.addTextChangedListener(new MyAccountWatcher());

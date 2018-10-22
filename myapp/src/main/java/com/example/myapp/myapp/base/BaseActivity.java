@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,11 +15,17 @@ import android.transition.Fade;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.ui.activity.MainActivity;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,6 +35,7 @@ import org.greenrobot.eventbus.EventBus;
 public abstract class BaseActivity extends AppCompatActivity {
     protected String TAG_LOG = this.getClass().getSimpleName();
 
+    private List<TurnBackListener> mTurnBackListeners = new ArrayList<>();
     private View.OnClickListener mOnNavClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -35,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     };
     private View mStatus_bar;
+    private long mExitTime;
 
 
     @Override
@@ -224,5 +233,39 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mStatus_bar != null) {
             mStatus_bar.setBackgroundResource(color);
         }
+    }
+
+    public interface TurnBackListener {
+        boolean onTurnBack();
+    }
+
+    public void addOnTurnBackListener(TurnBackListener l) {
+        this.mTurnBackListeners.add(l);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        for (TurnBackListener listener : mTurnBackListeners) {
+            if (listener.onTurnBack()) {
+                return;
+            }
+        }
+
+        if (this instanceof MainActivity) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+
+                Toast.makeText(this, R.string.exitApp, Toast.LENGTH_SHORT).show();
+
+                mExitTime = System.currentTimeMillis();
+            } else {
+
+                System.exit(0);
+            }
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }

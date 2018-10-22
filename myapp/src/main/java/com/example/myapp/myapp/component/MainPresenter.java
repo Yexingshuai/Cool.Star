@@ -3,17 +3,17 @@ package com.example.myapp.myapp.component;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.base.BasePresenter;
+import com.example.myapp.myapp.component.life.LifeFragment;
 import com.example.myapp.myapp.component.life.LifeFragmentPresenter;
-import com.example.myapp.myapp.component.study.StudyFragment2;
+import com.example.myapp.myapp.component.movie.HappyFragment;
+import com.example.myapp.myapp.component.news.NewsFragment;
+import com.example.myapp.myapp.component.news.NewsFragmentPresenter;
+import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.component.study.StudyFragmentPresenter;
-import com.example.myapp.myapp.component.study.adapter.StudyEntryBinder;
-import com.example.myapp.myapp.data.source.life.LifeFragmentResiporty;
+import com.example.myapp.myapp.data.source.life.LifeFragmentRepository;
+import com.example.myapp.myapp.data.source.news.NewsFragmentRepository;
 import com.example.myapp.myapp.data.source.study.StudyFragmentRepository;
 import com.example.myapp.myapp.ui.activity.MainActivity;
-import com.example.myapp.myapp.component.movie.HappyFragment;
-import com.example.myapp.myapp.component.life.LifeFragment;
-import com.example.myapp.myapp.ui.fragment.MyFragment;
-import com.example.myapp.myapp.component.study.StudyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +50,14 @@ public class MainPresenter implements BasePresenter {
         new StudyFragmentPresenter(new StudyFragmentRepository(), studyFragment);
         fragmentList.add(studyFragment);
         //娱乐
-        fragmentList.add(new HappyFragment());
+        fragmentList.add(HappyFragment.newInstance());
+        //新闻
+        NewsFragment newsFragment = NewsFragment.newInstance();
+        new NewsFragmentPresenter(newsFragment, new NewsFragmentRepository());
+        fragmentList.add(newsFragment);
         //生活
         LifeFragment lifeFragment = LifeFragment.newInstance();
-        new LifeFragmentPresenter(new LifeFragmentResiporty(), lifeFragment);
+        new LifeFragmentPresenter(new LifeFragmentRepository(), lifeFragment);
         fragmentList.add(lifeFragment);
         return fragmentList;
     }
@@ -62,8 +66,9 @@ public class MainPresenter implements BasePresenter {
         List<String> titleList = new ArrayList<>();
         titleList.add("学习");
         titleList.add("娱乐");
+        titleList.add("新闻");
         titleList.add("生活");
-//        titleList.add("我的");
+
         return titleList;
     }
 
@@ -71,8 +76,8 @@ public class MainPresenter implements BasePresenter {
         List<Integer> mTabImg = new ArrayList<>();
         mTabImg.add(R.drawable.tab_home_btn);
         mTabImg.add(R.drawable.tab_sm_btn);
+        mTabImg.add(R.drawable.tab_news_btn);
         mTabImg.add(R.drawable.tab_shopping_btn);
-//        mTabImg.add(R.drawable.tab_preson_btn);
         return mTabImg;
     }
 }
