@@ -37,7 +37,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 /**
- * Created by yexing on 2018/3/28.
+ * Created by yexing on 2018/3/28.  现在在测试分支上
  */
 
 public class MainActivity extends BaseActivity implements BaseView<MainPresenter>, BaseActivity.TurnBackListener {
