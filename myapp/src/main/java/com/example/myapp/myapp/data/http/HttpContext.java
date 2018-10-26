@@ -1,17 +1,13 @@
 package com.example.myapp.myapp.data.http;
 
-import android.util.Log;
-import android.widget.Toast;
+import com.example.myapp.myapp.di.retrofit.RetrofitServer;
+import com.example.myapp.myapp.utils.LogUtil;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import com.example.myapp.myapp.di.retrofit.RetrofitServer;
-import com.example.myapp.myapp.utils.LogUtil;
-import com.example.myapp.myapp.utils.NetWorkHelper;
 
 /**
  * Created by yexing on 2018/4/13.

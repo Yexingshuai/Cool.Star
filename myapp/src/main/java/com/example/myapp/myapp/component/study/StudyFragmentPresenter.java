@@ -1,14 +1,15 @@
 package com.example.myapp.myapp.component.study;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.study.StudyFragmentSource;
+import com.example.myapp.myapp.room.Injection;
+import com.example.myapp.myapp.room.search.SearchDataRoomServer;
+import com.example.myapp.myapp.room.search.SearchDataSource;
+import com.example.myapp.myapp.room.search.entity.SearchHistory;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -17,9 +18,15 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpHeaders;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import okhttp3.Call;
 import okhttp3.Response;
+
 
 /**
  * Created by yexing on 2018/7/16.
@@ -178,19 +185,41 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
     }
 
     @Override
-    public void searchKeyWord(String message) {
+    public void searchKeyWord(final String message) {
         mSource.searchKeyWord(message, new HttpContext.Response<KeyWordResponse>() {
             @Override
             public void success(KeyWordResponse result) {
                 mView.setKeyWordInfo(result);
+                //保存导数据库
+                saveDatabase(message);
             }
 
             @Override
             public void error(String error) {
-                Log.e("[][][][", error);
                 super.error(error);
             }
 
+        });
+    }
+
+    /**
+     * 记录保存到数据库
+     *
+     * @param message
+     */
+    private void saveDatabase(String message) {
+
+        SearchDataSource searchDataSource = Injection.provideLocalSearchDataSource(((StudyFragment) mView).getActivity());
+        SearchDataRoomServer.getInstance().queryAll(searchDataSource.getAll(), new SearchDataRoomServer.Response<List<SearchHistory>>() {
+            @Override
+            public void success(List<SearchHistory> list) {
+                ToastUtil.showApp(list.size()+"");
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
+            }
         });
     }
 }

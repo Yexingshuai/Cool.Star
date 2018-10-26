@@ -89,6 +89,11 @@ public class RxJavaTest {
             }
 
 
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         });
 
 
