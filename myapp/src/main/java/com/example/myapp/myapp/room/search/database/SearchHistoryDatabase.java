@@ -28,7 +28,7 @@ public abstract class SearchHistoryDatabase extends RoomDatabase {
 
             synchronized (SearchHistoryDatabase.class) {
                 if (historyDatabase == null) {
-                    historyDatabase = Room.databaseBuilder(context.getApplicationContext(), SearchHistoryDatabase.class, "room-search-database")
+                    historyDatabase = Room.databaseBuilder(context.getApplicationContext(), SearchHistoryDatabase.class, "search_history.db")  //第三个参数name  换了的话，数据库数据会清空
                             //加上表示允许在主线程中进行数据库操作，，所以去掉他
 //                            .allowMainThreadQueries()
                             //数据库升级或变动 则增加这一行

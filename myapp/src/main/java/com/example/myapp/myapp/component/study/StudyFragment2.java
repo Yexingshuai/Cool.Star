@@ -23,6 +23,7 @@ import com.example.myapp.myapp.component.study.adapter.StudyEntryBinder;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
+import com.example.myapp.myapp.room.search.entity.SearchHistory;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
 import com.example.myapp.myapp.utils.ToastUtil;
@@ -50,7 +51,8 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * 改用MultiType  adapter填充Recyclerview
  * </p>
  */
-
+//已废弃
+@Deprecated
 public class StudyFragment2 extends BaseFragment implements StudyFragmentContract.View {
 
 
@@ -245,10 +247,6 @@ public class StudyFragment2 extends BaseFragment implements StudyFragmentContrac
         mPresenter = presenter;
     }
 
-    @Override
-    public void setBannerInfo() {
-
-    }
 
     @Override
     public void setStudyInfo(HomeItemBean result) {
@@ -328,6 +326,16 @@ public class StudyFragment2 extends BaseFragment implements StudyFragmentContrac
 
     @Override
     public void setKeyWordInfo(KeyWordResponse response) {
+
+    }
+
+    @Override
+    public void setSearchData(List<SearchHistory> list) {
+
+    }
+
+    @Override
+    public void deleteDatabaseSuccess() {
 
     }
 

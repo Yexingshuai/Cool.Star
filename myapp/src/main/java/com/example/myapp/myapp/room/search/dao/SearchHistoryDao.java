@@ -34,13 +34,18 @@ public interface SearchHistoryDao {
     @Query("SELECT * FROM SEARCH_HISTORY WHERE uid = :uid")
     SearchHistory FindByUid(int uid);
 
+    //根据信息, 查找对象
+    @Query("SELECT * FROM SEARCH_HISTORY WHERE message = :message")
+    Flowable<List<SearchHistory>>findByMessage(String message);
+
     //--------------insert----------------------
 
     //数据判断根据主键匹配，也就是uid
     //OnConflictStrategy.REPLACE  ,表示已有数据，那么就覆盖掉
     //Long 返回的是，插入条目的主键值
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Flowable<Long> insert(SearchHistory searchHistoty);
+    Long insert(SearchHistory searchHistoty);
+
 
     //返回List<Long>数据表示被插入数据的主键uid列表
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -79,5 +84,12 @@ public interface SearchHistoryDao {
     //同上
     @Delete()
     int delete(List<SearchHistory> searchHistotyList);
+
+
+    /**
+     * Delete all
+     */
+    @Query("DELETE  FROM search_history")
+    int deleteAll();
 
 }

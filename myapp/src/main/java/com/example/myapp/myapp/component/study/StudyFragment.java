@@ -20,17 +20,16 @@ import android.widget.Toast;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
-import com.example.myapp.myapp.component.login.LoginActivity;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
-import com.example.myapp.myapp.component.study.adapter.BannerViewBinder;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
+import com.example.myapp.myapp.room.Injection;
+import com.example.myapp.myapp.room.search.entity.SearchHistory;
 import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
 import com.example.myapp.myapp.ui.helper.GuidanceHelper;
-import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.example.myapp.myapp.ui.view.SearchView;
 import com.example.myapp.myapp.utils.ToastUtil;
@@ -41,16 +40,12 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.wooplr.spotlight.SpotlightView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
-
-import me.drakeet.multitype.Items;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 
 /**
@@ -135,6 +130,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);//删除所有的消息，防止内存泄露
+        mPresenter.stop();
     }
 
     @Override
@@ -153,6 +149,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         BaseActivity activity = (BaseActivity) context;
         activity.addOnTurnBackListener(this);
         super.onAttach(context);
+        mPresenter.start();
     }
 
     @Override
@@ -191,6 +188,9 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void initData() {
+        //数据库搜索历史记录
+        mPresenter.requestAllDatabase(Injection.provideLocalSearchDataSource(getActivity()));
+
         mSearchView.setEditTextListener(new SearchView.EditTextListener() {
             @Override
             public void editTextMessage(String message) {
@@ -285,10 +285,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         mPresenter = presenter;
     }
 
-    @Override
-    public void setBannerInfo() {
-
-    }
 
     @Override
     public void setStudyInfo(HomeItemBean result) {
@@ -366,6 +362,24 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void setKeyWordInfo(KeyWordResponse response) {
         mSearchView.setKeyWordData(response);
+    }
+
+    /**
+     * 获取历史内容
+     *
+     * @param list
+     */
+    @Override
+    public void setSearchData(List<SearchHistory> list) {
+        mSearchView.setSearchData(list, mPresenter);
+    }
+
+    /**
+     * 清除历史成功
+     */
+    @Override
+    public void deleteDatabaseSuccess() {
+        mSearchView.deletaDatabaseSuccess();
     }
 
     @Override

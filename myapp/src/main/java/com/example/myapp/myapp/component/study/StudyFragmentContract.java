@@ -4,6 +4,10 @@ import com.example.myapp.myapp.base.BasePresenter;
 import com.example.myapp.myapp.base.BaseView;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
+import com.example.myapp.myapp.room.search.SearchDataSource;
+import com.example.myapp.myapp.room.search.entity.SearchHistory;
+
+import java.util.List;
 
 /**
  * Created by yexing on 2018/7/16.
@@ -22,11 +26,14 @@ public interface StudyFragmentContract {
         void unCollect(int id);
 
         void searchKeyWord(String message);
+
+        void requestAllDatabase(SearchDataSource searchDataSource);
+
+        void deleteAll(SearchDataSource searchDataSource);
     }
 
     interface View extends BaseView<Presenter> {
 
-        void setBannerInfo();
 
         void setStudyInfo(HomeItemBean result);
 
@@ -47,6 +54,10 @@ public interface StudyFragmentContract {
         void requestBannerAndStudyInfoFail(String errorMsg);
 
         void setKeyWordInfo(KeyWordResponse response);
+
+        void setSearchData(List<SearchHistory> list);
+
+        void deleteDatabaseSuccess();
 
     }
 

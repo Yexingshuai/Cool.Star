@@ -14,7 +14,11 @@ public interface SearchDataSource {
 
     Flowable<List<SearchHistory>> getAll();
 
-    Flowable<Long> insertOne(SearchHistory searchHistory);
+    Long insertOne(SearchHistory searchHistory);
+
+    int deleteAll();
+
+    Flowable<List<SearchHistory>> findByMessage(String message);
 
 
 }

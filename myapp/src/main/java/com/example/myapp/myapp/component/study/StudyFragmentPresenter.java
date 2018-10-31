@@ -7,10 +7,9 @@ import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.study.StudyFragmentSource;
 import com.example.myapp.myapp.room.Injection;
-import com.example.myapp.myapp.room.search.SearchDataRoomServer;
+import com.example.myapp.myapp.room.RoomServer;
 import com.example.myapp.myapp.room.search.SearchDataSource;
 import com.example.myapp.myapp.room.search.entity.SearchHistory;
-import com.example.myapp.myapp.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
@@ -19,10 +18,6 @@ import com.lzy.okgo.model.HttpHeaders;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -38,6 +33,10 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
     private StudyFragmentSource mSource;
     private StudyFragmentContract.View mView;
 
+    private RoomServer roomServer;
+
+    private int lastUid = -1;
+
     public StudyFragmentPresenter(StudyFragmentSource source, StudyFragmentContract.View view) {
 
         mSource = source;
@@ -47,12 +46,12 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 
     @Override
     public void start() {
-
+        roomServer = new RoomServer();
     }
 
     @Override
     public void stop() {
-
+        roomServer.dispose();
     }
 
 
@@ -190,8 +189,11 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
             @Override
             public void success(KeyWordResponse result) {
                 mView.setKeyWordInfo(result);
-                //保存导数据库
-                saveDatabase(message);
+                //保存到数据库
+                if (result.getData().getDatas().size() > 0) {
+                    saveToDatabase(message);
+                }
+
             }
 
             @Override
@@ -203,22 +205,107 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
     }
 
     /**
-     * 记录保存到数据库
+     * 查询所有历史数据
      *
-     * @param message
+     * @param searchDataSource
      */
-    private void saveDatabase(String message) {
-
-        SearchDataSource searchDataSource = Injection.provideLocalSearchDataSource(((StudyFragment) mView).getActivity());
-        SearchDataRoomServer.getInstance().queryAll(searchDataSource.getAll(), new SearchDataRoomServer.Response<List<SearchHistory>>() {
+    @Override
+    public void requestAllDatabase(final SearchDataSource searchDataSource) {
+        mSource.queryAll(roomServer, searchDataSource, new RoomServer.Response<List<SearchHistory>>() {
             @Override
-            public void success(List<SearchHistory> list) {
-                ToastUtil.showApp(list.size()+"");
+            public void success(List<SearchHistory> response) {
+                if (response.size() > 0) {
+                    SearchHistory searchHistory = response.get(response.size() - 1);  //取出末尾值元素
+                    lastUid = searchHistory.getUid();
+                }
+                mView.setSearchData(response);
             }
 
             @Override
             public void error(String error) {
                 super.error(error);
+            }
+        });
+    }
+
+    /**
+     * 清空历史记录
+     */
+    @Override
+    public void deleteAll(SearchDataSource searchDataSource) {
+        mSource.deleteAll(roomServer, searchDataSource, new RoomServer.Response<Integer>() {
+            @Override
+            public void success(Integer integer) {
+                mView.deleteDatabaseSuccess();
+            }
+        });
+    }
+
+    /**
+     * 记录保存到数据库
+     *
+     * @param message
+     */
+    private void saveToDatabase(String message) {
+        SearchDataSource searchDataSource = Injection.provideLocalSearchDataSource(((StudyFragment) mView).getActivity());
+        //先查询数据库中是否有这个数据，有则排前面，没有则插入
+//        hasThisOne(searchDataSource, message);
+        insertOne(searchDataSource, message);
+    }
+
+    private void hasThisOne(final SearchDataSource searchDataSource, final String message) {
+
+        roomServer.execute(searchDataSource.findByMessage(message), new RoomServer.Response<List<SearchHistory>>() {
+            @Override
+            public void success(List<SearchHistory> response) {
+                if (response.size() > 0) {
+                    //把这个元素取出来，并放到最后
+                    sortPrimaryKey(searchDataSource, response);
+                } else {
+                    insertOne(searchDataSource, message);
+                }
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
+            }
+        });
+    }
+
+    /**
+     * 排序主键
+     *
+     * @param searchDataSource
+     * @param response
+     */
+    private void sortPrimaryKey(SearchDataSource searchDataSource, List<SearchHistory> response) {
+        SearchHistory searchHistory = response.get(0);
+        if (lastUid != -1) {
+            searchHistory.setUid(lastUid);
+        }
+
+
+    }
+
+
+    /**
+     * 添加一条数据
+     *
+     * @param searchDataSource
+     * @param message
+     */
+    public void insertOne(SearchDataSource searchDataSource, String message) {
+        mSource.insertOne(roomServer, searchDataSource, new SearchHistory(message), new RoomServer.Response<Long>() {
+            @Override
+            public void success(Long response) {
+
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
+
             }
         });
     }

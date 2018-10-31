@@ -2,10 +2,14 @@ package com.example.myapp.myapp.data.source.study;
 
 import com.example.myapp.myapp.data.api.WandroidApi;
 import com.example.myapp.myapp.data.http.HttpContext;
+import com.example.myapp.myapp.room.RoomServer;
+import com.example.myapp.myapp.room.search.SearchDataSource;
+import com.example.myapp.myapp.room.search.entity.SearchHistory;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
 
 /**
  * Created by yexing on 2018/7/16.
@@ -16,40 +20,10 @@ public class StudyFragmentRepository implements StudyFragmentSource {
     public void requestBannerAndStutyInfo(int index, final HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();
         WandroidApi api = httpContext.createApi(WandroidApi.class);
-
         /**
          * 改用RxJava合并方式
          */
-
-        rx.Observable.merge(api.getBanner(), api.getHome(index))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Object>() {
-                    @Override
-                    public void onCompleted() {
-                        response.stop();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        response.error(e.getMessage());
-
-                    }
-
-                    @Override
-                    public void onNext(Object o) {
-                        response.success(o);
-
-
-                    }
-
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-
-
-                    }
-                });
+        httpContext.execute(rx.Observable.merge(api.getBanner(), api.getHome(index)), response);
     }
 
     @Override
@@ -81,6 +55,49 @@ public class StudyFragmentRepository implements StudyFragmentSource {
         HttpContext httpContext = new HttpContext();
         WandroidApi api = httpContext.createApi(WandroidApi.class);
         httpContext.execute(api.searchKeyWord(0, message), response);
+    }
+
+
+    /**
+     * 插入一条记录到数据库
+     *
+     * @param searchHistory
+     */
+    @Override
+    public void insertOne(RoomServer roomServer, final SearchDataSource searchDataSource, final SearchHistory searchHistory, final RoomServer.Response response) {
+        Flowable<Long> flowable = Flowable.create(new FlowableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(FlowableEmitter<Long> emitter) throws Exception {
+                Long aLong = searchDataSource.insertOne(searchHistory);
+                emitter.onNext(aLong);
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.BUFFER);
+        roomServer.execute(flowable, response);
+    }
+
+    /**
+     * 查询数据库的数量
+     *
+     * @param searchDataSource
+     * @param response
+     */
+    @Override
+    public void queryAll(RoomServer roomServer, SearchDataSource searchDataSource, RoomServer.Response response) {
+        roomServer.execute(searchDataSource.getAll(), response);
+    }
+
+    @Override
+    public void deleteAll(RoomServer roomServer, final SearchDataSource searchDataSource, RoomServer.Response response) {
+        Flowable<Integer> flowable = Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                int i = searchDataSource.deleteAll();
+                emitter.onNext(i);
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.BUFFER);
+        roomServer.execute(flowable, response);
     }
 
 

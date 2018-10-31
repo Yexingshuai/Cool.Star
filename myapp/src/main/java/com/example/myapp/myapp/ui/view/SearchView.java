@@ -4,18 +4,18 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -25,15 +25,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.component.study.StudyFragment;
+import com.example.myapp.myapp.component.study.StudyFragmentContract;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
+import com.example.myapp.myapp.room.Injection;
+import com.example.myapp.myapp.room.search.SearchDataSource;
+import com.example.myapp.myapp.room.search.entity.SearchHistory;
 import com.example.myapp.myapp.ui.adapter.OnItemClickListener;
 import com.example.myapp.myapp.ui.adapter.RecyclerAdapter;
 import com.example.myapp.myapp.ui.adapter.RecyclerHolder;
 import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.utils.MyAnimationUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,6 +57,10 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
     private List<KeyWordResponse.DataBean.DatasBean> mList = new ArrayList();
     private RecyclerView mRecyclerView;
     private RecyclerAdapter<KeyWordResponse.DataBean.DatasBean> mAdapter;
+    private TextView tv_clear;
+    private FlowLayout mFlowLayout;
+    private StudyFragmentContract.Presenter mPresenter;
+    private SpinKitView mSpinKit;
 
     public SearchView(Context context) {
         this(context, null);
@@ -82,6 +93,12 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
         mClear = rootView.findViewById(R.id.iv_search_clear);
         mRecyclerView = rootView.findViewById(R.id.recyclerview);
 //        mEditTextSearch.requestFocus();// 请求焦点
+        mFlowLayout = rootView.findViewById(R.id.flowlayout);
+        //清除历史记录
+        tv_clear = rootView.findViewById(R.id.tv_clear);
+        //Spinkit
+        mSpinKit = rootView.findViewById(R.id.spin_kit);
+        tv_clear.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mClear.setOnClickListener(this);
 
@@ -133,7 +150,11 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(
                                 v.getApplicationWindowToken(), 0);
-                        mEditTextListener.editTextMessage(mEditTextSearch.getText().toString().trim());
+                        if (mEditTextListener != null) {
+                            mEditTextListener.editTextMessage(mEditTextSearch.getText().toString().trim());
+                        }
+                        mSpinKit.setVisibility(View.VISIBLE);
+
                     }
                     return true;
                 }
@@ -195,7 +216,6 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
 
 
     public boolean onTurnBack() {
-
         if (this.isShown()) {
             hideView();
             return true;
@@ -212,14 +232,19 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
             case R.id.iv_search_clear:
                 mEditTextSearch.setText("");
                 break;
+            case R.id.tv_clear:
+                mPresenter.deleteAll(Injection.provideLocalSearchDataSource(getContext()));
+                break;
         }
     }
 
     public void setKeyWordData(KeyWordResponse keyWordData) {
+        mSpinKit.setVisibility(View.GONE);
         mList.clear();
         List<KeyWordResponse.DataBean.DatasBean> datas = keyWordData.getData().getDatas();
         if (datas.size() == 0) {
             ToastUtil.showApp("未查到数据！尝试更换关键词！");
+            return;
         }
 
         if (datas.size() > 5) {
@@ -233,6 +258,56 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
         }
 
         mAdapter.notifyDataSetChanged();
+    }
+
+
+    public void setSearchData(final List<SearchHistory> list, StudyFragmentContract.Presenter presenter) {
+        this.mPresenter = presenter;
+        mFlowLayout.removeAllViews();
+        mFlowLayout.setVisibility(View.VISIBLE);
+        Collections.reverse(list);
+        if (list.size() > 3) {
+            fillFlow(list, 3);
+        } else if (list.size() == 0) {
+            tv_clear.setVisibility(View.GONE);
+            mFlowLayout.setVisibility(View.GONE);
+        } else {
+            fillFlow(list, list.size());
+        }
+    }
+
+    private void fillFlow(List<SearchHistory> list, int size) {
+        for (int i = 0; i < size; i++) {
+            TextView textView = new TextView(getContext());
+            final String message = list.get(i).getMessage();
+            textView.setText(message);
+            textView.setPadding(6, 6, 6, 6);
+            textView.setTextColor(Color.BLACK);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            textView.setBackgroundResource(R.drawable.search_bg);
+            textView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mEditTextListener != null) {
+                        mEditTextListener.editTextMessage(message);
+                    }
+                    mSpinKit.setVisibility(View.VISIBLE);
+                    mEditTextSearch.setText(message);
+                    mEditTextSearch.setSelection(message.length());
+                }
+            });
+            mFlowLayout.addView(textView);
+        }
+        tv_clear.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 清除历史成功
+     */
+    public void deletaDatabaseSuccess() {
+        mFlowLayout.removeAllViews();
+        tv_clear.setVisibility(View.GONE);
     }
 
     public interface EditTextListener {
