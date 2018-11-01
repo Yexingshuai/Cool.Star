@@ -299,7 +299,7 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
         mSource.insertOne(roomServer, searchDataSource, new SearchHistory(message), new RoomServer.Response<Long>() {
             @Override
             public void success(Long response) {
-
+                //不知道
             }
 
             @Override
