@@ -17,6 +17,8 @@ import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.util.Calendar;
+
 /**
  * Created by DuanJiaNing on 2017/5/30.
  */
@@ -144,4 +146,17 @@ public class Utils {
     public static long getTimeStamp() {
         return System.currentTimeMillis() / 1000;
     }
+
+    private static long lastClickTime;
+    public static final int MIN_CLICK_DELAY_TIME = 350;
+
+    public synchronized static boolean isFastDoubleClick() {
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        if (currentTime - lastClickTime > 0 && currentTime - lastClickTime < MIN_CLICK_DELAY_TIME) {
+            return true;
+        }
+        lastClickTime = currentTime;
+        return false;
+    }
+
 }

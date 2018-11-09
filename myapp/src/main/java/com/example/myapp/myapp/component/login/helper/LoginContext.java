@@ -70,13 +70,16 @@ public class LoginContext {
      * @param cookies
      */
     public void saveUserCookieInfo(List<String> cookies) {
+        String jsessionid = cookies.get(0);
+        jsessionid = jsessionid.substring(0, jsessionid.indexOf(";") + 1);
         String userName = cookies.get(1);
         userName = userName.substring(0, userName.indexOf(";") + 1);  //loginUserName
         String psd = cookies.get(2);
         psd = psd.substring(0, psd.indexOf(";") + 1);
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(userName + "-");
-        stringBuffer.append(psd);
+        stringBuffer.append(psd + "-");
+        stringBuffer.append(jsessionid);
         String s = stringBuffer.toString();
         PreferencesUtils.putString(MyApp.mContext, AppFlag.USERCOOKIE, s);
     }
@@ -91,8 +94,10 @@ public class LoginContext {
             String[] split = string.split("-");
             String userName = split[0];
             String psd = split[1];
+            String jessionid = split[2];
             cookies.add(userName);
             cookies.add(psd);
+            cookies.add(jessionid);
             return cookies;
         }
         return null;

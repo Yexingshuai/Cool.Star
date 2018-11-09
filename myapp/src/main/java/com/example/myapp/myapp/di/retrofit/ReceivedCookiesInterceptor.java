@@ -28,6 +28,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
         if (userCookieInfo != null) {
             builder.addHeader("Cookie", userCookieInfo.get(0));
             builder.addHeader("Cookie", userCookieInfo.get(1));
+            builder.addHeader("Cookie", userCookieInfo.get(2));
         }
         return chain.proceed(builder.build());
 

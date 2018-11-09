@@ -10,7 +10,7 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_action_bar_status_bar_height_dp"
-        android:background="@color/xxblue"
+        android:background="@color/title_bar"
         android:visibility="visible" />
 
     <android.support.v7.widget.Toolbar
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="center"
-        android:background="@color/xxblue"
+        android:background="@color/title_bar"
         app:title=""
         app:titleTextColor="@color/white">
 

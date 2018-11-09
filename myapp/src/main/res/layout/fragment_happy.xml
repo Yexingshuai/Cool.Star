@@ -11,14 +11,14 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_action_bar_status_bar_height_dp"
-        android:background="@color/xxblue"
+        android:background="@color/title_bar"
         android:visibility="visible" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/xxblue"
+        android:background="@color/title_bar"
         app:title="娱乐"
         app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
 
@@ -26,12 +26,12 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/title_bar"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/red_base"
+        app:tabIndicatorColor="@color/white"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/red_base"
-        app:tabTextColor="@color/text_gray_4" />
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/colorTextDark" />
 
 
     <android.support.v4.view.ViewPager

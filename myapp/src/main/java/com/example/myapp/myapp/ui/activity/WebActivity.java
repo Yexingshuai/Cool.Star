@@ -204,7 +204,7 @@ public class WebActivity extends BaseActivity {
                 dialog.setCancelable(false);
                 dialog.create().setCanceledOnTouchOutside(false);
                 dialog.setTitle("权限申请！");
-                dialog.setMessage("存储位置权限被禁止，该功能无法使用\n如要使用，请前往设置进行授权！");
+                dialog.setMessage("存储权限被禁止，该功能无法使用\n如要使用，请前往设置进行授权！");
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

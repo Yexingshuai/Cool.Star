@@ -31,7 +31,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/xxblue"
+        android:background="@color/title_bar"
         android:clickable="true"
         android:gravity="bottom"
         android:visibility="invisible">

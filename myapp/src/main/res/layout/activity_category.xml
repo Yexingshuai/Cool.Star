@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.myapp.myapp.component.news.category.CategoryActivity">
+
+    <include layout="@layout/app_toolbar" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/diy_gray"
+        android:gravity="center_vertical"
+        android:padding="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="15dp"
+            android:text="我的频道"
+            android:textColor="#8D8D8D" />
+
+        <TextView
+            android:id="@+id/tv_exit"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/category_edit"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="编辑"
+            android:textColor="@color/colorAccent" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_active"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@color/diy_gray"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="点击添加更多栏目"
+        android:textColor="#8D8D8D" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_inactive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

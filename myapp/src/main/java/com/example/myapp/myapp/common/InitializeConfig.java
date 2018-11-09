@@ -1,6 +1,7 @@
 package com.example.myapp.myapp.common;
 
 import android.app.Application;
+import android.os.Environment;
 
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.lzy.okgo.OkGo;
@@ -12,6 +13,9 @@ import com.orhanobut.logger.Logger;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.logging.Level;
 
 import interfaces.heweather.com.interfacesmodule.view.HeConfig;
@@ -116,6 +120,7 @@ public class InitializeConfig {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 }
