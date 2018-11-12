@@ -117,8 +117,9 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 //        });
         ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.put("Cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
+        httpHeaders.put("cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
         httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "");
+        httpHeaders.put("cookie", userCookieInfo.get(2) != null ? userCookieInfo.get(2) : "");
         OkGo.post("http://www.wanandroid.com/lg/collect/" + id + "/json")
                 .tag(this)
                 .cacheMode(CacheMode.DEFAULT)
@@ -155,8 +156,9 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
     public void unCollect(int id) {
         ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.put("Cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
+        httpHeaders.put("cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
         httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "");
+        httpHeaders.put("cookie", userCookieInfo.get(2) != null ? userCookieInfo.get(2) : "");
         OkGo.post("http://www.wanandroid.com/lg/uncollect_originId/" + id + "/json")
                 .tag(this)
                 .cacheMode(CacheMode.DEFAULT)

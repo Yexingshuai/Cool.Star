@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -49,6 +50,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
     private List<String> mTitleList = new ArrayList<>();
     private ImageView mAddBtn;
     private FragmentAdapter mFragmentAdapter;
+    private CommonNavigator mCommonNavigator;
 
     @Override
     protected boolean isNeedToBeSubscriber() {
@@ -60,6 +62,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
         return R.layout.fragment_news;
     }
 
+    @NonNull
     public static NewsFragment newInstance() {
         return new NewsFragment();
     }
@@ -77,15 +80,17 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
     public void initData() {
         //先从数据库查询数据，没有则从网络获取
         mPresenter.queryDatabase();
-    }
-
-    private void initIndicator() {
         mViewPager.setOffscreenPageLimit(3);
         mFragmentAdapter = new FragmentAdapter(getChildFragmentManager(), mNewsFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
-        CommonNavigator commonNavigator = new CommonNavigator(getActivity());
-        commonNavigator.setScrollPivotX(0.65f);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+        ViewPagerHelper.bind(magicIndicator, mViewPager);
+
+    }
+
+    private void initIndicator() {
+        mCommonNavigator = new CommonNavigator(getActivity());
+        mCommonNavigator.setScrollPivotX(0.65f);
+        mCommonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
                 return mTitleList.size();
@@ -95,8 +100,8 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorFlipPagerTitleView(context);
                 simplePagerTitleView.setText(mTitleList.get(index));
-                simplePagerTitleView.setNormalColor(Color.WHITE);
-                simplePagerTitleView.setSelectedColor(Color.parseColor("#4CAF50"));
+                simplePagerTitleView.setNormalColor(Color.parseColor("#c4d9d9"));
+                simplePagerTitleView.setSelectedColor(Color.parseColor("#ffffff"));
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -115,12 +120,11 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
                 indicator.setRoundRadius(UIUtil.dip2px(context, 3));
                 indicator.setStartInterpolator(new AccelerateInterpolator());
                 indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
-                indicator.setColors(Color.parseColor("#00c853"));
+                indicator.setColors(Color.parseColor("#ffffff"));
                 return indicator;
             }
         });
-        magicIndicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(magicIndicator, mViewPager);
+        magicIndicator.setNavigator(mCommonNavigator);
     }
 
 
@@ -146,6 +150,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
             mNewsFragmentList.add(newsDetailFragment);
         }
         initIndicator();
+        mFragmentAdapter.notifyDataSetChanged();
         //存储到数据库当中
         mPresenter.saveToDatabase(categoryList);
     }
@@ -175,13 +180,13 @@ public class NewsFragment extends BaseFragment implements NewsContract.View, Vie
                 new NewsDetailPresenter(newsDetailFragment, new NewsDetailRepository());
                 mNewsFragmentList.add(newsDetailFragment);
             }
-            if (mFragmentAdapter != null) {
-                mFragmentAdapter.notifyDataSetChanged();
-            }
-//            else {
-            initIndicator();
-//            }
+            mFragmentAdapter.notifyDataSetChanged();
 
+            if (mCommonNavigator != null) {
+                mCommonNavigator.notifyDataSetChanged();
+            } else {
+                initIndicator();
+            }
 
         }
     }

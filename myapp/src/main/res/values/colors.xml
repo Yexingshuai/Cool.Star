@@ -49,6 +49,7 @@
 
     <color name="colorTextDark">#424242</color>
     <color name="colorTextDark2nd">#757575</color>
+    <color name="colorTextDark2">#c4d9d9</color>
 
     <!--weather-->
     <color name="weather">#051433</color>

@@ -88,7 +88,6 @@ public class NewsFragmentPresenter implements NewsContract.Presenter {
             public void success(List<Category> response) {
                 //去除未添加的
                 if (response.size() > 0) {
-                    NewsHelper.getInstance().setDatabaseListCategoryList(response);
                     Iterator<Category> iterator = response.iterator();
                     while (iterator.hasNext()) {
                         Category category = iterator.next();
@@ -106,8 +105,8 @@ public class NewsFragmentPresenter implements NewsContract.Presenter {
                             }
                         }
                     });
-                    mView.setDatabaseData(response);
                 }
+                mView.setDatabaseData(response);
 
             }
 
