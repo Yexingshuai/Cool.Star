@@ -8,10 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <!--防白屏-->
-        <!--<item name="android:windowBackground">@color/red_base</item>-->
-        <!--<item name="android:windowContentTransitions">true</item>-->
-
+        <!--跨进程解决白屏-->
 
     </style>
 
@@ -22,7 +19,6 @@
 
 
     <style name="TextStyle111">
-
         <item name="android:textColor">@color/white</item>
         <item name="android:padding">3dp</item>
         <item name="android:layout_width">wrap_content</item>
@@ -59,5 +55,15 @@
     <style name="TabLayoutTextSize">
         <item name="android:textSize">15sp</item>
     </style>
+
+    <!--WebView-->
+    <style name="WebTheme" parent="Theme.AppCompat.Light">
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
 
 </resources>

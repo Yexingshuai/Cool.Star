@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
 
     private MyViewPager mViewPager;
-    public TabLayout mTabLayout;
+    private TabLayout mTabLayout;
     private MainPresenter mPresenter;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;

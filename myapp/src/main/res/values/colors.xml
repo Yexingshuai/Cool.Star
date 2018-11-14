@@ -31,8 +31,6 @@
     <color name="title_bar">#00c3a6</color>
 
 
-
-
     <color name="theme_red_base">#FB5B81</color>
     <color name="theme_blue">#0077D9</color>
     <color name="theme_blue_light">#03A9F4</color>
@@ -42,6 +40,8 @@
     <color name="theme_green">#4CAF50</color>
     <color name="theme_red">#FF5252</color>
     <color name="login_bg">#000028</color>
+    <color name="orange">#FF4500</color>
+    <color name="gold">#FFD700</color>
 
 
     <color name="lift_item_head">#66cccccc</color>
