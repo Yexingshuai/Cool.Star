@@ -193,7 +193,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
             @Override
             public void onBoomWillShow() {
-                VibratorUtil.Vibrate(getActivity(), 70);   //震动70ms
+                VibratorUtil.Vibrate(getActivity(), 50);   //震动70ms
             }
 
             @Override
@@ -441,29 +441,19 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             //监听y轴,或者x轴上的偏移量
             sumY += dy;
-            int bgColor = 0X553190E8;
+            int bgColor = 0;
             if (sumY <= 0) {
                 //顶部title显示的是透明颜色
-                bgColor = Color.TRANSPARENT;   // 0X553190E8
                 llTitleContainer.setVisibility(View.INVISIBLE);
             } else if (sumY > 350) {
-                //顶部显示蓝色
-                //终点颜色
-                if (color == -1) {
-//                    bgColor = 0XFF3190E8;
-                    bgColor = 0X00C3A6;
-                } else {
-                    bgColor = color;
-                }
-
+                llTitleContainer.setBackgroundResource(R.color.title_bar);
                 llTitleContainer.setVisibility(View.VISIBLE);
             } else {
                 //滚动过程中修改顶部的颜色值
-                bgColor = (int) argbEvaluator.evaluate(sumY / duration, Color.TRANSPARENT, bgColor);
+                bgColor = (int) argbEvaluator.evaluate(sumY / duration, Color.TRANSPARENT, Color.parseColor("#00c3a6"));
                 llTitleContainer.setVisibility(View.VISIBLE);
+                llTitleContainer.setBackgroundColor(bgColor);
             }
-            llTitleContainer.setBackgroundColor(bgColor);
-
 
             //控制底部导航栏隐藏或展示
             if (dy > 30) {//up -> hide
@@ -494,7 +484,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
             if (newState == RecyclerView.SCROLL_STATE_IDLE && sumY > 300) {
                 //执行引导动画
-                GuidanceHelper.guide(getContext(), mHeadImg, "mHeadImg", "点击我展开侧拉菜单哦！\n 手指侧拉也可以的。");
+                GuidanceHelper.guide(getContext(), mHeadImg, "mHeadImg", "点击我展开侧拉菜单哦！\n 手指侧滑也可以的。");
             }
             super.onScrollStateChanged(recyclerView, newState);
 

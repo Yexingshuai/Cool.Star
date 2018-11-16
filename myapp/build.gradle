@@ -95,6 +95,9 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
     //RxJava支持
     implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
+    //RatingBar
+    implementation 'com.github.FlyingPumba:SimpleRatingBar:v0.1.5'
 
 
 }

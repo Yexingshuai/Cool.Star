@@ -5,7 +5,7 @@
     android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/title_bar"
     android:gravity="center"
     tools:context="com.example.myapp.myapp.ui.activity.SplashActivity">
 

@@ -7,7 +7,7 @@ public class Rating {
 
     private int max;
 
-    private double average;
+    private float average;
 
     private String stars;
 
@@ -21,11 +21,11 @@ public class Rating {
         this.max = max;
     }
 
-    public double getAverage() {
+    public float getAverage() {
         return average;
     }
 
-    public void setAverage(double average) {
+    public void setAverage(float average) {
         this.average = average;
     }
 

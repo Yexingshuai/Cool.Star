@@ -14,10 +14,12 @@
         android:background="@color/title_bar"
         android:visibility="visible" />
 
+    <!--?attr/actionBarSize-->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="42dp"
         android:background="@color/title_bar"
         app:title="娱乐"
         app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
@@ -29,9 +31,11 @@
         android:background="@color/title_bar"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="3.5dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/colorTextDark" />
+        app:tabTextAppearance="@style/TabLayoutTextSize"
+        app:tabTextColor="@color/colorTextDark2" />
 
 
     <android.support.v4.view.ViewPager

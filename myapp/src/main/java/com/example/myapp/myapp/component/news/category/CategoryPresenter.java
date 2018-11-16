@@ -35,7 +35,7 @@ public class CategoryPresenter implements CategoryContract.Presenter {
 
     @Override
     public void stop() {
-
+        roomServer.dispose();
     }
 
     public CategoryPresenter(CategoryContract.View view) {

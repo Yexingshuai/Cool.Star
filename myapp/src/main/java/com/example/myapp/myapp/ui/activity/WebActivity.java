@@ -263,6 +263,7 @@ public class WebActivity extends BaseActivity {
         UMShareAPI.get(this).release();  //防止内存泄露
         UMengShareHelper.release();
         super.onDestroy();
+//        System.exit(0);
     }
 
 

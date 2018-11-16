@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 public class NewsDetailFragment extends BaseFragment implements NewsDetailContract.View {
-    public static final String CID = "cid";
+    public static final String CID = "CID";
     private int mCid;
     private RecyclerView mRecyclerView;
     private LoadingStatusLayout mLoadingStatusLayout;

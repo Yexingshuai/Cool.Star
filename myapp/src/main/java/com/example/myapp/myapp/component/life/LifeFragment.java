@@ -2,6 +2,7 @@ package com.example.myapp.myapp.component.life;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,10 +34,8 @@ import java.util.List;
 public class LifeFragment extends BaseFragment implements LifeFragmentContract.View, View.OnClickListener {
 
 
-    private ViewPager vp_module;
-    private RecyclerView mRecyclerView;
     private LifeFragmentContract.Presenter mPresenter;
-    private int pageSize = 20;
+    private final int pageSize = 40;
     private int pageNum = 1;
     private List<JokeResponse.ResultBean.DataBean> jokeList = new ArrayList<>();
     private EditTextDialog mDialog = new EditTextDialog();
@@ -100,11 +99,14 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
 
             @Override
             public void onRightCardExit(Object dataObject) {
+
             }
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
-
+                if (itemsInAdapter == 1) {
+                    mPresenter.requestJoke(++pageNum, pageSize);
+                }
             }
 
             @Override
@@ -121,6 +123,7 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
 
     @Override
     public void setJokeInfo(JokeResponse response) {
+        jokeList.clear();
         jokeList.addAll(response.getResult().getData());
         swipeFlingAdater.notifyDataSetChanged();
     }
