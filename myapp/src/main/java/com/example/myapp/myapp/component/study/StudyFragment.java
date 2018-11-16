@@ -484,7 +484,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
             if (newState == RecyclerView.SCROLL_STATE_IDLE && sumY > 300) {
                 //执行引导动画
-                GuidanceHelper.guide(getContext(), mHeadImg, "mHeadImg", "点击我展开侧拉菜单哦！\n 手指侧拉也可以的。");
+                GuidanceHelper.guide(getContext(), mHeadImg, "mHeadImg", "点击我展开侧拉菜单哦！\n 手指侧滑也可以的。");
             }
             super.onScrollStateChanged(recyclerView, newState);
 
