@@ -2,6 +2,7 @@ package com.example.myapp.myapp.data.http;
 
 import com.example.myapp.myapp.di.retrofit.RetrofitServer;
 import com.example.myapp.myapp.utils.LogUtil;
+import com.example.myapp.myapp.utils.ToastUtil;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -49,7 +50,7 @@ public class HttpContext {
      * @param observable {@link Observable}
      * @param response   {@link Response}
      */
-    public <T> void execute(Observable<T> observable, final Response<T> response) {
+    public <T> void execute(final Observable<T> observable, final Response<T> response) {
 
         mSubscription = observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

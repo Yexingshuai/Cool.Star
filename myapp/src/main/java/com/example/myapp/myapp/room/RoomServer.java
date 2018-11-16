@@ -2,7 +2,10 @@ package com.example.myapp.myapp.room;
 
 import com.example.myapp.myapp.utils.ToastUtil;
 
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -20,6 +23,7 @@ public class RoomServer {
     public <T> void execute(Flowable<T> flowable, final Response<T> response) {
         mDisposable = flowable
                 .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<T>() {
                     @Override
@@ -34,6 +38,20 @@ public class RoomServer {
                 });
 
     }
+
+    public <T> Flowable<T> makeFlowable(final OnSubscribeListener<T> onSubscribe) {
+        Flowable<T> flowable = Flowable.create(new FlowableOnSubscribe<T>() {
+            @Override
+            public void subscribe(FlowableEmitter<T> emitter) throws Exception {
+
+                emitter.onNext(onSubscribe.onSubscribe());
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.BUFFER);
+
+        return flowable;
+    }
+
 
     public void dispose() {
         if (mDisposable != null) {
@@ -52,5 +70,11 @@ public class RoomServer {
             ToastUtil.showApp(error);
         }
     }
+
+    public interface OnSubscribeListener<T> {
+
+        T onSubscribe();
+    }
+
 
 }

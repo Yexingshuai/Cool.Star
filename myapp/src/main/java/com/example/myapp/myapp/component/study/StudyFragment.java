@@ -21,6 +21,7 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.component.login.helper.LoginContext;
+import com.example.myapp.myapp.component.news.category.CategoryActivity;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
@@ -33,9 +34,12 @@ import com.example.myapp.myapp.ui.helper.GuidanceHelper;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.example.myapp.myapp.ui.view.SearchView;
 import com.example.myapp.myapp.utils.ToastUtil;
+import com.example.myapp.myapp.utils.VibratorUtil;
+import com.nightonke.boommenu.BoomButtons.BoomButton;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.OnBoomListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -166,6 +170,37 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
         //BoomMenu
         BoomMenuButton bmb = getView(R.id.boom_menu);
+        bmb.setOnBoomListener(new OnBoomListener() {
+            @Override
+            public void onClicked(int index, BoomButton boomButton) {
+
+            }
+
+            @Override
+            public void onBackgroundClick() {
+
+            }
+
+            @Override
+            public void onBoomWillHide() {
+
+            }
+
+            @Override
+            public void onBoomDidHide() {
+
+            }
+
+            @Override
+            public void onBoomWillShow() {
+                VibratorUtil.Vibrate(getActivity(), 70);   //震动70ms
+            }
+
+            @Override
+            public void onBoomDidShow() {
+
+            }
+        });
 
         for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
@@ -194,7 +229,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         mSearchView.setEditTextListener(new SearchView.EditTextListener() {
             @Override
             public void editTextMessage(String message) {
-//                ToastUtil.showApp(message);
                 mPresenter.searchKeyWord(message);
             }
         });
@@ -416,7 +450,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
                 //顶部显示蓝色
                 //终点颜色
                 if (color == -1) {
-                    bgColor = 0XFF3190E8;
+//                    bgColor = 0XFF3190E8;
+                    bgColor = 0X00C3A6;
                 } else {
                     bgColor = color;
                 }

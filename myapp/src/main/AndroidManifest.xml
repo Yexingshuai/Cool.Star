@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 读写SD卡权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 指纹 -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,11 +17,13 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--location-->
-    <!--访问网络定位-->
+    <!-- location -->
+    <!-- 访问网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--访问GPS定位-->
+    <!-- 访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".myapp.base.MyApp"
@@ -34,93 +37,87 @@
             android:name=".myapp.ui.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/splashTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:windowSoftInputMode="adjustResize"
             android:name=".myapp.ui.activity.MainActivity"
-            android:screenOrientation="portrait" />
-
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".myapp.ui.activity.WebActivity"
             android:label="加载中..." />
         <activity android:name=".myapp.ui.activity.ShowBannerActivity" />
-
-
         <activity android:name=".myapp.component.movie.detail.FilmDetailActivity" />
         <activity
             android:name=".myapp.ui.activity.HomeActivity"
             android:label="主页" />
-        <activity android:name=".myapp.ui.activity.AboutActivity"></activity>
-
-
+        <activity android:name=".myapp.ui.activity.AboutActivity" />
         <activity
             android:name=".myapp.ui.activity.TestAboutActivity"
             android:theme="@style/TransparentTheme" />
-
         <activity android:name=".myapp.ui.activity.TestMenuActivity" />
-
         <activity
             android:name=".myapp.component.login.LoginActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
         <activity
             android:name=".myapp.component.favorite.MyFavoriteActivity"
             android:label="我喜欢的" />
 
-        <!--天气-->
+        <!-- 天气 -->
         <activity
             android:name=".myapp.component.weather.WeatherActivity"
             android:label="" />
 
-        <!--设置-->
+        <!-- 设置 -->
         <activity
             android:name=".myapp.ui.activity.SettingActivity"
             android:label="设置" />
-
         <activity
             android:name=".myapp.ui.activity.VocalConcertTextActivity"
             android:screenOrientation="landscape" />
 
+        <activity
+            android:name=".myapp.component.news.category.CategoryActivity"
+            android:label="分类筛选"
+            android:screenOrientation="portrait"></activity>
 
-        <!--Share Start-->
+        <!-- Share Start -->
 
-        <!--sina-->
+
+        <!-- sina -->
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!--weChat-->
+        <!-- weChat -->
         <activity
             android:name=".myapp.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--qq-->
+        <!-- qq -->
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -140,7 +137,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--Share End-->
+        <!-- Share End -->
+
     </application>
 
 </manifest>

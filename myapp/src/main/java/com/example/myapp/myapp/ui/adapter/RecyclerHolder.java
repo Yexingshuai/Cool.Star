@@ -77,6 +77,17 @@ public class RecyclerHolder extends RecyclerView.ViewHolder {
         textView.setText(text);
     }
 
+    public void showView(int viewId,boolean isShow) {
+        View view = getViewById(viewId);
+        if (isShow) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+
     public void textWithVisbility(int textId, boolean isVisible) {
         TextView textView = (TextView) getViewById(textId);
         textView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
