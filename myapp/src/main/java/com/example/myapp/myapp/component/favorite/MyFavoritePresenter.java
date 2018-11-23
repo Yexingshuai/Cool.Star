@@ -62,8 +62,10 @@ public class MyFavoritePresenter implements MyFavoriteContract.Presenter {
     public void delCollectArtist(int id, String originId) {
         ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.put("Cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
-        httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "");
+        String name = userCookieInfo.get(0);
+        String token = userCookieInfo.get(1);
+        String cookie = name + token;
+        httpHeaders.put("Cookie", cookie);
         OkGo.post("http://www.wanandroid.com/lg/uncollect/" + id + "/json")
                 .tag(this)
                 .cacheMode(CacheMode.DEFAULT)
@@ -92,6 +94,7 @@ public class MyFavoritePresenter implements MyFavoriteContract.Presenter {
 
     /**
      * 加载更多我喜欢的
+     *
      * @param pageNum
      */
     @Override

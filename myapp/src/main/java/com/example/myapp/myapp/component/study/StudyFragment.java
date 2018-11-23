@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -365,7 +366,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void unCollectSuccess() {
-
+//        ToastUtil.showApp("取消收藏成功");
     }
 
     /**

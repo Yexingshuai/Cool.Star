@@ -6,6 +6,9 @@ package com.example.myapp.myapp.common;
 
 public final class AppFlag {
 
+
+    public static boolean isFromNews;
+
     /**
      * 存储用户信息的key
      */
@@ -27,7 +30,11 @@ public final class AppFlag {
      */
     public static final String MOB_PWD = "9c5d0a422b77c9d64090c904f6646e4d";
 
-    public static boolean isFromNews;
+    //是否开启加载网络图片
+    public static final String ISLOADIMAGE = "isloadimage";
+
+    //是否接受推送
+    public static final String ISRECEIVEPUSH = "isreceivepush";
 
 
 }

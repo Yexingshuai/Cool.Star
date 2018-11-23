@@ -1,23 +1,19 @@
 package com.example.myapp.myapp.common;
 
 import android.app.Application;
-import android.os.Environment;
 
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.logging.Level;
 
+import cn.jpush.android.api.JPushInterface;
 import interfaces.heweather.com.interfacesmodule.view.HeConfig;
 
 
@@ -52,6 +48,10 @@ public class InitializeConfig {
         PlatformConfig.setWeixin("wxdda8441a2fcd9957", "9dcf5851d8d807bbcf92f7dd56856eae");
         PlatformConfig.setSinaWeibo("3072140610", "faa0b4cf935fa6f3ee935b531190106c", "http://sns.whalecloud.com");
         PlatformConfig.setQQZone("1107157177", "ri5rEKt2ZU3zUaBI");
+
+        //推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(appContext);
 
 
         //初始化框架
