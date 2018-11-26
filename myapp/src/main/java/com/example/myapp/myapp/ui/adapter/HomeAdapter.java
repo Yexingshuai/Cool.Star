@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
@@ -59,6 +60,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
      * 记录banner选中的索引
      */
     private int bannerPosition = 0;
+
 
 
     public HomeAdapter(Context mCtx) {
@@ -201,7 +203,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 //                if (i == 0) {
 //                    imageView.setBackgroundResource(R.drawable.guide_point_red);
 //                } else {
-                    imageView.setBackgroundResource(R.drawable.guide_point_normal);
+                imageView.setBackgroundResource(R.drawable.guide_point_normal);
 //                }
                 ((HeadHolder) holder).ll_guide_points.addView(imageView);
             }
@@ -266,9 +268,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
         public HeadHolder(View itemView) {
             super(itemView);
             vp = itemView.findViewById(R.id.vp);
-
             ll_guide_points = itemView.findViewById(R.id.ll_guide_points);
             iv_guide_whitepoint = itemView.findViewById(R.id.iv_guide_whitepoint);
+
             Message message = new Message();
             message.what = 1;
             message.obj = vp;
@@ -276,8 +278,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 EventBus.getDefault().post(message);
                 isDispatch = !isDispatch;
             }
-
-
         }
     }
 

@@ -36,6 +36,14 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
+            <ImageView
+                android:id="@+id/iv_download"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/download" />
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

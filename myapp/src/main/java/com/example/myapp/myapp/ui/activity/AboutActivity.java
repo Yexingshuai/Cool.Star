@@ -1,21 +1,38 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.helper.UiHelper;
+import com.example.myapp.myapp.utils.ToastUtil;
+import com.example.myapp.myapp.utils.Utils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -29,6 +46,7 @@ public class AboutActivity extends BaseActivity {
     private String imgUrl = "http://guolin.tech/api/bing_pic";
     private Button mWebHome;
     private Button mFeedBack;
+    private ImageView iv_download;
 
     @Override
     public int inflateContentView() {
@@ -43,6 +61,8 @@ public class AboutActivity extends BaseActivity {
         mToolBar = getView(R.id.toolbar);
         mWebHome = getView(R.id.btn_web_home);
         mFeedBack = getView(R.id.btn_feedback);
+        iv_download = getView(R.id.iv_download);
+        setCommonClickListener(iv_download);
         setCommonClickListener(mWebHome);
         setCommonClickListener(mFeedBack);
         setSupportActionBar(mToolBar);
@@ -64,9 +84,18 @@ public class AboutActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        if (!AboutActivity.this.isFinishing()) {
-                        GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
-//                        }
+//                        GlideContext.loadCommon(AboutActivity.this, s, mHeadView);
+                        Glide.with(AboutActivity.this).load(s).diskCacheStrategy(DiskCacheStrategy.RESULT).listener(new RequestListener<String, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                return false;
+                            }
+                        }).into(mHeadView);
                     }
 
                     @Override
@@ -76,6 +105,36 @@ public class AboutActivity extends BaseActivity {
                     }
                 });
 
+    }
+
+    private void saveToGallery(Bitmap bmp) {
+        File appDir = new File(Environment.getExternalStorageDirectory(), "CoolStar");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            ToastUtil.showApp("图片保存在" + appDir.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(this.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + appDir.getAbsolutePath())));
     }
 
     @Override
@@ -93,6 +152,9 @@ public class AboutActivity extends BaseActivity {
                 break;
             case R.id.btn_feedback:
                 feedBack();
+                break;
+            case R.id.iv_download:
+                saveToGallery(Utils.convertViewToBitmap(mHeadView));
                 break;
             default:
                 break;
@@ -112,4 +174,6 @@ public class AboutActivity extends BaseActivity {
         super.onDestroy();
         OkGo.getInstance().cancelAll();
     }
+
+
 }
