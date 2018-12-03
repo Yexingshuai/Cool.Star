@@ -1,8 +1,6 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,8 +12,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,20 +22,12 @@ import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.common.AppFlag;
 import com.example.myapp.myapp.ui.helper.GuidanceHelper;
 import com.example.myapp.myapp.ui.helper.UMengShareHelper;
+import com.example.myapp.myapp.utils.PermissonUtil;
 import com.example.myapp.myapp.utils.ToastUtil;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.shareboard.SnsPlatform;
-
-import java.util.ArrayList;
 
 /**
  * Created by yexing on 2018/3/30.
@@ -85,7 +73,7 @@ public class WebActivity extends BaseActivity {
                     .listener(new OnBMClickListener() {
                         @Override
                         public void onBoomButtonClick(int index) {
-                            checkVersion(index);
+                            checkPermisson(index);
                         }
                     })
             );
@@ -186,10 +174,11 @@ public class WebActivity extends BaseActivity {
      *
      * @return
      */
-    private void checkVersion(final int index) {
-        Dexter.withActivity(this).withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).withListener(new PermissionListener() {
+    private void checkPermisson(final int index) {
+
+        PermissonUtil.requestPermisson(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储空间", new PermissonUtil.PermissonListener() {
             @Override
-            public void onPermissionGranted(PermissionGrantedResponse response) {
+            public void onPermissonGranted() {
                 UMengShareHelper.getInstance().initialize(WebActivity.this).shareWithWeb(index, title, webUrl).setShareCallbackListener(new UMengShareHelper.ShareCallbackListener() {
                     @Override
                     public void shareError(String errorMsg) {
@@ -199,44 +188,11 @@ public class WebActivity extends BaseActivity {
             }
 
             @Override
-            public void onPermissionDenied(PermissionDeniedResponse response) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(WebActivity.this);
-                dialog.setCancelable(false);
-                dialog.create().setCanceledOnTouchOutside(false);
-                dialog.setTitle("权限申请！");
-                dialog.setMessage("存储权限被禁止，该功能无法使用\n如要使用，请前往设置进行授权！");
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                dialog.show();
+            public void onPermissonDenied() {
 
             }
+        });
 
-            @Override
-            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, final PermissionToken token) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(WebActivity.this);
-                dialog.setCancelable(false);
-                dialog.create().setCanceledOnTouchOutside(false);
-                dialog.setTitle("权限申请！");
-                dialog.setMessage("存储权限被禁止，我们需要这个权限，请允许它！");
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        token.cancelPermissionRequest();
-                    }
-                });
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        token.continuePermissionRequest();
-                    }
-                });
-                dialog.show();
-            }
-        }).check();
     }
 
     @Override

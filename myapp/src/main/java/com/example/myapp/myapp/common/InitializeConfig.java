@@ -50,7 +50,7 @@ public class InitializeConfig {
         PlatformConfig.setQQZone("1107157177", "ri5rEKt2ZU3zUaBI");
 
         //推送
-        JPushInterface.setDebugMode(true);
+        JPushInterface.setDebugMode(isDebug);
         JPushInterface.init(appContext);
 
 

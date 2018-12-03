@@ -3,7 +3,7 @@ package com.example.myapp.myapp.data.bean;
 import java.util.List;
 
 /**
- * Created by daixiankade on 2018/3/29.
+ * Created by yexing on 2018/3/29.
  */
 
 public class BannerBean {

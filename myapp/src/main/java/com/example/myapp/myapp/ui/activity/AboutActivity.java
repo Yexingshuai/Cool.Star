@@ -1,5 +1,6 @@
 package com.example.myapp.myapp.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -11,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -20,8 +20,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
-import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.helper.UiHelper;
+import com.example.myapp.myapp.utils.PermissonUtil;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
 import com.lzy.okgo.OkGo;
@@ -32,7 +32,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -154,7 +153,17 @@ public class AboutActivity extends BaseActivity {
                 feedBack();
                 break;
             case R.id.iv_download:
-                saveToGallery(Utils.convertViewToBitmap(mHeadView));
+                PermissonUtil.requestPermisson(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储空间", new PermissonUtil.PermissonListener() {
+                    @Override
+                    public void onPermissonGranted() {
+                        saveToGallery(Utils.convertViewToBitmap(mHeadView));
+                    }
+
+                    @Override
+                    public void onPermissonDenied() {
+
+                    }
+                });
                 break;
             default:
                 break;

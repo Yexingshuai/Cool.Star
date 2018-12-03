@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 
 /**
- * Created by daixiankade on 2018/4/9.
+ * Created by yexing on 2018/4/9.
  */
 
 public class FingerUtils {

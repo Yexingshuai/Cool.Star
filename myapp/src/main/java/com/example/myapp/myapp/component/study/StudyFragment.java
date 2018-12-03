@@ -156,7 +156,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         BaseActivity activity = (BaseActivity) context;
         activity.addOnTurnBackListener(this);
         super.onAttach(context);
-        mPresenter.start();
     }
 
     @Override
@@ -280,6 +279,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter.start();
         sumY = 0;
     }
 

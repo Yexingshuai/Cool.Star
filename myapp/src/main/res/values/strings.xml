@@ -84,5 +84,8 @@
     <string name="weather">天气</string>
     <string name="exitApp">再按一次退出程序哦</string>
 
+    <string name="permisson">权限被禁止，该功能无法使用\n如要使用，请前往设置进行授权！</string>
+    <string name="permissonTitle">权限申请</string>
+
 
 </resources>
