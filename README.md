@@ -8,6 +8,8 @@
 ![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/4.png)
 ![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/5.png)
 ![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/6.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/7.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/8.png)
 ### 简介
 - 此项目为本人练手随意写的app，没有很好的架构和编码，一起努力学习吧。项目简单涉及到WebView+EventBus+属性动画，最重要的是锻炼编码能力和架构,项目还会继续更新。
 ---
