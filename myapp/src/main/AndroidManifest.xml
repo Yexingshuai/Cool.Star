@@ -83,7 +83,43 @@
         <activity
             android:name=".myapp.component.news.category.CategoryActivity"
             android:label="分类筛选"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
+
+        <!--Push Receiver-->
+        <!-- User defined. 用户自定义的广播接收器-->
+        <!--<receiver-->
+            <!--android:name=".myapp.receiver.MyReceiver"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="false">-->
+            <!--<intent-filter>-->
+                <!--&lt;!&ndash;Required 用户注册SDK的intent&ndash;&gt;-->
+                <!--<action android:name="cn.jpush.android.intent.REGISTRATION" />-->
+                <!--&lt;!&ndash;Required 用户接收SDK消息的intent&ndash;&gt;-->
+                <!--<action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />-->
+                <!--&lt;!&ndash;Required 用户接收SDK通知栏信息的intent&ndash;&gt;-->
+                <!--<action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />-->
+                <!--&lt;!&ndash;Required 用户打开自定义通知栏的intent&ndash;&gt;-->
+                <!--<action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />-->
+                <!--&lt;!&ndash; 接收网络变化 连接/断开 since 1.6.3 &ndash;&gt;-->
+                <!--<action android:name="cn.jpush.android.intent.CONNECTION" />-->
+                <!--<category android:name="com.csii.tiannongshang.mobilebank" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <receiver
+            android:name=".myapp.receiver.MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <category android:name="com.yx.cool" />
+            </intent-filter>
+        </receiver>
 
         <!-- Share Start -->
 

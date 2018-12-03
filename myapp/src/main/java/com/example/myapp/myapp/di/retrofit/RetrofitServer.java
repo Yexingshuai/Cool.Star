@@ -2,17 +2,12 @@ package com.example.myapp.myapp.di.retrofit;
 
 import android.util.Log;
 
-import com.example.myapp.myapp.base.MyApp;
 import com.example.myapp.myapp.data.api.AppUrl;
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.example.myapp.myapp.utils.LogUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -27,8 +22,6 @@ import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import com.example.myapp.myapp.utils.LogUtil;
 
 /**
  * Created by yexing on 2018/4/13.
@@ -111,10 +104,10 @@ public class RetrofitServer {
 //                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApp.mContext));
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()      //注册应用拦截器
-                .addInterceptor(new AddCookiesInterceptor())        //添加Cookie
                 .addInterceptor(new ReceivedCookiesInterceptor())
-//                .cookieJar(cookieJar)          //还不知道怎么用
+                .addInterceptor(new AddCookiesInterceptor())        //添加Cookie
                 .addInterceptor(new LoggingInterceptors())
+//                .cookieJar(cookieJar)          //还不知道怎么用
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS);
@@ -178,7 +171,7 @@ public class RetrofitServer {
             sb.append(chain.connection());
             sb.append("\nheaders=");
             sb.append(request.headers());
-            sb.append("tag ");
+            sb.append("\ntag ");
             sb.append(request.tag());
 
 
@@ -187,34 +180,38 @@ public class RetrofitServer {
 
             Response response = chain.proceed(request);             // Response
             BufferedSource source = response.body().source();
-            source.request(Long.MAX_VALUE);
-            //获得返回的数据
-            Buffer buffer1 = source.buffer();
-            //使用前clone()下，避免直接消耗
-            Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
+            if (source != null) {
+                source.request(Long.MAX_VALUE);
+                //获得返回的数据
+                Buffer buffer1 = source.buffer();
+                //使用前clone()下，避免直接消耗
+                Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
+            }
+
             Log.e("Retrofit-url--", request.url() + "");
 
             if (requestBody != null) {
-                sb.append("\nRequestBody");
-                sb.append("\n\tcontentLength=");
-                sb.append(requestBody.contentLength());
-                sb.append("\n\tcontentType=");
-                sb.append(requestBody.contentType().toString());
+//                sb.append("\nRequestBody");
+//                sb.append("\n\tcontentLength=");
+//                sb.append(requestBody.contentLength());
+//                sb.append("\n\tcontentType=");
+//                sb.append(requestBody.contentType().toString());
+//                try {
+//                    final Request copy = request.newBuilder().build();
+//                    final Buffer buffer = new Buffer();
+//                    copy.body().writeTo(buffer);
+//                    Charset charset = UTF8;
+//                    MediaType contentType = copy.body().contentType();
+//                    if (contentType != null) {
+//                        charset = contentType.charset(UTF8);
+//                    }
+//                    sb.append("\nBody details:--->>>\n");
+//                    sb.append(buffer.readString(charset));
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+            } else {
 
-                try {
-                    final Request copy = request.newBuilder().build();
-                    final Buffer buffer = new Buffer();
-                    copy.body().writeTo(buffer);
-                    Charset charset = UTF8;
-                    MediaType contentType = copy.body().contentType();
-                    if (contentType != null) {
-                        charset = contentType.charset(UTF8);
-                    }
-                    sb.append("\nBody details:--->>>\n");
-                    sb.append(buffer.readString(charset));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
 
             LogUtil.i(TAG_LOG, sb.toString());
@@ -223,7 +220,6 @@ public class RetrofitServer {
             Response
              */
 //            Response response = chain.proceed(request);
-            List<String> cookies = response.headers("Set-Cookie");
 
 
             long t2 = System.nanoTime();

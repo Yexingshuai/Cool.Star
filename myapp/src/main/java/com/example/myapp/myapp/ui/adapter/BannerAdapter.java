@@ -62,7 +62,7 @@ public class BannerAdapter extends PagerAdapter {
             }
         });
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Glide.with(mCtx).load(imagePath).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade(500).into(imageView);
+        Glide.with(mCtx).load(imagePath).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade(500).into(imageView);  //这个crossFade 是渐变的动画效果
 //        Glide.with(mCtx).load(imagePath).into(imageView);
         //圆角
 //        Glide.with(mCtx).load(imagePath).transform(new GlideRoundTransform(mCtx,2)).diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);

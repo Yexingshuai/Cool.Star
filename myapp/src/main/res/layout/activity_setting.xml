@@ -107,6 +107,7 @@
                     android:textSize="16sp" />
 
                 <Switch
+                    android:id="@+id/switch_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -131,6 +132,7 @@
                     android:textSize="16sp" />
 
                 <Switch
+                    android:id="@+id/switch_push"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

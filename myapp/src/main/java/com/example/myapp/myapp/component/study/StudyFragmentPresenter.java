@@ -98,52 +98,53 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 
     @Override
     public void collectArtist(int id) {
-//        mSource.collect(id, new HttpContext.Response<WanAndroidBaseReponse>() {
-//            @Override
-//            public void success(WanAndroidBaseReponse result) {
-//                int errorCode = result.getErrorCode();
-//                if (errorCode == 0) {
-//                    mView.collectSuccess();
-//                } else {
-//                    mView.collectFail("");
-//                }
-//            }
-//
-//            @Override
-//            public void error(String error) {
-//                super.error(error);
+        mSource.collect(id, new HttpContext.Response<WanAndroidBaseReponse>() {
+            @Override
+            public void success(WanAndroidBaseReponse result) {
+                int errorCode = result.getErrorCode();
+                if (errorCode == 0) {
+                    mView.collectSuccess();
+                } else {
+                    mView.collectFail(result.getErrorMsg());
+                }
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
 //                mView.collectFail(error);
-//            }
-//        });
-        ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.put("cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
-        httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "");
-        httpHeaders.put("cookie", userCookieInfo.get(2) != null ? userCookieInfo.get(2) : "");
-        OkGo.post("http://www.wanandroid.com/lg/collect/" + id + "/json")
-                .tag(this)
-                .cacheMode(CacheMode.DEFAULT)
-                .headers(httpHeaders)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Gson gson = new Gson();
-                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
-                        int errorCode = reponse.getErrorCode();
-                        if (errorCode == 0) {
-                            mView.collectSuccess();
-                        } else {
-                            mView.collectFail(reponse.getErrorMsg());
-                        }
-                    }
+            }
+        });
 
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        mView.collectFail(e.getMessage());
-
-                    }
-                });
+//        ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.put("cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "qazqaz");
+//        httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "qazaq");
+//        httpHeaders.put("cookie", userCookieInfo.get(2) != null ? userCookieInfo.get(2) : "qazqaz");
+//        OkGo.post("http://www.wanandroid.com/lg/collect/" + id + "/json")
+//                .tag(this)
+//                .cacheMode(CacheMode.DEFAULT)
+//                .headers(httpHeaders)
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(String s, Call call, Response response) {
+//                        Gson gson = new Gson();
+//                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
+//                        int errorCode = reponse.getErrorCode();
+//                        if (errorCode == 0) {
+//                            mView.collectSuccess();
+//                        } else {
+//                            mView.collectFail(reponse.getErrorMsg());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Call call, Response response, Exception e) {
+//                        super.onError(call, response, e);
+//                        mView.collectFail(e.getMessage());
+//
+//                    }
+//                });
 
     }
 
@@ -154,34 +155,46 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
      */
     @Override
     public void unCollect(int id) {
-        ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.put("cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
-        httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "");
-        httpHeaders.put("cookie", userCookieInfo.get(2) != null ? userCookieInfo.get(2) : "");
-        OkGo.post("http://www.wanandroid.com/lg/uncollect_originId/" + id + "/json")
-                .tag(this)
-                .cacheMode(CacheMode.DEFAULT)
-                .headers(httpHeaders)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Gson gson = new Gson();
-                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
-                        int errorCode = reponse.getErrorCode();
-                        if (errorCode == 0) {
-                            mView.unCollectSuccess();
-                        } else {
-                            mView.unCollectFail(reponse.getErrorMsg());
-                        }
-                    }
 
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        mView.unCollectFail(e.getMessage());
-                    }
-                });
+        mSource.unCollect(id, new HttpContext.Response<WanAndroidBaseReponse>() {
+            @Override
+            public void success(WanAndroidBaseReponse result) {
+                int errorCode = result.getErrorCode();
+                if (errorCode == 0) {
+                    mView.unCollectSuccess();
+                } else {
+                    mView.unCollectFail(result.getErrorMsg());
+                }
+            }
+        });
+//        ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.put("cookie", userCookieInfo.get(0) != null ? userCookieInfo.get(0) : "");
+//        httpHeaders.put("cookie", userCookieInfo.get(1) != null ? userCookieInfo.get(1) : "");
+//        httpHeaders.put("cookie", userCookieInfo.get(2) != null ? userCookieInfo.get(2) : "");
+//        OkGo.post("http://www.wanandroid.com/lg/uncollect_originId/" + id + "/json")
+//                .tag(this)
+//                .cacheMode(CacheMode.DEFAULT)
+//                .headers(httpHeaders)
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(String s, Call call, Response response) {
+//                        Gson gson = new Gson();
+//                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
+//                        int errorCode = reponse.getErrorCode();
+//                        if (errorCode == 0) {
+//                            mView.unCollectSuccess();
+//                        } else {
+//                            mView.unCollectFail(reponse.getErrorMsg());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Call call, Response response, Exception e) {
+//                        super.onError(call, response, e);
+//                        mView.unCollectFail(e.getMessage());
+//                    }
+//                });
 
     }
 

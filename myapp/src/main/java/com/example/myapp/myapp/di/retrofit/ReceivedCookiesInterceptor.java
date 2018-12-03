@@ -26,9 +26,11 @@ public class ReceivedCookiesInterceptor implements Interceptor {
 
         ArrayList<String> userCookieInfo = LoginContext.getInstance().getUserCookieInfo();
         if (userCookieInfo != null) {
-            builder.addHeader("Cookie", userCookieInfo.get(0));
-            builder.addHeader("Cookie", userCookieInfo.get(1));
-            builder.addHeader("Cookie", userCookieInfo.get(2));
+            String s = userCookieInfo.get(0) + userCookieInfo.get(1) + userCookieInfo.get(2);
+//            builder.addHeader("cookie", userCookieInfo.get(0));
+//            builder.addHeader("cookie", userCookieInfo.get(1));
+//            builder.addHeader("cookie", userCookieInfo.get(2));
+            builder.addHeader("Cookie", s);
         }
         return chain.proceed(builder.build());
 

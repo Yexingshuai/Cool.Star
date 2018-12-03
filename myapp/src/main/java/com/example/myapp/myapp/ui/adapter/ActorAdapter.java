@@ -45,10 +45,11 @@ public class ActorAdapter extends RecyclerView.Adapter {
         FilmPeople filmPeople = list.get(position);
         ViewHolder holder = (ViewHolder) viewHolder;
         holder.setData(filmPeople);
-//        if (filmPeople.getAvatars().getLarge()!=null) {
+        if (filmPeople.getAvatars()!= null) {
 //            GlideContext.loadCommon(mctx, filmPeople.getAvatars().getLarge(), holder.iv_actor);
-//        }
-        Glide.with(mctx).load(filmPeople.getAvatars().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.iv_actor);
+            Glide.with(mctx).load(filmPeople.getAvatars().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.iv_actor);
+        }
+
 
         holder.tv_actor_name.setText(filmPeople.getName());
         if (filmPeople.getType() == 1) {
@@ -84,7 +85,7 @@ public class ActorAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     String alt = filmPeople.getAlt();
-                    UiHelper.skipWebActivity(mctx,null,alt);
+                    UiHelper.skipWebActivity(mctx, null, alt);
                 }
             });
         }

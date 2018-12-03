@@ -24,7 +24,7 @@ import com.example.myapp.myapp.data.bean.ThemeColor;
 import com.example.myapp.myapp.utils.SPUtils;
 
 /**
- * Created by daixiankade on 2018/5/8.
+ * Created by yexing on 2018/5/8.
  */
 
 public class DesignDialog extends AppCompatDialogFragment implements View.OnClickListener {

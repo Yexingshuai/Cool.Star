@@ -2,12 +2,14 @@
 ### 学习娱乐生活的app
 #### RxJava+Retrofit+MVP打造高颜值App，在这里你可以学到最新的安卓知识，了解最新的影讯，也能实时关注所在地区的气候变化。又能学习又能玩耍，快来下载吧！
 ### 截图展示
-![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/1.png)
-![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/2.png)
-![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/3.png)
-![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/4.png)
-![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/5.png)
-![](https://github.com/Yexingshuai/Cool.Star/blob/master/images/6.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/1.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/2.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/3.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/4.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/5.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/6.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/7.png)
+![](https://github.com/Yexingshuai/Cool.Star/blob/develop/images/8.png)
 ### 简介
 - 此项目为本人练手随意写的app，没有很好的架构和编码，一起努力学习吧。项目简单涉及到WebView+EventBus+属性动画，最重要的是锻炼编码能力和架构,项目还会继续更新。
 ---

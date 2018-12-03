@@ -18,6 +18,7 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.base.BaseView;
+import com.example.myapp.myapp.common.AppFlag;
 import com.example.myapp.myapp.component.MainPresenter;
 import com.example.myapp.myapp.component.favorite.MyFavoriteActivity;
 import com.example.myapp.myapp.component.login.LoginActivity;
@@ -29,12 +30,15 @@ import com.example.myapp.myapp.ui.dialog.DesignDialog;
 import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.MyViewPager;
 import com.example.myapp.myapp.ui.view.NavigationButton;
+import com.example.myapp.myapp.utils.PreferencesUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by yexing on 2018/3/28.  现在在测试分支上
@@ -50,7 +54,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     private DrawerLayout mDrawerLayout;
     private TextView mUserName;
     private MenuItem logoutMenuItem;
-
 
     @Override
     public int inflateContentView() {
@@ -70,9 +73,23 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         logoutMenuItem = mNavigationView.getMenu().findItem(R.id.navigation_item_logout);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
+
 
     @Override
     protected void initData() {
+
+        String userName = LoginContext.getInstance().getUserName();
+        if (userName != null) {
+            JPushInterface.setAlias(this, 1, userName);
+        }
+        //判断是否接受推送
+        if (!PreferencesUtils.getBoolean(this, AppFlag.ISRECEIVEPUSH, true)) {
+            JPushInterface.stopPush(this.getApplicationContext());
+        }
         List<Integer> mTabImg = mPresenter.getTabImg();
         List<BaseFragment> fragments = mPresenter.getFragments();
         List<String> mTabText = mPresenter.getPageTitle();

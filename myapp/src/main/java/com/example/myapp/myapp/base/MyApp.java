@@ -2,13 +2,8 @@ package com.example.myapp.myapp.base;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 
 import com.example.myapp.myapp.common.InitializeConfig;
-import com.example.myapp.myapp.utils.LogUtil;
-
-import java.security.Security;
 
 
 /**
@@ -32,6 +27,7 @@ public class MyApp extends Application {
         //捕捉异常
 
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
+
 
     }
 

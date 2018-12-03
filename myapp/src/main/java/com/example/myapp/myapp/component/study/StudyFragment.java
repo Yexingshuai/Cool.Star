@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,6 +29,7 @@ import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.room.Injection;
 import com.example.myapp.myapp.room.search.entity.SearchHistory;
 import com.example.myapp.myapp.ui.activity.MainActivity;
+import com.example.myapp.myapp.ui.adapter.BannerAdapter;
 import com.example.myapp.myapp.ui.adapter.HomeAdapter;
 import com.example.myapp.myapp.ui.adapter.SpaceItemDecoration;
 import com.example.myapp.myapp.ui.helper.GuidanceHelper;
@@ -49,6 +51,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -153,7 +156,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
         BaseActivity activity = (BaseActivity) context;
         activity.addOnTurnBackListener(this);
         super.onAttach(context);
-        mPresenter.start();
     }
 
     @Override
@@ -277,8 +279,10 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter.start();
         sumY = 0;
     }
+
 
     @Override
     protected boolean isNeedToBeSubscriber() {
@@ -333,7 +337,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
             BannerBean bannerBean = (BannerBean) result;
             List<BannerBean.DataBean> datas = bannerBean.getData();
             homeAdapter.addBanner(datas);
-
         } else {
             HomeItemBean homeItem = (HomeItemBean) result;
             HomeItemBean.DataBean data = homeItem.getData();
@@ -365,7 +368,7 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
 
     @Override
     public void unCollectSuccess() {
-
+//        ToastUtil.showApp("取消收藏成功");
     }
 
     /**

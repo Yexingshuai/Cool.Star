@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.example.myapp.myapp.base.BasePresenter;
+import com.example.myapp.myapp.utils.PermissonUtil;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -65,7 +66,6 @@ public class WeatherPresenter implements BasePresenter {
      * 获取实况天气
      */
     public void getWeatherNow() {
-//        checkPermisson();
         HeWeather.getWeatherNow(mActivity, "auto_ip", Lang.CHINESE_SIMPLIFIED, Unit.METRIC, new HeWeather.OnResultWeatherNowBeanListener() {
             @Override
             public void onError(Throwable throwable) {
@@ -84,51 +84,17 @@ public class WeatherPresenter implements BasePresenter {
      * 检查权限
      */
     public void checkPermisson() {
-        Dexter.withActivity(mActivity).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
+        PermissonUtil.requestPermisson(mActivity, Manifest.permission.ACCESS_FINE_LOCATION, "地理位置", new PermissonUtil.PermissonListener() {
             @Override
-            public void onPermissionGranted(PermissionGrantedResponse response) {
+            public void onPermissonGranted() {
                 getWeatherNow();
             }
 
             @Override
-            public void onPermissionDenied(PermissionDeniedResponse response) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(mActivity);
-                dialog.setCancelable(false);
-                dialog.create().setCanceledOnTouchOutside(false);
-                dialog.setTitle("权限申请！");
-                dialog.setMessage("地理位置权限被禁止，该功能无法使用\n如要使用，请前往设置进行授权！");
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mActivity.finish();
-                    }
-                });
-                dialog.show();
-
+            public void onPermissonDenied() {
+                mActivity.finish();
             }
-
-            @Override
-            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, final PermissionToken token) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(mActivity);
-                dialog.setCancelable(false);
-                dialog.create().setCanceledOnTouchOutside(false);
-                dialog.setTitle("权限申请！");
-                dialog.setMessage("地理位置权限被禁止，我们需要这个权限，请允许它！");
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        token.cancelPermissionRequest();
-                    }
-                });
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        token.continuePermissionRequest();
-                    }
-                });
-                dialog.show();
-            }
-        }).check();
+        });
     }
 
     /**
