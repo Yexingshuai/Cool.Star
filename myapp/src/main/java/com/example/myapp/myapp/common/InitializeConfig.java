@@ -42,10 +42,13 @@ public class InitializeConfig {
         ToastUtil.initToastApp(appContext);
 
         //友盟第三方分享
+
+        //友盟第三方分享
+        UMConfigure.setLogEnabled(isDebug);
         UMConfigure.init(appContext, "5b598a94b27b0a77c30000d1"
                 , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
 
-        PlatformConfig.setWeixin("wxdda8441a2fcd9957", "9dcf5851d8d807bbcf92f7dd56856eae");
+        PlatformConfig.setWeixin("wxdda8441a2fcd9957", "147b79ccfe5dd8f8487487d65a3d3467");
         PlatformConfig.setSinaWeibo("3072140610", "faa0b4cf935fa6f3ee935b531190106c", "http://sns.whalecloud.com");
         PlatformConfig.setQQZone("1107157177", "ri5rEKt2ZU3zUaBI");
 

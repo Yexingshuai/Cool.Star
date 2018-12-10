@@ -1,6 +1,7 @@
 package com.example.myapp.myapp.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -220,6 +221,12 @@ public class WebActivity extends BaseActivity {
         UMengShareHelper.release();
         super.onDestroy();
 //        System.exit(0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
 

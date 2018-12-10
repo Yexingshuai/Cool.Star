@@ -31,11 +31,37 @@ android {
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('coolstar.jks')
+            keyAlias 'coolstar'
+            keyPassword '931026'
+            storePassword '931026'
+        }
+        release {
+            storeFile file('coolstar.jks')
+            keyAlias 'coolstar'
+            keyPassword '931026'
+            storePassword '931026'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug{
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
     }
 
 }
