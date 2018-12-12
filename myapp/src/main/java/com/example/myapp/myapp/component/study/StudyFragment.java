@@ -93,7 +93,6 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
     private ViewPager mViewPager;
     private SmartRefreshLayout mRefreshLayout;
 
-    private int color = -1;
     private StudyFragmentContract.Presenter mPresenter;
 
     public static final int NAVIGATION_HIDE = 1001;

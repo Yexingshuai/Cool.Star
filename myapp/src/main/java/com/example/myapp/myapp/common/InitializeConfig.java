@@ -42,8 +42,6 @@ public class InitializeConfig {
         ToastUtil.initToastApp(appContext);
 
         //友盟第三方分享
-
-        //友盟第三方分享
         UMConfigure.setLogEnabled(isDebug);
         UMConfigure.init(appContext, "5b598a94b27b0a77c30000d1"
                 , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0

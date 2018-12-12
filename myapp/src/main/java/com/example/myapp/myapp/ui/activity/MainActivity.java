@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
     private void showBottomNav(final View mTarget) {
         // 这种效果最好
-        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());//
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getTop());// 1920--1773
         va.setDuration(200);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -165,7 +165,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
 
     private void hideBottomNav(final View mTarget) {
         //这种效果最好
-        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getBottom());
+        ValueAnimator va = ValueAnimator.ofFloat(mTarget.getY(), mTarget.getBottom());//1773-1920
         va.setDuration(200);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
