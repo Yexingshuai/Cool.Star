@@ -54,6 +54,10 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     private DrawerLayout mDrawerLayout;
     private TextView mUserName;
     private MenuItem logoutMenuItem;
+    /**
+     * 底部导航动画展示状态标记
+     */
+    public static boolean isShow = true;
 
     @Override
     public int inflateContentView() {
@@ -185,10 +189,19 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(Message msg) {
         if (msg.what == StudyFragment.NAVIGATION_HIDE) {
-            hideBottomNav(mTabLayout);
+            if (isShow) {
+                isShow = !isShow;
+                hideBottomNav(mTabLayout);
+            }
         } else if (msg.what == StudyFragment.NAVIGATION_SHOW) {
+            if (!isShow) {
+                isShow = !isShow;
+                showBottomNav(mTabLayout);
+            }
+        } else if (msg.what == BaseFragment.SHOWINDICATOR) {
             showBottomNav(mTabLayout);
         }
+
     }
 
     /**

@@ -2,6 +2,7 @@ package com.example.myapp.myapp.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,10 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapp.R;
+import com.example.myapp.myapp.component.study.StudyFragment;
+import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.load.LoadingStatusLayout;
 import com.example.myapp.myapp.ui.view.StateLayout;
+import com.example.myapp.myapp.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Collection;
 
@@ -27,6 +33,8 @@ public abstract class BaseFragment extends Fragment {
     protected Context mCtx;
     private boolean mIsFirstVisible;
     private boolean mHasCreatedView;//是否创建完视图
+
+    public static final int SHOWINDICATOR = 1003;
 
 
     @Override
@@ -103,9 +111,20 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
         if (mIsFirstVisible && mHasCreatedView && getUserVisibleHint()) {
             onFragmentVisibleToUser(isVisibleToUser);
+            if (!MainActivity.isShow) {
+                Message message = new Message();
+                message.what = SHOWINDICATOR;
+                EventBus.getDefault().post(message);
+            }
         }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(Message msg) {
 
     }
 

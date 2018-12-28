@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
 
+Properties signingProperties = new Properties()
+signingProperties.load(new FileInputStream(file("../signings/signing.properties")))
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "com.yx.cool"
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true  //vector
@@ -26,24 +28,24 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "973732984158788faaf1f9b7", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
 
     signingConfigs {
         debug {
-            storeFile file('coolstar.jks')
-            keyAlias 'coolstar'
-            keyPassword '931026'
-            storePassword '931026'
+            storeFile file(signingProperties['KEYSTORE_FILEPATH'])
+            keyAlias signingProperties['KEY_ALIAS']
+            keyPassword signingProperties['KEY_PASSWORD']
+            storePassword signingProperties['STORE_PASSWORD']
         }
         release {
-            storeFile file('coolstar.jks')
-            keyAlias 'coolstar'
-            keyPassword '931026'
-            storePassword '931026'
+            storeFile file(signingProperties['KEYSTORE_FILEPATH'])
+            keyAlias signingProperties['KEY_ALIAS']
+            keyPassword signingProperties['KEY_PASSWORD']
+            storePassword signingProperties['STORE_PASSWORD']
         }
     }
 
@@ -55,7 +57,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        debug{
+        debug {
             minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.debug
@@ -69,7 +71,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -82,7 +85,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava:+'
     //glide
     implementation 'com.github.bumptech.glide:glide:3.8.0'
-    implementation 'com.android.support:design:26.1.0'
     //RxJava
     implementation 'io.reactivex.rxjava2:rxjava:+'
     implementation 'io.reactivex.rxjava2:rxandroid:+'

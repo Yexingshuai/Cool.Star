@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapp.myapp.di.glide.GlideContext;
+import com.example.myapp.myapp.utils.ToastUtil;
 
 public class RecyclerHolder extends RecyclerView.ViewHolder {
 

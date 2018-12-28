@@ -1,5 +1,6 @@
 package com.example.myapp.myapp.component.movie;
 
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
@@ -12,7 +13,12 @@ import com.example.myapp.myapp.component.movie.top.FilmTop100Presenter;
 import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.data.source.film.live.FilmLiveRepository;
 import com.example.myapp.myapp.data.source.film.top.FilmTopRepository;
+import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.adapter.FilmPagerAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -35,6 +41,7 @@ public class HappyFragment extends BaseFragment {
     protected void refreshData() {
 
     }
+
 
     public static HappyFragment newInstance() {
         return new HappyFragment();
