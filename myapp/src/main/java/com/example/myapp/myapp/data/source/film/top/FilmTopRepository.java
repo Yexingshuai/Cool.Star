@@ -8,10 +8,12 @@ import com.example.myapp.myapp.data.http.HttpContext;
  */
 
 public class FilmTopRepository implements FilmTop100Source {
+
+    public static final String APIKEY = "0df993c66c0c636e29ecbb5344252a4a";
     @Override
     public void getTop100Film(HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();
         DoubanApi doubanApi = httpContext.createApi2(DoubanApi.class);
-        httpContext.execute(doubanApi.getTop100(0,100),response);
+        httpContext.execute(doubanApi.getTop100(0,100,APIKEY),response);
     }
 }

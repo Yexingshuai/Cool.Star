@@ -8,11 +8,14 @@ import com.example.myapp.myapp.data.http.HttpContext;
  */
 
 public class FilmLiveRepository implements FilmLiveSource {
+    public static final String APIKEY = "0df993c66c0c636e29ecbb5344252a4a";
+
+
     @Override
     public void getLiveFilm(HttpContext.Response response) {
         HttpContext httpContext = new HttpContext();
         DoubanApi doubanApi = httpContext.createApi2(DoubanApi.class);
-        httpContext.execute(doubanApi.getLiveFilm(), response);
+        httpContext.execute(doubanApi.getLiveFilm(APIKEY), response);
 
     }
 }

@@ -11,7 +11,7 @@ public class AppUrl {
     /**
      * study
      */
-    public static final String BASEURL = "http://www.wanandroid.com/";
+    public static final String BASEURL = "https://www.wanandroid.com/";
 
     /**
      * movie
