@@ -4,6 +4,8 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
 import com.example.myapp.myapp.base.BasePresenter;
 import com.example.myapp.myapp.component.life.LifeFragment;
+import com.example.myapp.myapp.component.life.LifeFragment2;
+import com.example.myapp.myapp.component.life.LifeFragment3;
 import com.example.myapp.myapp.component.life.LifeFragmentPresenter;
 import com.example.myapp.myapp.component.movie.HappyFragment;
 import com.example.myapp.myapp.component.news.NewsFragment;
@@ -58,14 +60,18 @@ public class MainPresenter implements BasePresenter {
         //生活
         LifeFragment lifeFragment = LifeFragment.newInstance();
         new LifeFragmentPresenter(new LifeFragmentRepository(), lifeFragment);
-        fragmentList.add(lifeFragment);
+
+        LifeFragment3 lifeFragment3 = LifeFragment3.newInstance();
+        new LifeFragmentPresenter(new LifeFragmentRepository(), lifeFragment3);
+        fragmentList.add(lifeFragment3);
+
         return fragmentList;
     }
 
     public List<String> getPageTitle() {
         List<String> titleList = new ArrayList<>();
         titleList.add("学习");
-        titleList.add("娱乐");
+        titleList.add("影评");
         titleList.add("新闻");
         titleList.add("生活");
 

@@ -2,6 +2,7 @@ package com.example.myapp.myapp.ui.activity;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -32,6 +33,7 @@ import com.example.myapp.myapp.ui.view.MyViewPager;
 import com.example.myapp.myapp.ui.view.NavigationButton;
 import com.example.myapp.myapp.utils.PreferencesUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
+import com.example.myapp.myapp.utils.Utils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -75,6 +77,7 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         View headerView = mNavigationView.getHeaderView(0);
         mUserName = headerView.findViewById(R.id.tv_username);
         logoutMenuItem = mNavigationView.getMenu().findItem(R.id.navigation_item_logout);
+        Utils.setDarkStatusIcon(this, true);
     }
 
     @Override

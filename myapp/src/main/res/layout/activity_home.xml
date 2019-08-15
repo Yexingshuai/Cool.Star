@@ -56,7 +56,7 @@
 
             <TextView
                 android:textSize="14sp"
-                android:text="@string/author_desc"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

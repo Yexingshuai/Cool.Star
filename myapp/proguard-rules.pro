@@ -26,6 +26,7 @@
 
 -keep class com.example.myapp.myapp.data.bean.** { *; }
 -keep class com.example.myapp.myapp.wxapi.** { *; }
+-ignorewarnings
 
 
 #---------------------------------2.第三方包-------------------------------

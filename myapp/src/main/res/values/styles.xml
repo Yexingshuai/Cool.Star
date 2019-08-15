@@ -65,5 +65,15 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
+    <style name="TabLayoutTextSizeStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="MainAppBar" parent="android:Widget">
+        <item name="elevation">0dip</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 
 </resources>

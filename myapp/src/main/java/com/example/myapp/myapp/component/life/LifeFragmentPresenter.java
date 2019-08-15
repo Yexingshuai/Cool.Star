@@ -1,8 +1,13 @@
 package com.example.myapp.myapp.component.life;
 
+import com.example.myapp.R;
+import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.component.life.fragment.JokeFragment;
 import com.example.myapp.myapp.data.bean.JokeResponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.life.LifeFragmentSource;
+
+import java.util.List;
 
 /**
  * Created by yexing on 2018/8/28.
@@ -47,5 +52,13 @@ public class LifeFragmentPresenter implements LifeFragmentContract.Presenter {
                 mView.requestJokeFail(error);
             }
         });
+    }
+
+    @Override
+    public void addJokeFg(List<BaseFragment> mFragmentList) {
+        String[] stringArray = ((LifeFragment3) mView).getActivity().getResources().getStringArray(R.array.joke_fg);
+        for (String title : stringArray) {
+            mFragmentList.add(new JokeFragment());
+        }
     }
 }

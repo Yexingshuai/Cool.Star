@@ -6,32 +6,6 @@
         <item>Top100</item>
     </string-array>
 
-
-    <string name="author_desc">哈哈，谢谢你能看到这里~\n\n
-        现在是一个技术不够强的文艺的码农,爱好睡觉,耍,并不喜欢写代码。\n\n
-        做过最强的项目是手机银行 \n
-        承认对美工设计没有任何灵感，凑合看吧 \n
-        我很帅\n
-        坐标：北京\n
-        希望成长越来越快..\n
-        后续会把代码托管到git上.. \n
-        如果觉得不错就请给我点个赞吧\n
-
-    </string>
-
-
-    <string name="about">项目全部数据来源 鸿洋 开放API,以及豆瓣API2.0，在此表示感谢.~\n\n
-        项目整体采用MVC(MVP暂时还没有搞透彻)+RxJava+Retorift。\n\n
-        以及简单涉及到Eventbus+WebView+属性动画\n
-        暂时没有涉及到数据库，也没有对数据进行缓存\n
-        项目会继续更新.. \n
-        又能学习又能耍.. \n
-        电影那块的接口很不稳定，怪服务器... 只能干等啦..\n
-        请到Git上面给我点个赞吧\n
-
-    </string>
-
-
     <!--关于BoomMenu -->
 
     <string name="boom_tile1">
@@ -86,6 +60,17 @@
 
     <string name="permisson">权限被禁止，该功能无法使用\n如要使用，请前往设置进行授权！</string>
     <string name="permissonTitle">权限申请</string>
+
+    <string-array name="joke_fg">
+        <item>全部</item>
+        <item>文字</item>
+        <item>图片</item>
+        <item>gif</item>
+        <item>视频</item>
+        <item>视频</item>
+        <item>视频</item>
+        <item>视频</item>
+    </string-array>
 
 
 </resources>

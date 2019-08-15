@@ -170,4 +170,19 @@ public class Utils {
         return bitmap;
     }
 
+    public static void setDarkStatusIcon(Activity activity,boolean bDark) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            View decorView = activity.getWindow().getDecorView();
+            if(decorView != null){
+                int vis = decorView.getSystemUiVisibility();
+                if(bDark){
+                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                } else{
+                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                }
+                decorView.setSystemUiVisibility(vis);
+            }
+        }
+    }
+
 }
