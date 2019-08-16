@@ -32,6 +32,91 @@
                 android:paddingLeft="8dp"
                 android:src="@drawable/weather_default" />
 
+            <!--weather-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+                <com.example.myapp.myapp.ui.view.CircleImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="13dp"
+                    android:tint="@color/colorPrimaryDark"
+                    android:src="@mipmap/singing"
+                    android:scaleType="fitCenter"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:id="@+id/text_degree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333333"
+                    android:layout_toRightOf="@+id/imageView"
+                    android:textSize="25sp"/>
+
+                <ImageView
+                    android:id="@+id/image_weather_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/text_degree"
+                    android:layout_alignBottom="@+id/text_degree"
+                    android:layout_toRightOf="@+id/text_degree"
+                    android:src="@drawable/weather_line"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/text_degree"
+                    android:layout_alignBottom="@+id/text_degree"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/image_weather_line"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="9sp"/>
+
+                    <TextView
+                        android:text="2019-08-11"
+                        android:id="@+id/text_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="10sp"/>
+                </LinearLayout>
+
+                <TextView
+
+                    android:id="@+id/text_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#333333"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:id="@+id/text_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView"
+                    android:layout_toRightOf="@+id/text_location"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#333333"
+                    android:textSize="10sp"/>
+
+            <!--</RelativeLayout>-->
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,14 +138,14 @@
 
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/iv_up"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
                     android:rotation="180"
-                    android:src="@mipmap/fg_up" />
+                    android:src="@mipmap/fg_up"
+                    android:visibility="gone" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -165,42 +250,46 @@
             </LinearLayout>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/lift_item_head" />
-
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:elevation="1dp">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.6dp"
+                    android:background="@color/lift_item_head" />
 
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_below="@+id/view_line"
-                android:layout_marginBottom="0dp"
-                android:layout_toLeftOf="@+id/imageView_filter"
-                android:elevation="1dp"
-                android:paddingLeft="10dp"
-                app:tabBackground="@color/white"
-                app:tabIndicatorColor="#404a53"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="#404a53"
-                app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
-                app:tabTextColor="#999999" />
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_below="@+id/view"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toLeftOf="@+id/imageView_filter"
+                    android:elevation="1dp"
+                    android:paddingLeft="10dp"
+                    app:tabBackground="@color/white"
+                    app:tabIndicatorColor="#404a53"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="#404a53"
+                    app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
+                    app:tabTextColor="#999999" />
 
                 <ImageView
-                    android:layout_marginRight="6dp"
                     android:id="@+id/imageView_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="6dp"
+                    android:layout_toRightOf="@+id/tab_layout"
                     android:padding="10dp"
                     android:src="@drawable/sns_filter" />
+
 
             </RelativeLayout>
 

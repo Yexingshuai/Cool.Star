@@ -1,5 +1,6 @@
 package com.example.myapp.myapp.component.life;
 
+import android.Manifest;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -14,36 +15,35 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
-import com.example.myapp.myapp.component.life.fragment.JokeFragment;
-import com.example.myapp.myapp.component.life.view.AppBarStateChangeListener;
-import com.example.myapp.myapp.component.life.view.JudgeNestedScrollView2;
 import com.example.myapp.myapp.data.bean.JokeResponse;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
-import com.example.myapp.myapp.utils.Utils;
+import com.example.myapp.myapp.ui.view.CircleImageView;
+import com.example.myapp.myapp.utils.PermissonUtil;
+import com.example.myapp.myapp.utils.ToastUtil;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
+
+import interfaces.heweather.com.interfacesmodule.bean.Lang;
+import interfaces.heweather.com.interfacesmodule.bean.Unit;
+import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
+import interfaces.heweather.com.interfacesmodule.bean.weather.now.NowBase;
+import interfaces.heweather.com.interfacesmodule.view.HeWeather;
 
 
 /**
@@ -68,6 +68,20 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
     private LinearLayout mRootHeaderView;
     private int headerHeight = -1;
     private boolean isShowImg = false;
+
+    /**
+     * weather view
+     *
+     * @return
+     */
+    public TextView mText_degree;
+    public TextView mText_week;
+    public TextView mText_date;
+    public TextView mText_location;
+    public ImageView mImage_weather_line;
+    public TextView mText_weather;
+    private CircleImageView imageView;
+    private ImageView mImgDefault;
 
 
     @Override
@@ -94,6 +108,14 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
         mAppbarlayout = getView(R.id.appbar);
         mUpImg = getView(R.id.iv_up);
         mRootHeaderView = getView(R.id.layout_header_root);
+        imageView = getView(R.id.imageView);
+        mText_degree = getView(R.id.text_degree);
+        mText_week = getView(R.id.text_week);
+        mText_date = getView(R.id.text_date);
+        mText_location = getView(R.id.text_location);
+        mImage_weather_line = getView(R.id.image_weather_line);
+        mText_weather = getView(R.id.text_weather);
+        mImgDefault = getView(R.id.image_weather_default);
 //        setVectorDrawable(getActivity(), ivScanCode, R.drawable.ic_home_menu_scan, true);
         mSearchLayout.setOnClickListener(this);
         mUpImg.setOnClickListener(this);
@@ -111,7 +133,29 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
         mViewPager.setAdapter(new FragmentAdapter(getChildFragmentManager(), mFragmentList, Arrays.asList(getActivity().getResources().getStringArray(R.array.joke_fg))));
 //        // 将TabLayout和ViewPager进行关联，让两者联动起来
         mTabLayout.setupWithViewPager(mViewPager);
+        getWeatherInfo();
+        getTimeInfo();
+    }
 
+
+    public static LifeFragment3 newInstance() {
+        return new LifeFragment3();
+    }
+
+
+    @Override
+    public void setJokeInfo(JokeResponse response) {
+
+    }
+
+    @Override
+    public void requestJokeFail(String errorMsg) {
+
+    }
+
+    @Override
+    public void setPresenter(LifeFragmentContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
 
@@ -168,7 +212,7 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 verticalOffset = Math.abs(verticalOffset);
 
-                if (verticalOffset == 0&isShowImg) {
+                if (verticalOffset == 0 & isShowImg) {
                     mUpImg.setVisibility(View.VISIBLE);
                 }
 
@@ -189,25 +233,68 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
         });
     }
 
+    public void getWeatherInfo() {
 
-    public static LifeFragment3 newInstance() {
-        return new LifeFragment3();
+        PermissonUtil.requestPermisson(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, "地理位置", new PermissonUtil.PermissonListener() {
+            @Override
+            public void onPermissonGranted() {
+                HeWeather.getWeatherNow(getActivity(), "auto_ip", Lang.CHINESE_SIMPLIFIED, Unit.METRIC, new HeWeather.OnResultWeatherNowBeanListener() {
+                    @Override
+                    public void onError(Throwable throwable) {
+                        ToastUtil.showApp(throwable.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(List<Now> list) {
+                        Now now = list.get(0);
+                        NowBase nowBase = now.getNow();
+                        String location = now.getBasic().getLocation();
+                        mImgDefault.setVisibility(View.GONE);
+                        mText_location.setText(location);
+                        String tmp = nowBase.getTmp();
+                        mText_degree.setText(tmp + "°");
+                        mText_weather.setText(nowBase.getCond_txt());
+                        mText_week.setText(mWay);
+                        mText_date.setText(date);
+                    }
+                });
+            }
+
+            @Override
+            public void onPermissonDenied() {
+                ToastUtil.showApp("权限被拒绝！");
+            }
+        });
+
     }
 
+    public String mWay;
+    public String date;
 
-    @Override
-    public void setJokeInfo(JokeResponse response) {
-
-    }
-
-    @Override
-    public void requestJokeFail(String errorMsg) {
-
-    }
-
-    @Override
-    public void setPresenter(LifeFragmentContract.Presenter presenter) {
-        mPresenter = presenter;
+    public void getTimeInfo() {
+        Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String year = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
+        String month = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
+        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
+        String way = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
+        if ("1".equals(way)) {
+            way = "天";
+        } else if ("2".equals(way)) {
+            way = "一";
+        } else if ("3".equals(way)) {
+            way = "二";
+        } else if ("4".equals(way)) {
+            way = "三";
+        } else if ("5".equals(way)) {
+            way = "四";
+        } else if ("6".equals(way)) {
+            way = "五";
+        } else if ("7".equals(way)) {
+            way = "六";
+        }
+        mWay = "星期" + way;
+        date = year + "-" + month + "-" + day;
     }
 
 
@@ -254,7 +341,6 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
                 break;
         }
     }
-
 
 
 }

@@ -1,6 +1,5 @@
 package com.example.myapp.myapp.component.weather;
 
-import android.app.AlertDialog;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
