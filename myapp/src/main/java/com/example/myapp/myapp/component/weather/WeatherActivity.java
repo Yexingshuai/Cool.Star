@@ -155,7 +155,7 @@ public class WeatherActivity extends BaseActivity implements BaseView<WeatherPre
         Now now = nowList.get(0);
         NowBase nowBase = now.getNow();
         String tmp = nowBase.getTmp();
-        mTmp.setText(tmp);
+        mTmp.setText(tmp+"°");
         mWeatherState.setText(nowBase.getCond_txt());
         mPresenter.getWeatherHourly();
     }

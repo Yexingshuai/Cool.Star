@@ -38,14 +38,12 @@
                 <!--android:layout_height="wrap_content">-->
 
 
-                <com.example.myapp.myapp.ui.view.CircleImageView
+                <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="27dp"
                     android:layout_height="27dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="13dp"
-                    android:tint="@color/colorPrimaryDark"
-                    android:src="@mipmap/singing"
                     android:scaleType="fitCenter"
                     android:layout_marginRight="5dp"/>
 
@@ -58,6 +56,7 @@
                     android:textSize="25sp"/>
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/image_weather_line"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,6 +66,7 @@
                     android:src="@drawable/weather_line"/>
 
                 <LinearLayout
+                    android:animateLayoutChanges="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/text_degree"
@@ -84,7 +84,7 @@
                         android:textSize="9sp"/>
 
                     <TextView
-                        android:text="2019-08-11"
+                        android:text=""
                         android:id="@+id/text_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -235,16 +235,16 @@
                     android:src="@drawable/builder_bar_shadow"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@color/black" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:background="@color/black" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@color/colorAccent" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="200dp"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:background="@color/colorAccent" />-->
 
 
             </LinearLayout>

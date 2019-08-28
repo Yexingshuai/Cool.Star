@@ -6,6 +6,10 @@ signingProperties.load(new FileInputStream(file("../signings/signing.properties"
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
+
+    aaptOptions.cruncherEnabled = false//打包出现aapt错误
+    aaptOptions.useNewCruncher = false
+
     defaultConfig {
         applicationId "com.yx.cool"
         minSdkVersion rootProject.minSdkVersion
@@ -24,7 +28,7 @@ android {
 
         ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86'
         }
 
         manifestPlaceholders = [
@@ -140,6 +144,8 @@ dependencies {
     //推送
     implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
     implementation 'cn.jiguang.sdk:jcore:+'  // 此处以JCore 1.2.5 版本为例。
+    implementation 'com.lxj:xpopup:1.8.8'
+
 
 
 }

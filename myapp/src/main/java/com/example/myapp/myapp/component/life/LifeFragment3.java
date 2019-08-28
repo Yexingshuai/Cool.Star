@@ -20,6 +20,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,9 +28,11 @@ import android.widget.TextView;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.component.life.widget.BannerWidget;
+import com.example.myapp.myapp.component.life.widget.ListWidget;
 import com.example.myapp.myapp.data.bean.JokeResponse;
+import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
-import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.example.myapp.myapp.utils.PermissonUtil;
 import com.example.myapp.myapp.utils.ToastUtil;
 
@@ -44,6 +47,7 @@ import interfaces.heweather.com.interfacesmodule.bean.Unit;
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.NowBase;
 import interfaces.heweather.com.interfacesmodule.view.HeWeather;
+
 
 
 /**
@@ -80,8 +84,11 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
     public TextView mText_location;
     public ImageView mImage_weather_line;
     public TextView mText_weather;
-    private CircleImageView imageView;
+    private ImageView imageView;
     private ImageView mImgDefault;
+
+    private String imgUrl = "https://cdn.heweather.com/cond_icon/%s.png";
+    private static final int CODE_SELECT_IMAGE = 1;
 
 
     @Override
@@ -105,6 +112,7 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
         mViewPager = getView(R.id.viewpager);
         mSearchLayout = getView(R.id.searchLayout);
         ImageView ivScanCode = getView(R.id.scan_code);
+        ivScanCode.setOnClickListener(this);
         mAppbarlayout = getView(R.id.appbar);
         mUpImg = getView(R.id.iv_up);
         mRootHeaderView = getView(R.id.layout_header_root);
@@ -127,14 +135,26 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
 
     @Override
     public void initData() {
+        getWeatherInfo();
+        getTimeInfo();
+        //添加widget
+        BannerWidget bannerWidget = new BannerWidget(getActivity());
+        bannerWidget.init();
+        mRootHeaderView.addView(bannerWidget.getRootView());
+        ListWidget listWidget = new ListWidget(getActivity());
+        listWidget.init();
+        mRootHeaderView.addView(listWidget.getRootView());
+//        mRootHeaderView.requestLayout();
+
         mFragmentList = new ArrayList<>();
         mPresenter.addJokeFg(mFragmentList);
         mViewPager.setOffscreenPageLimit(mFragmentList.size());
+
         mViewPager.setAdapter(new FragmentAdapter(getChildFragmentManager(), mFragmentList, Arrays.asList(getActivity().getResources().getStringArray(R.array.joke_fg))));
 //        // 将TabLayout和ViewPager进行关联，让两者联动起来
         mTabLayout.setupWithViewPager(mViewPager);
-        getWeatherInfo();
-        getTimeInfo();
+
+
     }
 
 
@@ -248,7 +268,9 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
                     public void onSuccess(List<Now> list) {
                         Now now = list.get(0);
                         NowBase nowBase = now.getNow();
+                        String cond_code = nowBase.getCond_code();//图标代码
                         String location = now.getBasic().getLocation();
+                        mImage_weather_line.setVisibility(View.INVISIBLE);
                         mImgDefault.setVisibility(View.GONE);
                         mText_location.setText(location);
                         String tmp = nowBase.getTmp();
@@ -256,6 +278,14 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
                         mText_weather.setText(nowBase.getCond_txt());
                         mText_week.setText(mWay);
                         mText_date.setText(date);
+                        String s = String.format(imgUrl, cond_code);
+                        if (TextUtils.equals(cond_code, "100")) {
+                            setVectorDrawable(getActivity(), imageView, R.mipmap.weather100, true);
+                        } else {
+                            GlideContext.loadCommon(getActivity(), s, imageView);
+                        }
+
+
                     }
                 });
             }
@@ -312,7 +342,8 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
 
         if (isBlack) {
             // icon修改为黑色
-            bitmap = tintBitmap(bitmap, Color.parseColor("#ff000000"));
+//            bitmap = tintBitmap(bitmap, Color.parseColor("#ff000000"));
+            bitmap = tintBitmap(bitmap, Color.parseColor("#FFD700"));
         }
         imageView.setImageBitmap(bitmap);
     }
@@ -337,6 +368,8 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
                 setHeaderView(false);
                 break;
             case R.id.searchLayout:
+                break;
+            case R.id.scan_code:
 
                 break;
         }

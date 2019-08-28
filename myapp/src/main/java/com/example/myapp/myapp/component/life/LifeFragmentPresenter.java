@@ -56,9 +56,10 @@ public class LifeFragmentPresenter implements LifeFragmentContract.Presenter {
 
     @Override
     public void addJokeFg(List<BaseFragment> mFragmentList) {
-        String[] stringArray = ((LifeFragment3) mView).getActivity().getResources().getStringArray(R.array.joke_fg);
-        for (String title : stringArray) {
-            mFragmentList.add(new JokeFragment());
-        }
+        mFragmentList.add(JokeFragment.newInstance(1));
+        mFragmentList.add(JokeFragment.newInstance(2));
+        mFragmentList.add(JokeFragment.newInstance(3));
+        mFragmentList.add(JokeFragment.newInstance(4));
+        mFragmentList.add(JokeFragment.newInstance(5));
     }
 }

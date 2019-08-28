@@ -30,6 +30,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private Button mSignIn; //注册
     private LoginContract.Presenter mPresenter;
     private SpinKitView kitView;
+    private ImageView icon_back;
 
     @Override
     public int inflateContentView() {
@@ -53,6 +54,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         mSignIn = getView(R.id.bt_sign_in);
         setCommonClickListener(mSignIn);
         kitView = getView(R.id.spin_kit);
+        icon_back = getView(R.id.icon_back);
+        setCommonClickListener(icon_back);
 
     }
 
@@ -128,6 +131,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 String account = mAccountEditext.getText().toString().trim();
                 String password = mPasswordEdittext.getText().toString().trim();
                 mPresenter.register(account, password, password);
+                break;
+            case R.id.icon_back:
+                finish();
                 break;
         }
     }

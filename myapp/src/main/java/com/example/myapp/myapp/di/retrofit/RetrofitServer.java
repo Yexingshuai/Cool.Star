@@ -81,6 +81,18 @@ public class RetrofitServer {
         return retrofit;
     }
 
+    public static final Retrofit getRetrofit5() {
+
+        OkHttpClient okHttpClient = getOkHttpClient2();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppUrl.BASEURL5)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return retrofit;
+    }
+
 
     /**
      * 创建网络所需的API
@@ -143,7 +155,7 @@ public class RetrofitServer {
 
 
     /**
-     * 网络日志处理   用来打印出去的请求和收到的相应
+     * 网络日志处理   用来打印出去的请求和收到的响应
      * {@link LogUtil}
      */
     private static class LoggingInterceptors implements Interceptor {
@@ -185,7 +197,7 @@ public class RetrofitServer {
                 //获得返回的数据
                 Buffer buffer1 = source.buffer();
                 //使用前clone()下，避免直接消耗
-                Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
+//                Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
             }
 
             Log.e("Retrofit-url--", request.url() + "");

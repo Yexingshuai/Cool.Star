@@ -23,7 +23,7 @@ import interfaces.heweather.com.interfacesmodule.view.HeConfig;
 
 public class InitializeConfig {
 
-    public static final boolean isDebug = true;
+    public static final boolean isDebug = false;
 
     public static void init(Application appContext) {
 

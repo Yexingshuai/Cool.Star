@@ -251,6 +251,10 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 
+#xPopup
+-dontwarn com.lxj.xpopup.widget.**
+-keep class com.lxj.xpopup.widget.**{*;}
+
 #-------------------------------------------------------------------------
 
 #---------------------------------3.与js互相调用的类------------------------
