@@ -50,6 +50,10 @@ android {
         ]
     }
 
+    //不检查res
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
     lintOptions {
         abortOnError false  //当lint发现错误时，不会停止构建
     }
