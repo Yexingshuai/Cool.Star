@@ -50,6 +50,10 @@ android {
         ]
     }
 
+    lintOptions {
+        abortOnError false  //当lint发现错误时，不会停止构建
+    }
+
     signingConfigs {
         debug {
             storeFile file(signingProperties['KEYSTORE_FILEPATH'])
