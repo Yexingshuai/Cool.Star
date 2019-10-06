@@ -83,7 +83,7 @@ public class LifeFragment extends BaseFragment implements LifeFragmentContract.V
 
     @Override
     public void initData() {
-        mPresenter.requestJoke(pageNum, pageSize);
+//        mPresenter.requestJoke(pageNum, pageSize);   jokeInfo
         swipeFlingAdater = new SwipeFlingAdater(getActivity(), jokeList);
         swipeFlingAdapterView.setAdapter(swipeFlingAdater);
         swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {

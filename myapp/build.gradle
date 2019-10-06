@@ -7,6 +7,12 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     aaptOptions.cruncherEnabled = false//打包出现aapt错误
     aaptOptions.useNewCruncher = false
 
@@ -28,7 +34,13 @@ android {
 
         ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86'
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['Libs']
+            }
         }
 
         manifestPlaceholders = [
@@ -64,7 +76,7 @@ android {
         debug {
             minifyEnabled true
             shrinkResources true
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -115,6 +127,8 @@ dependencies {
     implementation files('libs/umeng-share-QQ-simplify-6.9.3.jar')
     implementation files('libs/umeng-share-sina-simplify-6.9.3.jar')
     implementation files('libs/umeng-share-wechat-simplify-6.9.3.jar')
+    //map
+    implementation files('libs/BaiduLBS_Android.jar')
     //和风
     implementation files('libs/sdk_HeWeather_Public_Android_V2.0.jar')
     //LikeButton
@@ -145,7 +159,10 @@ dependencies {
     implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
     implementation 'cn.jiguang.sdk:jcore:+'  // 此处以JCore 1.2.5 版本为例。
     implementation 'com.lxj:xpopup:1.8.8'
-
-
-
+    //JZvideo
+    implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+    //qrcode
+    implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.3.6'
+    //Bugly
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
 }

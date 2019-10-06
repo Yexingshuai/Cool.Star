@@ -28,11 +28,13 @@ import android.widget.TextView;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.component.life.qrcode.QRcodeActivity;
 import com.example.myapp.myapp.component.life.widget.BannerWidget;
 import com.example.myapp.myapp.component.life.widget.ListWidget;
 import com.example.myapp.myapp.data.bean.JokeResponse;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
+import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.utils.PermissonUtil;
 import com.example.myapp.myapp.utils.ToastUtil;
 
@@ -47,7 +49,6 @@ import interfaces.heweather.com.interfacesmodule.bean.Unit;
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
 import interfaces.heweather.com.interfacesmodule.bean.weather.now.NowBase;
 import interfaces.heweather.com.interfacesmodule.view.HeWeather;
-
 
 
 /**
@@ -124,7 +125,8 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
         mImage_weather_line = getView(R.id.image_weather_line);
         mText_weather = getView(R.id.text_weather);
         mImgDefault = getView(R.id.image_weather_default);
-//        setVectorDrawable(getActivity(), ivScanCode, R.drawable.ic_home_menu_scan, true);
+        ImageView mImgFilter = getView(R.id.imageView_filter);
+        mImgFilter.setOnClickListener(this);
         mSearchLayout.setOnClickListener(this);
         mUpImg.setOnClickListener(this);
         ivScanCode.setOnClickListener(this);
@@ -270,7 +272,7 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
                         NowBase nowBase = now.getNow();
                         String cond_code = nowBase.getCond_code();//图标代码
                         String location = now.getBasic().getLocation();
-                        mImage_weather_line.setVisibility(View.INVISIBLE);
+                        mImage_weather_line.setVisibility(View.VISIBLE);
                         mImgDefault.setVisibility(View.GONE);
                         mText_location.setText(location);
                         String tmp = nowBase.getTmp();
@@ -370,7 +372,20 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
             case R.id.searchLayout:
                 break;
             case R.id.scan_code:
+                PermissonUtil.requestPermisson(getActivity(), Manifest.permission.CAMERA, "相机", new PermissonUtil.PermissonListener() {
+                    @Override
+                    public void onPermissonGranted() {
+                        UiHelper.skipActivityNofinish(getActivity(), QRcodeActivity.class);
+                    }
 
+                    @Override
+                    public void onPermissonDenied() {
+//                        ToastUtil.showApp("权限被拒绝");
+                    }
+                });
+
+                break;
+            case R.id.imageView_filter:
                 break;
         }
     }

@@ -2,12 +2,16 @@ package com.example.myapp.myapp.common;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -54,18 +58,15 @@ public class InitializeConfig {
         JPushInterface.setDebugMode(isDebug);
         JPushInterface.init(appContext);
 
-
-        //初始化框架
-//        Retrofit.Builder builder = new Retrofit.Builder();
-//        builder.baseUrl(AppUrl.BASEURL);//配置主机地址， 必须以/ 结束
-//        builder.addConverterFactory(GsonConverterFactory.create(new Gson()));// 指定使用什么框架完成json解析
-//        builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());  //支持RxJava
-//        //读取@get上面的请求
-//        httpUtil = builder.build().create(WandroidApi.class);
-
-
+        //Bugly
+//        Beta.autoInit = false;
+        Beta.autoCheckUpgrade = false;
+        Bugly.init(appContext, "a2ecdae09d", true);
         //必须调用初始化
         OkGo.init(appContext);
+
+        //baidu map
+        SDKInitializer.initialize(appContext);
 
 
         //以下设置的所有参数是全局参数,同样的参数可以在请求的时候再设置一遍,那么对于该请求来讲,请求中的参数会覆盖全局参数

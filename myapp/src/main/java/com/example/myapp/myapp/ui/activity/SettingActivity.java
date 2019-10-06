@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.example.myapp.myapp.common.AppFlag;
 import com.example.myapp.myapp.utils.CacheCleanUtil;
 import com.example.myapp.myapp.utils.PreferencesUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
+import com.tencent.bugly.beta.Beta;
 
 import org.androidannotations.annotations.App;
 
@@ -29,6 +31,7 @@ public class SettingActivity extends BaseActivity {
     private TextView mCache;
     private Switch mSwitchImage;
     private Switch mSwitchPush;
+    private RelativeLayout mRootUpdate;
 
     @Override
     public int inflateContentView() {
@@ -42,6 +45,8 @@ public class SettingActivity extends BaseActivity {
         setCommonClickListener(cardView);
         mSwitchImage = getView(R.id.switch_image);
         mSwitchPush = getView(R.id.switch_push);
+        mRootUpdate = getView(R.id.rl_update);
+        setCommonClickListener(mRootUpdate);
     }
 
     @Override
@@ -91,6 +96,10 @@ public class SettingActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 ToastUtil.showApp("清除成功！");
+                break;
+
+            case R.id.rl_update:
+                Beta.checkUpgrade(true, false);
                 break;
         }
     }

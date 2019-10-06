@@ -1,8 +1,6 @@
 package com.example.myapp.myapp.component.life.viewholder;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,11 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
 import com.example.myapp.myapp.component.life.entity.JokeBean;
@@ -40,7 +34,6 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
     private TextView tv_commenter_name;
     private TextView tv_commenter_text;
     private ImageView img_content;
-    private View img_default;
 
 
     public GifRVHolder(@NonNull View itemView, Context context) {
@@ -64,7 +57,6 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
         tv_commenter_name = itemView.findViewById(R.id.tv_commenter_name);
         tv_commenter_text = itemView.findViewById(R.id.tv_commenter_text);
         img_content = itemView.findViewById(R.id.img_content);
-        img_default = itemView.findViewById(R.id.img_default);
         img_content.setOnClickListener(this);
     }
 
@@ -81,40 +73,40 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
         }
         if (!TextUtils.isEmpty(dataBean.gif)) {
             imgUrl = dataBean.gif;
-//            GlideContext.loadCommon(mContext, dataBean.image, img_content);
-//            Glide.with(mContext).load(dataBean.gif).asBitmap().listener(new RequestListener<String, Bitmap>() {
+
+//            GlideContext.loadCommon(mContext,dataBean.gif,img_content);
+
+
+            Glide.with(mContext).load(dataBean.gif).asBitmap().listener(new RequestListener() {
+                @Override
+                public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
+                    img_content.setVisibility(View.GONE);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    img_content.setVisibility(View.VISIBLE);
+                    return false;
+                }
+
+            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
+
+//            Glide.with(mContext).load(dataBean.gif).listener(new RequestListener<String, GlideDrawable>() {
 //                @Override
-//                public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
+//                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
 //                    img_content.setVisibility(View.GONE);
 //                    img_default.setVisibility(View.GONE);
 //                    return false;
 //                }
 //
 //                @Override
-//                public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
 //                    img_content.setVisibility(View.VISIBLE);
 //                    img_default.setVisibility(View.GONE);
 //                    return false;
 //                }
-//
-//
 //            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
-
-            Glide.with(mContext).load(dataBean.gif).listener(new RequestListener<String, GlideDrawable>() {
-                @Override
-                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                    img_content.setVisibility(View.GONE);
-                    img_default.setVisibility(View.GONE);
-                    return false;
-                }
-
-                @Override
-                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                    img_content.setVisibility(View.VISIBLE);
-                    img_default.setVisibility(View.GONE);
-                    return false;
-                }
-            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
 
         }
         if (!TextUtils.isEmpty(dataBean.username)) {
@@ -158,9 +150,7 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
                 if (TextUtils.isEmpty(imgUrl)) {
                     return;
                 }
-//                new XPopup.Builder(mContext)
-//                        .asImageViewer(img_content, imgUrl, true, -1, -1, 50, false, new ImageLoader())
-//                        .show();
+
 
                 new XPopup.Builder(mContext)
                         .asImageViewer(img_content, imgUrl, new ImageLoader())

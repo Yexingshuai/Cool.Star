@@ -32,7 +32,7 @@
                 <com.example.myapp.myapp.ui.view.CircleImageView
                     android:id="@+id/icon"
                     android:layout_width="18dp"
-                    android:layout_height="18dp"/>
+                    android:layout_height="18dp" />
 
                 <TextView
                     android:id="@+id/tv_username"
@@ -52,22 +52,14 @@
                 android:textSize="14sp" />
 
             <RelativeLayout
+                android:layout_marginTop="6dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="200dp">
                 <!--image-->
-                <ImageView
-                    android:id="@+id/img_content"
+                <cn.jzvd.JzvdStd
+                    android:id="@+id/jz_video"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:scaleType="centerCrop" />
-
-                <View
-                    android:id="@+id/img_default"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@mipmap/image_load_fail" />
+                    android:layout_height="200dp" />
 
             </RelativeLayout>
             <!--评论-->

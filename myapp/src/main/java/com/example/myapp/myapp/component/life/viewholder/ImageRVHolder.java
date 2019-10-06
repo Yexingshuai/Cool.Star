@@ -1,10 +1,9 @@
 package com.example.myapp.myapp.component.life.viewholder;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
@@ -32,7 +30,6 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
     private TextView tv_commenter_name;
     private TextView tv_commenter_text;
     private ImageView img_content;
-    private View img_default;
 
 
     public ImageRVHolder(@NonNull View itemView, Context context) {
@@ -56,20 +53,17 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
         tv_commenter_name = itemView.findViewById(R.id.tv_commenter_name);
         tv_commenter_text = itemView.findViewById(R.id.tv_commenter_text);
         img_content = itemView.findViewById(R.id.img_content);
-        img_default = itemView.findViewById(R.id.img_default);
         img_content.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
-//        img_content.setImageResource(0);
-        img_default.setVisibility(View.VISIBLE);
+//        img_default.setVisibility(View.VISIBLE);
     }
 
 
     public void setData(JokeBean.DataBean dataBean) {
-//        img_content.setVisibility(View.GONE);
-//        img_default.setVisibility(View.GONE);
+        img_content.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(dataBean.header)) {
             GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
@@ -77,15 +71,14 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
             Glide.with(mContext).load(dataBean.image).asBitmap().listener(new RequestListener() {
                 @Override
                 public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
+                    ((AppCompatActivity)mContext).supportStartPostponedEnterTransition();
                     img_content.setVisibility(View.GONE);
-                    img_default.setVisibility(View.GONE);
                     return false;
                 }
 
                 @Override
                 public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
                     img_content.setVisibility(View.VISIBLE);
-                    img_default.setVisibility(View.GONE);
                     return false;
                 }
 

@@ -45,7 +45,7 @@
             </LinearLayout>
 
             <!--正文-->
-            <TextView
+            <com.example.myapp.myapp.ui.view.ExpandTextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:layout_marginTop="4dp"
                 android:text="显示全部"
                 android:textColor="#02AF66"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
             <!--评论-->

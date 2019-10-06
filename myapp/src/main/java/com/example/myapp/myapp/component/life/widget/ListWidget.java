@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.common.AppFlag;
+import com.example.myapp.myapp.component.map.MapActivity;
 import com.example.myapp.myapp.component.weather.WeatherActivity;
 import com.example.myapp.myapp.data.api.MobApi;
 import com.example.myapp.myapp.data.bean.FortuneResponse;
@@ -80,7 +81,7 @@ public class ListWidget extends BaseWidget {
                     utils.converse();
                     break;
                 case 5:
-                    ToastUtil.showApp("待开发！");
+                  UiHelper.skipActivityNofinish(mContext,MapActivity.class);
                     break;
                 case 6:
                     UiHelper.skipActivityNofinish(mContext, WeatherActivity.class);

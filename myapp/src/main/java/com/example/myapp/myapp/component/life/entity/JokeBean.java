@@ -74,6 +74,7 @@ public class JokeBean {
         public String gif;
         public String thumbnail;
         public String video;
+        public boolean isExpand;
 
     }
 }

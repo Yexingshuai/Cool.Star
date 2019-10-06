@@ -2,12 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <!--android:icon="@drawable/ic_add_white_24dp"-->
     <item
-        android:id="@+id/pick_up"
-        android:icon="@drawable/ic_add_white_24dp"
+        android:id="@+id/find_200"
         android:menuCategory="container"
         android:orderInCategory="100"
-        android:title="提货"
+        android:title="200米范围内"
+        app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/find_500"
+        android:menuCategory="container"
+        android:orderInCategory="100"
+        android:title="500米范围内"
+        app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/find_1000"
+        android:menuCategory="container"
+        android:orderInCategory="100"
+        android:title="1000米范围内"
         app:showAsAction="collapseActionView" />
 
     <!--  app:showAsAction="collapseActionView" -->

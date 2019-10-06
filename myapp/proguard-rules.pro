@@ -251,9 +251,46 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 
+#okgo
+-dontwarn com.lzy.okgo.**
+-keep class com.lzy.okgo.**{*;}
+
+#okrx
+-dontwarn com.lzy.okrx.**
+-keep class com.lzy.okrx.**{*;}
+
+#okrx2
+-dontwarn com.lzy.okrx2.**
+-keep class com.lzy.okrx2.**{*;}
+
+#okserver
+-dontwarn com.lzy.okserver.**
+-keep class com.lzy.okserver.**{*;}
+
 #xPopup
 -dontwarn com.lxj.xpopup.widget.**
 -keep class com.lxj.xpopup.widget.**{*;}
+
+#JZvideo
+-keep public class cn.jzvd.JZMediaSystem {*; }
+-keep public class cn.jzvd.demo.CustomMedia.CustomMedia {*; }
+-keep public class cn.jzvd.demo.CustomMedia.JZMediaIjk {*; }
+-keep public class cn.jzvd.demo.CustomMedia.JZMediaSystemAssertFolder {*; }
+
+-keep class tv.danmaku.ijk.media.player.** {*; }
+-dontwarn tv.danmaku.ijk.media.player.*
+-keep interface tv.danmaku.ijk.media.player.** { *; }
+
+
+#Bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+-keep class android.support.**{*;}
+
+#map
+-keep class com.baidu.** {*;}
+-keep class mapsdkvi.com.** {*;}
+-dontwarn com.baidu.**
 
 #-------------------------------------------------------------------------
 

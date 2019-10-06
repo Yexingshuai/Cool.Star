@@ -17,6 +17,9 @@ import com.example.myapp.myapp.component.life.entity.JokeBean;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 
+import cn.jzvd.JzvdStd;
+
+
 public class VideoRVHolder extends BaseViewHolder {
 
     private CircleImageView icon;
@@ -29,9 +32,7 @@ public class VideoRVHolder extends BaseViewHolder {
     private TextView tv_time;
     private TextView tv_commenter_name;
     private TextView tv_commenter_text;
-    private ImageView img_content;
-    private View img_default;
-
+    private JzvdStd jzvdStd;
 
     public VideoRVHolder(@NonNull View itemView, Context context) {
         super(itemView, context);
@@ -53,8 +54,7 @@ public class VideoRVHolder extends BaseViewHolder {
         commnentsRoot = itemView.findViewById(R.id.ll_wonderful_commnets);
         tv_commenter_name = itemView.findViewById(R.id.tv_commenter_name);
         tv_commenter_text = itemView.findViewById(R.id.tv_commenter_text);
-        img_content = itemView.findViewById(R.id.img_content);
-        img_default = itemView.findViewById(R.id.img_default);
+        jzvdStd = itemView.findViewById(R.id.jz_video);
     }
 
     @Override
@@ -63,28 +63,32 @@ public class VideoRVHolder extends BaseViewHolder {
     }
 
     public void setData(JokeBean.DataBean dataBean) {
-//        img_content.setVisibility(View.GONE);
-//        img_default.setVisibility(View.GONE);
         if (!TextUtils.isEmpty(dataBean.header)) {
             GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
         if (!TextUtils.isEmpty(dataBean.thumbnail)) {
-            Glide.with(mContext).load(dataBean.thumbnail).asBitmap().listener(new RequestListener() {
-                @Override
-                public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
-                    img_content.setVisibility(View.GONE);
-                    img_default.setVisibility(View.GONE);
-                    return false;
-                }
+//            Glide.with(mContext).load(dataBean.thumbnail).asBitmap().listener(new RequestListener() {
+//                @Override
+//                public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
+//                    img_content.setVisibility(View.GONE);
+//                    img_default.setVisibility(View.GONE);
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                    img_content.setVisibility(View.VISIBLE);
+//                    img_default.setVisibility(View.GONE);
+//                    return false;
+//                }
+//
+//            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
+            if (!TextUtils.isEmpty(dataBean.video)) {
+                jzvdStd.setUp(dataBean.video, dataBean.text);
+                GlideContext.loadCommon(mContext, dataBean.thumbnail, jzvdStd.thumbImageView);
+                jzvdStd.positionInList=getAdapterPosition();
+            }
 
-                @Override
-                public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
-                    img_content.setVisibility(View.VISIBLE);
-                    img_default.setVisibility(View.GONE);
-                    return false;
-                }
-
-            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
         }
         if (!TextUtils.isEmpty(dataBean.username)) {
             userName.setText(dataBean.username);

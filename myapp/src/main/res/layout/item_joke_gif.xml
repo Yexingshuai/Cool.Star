@@ -63,13 +63,13 @@
                     android:layout_marginTop="10dp"
                     android:scaleType="centerCrop" />
 
-                <View
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/img_default"
-                    android:layout_width="200dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@mipmap/image_load_fail" />
+                <!--<View-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:id="@+id/img_default"-->
+                    <!--android:layout_width="200dp"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@mipmap/image_load_fail" />-->
 
             </RelativeLayout>
             <!--评论-->

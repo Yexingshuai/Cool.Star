@@ -10,12 +10,18 @@ public interface JokeFragmentContract {
     interface Presenter extends BasePresenter {
 
         void requestJokeInfo(int type);
+
+        void requestMoreJokeInfo(int type);
     }
 
 
     interface View extends BaseView<Presenter> {
 
         void setJokeInfo(JokeBean jokeBean);
+
+        void setMoreJokeInfo(JokeBean jokeBean);
+
+        void loadFail();
     }
 }
 

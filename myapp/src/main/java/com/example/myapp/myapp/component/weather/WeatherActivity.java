@@ -47,6 +47,7 @@ public class WeatherActivity extends BaseActivity implements BaseView<WeatherPre
     private RecyclerView mRecyclerView_2;
     //未来天气情况
     private List<ForecastBase> daily_forecast = new ArrayList<>();
+    private String imgUrl = "https://cdn.heweather.com/cond_icon/%s.png";
 
 
     @Override
@@ -90,19 +91,23 @@ public class WeatherActivity extends BaseActivity implements BaseView<WeatherPre
         mAdapter = new RecyclerAdapter<HourlyBase>(R.layout.item_weather_hour, hourlyList) {
             @Override
             protected void onBindHolder(RecyclerHolder holder, HourlyBase model, int position) {
+                String s = String.format(imgUrl, model.getCond_code());
                 String time = model.getTime();
                 holder.text(R.id.tv_time, time.substring(5, time.length()));
                 holder.text(R.id.tv_tmp, model.getTmp() + "°");
+                holder.image(WeatherActivity.this,R.id.iv,s);
             }
         };
         mRecyclerView.setAdapter(mAdapter);
         mForecastAdapter = new RecyclerAdapter<ForecastBase>(R.layout.item_weather_forecast, daily_forecast) {
             @Override
             protected void onBindHolder(RecyclerHolder holder, ForecastBase model, int position) {
+                String s = String.format(imgUrl,model.getCond_code_n());
                 holder.text(R.id.tv_time, model.getDate().substring(5, model.getDate().length()));
                 String tmp_max = model.getTmp_max();
                 String tmp_min = model.getTmp_min();
                 holder.text(R.id.tv_tmp, tmp_max + "°" + "/" + tmp_min + "°");
+                holder.image(WeatherActivity.this,R.id.iv,s);
             }
         };
         mRecyclerView_2.setAdapter(mForecastAdapter);

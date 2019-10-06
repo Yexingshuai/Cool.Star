@@ -143,6 +143,27 @@
             </RelativeLayout>
 
 
+
+            <RelativeLayout
+                android:background="?android:attr/selectableItemBackground"
+                android:id="@+id/rl_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dp"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="检查更新"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </RelativeLayout>
+
+
         </LinearLayout>
 
 

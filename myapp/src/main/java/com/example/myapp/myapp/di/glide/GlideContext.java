@@ -44,7 +44,7 @@ public class GlideContext {
 //                .fallback(new ColorDrawable(Color.BLUE))//后备回调符
 //                .into(imageView);
         Glide.with(context)
-                .load(url)
+                .load(url).asBitmap()
                 .into(imageView);
     }
 

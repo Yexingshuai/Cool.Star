@@ -4,9 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +12,7 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.component.life.entity.JokeBean;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.view.CircleImageView;
+import com.example.myapp.myapp.ui.view.ExpandTextView;
 
 public class TextRVHolder extends BaseViewHolder implements View.OnClickListener {
 
@@ -22,7 +21,7 @@ public class TextRVHolder extends BaseViewHolder implements View.OnClickListener
     private CircleImageView icon_comment;
     private LinearLayout commnentsRoot;
     private TextView userName;
-    private TextView content;
+    private ExpandTextView content;
     private TextView tv_up;
     private TextView tv_down;
     private TextView tv_time;
@@ -64,34 +63,49 @@ public class TextRVHolder extends BaseViewHolder implements View.OnClickListener
 
     @Override
     public void initData() {
-        allLinesHeight = -1;
-        tv_all.setText("显示全部");
-        tv_all.setVisibility(View.GONE);
-        isExpand=false;
-//        content.setMaxLines(3);
-//        content.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                int lineCount = content.getLineCount();
-//                if (lineCount > 3) {
-//                    content.setMaxLines(3);
-//                    tv_all.setVisibility(View.VISIBLE);
-//                } else {
-//                    tv_all.setVisibility(View.GONE);
-//                }
-//            }
-//        });
+
     }
 
     public void setData(JokeBean.DataBean dataBean) {
         if (!TextUtils.isEmpty(dataBean.header)) {
-            GlideContext.loadCommon(mContext, dataBean.header, icon,R.mipmap.icon_head2);
+            GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
         if (!TextUtils.isEmpty(dataBean.username)) {
             userName.setText(dataBean.username);
         }
         if (!TextUtils.isEmpty(dataBean.text)) {
-            content.setText(dataBean.text);
+            content.setChanged(false);
+            content.setText(dataBean.text, dataBean.isExpand, new ExpandTextView.Callback() {
+                @Override
+                public void onExpand() {
+                  tv_all.setText("收起");
+                }
+
+                @Override
+                public void onCollapse() {
+                    tv_all.setText("显示全部");
+                }
+
+                @Override
+                public void onLoss() {
+                    tv_all.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onPrepare() {
+                    tv_all.setVisibility(View.VISIBLE);
+                }
+            });
+
+            tv_all.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 保存当前行的状态
+                    dataBean.isExpand = !dataBean.isExpand;
+                    // 切换状态
+                    content.setChanged(dataBean.isExpand);
+                }
+            });
         } else {
             content.setText("暂无数据");
         }
@@ -107,7 +121,7 @@ public class TextRVHolder extends BaseViewHolder implements View.OnClickListener
         if (!TextUtils.isEmpty(dataBean.top_commentsContent)) {
             commnentsRoot.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(dataBean.top_commentsHeader)) {
-                GlideContext.loadCommon(mContext, dataBean.top_commentsHeader, icon_comment,R.mipmap.icon_head2);
+                GlideContext.loadCommon(mContext, dataBean.top_commentsHeader, icon_comment, R.mipmap.icon_head2);
             }
             if (!TextUtils.isEmpty(dataBean.top_commentsName)) {
                 tv_commenter_name.setText(dataBean.top_commentsName + "：");
@@ -169,7 +183,7 @@ public class TextRVHolder extends BaseViewHolder implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_all:
-                excuteAnim();
+//                excuteAnim();
                 break;
         }
     }

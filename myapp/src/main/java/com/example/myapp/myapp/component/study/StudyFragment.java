@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -46,6 +47,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.tencent.bugly.beta.Beta;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -110,6 +112,8 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
      * 页码
      */
     private int mPageNum = PAGE_NUMBER_DEFAULT;
+
+    private boolean loadUpdate;
 
     public Handler handler = new Handler() {
         @Override
@@ -341,6 +345,11 @@ public class StudyFragment extends BaseFragment implements StudyFragmentContract
             HomeItemBean.DataBean data = homeItem.getData();
             List<HomeItemBean.DataBean.DatasBean> datas = data.getDatas();
             homeAdapter.addHomeInfo(datas, true);
+        }
+        //等待首页刷新完成后，在检查更新
+        if (!loadUpdate) {
+            loadUpdate = true;
+            Beta.checkUpgrade(false,false);
         }
 
     }

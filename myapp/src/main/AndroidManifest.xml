@@ -17,13 +17,18 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- location -->
+    <!-- location   map-->
     <!-- 访问网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--震动-->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--二维码-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!--Bugly-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".myapp.base.MyApp"
@@ -33,6 +38,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="WDxbFkduexbSQwsKsrBhT3KUnVXuVyau" />
+
+
         <activity
             android:name=".myapp.ui.activity.SplashActivity"
             android:screenOrientation="portrait"
@@ -45,6 +55,8 @@
         </activity>
         <activity
             android:name=".myapp.ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -83,6 +95,17 @@
         <activity
             android:name=".myapp.component.news.category.CategoryActivity"
             android:label="分类筛选"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".myapp.component.life.qrcode.QRcodeActivity"
+            android:label="扫描二维码"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".myapp.component.map.MapActivity"
+            android:label="找厕所"
             android:screenOrientation="portrait" />
 
         <!--Push Receiver-->
@@ -197,6 +220,20 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- Share End -->
+
+        <!--Bugly start-->
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <!--map-->
+
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
+
 
     </application>
 

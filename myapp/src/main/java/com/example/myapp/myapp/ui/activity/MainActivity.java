@@ -34,6 +34,8 @@ import com.example.myapp.myapp.ui.view.NavigationButton;
 import com.example.myapp.myapp.utils.PreferencesUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -41,6 +43,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jzvd.Jzvd;
 
 /**
  * Created by yexing on 2018/3/28.  现在在测试分支上
@@ -85,7 +88,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         super.onNewIntent(intent);
     }
 
-
     @Override
     protected void initData() {
 
@@ -120,7 +122,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         }
 
         mTabLayout.addOnTabSelectedListener(new TabLayoutOnItemSelectListener());
-
     }
 
     @Override
@@ -223,7 +224,11 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         return false;
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
+    }
     class NavigationItemSelectListener implements NavigationView.OnNavigationItemSelectedListener {
 
         @Override

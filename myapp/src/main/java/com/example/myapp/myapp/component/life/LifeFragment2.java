@@ -130,7 +130,6 @@ public class LifeFragment2 extends BaseFragment implements LifeFragmentContract.
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 BaseFragment baseFragment = mFragmentList.get(mViewPager.getCurrentItem());
 
-                Log.e("-=-=-=-=-=", scrollY + "");
                 if (scrollY > mLlHeader.getMeasuredHeight()) {
                     mNestScrollview.setNeedScroll(false);
 
@@ -141,22 +140,6 @@ public class LifeFragment2 extends BaseFragment implements LifeFragmentContract.
                 }
             }
         });
-
-        Log.e("lglglglg", mLlHeader.getMeasuredHeight() + "");
-
-//        setTabItemClickListener();
-
-
-//        mNestScrollview.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mNestScrollview.scrollTo(0, 0);
-//            }
-//        },5000);
-
-
-
-
 
     }
 
