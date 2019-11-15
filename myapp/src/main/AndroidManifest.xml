@@ -29,6 +29,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!--Bugly-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".myapp.base.MyApp"
@@ -107,6 +108,19 @@
             android:name=".myapp.component.map.MapActivity"
             android:label="找厕所"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".myapp.component.schedule.AddScheduleActivity"
+            android:label="新建日程"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".myapp.component.schedule.TodayThingActivity"
+            android:label="今日事"
+            android:screenOrientation="portrait" />
+
+        <!--日程预览-->
+        <activity android:name=".myapp.component.schedule.PreviewScheduleActivity" />
 
         <!--Push Receiver-->
         <!-- User defined. 用户自定义的广播接收器-->
@@ -230,9 +244,10 @@
 
         <!--map-->
 
-        <service android:name="com.baidu.location.f"
+        <service
+            android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
 
 
     </application>

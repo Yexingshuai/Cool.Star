@@ -2,6 +2,7 @@ package com.example.myapp.myapp.component.life.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,12 +15,15 @@ import android.view.View;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.base.BaseFragment;
+import com.example.myapp.myapp.component.life.LifeFragment3;
 import com.example.myapp.myapp.component.life.entity.JokeBean;
 import com.example.myapp.myapp.component.life.viewholder.TextRVHolder;
+import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.data.bean.FavoriteResponse;
 import com.example.myapp.myapp.data.source.joke.JokeFragmentRepository;
 import com.example.myapp.myapp.ui.adapter.RecyclerAdapter;
 import com.example.myapp.myapp.ui.adapter.RecyclerHolder;
+import com.example.myapp.myapp.ui.helper.RecyclerViewScrollHelper;
 import com.example.myapp.myapp.ui.layoutmanager.ScrollLinearManager;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -30,6 +34,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,7 +62,7 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
 
     @Override
     protected boolean isNeedToBeSubscriber() {
-        return false;
+        return true;
     }
 
 
@@ -126,7 +133,7 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
 
             }
         });
-        mPresenter.requestJokeInfo(mFgType);
+//        mPresenter.requestJokeInfo(mFgType);
     }
 
 
@@ -146,7 +153,6 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
         mlist.clear();
         if (jokeBean == null) {
             ToastUtil.showApp("jokeBean为空");
-
             return;
         }
 
@@ -201,5 +207,14 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
     @Override
     public boolean onTurnBack() {
         return Jzvd.backPress();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(Message msg) {
+        if (msg.what == LifeFragment3.RECYCLERVIEW_TOP) {
+//            RecyclerViewScrollHelper.scrollToPosition(mRecyclerView, 0);
+            ((LinearLayoutManager)mRecyclerView.getLayoutManager()).scrollToPositionWithOffset(0,0);
+        }
+
     }
 }

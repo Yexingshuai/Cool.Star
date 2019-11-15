@@ -13,6 +13,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -38,6 +39,8 @@ import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.utils.PermissonUtil;
 import com.example.myapp.myapp.utils.ToastUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -62,6 +65,8 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
      * 默认页码数
      */
     private static final int PAGE_NUMBER_DEFAULT = 1;
+
+    public static final int RECYCLERVIEW_TOP = 2;
 
     private List<BaseFragment> mFragmentList;
     private TabLayout mTabLayout;
@@ -197,6 +202,9 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
             mAppbarlayout.setExpanded(true);
             isShowImg = false;
             mUpImg.setVisibility(View.GONE);
+            Message message = new Message();
+            message.what = RECYCLERVIEW_TOP;
+            EventBus.getDefault().post(message);
         }
     }
 

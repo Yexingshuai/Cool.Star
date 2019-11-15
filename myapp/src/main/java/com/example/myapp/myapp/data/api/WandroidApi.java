@@ -1,14 +1,18 @@
 package com.example.myapp.myapp.data.api;
 
+import com.example.myapp.myapp.data.bean.AddscheduleResponse;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.FavoriteResponse;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.data.bean.RegisterResponse;
+import com.example.myapp.myapp.data.bean.ScheduleListResponse;
 import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
+import com.umeng.socialize.sina.message.BaseResponse;
 
 import java.util.Map;
 
+import io.reactivex.annotations.Nullable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -121,5 +125,28 @@ public interface WandroidApi {
     @FormUrlEncoded
     @POST("article/query/{id}/json")
     Observable<KeyWordResponse> searchKeyWord(@Path("id") int id, @Field("k") String k);
+
+    /**
+     * 添加日程
+     *
+     * @param title
+     * @param content
+     * @param date
+     * @param type     可选  时间类型，自定义
+     * @param priority 可选  优先级， 自定义
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("lg/todo/add/json")
+    Observable<AddscheduleResponse> addSchedule(@Field("title") String title, @Field("content") String content, @Field("date") String date, @Field("type") String type, @Field("priority") String priority);
+
+
+    /**
+     * 查询todo清单
+     *
+     * @return
+     */
+    @GET("lg/todo/v2/list/1/json")
+    Observable<ScheduleListResponse> getScheduleList();
 
 }

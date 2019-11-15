@@ -12,9 +12,9 @@ public class QrCodePresenter {
 
     private Activity mContext;
 
-    private String http = "http://";
+    private final String http = "http://";
 
-    private String https = "https://";
+    private final String https = "https://";
 
 
     public QrCodePresenter(Context context, String result) {
@@ -35,8 +35,9 @@ public class QrCodePresenter {
          * 网址
          */
         if (mResult.startsWith(http) || mResult.startsWith(https)) {
-            UiHelper.skipWebActivity(mContext, "", mResult);
-            return true;
+//            UiHelper.skipWebActivity(mContext, "", mResult);
+//            return true;
+            return false;
         } else {
             return false;
         }

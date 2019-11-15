@@ -45,39 +45,39 @@ public class JokeFragmentPresenter implements JokeFragmentContract.Presenter {
 
     @Override
     public void requestJokeInfo(int type) {
-//        mSource.getJokeList(type, new HttpContext.Response<JokeBean>() {
-//            @Override
-//            public void success(JokeBean result) {
-//                mView.setJokeInfo(result);
-//            }
+        mSource.getJokeList(type, new HttpContext.Response<JokeBean>() {
+            @Override
+            public void success(JokeBean result) {
+                mView.setJokeInfo(result);
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
+                mView.loadFail();
+                ToastUtil.showApp(error);
+            }
+        });
+//        joke = String.format(joke, type);
+
+
+//        OkGo.get(joke)
+//                .tag(this)
+//                .cacheMode(CacheMode.DEFAULT)
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(String s, Call call, Response response) {
+//                        Gson gson = new Gson();
+//                        JokeBean jokeBean = gson.fromJson(s, JokeBean.class);
+//                        mView.setJokeInfo(jokeBean);
+//                    }
 //
-//            @Override
-//            public void error(String error) {
-//                super.error(error);
-//                mView.loadFail();
-//                ToastUtil.showApp(error);
-//            }
-//        });
-        joke = String.format(joke, type);
-
-
-        OkGo.get(joke)
-                .tag(this)
-                .cacheMode(CacheMode.DEFAULT)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Gson gson = new Gson();
-                        JokeBean jokeBean = gson.fromJson(s, JokeBean.class);
-                        mView.setJokeInfo(jokeBean);
-                    }
-
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-
-                    }
-                });
+//                    @Override
+//                    public void onError(Call call, Response response, Exception e) {
+//                        super.onError(call, response, e);
+//
+//                    }
+//                });
 
     }
 

@@ -82,8 +82,8 @@ android {
         }
 
         debug {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -173,4 +173,6 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.3.6'
     //Bugly
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //日历
+    implementation 'com.haibin:calendarview:3.6.6'
 }

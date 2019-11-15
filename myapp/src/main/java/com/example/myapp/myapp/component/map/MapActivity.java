@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -123,6 +124,8 @@ public class MapActivity extends BaseActivity {
     private void createInfoWindow(PoiInfo bean) {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_marker, null);
         TextView tv_location = view.findViewById(R.id.tv_location);
+        TextView tv_go = view.findViewById(R.id.tv_go); //去这里
+        setCommonClickListener(tv_go);
         tv_location.setText(bean.address);
         InfoWindow infoWindow = new InfoWindow(view, bean.location, -100);
         //使InfoWindow生效
@@ -187,7 +190,7 @@ public class MapActivity extends BaseActivity {
 
     private LocationListener.LocationCallBack locationCallBack = new LocationListener.LocationCallBack() {
         @Override
-        public void setLocationInfo(MyLocationData locData) {
+        public void setLocationInfo(MyLocationData locData, BDLocation location) {
             mlatitude = locData.latitude;
             mlongitude = locData.longitude;
 
@@ -274,6 +277,8 @@ public class MapActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.img_location:
                 isFirstIn = true;
+                break;
+            case R.id.tv_go:
                 break;
         }
     }

@@ -197,7 +197,7 @@ public class RetrofitServer {
                 //获得返回的数据
                 Buffer buffer1 = source.buffer();
                 //使用前clone()下，避免直接消耗
-//                Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
+                Log.e("Retrofit-data--", buffer1.clone().readString(Charset.forName("UTF-8")));
             }
 
             Log.e("Retrofit-url--", request.url() + "");

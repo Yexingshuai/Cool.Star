@@ -292,6 +292,13 @@
 -keep class mapsdkvi.com.** {*;}
 -dontwarn com.baidu.**
 
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context);
+}
+
+
+#
+
 #-------------------------------------------------------------------------
 
 #---------------------------------3.与js互相调用的类------------------------

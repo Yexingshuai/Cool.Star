@@ -20,7 +20,7 @@ public class LocationListener extends BDAbstractLocationListener {
                 .direction(location.getDirection()).latitude(location.getLatitude())
                 .longitude(location.getLongitude()).build();
         if (mLocationCallBack != null) {
-            mLocationCallBack.setLocationInfo(locData);
+            mLocationCallBack.setLocationInfo(locData, location);
         }
     }
 
@@ -30,7 +30,7 @@ public class LocationListener extends BDAbstractLocationListener {
     }
 
     public interface LocationCallBack {
-        void setLocationInfo(MyLocationData locData);
+        void setLocationInfo(MyLocationData locData, BDLocation location);
     }
 
 }

@@ -10,12 +10,12 @@ import android.widget.Toast;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.common.AppFlag;
+import com.example.myapp.myapp.component.schedule.TodayThingActivity;
 import com.example.myapp.myapp.component.map.MapActivity;
 import com.example.myapp.myapp.component.weather.WeatherActivity;
 import com.example.myapp.myapp.data.api.MobApi;
 import com.example.myapp.myapp.data.bean.FortuneResponse;
 import com.example.myapp.myapp.data.http.HttpContext;
-import com.example.myapp.myapp.ui.activity.MainActivity;
 import com.example.myapp.myapp.ui.activity.VocalConcertTextActivity;
 import com.example.myapp.myapp.ui.adapter.OnItemClickListener;
 import com.example.myapp.myapp.ui.adapter.RecyclerAdapter;
@@ -50,7 +50,7 @@ public class ListWidget extends BaseWidget {
         public void onItemClick(View view, int position) {
             switch (position) {
                 case 0:
-                    ToastUtil.showApp("待开发！");
+                    UiHelper.skipActivityNofinish(mContext, TodayThingActivity.class);
                     break;
                 case 1:
                     UiHelper.skipWebActivity(mContext, "", "https://www.ickd.cn/");
@@ -81,7 +81,7 @@ public class ListWidget extends BaseWidget {
                     utils.converse();
                     break;
                 case 5:
-                  UiHelper.skipActivityNofinish(mContext,MapActivity.class);
+                    UiHelper.skipActivityNofinish(mContext, MapActivity.class);
                     break;
                 case 6:
                     UiHelper.skipActivityNofinish(mContext, WeatherActivity.class);
@@ -124,7 +124,7 @@ public class ListWidget extends BaseWidget {
         mList.add(new Tab("手电筒", R.mipmap.shoudian));
         mList.add(new Tab("找厕所", R.mipmap.toilet));
         mList.add(new Tab("看天气", R.mipmap.item_weather));
-        mList.add(new Tab("不知道", R.mipmap.donkonw));
+        mList.add(new Tab("Siri", R.mipmap.chat));
     }
 
 

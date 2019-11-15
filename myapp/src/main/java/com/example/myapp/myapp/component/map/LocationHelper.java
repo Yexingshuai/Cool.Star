@@ -44,6 +44,7 @@ public class LocationHelper {
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);
+        option.setIsNeedAddress(true); //需要获取位置信息
 
         //设置locationClientOption
         mLocationClient.setLocOption(option);
