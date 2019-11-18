@@ -39,7 +39,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/calendar_detail_week"
+                android:id="@+id/tv_week"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:layout_gravity="center_horizontal"
@@ -49,7 +49,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/calendar_day"
+                android:id="@+id/tv_day"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/calendar_month"
+            android:id="@+id/tv_month"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_alignParentBottom="true"
@@ -92,7 +92,7 @@
         android:paddingLeft="40dp">
 
         <TextView
-            android:id="@+id/calendar_detail_name"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="标题"
@@ -101,7 +101,7 @@
 
 
         <TextView
-            android:id="@+id/calendar_detail_time"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="13dp"
@@ -164,7 +164,7 @@
                 android:paddingRight="10dp">
 
                 <TextView
-                    android:id="@+id/calendar_address1"
+                    android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -177,7 +177,7 @@
 
 
                 <TextView
-                    android:id="@+id/calendar_us"
+                    android:id="@+id/tv_contact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -194,66 +194,49 @@
 
     <!--编辑删除-->
     <RelativeLayout
+        android:id="@+id/rl_delete"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="#F7F7F7"
         android:elevation="6dp">
 
-        <LinearLayout
-            android:id="@+id/ll_detail_bottom_self"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:drawableLeft="@mipmap/calendar_del"
+            android:drawablePadding="10dp"
+            android:text="删除"
+            android:textColor="#777777"
+            android:textSize="13sp"
+
+            />
 
 
-            <LinearLayout
-                android:id="@+id/ll_detail_del"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="center">
+        <!--<LinearLayout-->
+        <!--android:id="@+id/ll_detail_edit"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="25dp"
-                    android:drawableLeft="@mipmap/calendar_del"
-                    android:drawablePadding="10dp"
-                    android:text="删除"
-                    android:textColor="#777777"
-                    android:textSize="13sp"
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="25dp"-->
+        <!--android:drawableLeft="@mipmap/calendar_edit"-->
+        <!--android:drawablePadding="10dp"-->
+        <!--android:text="编辑"-->
+        <!--android:textColor="#777777"-->
+        <!--android:textSize="13sp"-->
 
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_detail_edit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="25dp"
-                    android:drawableLeft="@mipmap/calendar_edit"
-                    android:drawablePadding="10dp"
-                    android:text="编辑"
-                    android:textColor="#777777"
-                    android:textSize="13sp"
-
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
+        <!--/>-->
+        <!--</LinearLayout>-->
 
 
     </RelativeLayout>

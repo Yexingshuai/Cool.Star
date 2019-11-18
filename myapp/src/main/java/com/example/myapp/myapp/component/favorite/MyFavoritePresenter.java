@@ -2,7 +2,7 @@ package com.example.myapp.myapp.component.favorite;
 
 import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.data.bean.FavoriteResponse;
-import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
+import com.example.myapp.myapp.data.bean.WanAndroidBaseResponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.favorite.MyFavoriteSource;
 import com.google.gson.Gson;
@@ -75,7 +75,7 @@ public class MyFavoritePresenter implements MyFavoriteContract.Presenter {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Gson gson = new Gson();
-                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
+                        WanAndroidBaseResponse reponse = gson.fromJson(s, WanAndroidBaseResponse.class);
                         int errorCode = reponse.getErrorCode();
                         if (errorCode == 0) {
                             mView.delCollectArtistSuccess();

@@ -7,12 +7,10 @@ import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
 import com.example.myapp.myapp.data.bean.RegisterResponse;
 import com.example.myapp.myapp.data.bean.ScheduleListResponse;
-import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
-import com.umeng.socialize.sina.message.BaseResponse;
+import com.example.myapp.myapp.data.bean.WanAndroidBaseResponse;
 
 import java.util.Map;
 
-import io.reactivex.annotations.Nullable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -95,7 +93,7 @@ public interface WandroidApi {
      * @return
      */
     @POST("lg/collect/{id}/json")
-    Observable<WanAndroidBaseReponse> collect(@Path("id") int id);
+    Observable<WanAndroidBaseResponse> collect(@Path("id") int id);
 
     /**
      * 取消收藏
@@ -104,7 +102,7 @@ public interface WandroidApi {
      * @return
      */
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<WanAndroidBaseReponse> unCollect(@Path("id") int id);
+    Observable<WanAndroidBaseResponse> unCollect(@Path("id") int id);
 
     /**
      * 获取收藏列表
@@ -148,5 +146,15 @@ public interface WandroidApi {
      */
     @GET("lg/todo/v2/list/1/json")
     Observable<ScheduleListResponse> getScheduleList();
+
+
+    /**
+     * 删除一个todo
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("lg/todo/delete/83/json")
+    Observable<WanAndroidBaseResponse> delTodo(@Field("id") int id);
 
 }

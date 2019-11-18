@@ -152,7 +152,7 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
             ScheduleListResponse.DataBean.DatasBean datasBean = mList.get(position);
             Intent intent = new Intent(TodayThingActivity.this, PreviewScheduleActivity.class);
             intent.putExtra(PreviewScheduleActivity.SCHEDULEINFO, datasBean);
-            startActivity(intent);
+            startActivityForResult(intent,2);
         }
     };
 
@@ -267,8 +267,15 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 1001) {
-            requestTodoList();
+        if (requestCode == 1) {
+            if (resultCode == 1001) {
+                requestTodoList();
+            }
+        } else if (requestCode == 2) {
+            if (resultCode == 1002) {
+                requestTodoList();
+            }
         }
+
     }
 }

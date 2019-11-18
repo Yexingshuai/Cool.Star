@@ -4,7 +4,7 @@ package com.example.myapp.myapp.data.bean;
  * Created by yexing on 2018/8/10.
  */
 
-public class WanAndroidBaseReponse {
+public class WanAndroidBaseResponse {
 
 
     /**
@@ -13,17 +13,9 @@ public class WanAndroidBaseReponse {
      * errorMsg :
      */
 
-    private Object data;
     private int errorCode;
     private String errorMsg;
 
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 
     public int getErrorCode() {
         return errorCode;

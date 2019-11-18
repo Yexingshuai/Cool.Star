@@ -1,26 +1,16 @@
 package com.example.myapp.myapp.component.study;
 
-import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
 import com.example.myapp.myapp.data.bean.KeyWordResponse;
-import com.example.myapp.myapp.data.bean.WanAndroidBaseReponse;
+import com.example.myapp.myapp.data.bean.WanAndroidBaseResponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.study.StudyFragmentSource;
 import com.example.myapp.myapp.room.Injection;
 import com.example.myapp.myapp.room.RoomServer;
 import com.example.myapp.myapp.room.search.SearchDataSource;
 import com.example.myapp.myapp.room.search.entity.SearchHistory;
-import com.google.gson.Gson;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.HttpHeaders;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Response;
 
 
 /**
@@ -98,9 +88,9 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 
     @Override
     public void collectArtist(int id) {
-        mSource.collect(id, new HttpContext.Response<WanAndroidBaseReponse>() {
+        mSource.collect(id, new HttpContext.Response<WanAndroidBaseResponse>() {
             @Override
-            public void success(WanAndroidBaseReponse result) {
+            public void success(WanAndroidBaseResponse result) {
                 int errorCode = result.getErrorCode();
                 if (errorCode == 0) {
                     mView.collectSuccess();
@@ -129,7 +119,7 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 //                    @Override
 //                    public void onSuccess(String s, Call call, Response response) {
 //                        Gson gson = new Gson();
-//                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
+//                        WanAndroidBaseResponse reponse = gson.fromJson(s, WanAndroidBaseResponse.class);
 //                        int errorCode = reponse.getErrorCode();
 //                        if (errorCode == 0) {
 //                            mView.collectSuccess();
@@ -156,9 +146,9 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
     @Override
     public void unCollect(int id) {
 
-        mSource.unCollect(id, new HttpContext.Response<WanAndroidBaseReponse>() {
+        mSource.unCollect(id, new HttpContext.Response<WanAndroidBaseResponse>() {
             @Override
-            public void success(WanAndroidBaseReponse result) {
+            public void success(WanAndroidBaseResponse result) {
                 int errorCode = result.getErrorCode();
                 if (errorCode == 0) {
                     mView.unCollectSuccess();
@@ -180,7 +170,7 @@ public class StudyFragmentPresenter implements StudyFragmentContract.Presenter {
 //                    @Override
 //                    public void onSuccess(String s, Call call, Response response) {
 //                        Gson gson = new Gson();
-//                        WanAndroidBaseReponse reponse = gson.fromJson(s, WanAndroidBaseReponse.class);
+//                        WanAndroidBaseResponse reponse = gson.fromJson(s, WanAndroidBaseResponse.class);
 //                        int errorCode = reponse.getErrorCode();
 //                        if (errorCode == 0) {
 //                            mView.unCollectSuccess();
