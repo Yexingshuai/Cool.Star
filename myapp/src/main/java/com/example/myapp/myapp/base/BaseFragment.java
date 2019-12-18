@@ -36,6 +36,8 @@ public abstract class BaseFragment extends Fragment {
 
     public static final int SHOWINDICATOR = 1003;
 
+    private View mRoot;
+
 
     @Override
     public void onStart() {
@@ -80,9 +82,20 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e(TAG_LOG, "------------------onCreateView");
-        mFragmentView = inflater.inflate(getLayoutId(), container, false);
-        initView();
-        return mFragmentView;
+
+        if (mRoot == null) {
+            mFragmentView = inflater.inflate(getLayoutId(), container, false);
+            initView();
+            mRoot = mFragmentView;
+        } else {
+            if (mRoot.getParent() != null) {
+                // 把当前Root从其父控件中移除
+                ((ViewGroup) mRoot.getParent()).removeView(mRoot);
+            }
+        }
+
+
+        return mRoot;
 
     }
 
@@ -114,11 +127,7 @@ public abstract class BaseFragment extends Fragment {
 
         if (mIsFirstVisible && mHasCreatedView && getUserVisibleHint()) {
             onFragmentVisibleToUser(isVisibleToUser);
-            if (!MainActivity.isShow) {
-                Message message = new Message();
-                message.what = SHOWINDICATOR;
-                EventBus.getDefault().post(message);
-            }
+
         }
 
     }

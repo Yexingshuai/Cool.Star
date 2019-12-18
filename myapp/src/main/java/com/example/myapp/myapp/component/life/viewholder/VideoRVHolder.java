@@ -90,8 +90,8 @@ public class VideoRVHolder extends BaseViewHolder {
             }
 
         }
-        if (!TextUtils.isEmpty(dataBean.username)) {
-            userName.setText(dataBean.username);
+        if (!TextUtils.isEmpty(dataBean.name)) {
+            userName.setText(dataBean.name);
         }
         if (!TextUtils.isEmpty(dataBean.text)) {
             content.setText(dataBean.text);

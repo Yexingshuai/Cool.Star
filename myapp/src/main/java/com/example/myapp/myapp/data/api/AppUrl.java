@@ -34,7 +34,7 @@ public class AppUrl {
     public static final String BANNER = BASEURL + "banner/json";
 
 
-    public static final String BASEURL5 = "https://www.apiopen.top/";
+    public static final String BASEURL5 = "https://api.apiopen.top/";
 
 
 }

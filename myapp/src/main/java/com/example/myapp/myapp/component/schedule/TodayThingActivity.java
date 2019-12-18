@@ -23,6 +23,7 @@ import com.example.myapp.myapp.ui.adapter.OnItemClickListener;
 import com.example.myapp.myapp.ui.adapter.RecyclerAdapter;
 import com.example.myapp.myapp.ui.adapter.RecyclerHolder;
 import com.example.myapp.myapp.ui.helper.UiHelper;
+import com.example.myapp.myapp.utils.ToastUtil;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarLayout;
 import com.haibin.calendarview.CalendarView;
@@ -33,7 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TodayThingActivity extends BaseActivity implements CalendarView.OnCalendarSelectListener, CalendarView.OnYearChangeListener, CalendarView.OnCalendarLongClickListener {
+public class TodayThingActivity extends BaseActivity implements
+        CalendarView.OnCalendarSelectListener, CalendarView.OnYearChangeListener, CalendarView.OnCalendarLongClickListener {
 
     private TextView mTextMonthDay;
     private TextView mTextYear;
@@ -43,10 +45,13 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
     private CalendarView mCalendarView;
     private CalendarLayout mCalendarLayout;
     private int mYear;
+    private int mMonth;
+    private int mDay;
     private RecyclerView mRecyclerView;
     private List<ScheduleListResponse.DataBean.DatasBean> mList = new ArrayList();
     private RecyclerAdapter mAdapter;
     private LinearLayout mLayout_empty_data;
+
 
     @Override
     public int inflateContentView() {
@@ -126,7 +131,6 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
 //                            holder.text(R.id.txt_start_time, "全天");
                         }
 
-
                     }
 
                 } else {
@@ -152,7 +156,7 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
             ScheduleListResponse.DataBean.DatasBean datasBean = mList.get(position);
             Intent intent = new Intent(TodayThingActivity.this, PreviewScheduleActivity.class);
             intent.putExtra(PreviewScheduleActivity.SCHEDULEINFO, datasBean);
-            startActivityForResult(intent,2);
+            startActivityForResult(intent, 2);
         }
     };
 
@@ -178,23 +182,25 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
         HttpContext httpContext = new HttpContext();
         WandroidApi api = httpContext.createApi(WandroidApi.class);
         httpContext.execute(api.getScheduleList(), new HttpContext.Response<ScheduleListResponse>() {
-            @Override
-            public void success(ScheduleListResponse result) {
-                List<ScheduleListResponse.DataBean.DatasBean> datas = result.getData().getDatas();
-                if (datas != null && datas.size() > 0) {
-//                    mLayout_empty_data.setVisibility(View.GONE);
-                    mList.clear();
-                    mList.addAll(datas);
-                    mAdapter.notifyDataSetChanged();
+                    @Override
+                    public void success(ScheduleListResponse result) {
+                        if (result.getErrorCode() == 0) {
 
-                } else {
-//                    mLayout_empty_data.setVisibility(View.VISIBLE);
+                            List<ScheduleListResponse.DataBean.DatasBean> datas = result.getData().getDatas();
+                            if (datas != null && datas.size() > 0) {
+                                mList.clear();
+                                mList.addAll(datas);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            ToastUtil.showApp(result.getErrorMsg());
+                        }
+                    }
+
                 }
-            }
-        });
-
-
+        );
     }
+
 
     @Override
     protected void onClickImpl(View view) {
@@ -229,6 +235,9 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
         mTextYear.setText(String.valueOf(calendar.getYear()));
         mTextLunar.setText(calendar.getLunar());
         mYear = calendar.getYear();
+        mMonth = calendar.getMonth();
+        mDay = calendar.getDay();
+
     }
 
     @Override
@@ -258,6 +267,9 @@ public class TodayThingActivity extends BaseActivity implements CalendarView.OnC
         switch (item.getItemId()) {
             case R.id.add_schedule:
                 Intent intent = new Intent(this, AddScheduleActivity.class);
+                intent.putExtra("year", mYear);
+                intent.putExtra("month", mMonth);
+                intent.putExtra("day", mDay);
                 startActivityForResult(intent, 1);
                 break;
         }

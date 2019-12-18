@@ -10,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.Address;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -35,16 +37,27 @@ import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.route.BikingRouteResult;
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.IndoorRouteResult;
+import com.baidu.mapapi.search.route.MassTransitRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.example.myapp.R;
 import com.example.myapp.myapp.base.BaseActivity;
 import com.example.myapp.myapp.component.map.listener.LocationListener;
 import com.example.myapp.myapp.component.map.overlayutil.PoiOverlay;
+import com.example.myapp.myapp.component.map.overlayutil.WalkingRouteOverlay;
 import com.example.myapp.myapp.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends BaseActivity {
+public class MapActivity extends BaseActivity implements BaiduMap.OnMapClickListener {
 
 
     private MapView mMapView = null;
@@ -63,6 +76,9 @@ public class MapActivity extends BaseActivity {
     private double mlongitude;
 
     private static final int Distance = 200;// 默认搜索范围
+    private RoutePlanSearch mSearch;
+    private String mCity;
+    private String mAddr;
 
     @Override
     public int inflateContentView() {
@@ -91,6 +107,13 @@ public class MapActivity extends BaseActivity {
 
         mMapViewMap.showMapPoi(true); //显示poi
 
+        //路线规划
+        mSearch = RoutePlanSearch.newInstance();
+
+        //设置路线规划检索监听器
+        mSearch.setOnGetRoutePlanResultListener(mRoutePlanListener);
+
+
         mLocationHelper = LocationHelper.getInstance();
         mLocationHelper.init(this, locationCallBack);
         mLocationHelper.startLocation();//显示定位
@@ -102,6 +125,7 @@ public class MapActivity extends BaseActivity {
         mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(onGetPoiSearchResultListener);
 
+        mMapViewMap.setOnMapClickListener(this);
 
         checkNearPoi(Distance);
         //Marker设置点击事件
@@ -110,6 +134,14 @@ public class MapActivity extends BaseActivity {
             public boolean onMarkerClick(Marker marker) {
                 PoiInfo info = (PoiInfo) marker.getExtraInfo().get("marker");//点击的marker
                 createInfoWindow(info);
+                double latitude = info.location.latitude;
+                double longitude = info.location.longitude;
+
+                //移动到中间
+                LatLng latLng = new LatLng(latitude, longitude);
+                MapStatusUpdate status = MapStatusUpdateFactory.newLatLng(latLng);
+                mMapViewMap.animateMapStatus(status);  //带有动画的移动到中心点
+
                 return true;
             }
         });
@@ -127,7 +159,25 @@ public class MapActivity extends BaseActivity {
         TextView tv_go = view.findViewById(R.id.tv_go); //去这里
         setCommonClickListener(tv_go);
         tv_location.setText(bean.address);
+        tv_go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //准备起点终点信息
+                PlanNode stNode = PlanNode.withCityNameAndPlaceName(mCity, mAddr);
+                PlanNode enNode = PlanNode.withCityNameAndPlaceName(mCity, bean.address);
+
+//                PlanNode stNode = PlanNode.withCityNameAndPlaceName("北京", "西二旗地铁站");
+//                PlanNode enNode = PlanNode.withCityNameAndPlaceName("北京", "百度科技园");
+                //发起检索
+                mSearch.walkingSearch((new WalkingRoutePlanOption())
+                        .from(stNode)
+                        .to(enNode));
+
+                mMapViewMap.hideInfoWindow();
+            }
+        });
         InfoWindow infoWindow = new InfoWindow(view, bean.location, -100);
+
         //使InfoWindow生效
         mMapViewMap.showInfoWindow(infoWindow);
     }
@@ -193,6 +243,8 @@ public class MapActivity extends BaseActivity {
         public void setLocationInfo(MyLocationData locData, BDLocation location) {
             mlatitude = locData.latitude;
             mlongitude = locData.longitude;
+            mCity = location.getCity();
+            mAddr = location.getAddrStr();
 
             if (isFirstIn) {
                 isFirstIn = false;
@@ -202,6 +254,49 @@ public class MapActivity extends BaseActivity {
             } else {
                 mMapViewMap.setMyLocationData(locData);
             }
+
+        }
+    };
+
+
+    private OnGetRoutePlanResultListener mRoutePlanListener = new OnGetRoutePlanResultListener() {
+        @Override
+        public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+            //创建WalkingRouteOverlay实例
+            WalkingRouteOverlay overlay = new WalkingRouteOverlay(mMapViewMap, MapActivity.this);
+            if (walkingRouteResult.getRouteLines() != null && walkingRouteResult.getRouteLines().size() > 0) {
+                //获取路径规划数据,(以返回的第一条数据为例)
+                //为WalkingRouteOverlay实例设置路径数据
+                overlay.setData(walkingRouteResult.getRouteLines().get(0));
+                //在地图上绘制WalkingRouteOverlay
+//                overlay.addToMap();
+            } else {
+                ToastUtil.showApp("抱歉，暂未规划路线");
+            }
+        }
+
+        @Override
+        public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+
+        }
+
+        @Override
+        public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
+
+        }
+
+        @Override
+        public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+
+        }
+
+        @Override
+        public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
+
+        }
+
+        @Override
+        public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
 
         }
     };
@@ -268,6 +363,7 @@ public class MapActivity extends BaseActivity {
         mLocationHelper.stop();
         mLocationHelper = null;
         mPoiSearch.destroy();
+        mSearch.destroy();
 
     }
 
@@ -303,6 +399,16 @@ public class MapActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        mMapViewMap.hideInfoWindow();
+    }
+
+    @Override
+    public void onMapPoiClick(MapPoi mapPoi) {
+
     }
 
 

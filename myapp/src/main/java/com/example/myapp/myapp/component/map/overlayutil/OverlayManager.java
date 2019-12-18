@@ -31,7 +31,7 @@ public abstract class OverlayManager implements OnMarkerClickListener, OnPolylin
     BaiduMap mBaiduMap = null;
     private List<OverlayOptions> mOverlayOptionList = null;
 
-    List<Overlay> mOverlayList = null;
+    protected List<Overlay> mOverlayList = null;
 
     /**
      * 通过一个BaiduMap 对象构造

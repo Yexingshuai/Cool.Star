@@ -70,8 +70,8 @@ public class TextRVHolder extends BaseViewHolder implements View.OnClickListener
         if (!TextUtils.isEmpty(dataBean.header)) {
             GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
-        if (!TextUtils.isEmpty(dataBean.username)) {
-            userName.setText(dataBean.username);
+        if (!TextUtils.isEmpty(dataBean.name)) {
+            userName.setText(dataBean.name);
         }
         if (!TextUtils.isEmpty(dataBean.text)) {
             content.setChanged(false);

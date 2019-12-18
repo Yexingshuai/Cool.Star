@@ -243,6 +243,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.mTurnBackListeners.add(l);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        // 当点击界面导航返回时，Finish当前界面
+        return super.onSupportNavigateUp();
+    }
+
 
     @Override
     public void onBackPressed() {

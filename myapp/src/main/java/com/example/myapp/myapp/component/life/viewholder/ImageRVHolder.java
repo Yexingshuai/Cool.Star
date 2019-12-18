@@ -67,8 +67,8 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
         if (!TextUtils.isEmpty(dataBean.header)) {
             GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
-        if (!TextUtils.isEmpty(dataBean.image)) {
-            Glide.with(mContext).load(dataBean.image).asBitmap().listener(new RequestListener() {
+        if (!TextUtils.isEmpty(dataBean.images)) {
+            Glide.with(mContext).load(dataBean.images).asBitmap().listener(new RequestListener() {
                 @Override
                 public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
                     ((AppCompatActivity)mContext).supportStartPostponedEnterTransition();
@@ -84,8 +84,8 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
 
             }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
         }
-        if (!TextUtils.isEmpty(dataBean.username)) {
-            userName.setText(dataBean.username);
+        if (!TextUtils.isEmpty(dataBean.name)) {
+            userName.setText(dataBean.name);
         }
         if (!TextUtils.isEmpty(dataBean.text)) {
             content.setText(dataBean.text);

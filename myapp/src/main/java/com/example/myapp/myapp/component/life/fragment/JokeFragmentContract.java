@@ -9,9 +9,9 @@ public interface JokeFragmentContract {
 
     interface Presenter extends BasePresenter {
 
-        void requestJokeInfo(int type);
+        void requestJokeInfo(int page,String type);
 
-        void requestMoreJokeInfo(int type);
+        void requestMoreJokeInfo(int page,String type);
     }
 
 

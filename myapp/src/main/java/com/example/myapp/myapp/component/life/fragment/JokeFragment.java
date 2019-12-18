@@ -56,9 +56,15 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
     private List<JokeBean.DataBean> mlist = new ArrayList();
     private JokeFragmentContract.Presenter mPresenter;
     public static final String FG_TYPE = "fg_type";
-    private int mFgType;
+    private String mFgType;
     private MultiTypeAdapter mAdapter;
     private SmartRefreshLayout mRefreshLayout;
+    private int mPageNum;
+
+    /**
+     * 默认页码数
+     */
+    private static final int PAGE_NUMBER_DEFAULT = 1;
 
     @Override
     protected boolean isNeedToBeSubscriber() {
@@ -66,9 +72,9 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
     }
 
 
-    public static JokeFragment newInstance(int type) {
+    public static JokeFragment newInstance(String type) {
         Bundle bundle = new Bundle();
-        bundle.putInt(FG_TYPE, type);
+        bundle.putString(FG_TYPE, type);
         JokeFragment jokeFragment = new JokeFragment();
         jokeFragment.setArguments(bundle);
         return jokeFragment;
@@ -90,7 +96,7 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
     @Override
     public void initView() {
         new JokeFragmentPresenter(new JokeFragmentRepository(), this);
-        mFgType = getArguments().getInt(FG_TYPE);
+        mFgType = getArguments().getString(FG_TYPE);
         mRecyclerView = getView(R.id.recyclerView);
         mRefreshLayout = getView(R.id.refreshLayout);
     }
@@ -122,14 +128,16 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mPresenter.requestJokeInfo(mFgType);
+                mPageNum = PAGE_NUMBER_DEFAULT;
+                mPresenter.requestJokeInfo(mPageNum, mFgType);
             }
         });
 
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mPresenter.requestMoreJokeInfo(mFgType);
+//                mPresenter.requestMoreJokeInfo(mFgType);
+                mPresenter.requestMoreJokeInfo(mPageNum++, mFgType);
 
             }
         });
@@ -157,8 +165,12 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
         }
 
         List<JokeBean.DataBean> jokeBeanData = jokeBean.getData();
-        mlist.addAll(jokeBeanData);
+        if (jokeBeanData != null) {
+            if (jokeBeanData.size() == 0) return;
+            mlist.addAll(jokeBeanData);
+        }
         mAdapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -213,7 +225,7 @@ public class JokeFragment extends BaseFragment implements JokeFragmentContract.V
     public void Event(Message msg) {
         if (msg.what == LifeFragment3.RECYCLERVIEW_TOP) {
 //            RecyclerViewScrollHelper.scrollToPosition(mRecyclerView, 0);
-            ((LinearLayoutManager)mRecyclerView.getLayoutManager()).scrollToPositionWithOffset(0,0);
+            ((LinearLayoutManager) mRecyclerView.getLayoutManager()).scrollToPositionWithOffset(0, 0);
         }
 
     }

@@ -103,12 +103,21 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
         mLocationHelper.init(this, locationCallBack);
         calendar = Calendar.getInstance(Locale.CHINA);
 
+
         //初始日期
         mYear = calendar.get(Calendar.YEAR);
         mMonth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int swithMonth = mMonth + 1;
+        mYear = getIntent().getIntExtra("year", 0);
+        mMonth = getIntent().getIntExtra("month", 0);
+        mDay = getIntent().getIntExtra("day", 0);
+
+//        int swithMonth = mMonth + 1;
+        int swithMonth = mMonth;
+
+        mStartTime.setText(mYear + "-" + swithMonth + "-" + mDay + " ");
+        mFinshTime.setText(mYear + "-" + swithMonth + "-" + mDay + " ");
 
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -287,8 +296,12 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
 
 
     private void searchContacts() {
-        Uri uri = Uri.parse("content://contacts/people");
-        Intent intent = new Intent(Intent.ACTION_PICK, uri);
+//        Uri uri = Uri.parse("content://contacts/people");
+//        Intent intent = new Intent(Intent.ACTION_PICK, uri);
+//        startActivityForResult(intent, 0);
+
+
+        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(intent, 0);
     }
 
@@ -303,7 +316,7 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
         sb.append(mEt_input.getText().toString().trim() + "#"); //正文
         sb.append(mEt_input_address.getText().toString().trim() + "#"); //地址
         sb.append(mEt_contact.getText().toString().trim() + "#");
-        sb.append(mSwitch.isChecked() ? 0+"#" : 1+"#"); //
+        sb.append(mSwitch.isChecked() ? 0 + "#" : 1 + "#"); //
         sb.append(mStartTime.getText() + "#"); //正文
         sb.append(mFinshTime.getText() + "#"); //正文
 
@@ -313,8 +326,13 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
         httpContext.execute(wandroidApi.addSchedule(title, sb.toString(), null, null, null), new HttpContext.Response<AddscheduleResponse>() {
             @Override
             public void success(AddscheduleResponse result) {
-                ToastUtil.showApp("添加成功！");
-                setResult(1001);
+                if (result.getErrorCode() == 0) {
+                    ToastUtil.showApp("添加成功！");
+                    setResult(1001);
+                } else {
+                    ToastUtil.showApp(result.getErrorMsg());
+                }
+
                 finish();
             }
 
@@ -341,10 +359,11 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
         super.onClickImpl(view);
         switch (view.getId()) {
             case R.id.save:
-                if (mEt_input.getText().toString().trim().length() > 0 && mEt_title.getText().toString().trim().length() > 0) {
+                if (mEt_input.getText().toString().trim().length() > 0 && mEt_title.getText().toString().trim().length() > 0
+                        && mEt_input_address.getText().toString().trim().length() > 0) {
                     addSchedule();
                 } else {
-                    ToastUtil.showApp("请输入标题和内容！");
+                    ToastUtil.showApp("请输入标题和内容与地址！");
                 }
                 break;
             case R.id.img_location:
@@ -391,7 +410,8 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
     public void afterTextChanged(Editable s) {
 
         if (s.length() > 0) {
-            if (mEt_title.getText().toString().length() > 0 & mEt_input.getText().toString().length() > 0) {
+            if (mEt_title.getText().toString().length() > 0 & mEt_input.getText().toString().length() > 0
+                    & mEt_input_address.getText().toString().trim().length() > 0) {
 
                 mButtonSave.setTextColor(getResources().getColor(R.color.black));
             } else {

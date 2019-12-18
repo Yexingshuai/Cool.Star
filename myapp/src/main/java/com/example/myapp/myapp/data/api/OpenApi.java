@@ -14,6 +14,6 @@ public interface OpenApi {
     /**
      * 获取段子信息
      */
-    @GET("satinGodApi")
-    Observable<JokeBean> getJokeInfo(@Query("type") int type, @Query("page") int page);
+    @GET("getJoke")
+    Observable<JokeBean> getJokeInfo(@Query("page") int page, @Query("count") int count, @Query("type") String type);
 }

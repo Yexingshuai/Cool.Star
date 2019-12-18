@@ -6,7 +6,7 @@ public class JokeBean {
 
     public int code;
     public String msg;
-    public List<DataBean> data;
+    public List<DataBean> result;
 
     public int getCode() {
         return code;
@@ -25,11 +25,11 @@ public class JokeBean {
     }
 
     public List<DataBean> getData() {
-        return data;
+        return result;
     }
 
     public void setData(List<DataBean> data) {
-        this.data = data;
+        this.result = data;
     }
 
     public static class DataBean {
@@ -57,7 +57,7 @@ public class JokeBean {
 
         public String type;
         public String text;
-        public String username;
+        public String name;
         public String uid;
         public String header;
         public String comment;
@@ -70,7 +70,7 @@ public class JokeBean {
         public String up;
         public String down;
         public String forward;
-        public String image;
+        public String images;
         public String gif;
         public String thumbnail;
         public String video;

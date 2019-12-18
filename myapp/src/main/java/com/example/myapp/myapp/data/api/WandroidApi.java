@@ -153,8 +153,8 @@ public interface WandroidApi {
      *
      * @return
      */
-    @FormUrlEncoded
-    @POST("lg/todo/delete/83/json")
-    Observable<WanAndroidBaseResponse> delTodo(@Field("id") int id);
+
+    @POST("lg/todo/delete/{id}/json")
+    Observable<WanAndroidBaseResponse> delTodo(@Path("id") int id);
 
 }

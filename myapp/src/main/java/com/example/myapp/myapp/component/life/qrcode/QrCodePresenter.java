@@ -35,9 +35,8 @@ public class QrCodePresenter {
          * 网址
          */
         if (mResult.startsWith(http) || mResult.startsWith(https)) {
-//            UiHelper.skipWebActivity(mContext, "", mResult);
-//            return true;
-            return false;
+            UiHelper.skipWebActivity(mContext, "", mResult);
+            return true;
         } else {
             return false;
         }
