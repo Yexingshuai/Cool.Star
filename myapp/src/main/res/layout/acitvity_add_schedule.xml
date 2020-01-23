@@ -125,6 +125,87 @@
 
             </RelativeLayout>
 
+
+            <!--radioGroup-->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="12dp"
+                android:background="#e7e7e7" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="100dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="选择日程类型"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+                />
+
+                <RadioGroup
+                    android:id="@+id/rg_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/rb1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rb_toady_schedule"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="事" />
+
+                    <RadioButton
+                        android:id="@+id/rb2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rb_toady_schedule"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="议" />
+
+                    <RadioButton
+                        android:id="@+id/ib2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rb_toady_schedule"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="假" />
+
+                    <RadioButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rb_toady_schedule"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="玩" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
             <!--time-->
 
             <RelativeLayout
@@ -144,13 +225,13 @@
                     android:textSize="14sp" />
 
                 <android.support.v7.widget.SwitchCompat
-                    android:checked="true"
                     android:id="@+id/sw_all_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:checked="true" />
             </RelativeLayout>
 
             <View

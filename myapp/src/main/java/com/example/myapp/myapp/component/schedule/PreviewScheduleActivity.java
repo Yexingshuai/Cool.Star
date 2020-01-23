@@ -16,6 +16,7 @@ import com.example.myapp.myapp.data.bean.ScheduleListResponse;
 import com.example.myapp.myapp.data.bean.WanAndroidBaseResponse;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.ui.dialog.CalendarDialog;
+import com.example.myapp.myapp.utils.StringUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
 
@@ -62,7 +63,7 @@ public class PreviewScheduleActivity extends BaseActivity {
         mData = (ScheduleListResponse.DataBean.DatasBean) getIntent().getSerializableExtra(SCHEDULEINFO);
         mTitle.setText(mData.getTitle());
         String[] contents = mData.getContent().split("#");
-        if (contents.length != 6) {
+        if (contents.length != 7) {
             return;
         }
         //正文
@@ -87,9 +88,36 @@ public class PreviewScheduleActivity extends BaseActivity {
             //全天
             mTime.setText("全天");
         } else {
+            //具体时间段  13:00 PM  18:00 PM
+            String startTime = contents[4];
+            String endTime = contents[5];
+            String[] startSplit = startTime.split(" ");
+            String[] endSplit = endTime.split(" ");
+            StringBuilder builder = new StringBuilder();
+            if (startSplit.length == 2) {
+                builder.append(startSplit[1]).append(" AM  ");
+            }
+
+            if (endSplit.length == 2) {
+                builder.append(endSplit[1]).append(" PM");
+            }
+            mTime.setText(builder.toString());
 
         }
 
+        //开始时间
+        if (!TextUtils.isEmpty(contents[4])) {
+
+            String[] split = contents[4].split(" ");
+
+            String timeInfo[] = split[0].split("-");
+            mDay.setText(timeInfo[2]);
+            //月份
+            mMonth.setText(StringUtils.getZHMonth(Integer.parseInt(timeInfo[1])));
+            //星期
+            mWeek.setText(StringUtils.dateToWeek(split[0]));
+
+        }
 
     }
 

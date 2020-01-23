@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="@dimen/sp_22" />
 
     </android.support.v7.widget.Toolbar>
 

@@ -43,15 +43,15 @@ public class GlideContext {
 //                .error(new ColorDrawable(Color.RED))//错误符
 //                .fallback(new ColorDrawable(Color.BLUE))//后备回调符
 //                .into(imageView);
-        Glide.with(context)
-                .load(url).asBitmap()
+        Glide.with(context).load(url)
+//                .load(url).asBitmap()
                 .into(imageView);
     }
 
     public static void loadCommon(Context context, String url, ImageView imageView, int placeholder) {
         Glide.with(context)
                 .load(url)
-                .placeholder(placeholder)
+//                .placeholder(placeholder)
                 .into(imageView);
     }
 
@@ -88,8 +88,8 @@ public class GlideContext {
 //                .into(imageView);
         Glide.with(context)
                 .load(url)
-                .asGif()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                .asGif()
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
 
@@ -103,8 +103,8 @@ public class GlideContext {
 //                .into(imageView);
         Glide.with(context)
                 .load(resId)
-                .asGif()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                .asGif()
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
 
@@ -113,7 +113,7 @@ public class GlideContext {
         Glide.with(context)
                 .load(url)
 //                .transform(mBlurTransformation)
-                .crossFade()
+//                .crossFade()
                 .into(imageView);
     }
 }

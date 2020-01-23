@@ -44,7 +44,7 @@
                 android:layout_height="15dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:text="TUE"
+                android:text=""
                 android:textColor="#333333"
                 android:textSize="12sp" />
 
@@ -54,7 +54,7 @@
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:text="12"
+                android:text=""
                 android:textColor="#333333"
                 android:textSize="35sp" />
         </LinearLayout>
@@ -67,7 +67,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="115dp"
             android:layout_marginBottom="15dp"
-            android:text="十一月"
+            android:text=""
             android:textColor="#333333"
             android:textSize="16sp" />
 
@@ -95,7 +95,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="标题"
+            android:text=""
             android:textColor="#333333"
             android:textSize="15sp" />
 
@@ -108,9 +108,11 @@
             android:drawableLeft="@mipmap/calendar_timer_lv"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:text="13:00 PM  18:00 PM"
+            android:text=""
             android:textColor="#00c994"
             android:textSize="12sp" />
+
+        <!--13:00 PM  18:00 PM-->
 
         <TextView
             android:id="@+id/tv_content"
@@ -120,7 +122,7 @@
             android:ellipsize="end"
             android:lineSpacingExtra="3dp"
             android:maxLines="4"
-            android:text="哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+            android:text=""
             android:textColor="#666666"
             android:textSize="14sp" />
 
@@ -171,7 +173,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="地点"
+                    android:text=""
                     android:textColor="#333333"
                     android:textSize="16sp" />
 

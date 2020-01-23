@@ -9,11 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import com.example.myapp.myapp.data.bean.JokeBean;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.lxj.xpopup.XPopup;
@@ -57,7 +56,6 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
         tv_commenter_name = itemView.findViewById(R.id.tv_commenter_name);
         tv_commenter_text = itemView.findViewById(R.id.tv_commenter_text);
         img_content = itemView.findViewById(R.id.img_content);
-        img_content.setOnClickListener(this);
     }
 
     @Override
@@ -74,39 +72,22 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
         if (!TextUtils.isEmpty(dataBean.images)) {
             imgUrl = dataBean.images;
 
-//            GlideContext.loadCommon(mContext,dataBean.gif,img_content);
 
+            //xpop
+            Glide.with(img_content).asBitmap().load(dataBean.images).apply(new RequestOptions()
+                    .override(Target.SIZE_ORIGINAL))
+                    .into(img_content);
 
-            Glide.with(mContext).load(dataBean.images).asBitmap().listener(new RequestListener() {
+            img_content.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
-                    img_content.setVisibility(View.GONE);
-                    return false;
+                public void onClick(View v) {
+
+                    new XPopup.Builder(v.getContext())
+                            .asImageViewer(img_content, imgUrl, true, -1, -1, 50, false, new ImageLoader())
+                            .show();
                 }
+            });
 
-                @Override
-                public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
-                    img_content.setVisibility(View.VISIBLE);
-                    return false;
-                }
-
-            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
-
-//            Glide.with(mContext).load(dataBean.gif).listener(new RequestListener<String, GlideDrawable>() {
-//                @Override
-//                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                    img_content.setVisibility(View.GONE);
-//                    img_default.setVisibility(View.GONE);
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                    img_content.setVisibility(View.VISIBLE);
-//                    img_default.setVisibility(View.GONE);
-//                    return false;
-//                }
-//            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
 
         }
         if (!TextUtils.isEmpty(dataBean.name)) {
@@ -151,25 +132,25 @@ public class GifRVHolder extends BaseViewHolder implements View.OnClickListener 
                     return;
                 }
 
-
-                new XPopup.Builder(mContext)
-                        .asImageViewer(img_content, imgUrl, new ImageLoader())
-                        .show();
                 break;
         }
     }
 
-    public class ImageLoader implements XPopupImageLoader {
+
+    public static class ImageLoader implements XPopupImageLoader {
         @Override
         public void loadImage(int position, @NonNull Object url, @NonNull ImageView imageView) {
             //必须指定Target.SIZE_ORIGINAL，否则无法拿到原图，就无法享用天衣无缝的动画
-            Glide.with(mContext).load(url).into(imageView);
-
+            Glide.with(imageView).load(url).apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round).override(Target.SIZE_ORIGINAL)).into(imageView);
         }
 
         @Override
         public File getImageFile(@NonNull Context context, @NonNull Object uri) {
-
+            try {
+                return Glide.with(context).downloadOnly().load(uri).submit().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }

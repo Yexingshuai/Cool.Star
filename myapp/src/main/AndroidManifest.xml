@@ -32,6 +32,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".myapp.base.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -65,13 +66,7 @@
             android:label="加载中..." />
         <activity android:name=".myapp.ui.activity.ShowBannerActivity" />
         <activity android:name=".myapp.component.movie.detail.FilmDetailActivity" />
-        <activity
-            android:name=".myapp.ui.activity.HomeActivity"
-            android:label="主页" />
         <activity android:name=".myapp.ui.activity.AboutActivity" />
-        <activity
-            android:name=".myapp.ui.activity.TestAboutActivity"
-            android:theme="@style/TransparentTheme" />
         <activity android:name=".myapp.ui.activity.TestMenuActivity" />
         <activity
             android:name=".myapp.component.login.LoginActivity"
@@ -122,6 +117,10 @@
         <!--日程预览-->
         <activity android:name=".myapp.component.schedule.PreviewScheduleActivity" />
 
+        <activity
+            android:name=".myapp.component.siri.SiriActivity"
+            android:screenOrientation="portrait" />
+
         <!--Push Receiver-->
         <!-- User defined. 用户自定义的广播接收器-->
         <!--<receiver-->
@@ -160,30 +159,6 @@
         </receiver>
 
         <!-- Share Start -->
-
-
-        <!-- sina -->
-        <!--<activity-->
-        <!--android:name="com.umeng.socialize.media.WBShareCallBackActivity"-->
-        <!--android:configChanges="keyboardHidden|orientation"-->
-        <!--android:exported="false"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-        <!--<activity-->
-        <!--android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"-->
-        <!--android:configChanges="keyboardHidden|orientation"-->
-        <!--android:exported="false"-->
-        <!--android:windowSoftInputMode="adjustResize" />-->
-        <!--<activity-->
-        <!--android:name="com.sina.weibo.sdk.share.WbShareTransActivity"-->
-        <!--android:launchMode="singleTask"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
-
-        <!--<category android:name="android.intent.category.DEFAULT" />-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
-
 
         <!---->
         <activity
@@ -241,6 +216,7 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
+
 
         <!--map-->
 

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapp.R;
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import com.example.myapp.myapp.data.bean.JokeBean;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 import com.example.myapp.myapp.ui.view.ExpandTextView;

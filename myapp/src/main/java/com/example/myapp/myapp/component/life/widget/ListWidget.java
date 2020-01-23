@@ -12,6 +12,7 @@ import com.example.myapp.R;
 import com.example.myapp.myapp.common.AppFlag;
 import com.example.myapp.myapp.component.schedule.TodayThingActivity;
 import com.example.myapp.myapp.component.map.MapActivity;
+import com.example.myapp.myapp.component.siri.SiriActivity;
 import com.example.myapp.myapp.component.weather.WeatherActivity;
 import com.example.myapp.myapp.data.api.MobApi;
 import com.example.myapp.myapp.data.bean.FortuneResponse;
@@ -87,7 +88,7 @@ public class ListWidget extends BaseWidget {
                     UiHelper.skipActivityNofinish(mContext, WeatherActivity.class);
                     break;
                 case 7:
-                    ToastUtil.showApp("待开发！");
+                    UiHelper.skipActivityNofinish(mContext, SiriActivity.class);
                     break;
             }
         }

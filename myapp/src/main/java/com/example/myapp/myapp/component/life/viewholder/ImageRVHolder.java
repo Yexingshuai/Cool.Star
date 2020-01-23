@@ -2,7 +2,6 @@ package com.example.myapp.myapp.component.life.viewholder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,15 +9,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import com.example.myapp.myapp.data.bean.JokeBean;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.view.CircleImageView;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.XPopupImageLoader;
 
-public class ImageRVHolder extends BaseViewHolder implements View.OnClickListener {
+import java.io.File;
+
+public class ImageRVHolder extends BaseViewHolder  {
     private CircleImageView icon;
     private CircleImageView icon_comment;
     private LinearLayout commnentsRoot;
@@ -53,7 +55,6 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
         tv_commenter_name = itemView.findViewById(R.id.tv_commenter_name);
         tv_commenter_text = itemView.findViewById(R.id.tv_commenter_text);
         img_content = itemView.findViewById(R.id.img_content);
-        img_content.setOnClickListener(this);
     }
 
     @Override
@@ -68,21 +69,18 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
             GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
         if (!TextUtils.isEmpty(dataBean.images)) {
-            Glide.with(mContext).load(dataBean.images).asBitmap().listener(new RequestListener() {
-                @Override
-                public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
-                    ((AppCompatActivity)mContext).supportStartPostponedEnterTransition();
-                    img_content.setVisibility(View.GONE);
-                    return false;
-                }
 
-                @Override
-                public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
-                    img_content.setVisibility(View.VISIBLE);
-                    return false;
-                }
+            Glide.with(mContext).load(dataBean.images).into(img_content);
 
-            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
+            img_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new XPopup.Builder(mContext)
+                            .asImageViewer(img_content, dataBean.images, new ImageLoader())
+                            .show();
+                }
+            });
+
         }
         if (!TextUtils.isEmpty(dataBean.name)) {
             userName.setText(dataBean.name);
@@ -118,14 +116,24 @@ public class ImageRVHolder extends BaseViewHolder implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.img_content:
-//                if (!TextUtils.isEmpty(imgURl)) {
-//                    GlideContext.loadCommon(mContext, imgURl, img_content);
-//                }
-                break;
+
+
+
+    public static class ImageLoader implements XPopupImageLoader {
+        @Override
+        public void loadImage(int position, @NonNull Object url, @NonNull ImageView imageView) {
+            //必须指定Target.SIZE_ORIGINAL，否则无法拿到原图，就无法享用天衣无缝的动画
+            Glide.with(imageView).load(url).apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round).override(Target.SIZE_ORIGINAL)).into(imageView);
+        }
+
+        @Override
+        public File getImageFile(@NonNull Context context, @NonNull Object uri) {
+            try {
+                return Glide.with(context).downloadOnly().load(uri).submit().get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

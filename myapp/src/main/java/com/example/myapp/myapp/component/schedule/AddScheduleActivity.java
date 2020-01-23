@@ -22,6 +22,8 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -66,6 +68,7 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
     private int mStartHour;
     private int mStartMin;
     private boolean isOk;
+    private RadioGroup rg_schedule;
 
     @Override
     public int inflateContentView() {
@@ -86,6 +89,7 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
         mRlStart = findViewById(R.id.rl_start);
         mRlEnd = findViewById(R.id.rl_end);
         mSwitch = findViewById(R.id.sw_all_day);
+        rg_schedule = findViewById(R.id.rg_schedule);
         setCommonClickListener(mRlStart);
         setCommonClickListener(mRlEnd);
         setCommonClickListener(img_invite);
@@ -296,11 +300,6 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
 
 
     private void searchContacts() {
-//        Uri uri = Uri.parse("content://contacts/people");
-//        Intent intent = new Intent(Intent.ACTION_PICK, uri);
-//        startActivityForResult(intent, 0);
-
-
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(intent, 0);
     }
@@ -310,15 +309,17 @@ public class AddScheduleActivity extends BaseActivity implements TextWatcher {
      * 添加日程
      */
     private void addSchedule() {
+        RadioButton mCheckButton = findViewById(rg_schedule.getCheckedRadioButtonId());
         String title = mEt_title.getText().toString().trim(); //标题
-        StringBuilder sb = new StringBuilder();
 
+        StringBuilder sb = new StringBuilder();
         sb.append(mEt_input.getText().toString().trim() + "#"); //正文
         sb.append(mEt_input_address.getText().toString().trim() + "#"); //地址
-        sb.append(mEt_contact.getText().toString().trim() + "#");
+        sb.append(mEt_contact.getText().toString().trim() + "#"); //联系人
         sb.append(mSwitch.isChecked() ? 0 + "#" : 1 + "#"); //
         sb.append(mStartTime.getText() + "#"); //正文
         sb.append(mFinshTime.getText() + "#"); //正文
+        sb.append(mCheckButton.getText().toString() + "#"); //事件类型
 
         HttpContext httpContext = new HttpContext();
         WandroidApi wandroidApi = httpContext.createApi(WandroidApi.class);

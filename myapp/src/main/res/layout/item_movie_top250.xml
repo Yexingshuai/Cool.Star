@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/iv_film"
-            android:layout_width="85dp"
-            android:layout_height="105dp"
+            android:layout_width="@dimen/dp_85"
+            android:layout_height="@dimen/dp_105"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_toRightOf="@+id/iv_film"
             android:text="hhha"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp_13" />
 
         <TextView
             android:id="@+id/tv_film_english"
@@ -46,7 +46,7 @@
             android:layout_toRightOf="@+id/iv_film"
             android:text="hhha"
             android:textColor="@color/text_gray_6"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_14"
             android:textStyle="italic" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:paddingBottom="8dp"
             android:text="9.6"
             android:textColor="@color/red_base"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp_11" />
 
 
         <TextView
@@ -72,7 +72,7 @@
             android:paddingLeft="10dp"
             android:text="01"
             android:textColor="@color/text_gray_4"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
 
 

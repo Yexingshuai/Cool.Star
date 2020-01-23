@@ -1,19 +1,18 @@
 package com.example.myapp.myapp.component.life.fragment;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import android.util.Log;
+
+import com.example.myapp.myapp.data.bean.JokeBean;
 import com.example.myapp.myapp.data.http.HttpContext;
 import com.example.myapp.myapp.data.source.joke.JokeFragmentSource;
-import com.example.myapp.myapp.ui.activity.AboutActivity;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -23,7 +22,7 @@ public class JokeFragmentPresenter implements JokeFragmentContract.Presenter {
 
     private JokeFragmentSource mSource;
     private JokeFragmentContract.View mView;
-    public String joke = "https://api.apiopen.top/getJoke?page=%s&count=20&type=%s";
+    public String joke = "https://api.apiopen.top/getJoke?page=%s&count=2&type=%s";
 
     @Override
     public void start() {
@@ -45,39 +44,41 @@ public class JokeFragmentPresenter implements JokeFragmentContract.Presenter {
 
     @Override
     public void requestJokeInfo(int page, String type) {
-//        mSource.getJokeList(page, type, new HttpContext.Response<JokeBean>() {
-//            @Override
-//            public void success(JokeBean result) {
-//                mView.setJokeInfo(result);
-//            }
+        mSource.getJokeList(page, type, new HttpContext.Response<JokeBean>() {
+            @Override
+            public void success(JokeBean jokeBean) {
+                mView.setJokeInfo(jokeBean);
+            }
+
+            @Override
+            public void error(String error) {
+                super.error(error);
+                mView.loadFail();
+                ToastUtil.showApp(error);
+            }
+        });
+//        joke = String.format(joke, page, type);
 //
-//            @Override
-//            public void error(String error) {
-//                super.error(error);
-//                mView.loadFail();
-//                ToastUtil.showApp(error);
-//            }
-//        });
-        joke = String.format(joke, page, type);
-
-
-        OkGo.get(joke)
-                .tag(this)
-                .cacheMode(CacheMode.DEFAULT)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Gson gson = new Gson();
-                        JokeBean jokeBean = gson.fromJson(s, JokeBean.class);
-                        mView.setJokeInfo(jokeBean);
-                    }
-
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-
-                    }
-                });
+//
+//        OkGo.get(joke)
+//                .tag(this)
+//                .cacheMode(CacheMode.DEFAULT)
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(String s, Call call, Response response) {
+//
+//                        Gson gson = new Gson();
+//                        JokeBean jokeBean = gson.fromJson(s, JokeBean.class);
+//
+//                        mView.setJokeInfo(jokeBean);
+//                    }
+//
+//                    @Override
+//                    public void onError(Call call, Response response, Exception e) {
+//                        super.onError(call, response, e);
+//
+//                    }
+//                });
 
     }
 

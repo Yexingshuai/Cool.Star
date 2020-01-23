@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:background="@mipmap/bg_src_morning"
+        android:elevation="2dp"
+        android:outlineProvider="bounds">
+
+        <FrameLayout
+            android:id="@+id/fl_titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp">
+
+
+            <com.example.myapp.myapp.ui.view.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:foreground="@drawable/ic_touch_menu"
+                android:src="@mipmap/icon_head2" />
+
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Cool·Star"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/im_search"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="4dp"
+                android:foreground="@drawable/ic_touch_menu"
+                android:padding="7dp"
+                android:src="@mipmap/icon_search_builder"
+                android:tint="@color/white" />
+
+        </FrameLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <FrameLayout
+        android:id="@+id/lay_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="52dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatbt"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="68dp"
+        android:gravity="center"
+        android:padding="20dp"
+        android:tint="@color/white"
+        android:translationY="76dp"
+        app:contentScrim="#1572fc"
+        app:layout_anchor="@id/lay_container"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/ic_group_add" />
+
+
+    <android.support.design.widget.BottomNavigationView
+
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:outlineProvider="bounds"
+        android:translationZ="8dp"
+        app:itemIconTint="@drawable/text_nav"
+        app:itemTextColor="@drawable/text_nav"
+        app:menu="@menu/navigation_items"
+        tools:targetApi="lollipop">
+
+
+    </android.support.design.widget.BottomNavigationView>
+
+</android.support.design.widget.CoordinatorLayout>

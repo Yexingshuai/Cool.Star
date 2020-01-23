@@ -2,7 +2,7 @@ package com.example.myapp.myapp.component.life.fragment;
 
 import com.example.myapp.myapp.base.BasePresenter;
 import com.example.myapp.myapp.base.BaseView;
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import com.example.myapp.myapp.data.bean.JokeBean;
 
 public interface JokeFragmentContract {
 

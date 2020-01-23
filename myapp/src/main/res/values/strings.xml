@@ -65,12 +65,17 @@
         <item>全部</item>
         <item>文字</item>
         <item>图片</item>
-        <item>gif</item>
+        <item>Gif</item>
         <item>视频</item>
         <item>视频</item>
         <item>视频</item>
         <item>视频</item>
     </string-array>
+
+
+    <string name="title_home">Active</string>
+    <string name="title_group">Group</string>
+    <string name="title_contact">Contact</string>
 
 
 </resources>

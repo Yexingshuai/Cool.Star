@@ -22,8 +22,7 @@ import java.util.Random;
 public class SwipeFlingAdater extends BaseAdapter {
     private Context mCtx;
     private List<JokeResponse.ResultBean.DataBean> mList;
-//    private int[] imgBgs = {R.mipmap.joke_cat, R.mipmap.joke_dog, R.mipmap.joke_dog1};
-    private int[] imgBgs = {R.mipmap.joke_bg};
+    private int[] imgBgs = {};
 
     public SwipeFlingAdater(FragmentActivity activity, List<JokeResponse.ResultBean.DataBean> jokeList) {
         this.mCtx = activity;

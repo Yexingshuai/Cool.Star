@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/iV_film"
-                android:layout_width="110dp"
-                android:layout_height="130dp"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="@dimen/dp_120"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:maxLines="2"
                 android:padding="2dp"
                 android:textColor="@color/colorAccent"
-                android:textSize="13sp" />
+                android:textSize="@dimen/sp_13" />
 
             <TextView
                 android:id="@+id/tv_film_name"
@@ -47,7 +47,7 @@
                 android:maxLines="1"
                 android:padding="3dp"
                 android:textColor="@color/text_gray_28"
-                android:textSize="14sp" />
+                android:textSize="@dimen/sp_14" />
 
         </LinearLayout>
 

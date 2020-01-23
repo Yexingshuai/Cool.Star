@@ -151,7 +151,6 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
         ListWidget listWidget = new ListWidget(getActivity());
         listWidget.init();
         mRootHeaderView.addView(listWidget.getRootView());
-//        mRootHeaderView.requestLayout();
 
         mFragmentList = new ArrayList<>();
         mPresenter.addJokeFg(mFragmentList);
@@ -378,6 +377,7 @@ public class LifeFragment3 extends BaseFragment implements LifeFragmentContract.
                 setHeaderView(false);
                 break;
             case R.id.searchLayout:
+                ToastUtil.showApp("没什么可搜索的\uD83D\uDE01");
                 break;
             case R.id.scan_code:
                 PermissonUtil.requestPermisson(getActivity(), Manifest.permission.CAMERA, "相机", new PermissonUtil.PermissonListener() {

@@ -20,7 +20,7 @@ import java.util.Random;
  */
 
 public class LifeHeadAdapter extends PagerAdapter {
-        private int[] imgBgs = {R.mipmap.zuqiu, R.mipmap.lanqiu, R.mipmap.xingzuo};
+        private int[] imgBgs = {};
 //    private int[] imgBgs = {R.mipmap.joke_cat, R.mipmap.joke_dog, R.mipmap.joke_dog1};
     private String[] des = {"来一场足球较量吧！", "篮球梦", "星座运势"};
     private Context context;

@@ -36,7 +36,7 @@ public class SplashActivity extends BaseActivity {
         int x = r.nextInt(metrics.widthPixels * 4 / 3);   //1440不在内，只产生0-1439   乐事:1080*1920
         int y = r.nextInt(metrics.heightPixels * 4 / 3);  //2560
         float s = r.nextFloat() + 4.0f;  //r.nextFloat会产生一个0.0-1.0之间的  float
-        ValueAnimator tranY = ObjectAnimator.ofFloat(t, "translationY", y - t.getY() , 0);//
+        ValueAnimator tranY = ObjectAnimator.ofFloat(t, "translationY", y - t.getY(), 0);//
         ValueAnimator tranX = ObjectAnimator.ofFloat(t, "translationX", x - t.getX(), 0);//
         ValueAnimator scaleX = ObjectAnimator.ofFloat(t, "scaleX", s, 1.0f);
         ValueAnimator scaleY = ObjectAnimator.ofFloat(t, "scaleY", s, 1.0f);

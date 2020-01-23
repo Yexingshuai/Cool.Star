@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import com.example.myapp.myapp.data.bean.JokeBean;
 
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 

@@ -5,23 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     android:orientation="vertical">
 
 
     <include layout="@layout/app_toolbar" />
 
     <com.example.myapp.myapp.ui.load.LoadingStatusLayout
+        android:clipChildren="false"
         android:id="@+id/loadingStatusLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:status="LOADING">
 
         <ScrollView
+            android:clipChildren="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
             <LinearLayout
+                android:clipChildren="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -30,7 +34,7 @@
                 <!--android:padding="20dp"-->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="@dimen/dp_200">
 
                     <ImageView
                         android:id="@+id/iv_background"
@@ -42,8 +46,8 @@
 
                     <com.flaviofaria.kenburnsview.KenBurnsView
                         android:id="@+id/iv_film"
-                        android:layout_width="120dp"
-                        android:layout_height="170dp"
+                        android:layout_width="@dimen/dp_120"
+                        android:layout_height="@dimen/dp_170"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="25dp"
                         android:scaleType="centerCrop"
@@ -186,10 +190,11 @@
 
 
                 <android.support.v7.widget.RecyclerView
+                    android:clipChildren="false"
                     android:id="@+id/rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"></android.support.v7.widget.RecyclerView>
+                    android:layout_margin="10dp"></android.support.v7.widget.RecyclerView>
 
 
             </LinearLayout>

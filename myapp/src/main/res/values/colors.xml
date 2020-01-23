@@ -26,7 +26,7 @@
     <color name="text_gray_6">#666666</color>
     <color name="movie_line">#66cccccc</color>
     <color name="colorTransparent">#88808080</color>
-
+    <color name="red_base_alpha">#f36c21</color>
 
     <color name="title_bar">#00c3a6</color>
 

@@ -2,7 +2,6 @@ package com.example.myapp.myapp.ui.activity;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -27,6 +26,7 @@ import com.example.myapp.myapp.component.login.helper.LoginContext;
 import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.component.weather.WeatherActivity;
 import com.example.myapp.myapp.ui.adapter.FragmentAdapter;
+import com.example.myapp.myapp.ui.dialog.BottomGridDialog;
 import com.example.myapp.myapp.ui.dialog.DesignDialog;
 import com.example.myapp.myapp.ui.helper.UiHelper;
 import com.example.myapp.myapp.ui.view.MyViewPager;
@@ -34,8 +34,6 @@ import com.example.myapp.myapp.ui.view.NavigationButton;
 import com.example.myapp.myapp.utils.PreferencesUtils;
 import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
-import com.tencent.bugly.beta.Beta;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -43,7 +41,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
-import cn.jzvd.Jzvd;
 
 /**
  * Created by yexing on 2018/3/28.  现在在测试分支上
@@ -81,6 +78,8 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         mUserName = headerView.findViewById(R.id.tv_username);
         logoutMenuItem = mNavigationView.getMenu().findItem(R.id.navigation_item_logout);
         Utils.setDarkStatusIcon(this, true);
+
+//        BottomGridDialog bottomGridDialog = new BottomGridDialog(this);bottomGridDialog.show();
     }
 
     @Override
@@ -227,8 +226,9 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
     @Override
     protected void onPause() {
         super.onPause();
-        Jzvd.releaseAllVideos();
+//        Jzvd.releaseAllVideos();
     }
+
     class NavigationItemSelectListener implements NavigationView.OnNavigationItemSelectedListener {
 
         @Override

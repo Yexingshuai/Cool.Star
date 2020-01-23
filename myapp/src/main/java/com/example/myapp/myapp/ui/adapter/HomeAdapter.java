@@ -3,14 +3,10 @@ package com.example.myapp.myapp.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,24 +16,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.myapp.R;
-import com.example.myapp.myapp.component.study.StudyFragment;
 import com.example.myapp.myapp.data.bean.BannerBean;
 import com.example.myapp.myapp.data.bean.HomeItemBean;
-import com.example.myapp.myapp.ui.activity.WebActivity;
-
+import com.example.myapp.myapp.ui.helper.ItemAnimHelper;
 import com.example.myapp.myapp.ui.helper.UiHelper;
-import com.example.myapp.myapp.utils.ToastUtil;
 import com.example.myapp.myapp.utils.Utils;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import com.example.myapp.myapp.ui.helper.ItemAnimHelper;
-import com.like.LikeButton;
-import com.like.OnLikeListener;
 
 /**
  * Created by yexing on 2018/3/29.
@@ -56,10 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private BannerAdapter bannerAdapter;
     private ButtonLikeListener listener;
     private boolean isDispatch;
-    /**
-     * 记录banner选中的索引
-     */
-    private int bannerPosition = 0;
+
 
 
 
@@ -68,8 +56,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
         array = new int[]{
                 mCtx.getResources().getColor(R.color.cardView),
                 mCtx.getResources().getColor(R.color.cardView2),
-                mCtx.getResources().getColor(R.color.colorAccent),
-                mCtx.getResources().getColor(R.color.xxblue)};
+                mCtx.getResources().getColor(R.color.red_base_alpha),
+                mCtx.getResources().getColor(R.color.scan_middle),
+              };
     }
 
     public void addBanner(List<BannerBean.DataBean> banner) {

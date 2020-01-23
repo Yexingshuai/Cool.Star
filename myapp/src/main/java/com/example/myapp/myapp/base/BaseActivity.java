@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,12 +14,12 @@ import android.transition.Fade;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.myapp.R;
 import com.example.myapp.myapp.ui.activity.MainActivity;
+import com.example.myapp.myapp.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,6 +49,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(inflateContentView());
+
+        StatusBarUtil.setStatusBarColor2(this, false);
         //ToolBar
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {

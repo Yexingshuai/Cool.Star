@@ -6,12 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.myapp.myapp.component.life.entity.JokeBean;
 import com.example.myapp.myapp.component.life.viewholder.BaseViewHolder;
 import com.example.myapp.myapp.component.life.viewholder.GifRVHolder;
 import com.example.myapp.myapp.component.life.viewholder.ImageRVHolder;
 import com.example.myapp.myapp.component.life.viewholder.TextRVHolder;
 import com.example.myapp.myapp.component.life.viewholder.VideoRVHolder;
+import com.example.myapp.myapp.data.bean.JokeBean;
 
 import java.util.ArrayList;
 import java.util.List;

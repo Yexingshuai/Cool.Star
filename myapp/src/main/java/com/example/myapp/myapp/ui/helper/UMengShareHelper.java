@@ -88,7 +88,7 @@ public class UMengShareHelper {
     public UMengShareHelper shareWithWeb(int index, String title, String url) {
         UMWeb web = new UMWeb(url);
         web.setTitle("Cool.Star");
-        web.setThumb(new UMImage(mCtx, R.mipmap.meizi));  //分享图片
+        web.setThumb(new UMImage(mCtx, R.mipmap.dream1));  //分享图片
         web.setDescription(title);
         new ShareAction((Activity) mCtx).withMedia(web)
                 .setPlatform(platforms.get(index).mPlatform)

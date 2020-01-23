@@ -3,10 +3,12 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
 
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
-        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <!--都注释-->
+        <!--<item name="android:windowTranslucentStatus">false</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <!--&lt;!&ndash;Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色&ndash;&gt;-->
+        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
         <!--防白屏-->
         <!--<item name="android:windowBackground">@color/black</item>-->
         <!--<item name="android:windowDrawsSystemBarBackgrounds">false</item>-->
@@ -15,5 +17,6 @@
     <!--splashTheme-->
     <style name="splashTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/title_bar</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

@@ -32,7 +32,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="缓存"
                 android:textColor="@color/icon_select"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp_18" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="清除缓存"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/tv_cache"
@@ -56,7 +56,7 @@
                     android:layout_marginRight="15dp"
                     android:text="12.2M"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp_14" />
 
             </RelativeLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="通用设置"
                 android:textColor="@color/icon_select"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp_18" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="加载网络图片"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp_14" />
 
                 <Switch
                     android:id="@+id/switch_image"
@@ -129,7 +129,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="接收消息推送"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp_14" />
 
                 <Switch
                     android:id="@+id/switch_push"
@@ -158,7 +158,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="检查更新"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp_14" />
 
 
             </RelativeLayout>

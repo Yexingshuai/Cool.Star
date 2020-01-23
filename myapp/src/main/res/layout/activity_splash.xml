@@ -45,37 +45,37 @@
                 <TextView
                     android:id="@+id/tv1"
                     style="@style/TextStyle111"
-                    android:text="你" />
+                    android:text="Be" />
 
                 <TextView
                     android:id="@+id/tv2"
                     style="@style/TextStyle111"
-                    android:text="好" />
+                    android:text="just" />
 
                 <TextView
                     android:id="@+id/tv3"
                     style="@style/TextStyle111"
-                    android:text="我" />
+                    android:text="the" />
 
                 <TextView
                     android:id="@+id/tv4"
                     style="@style/TextStyle111"
-                    android:text="很" />
+                    android:text="one" />
 
                 <TextView
                     android:id="@+id/tv5"
                     style="@style/TextStyle111"
-                    android:text="帅" />
+                    android:text="you" />
 
                 <TextView
                     android:id="@+id/tv6"
                     style="@style/TextStyle111"
-                    android:text="谢" />
+                    android:text="wanna" />
 
                 <TextView
                     android:id="@+id/tv7"
                     style="@style/TextStyle111"
-                    android:text="谢" />
+                    android:text="be！" />
 
             </LinearLayout>
 

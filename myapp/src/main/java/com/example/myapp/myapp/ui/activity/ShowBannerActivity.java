@@ -52,8 +52,9 @@ public class ShowBannerActivity extends BaseActivity {
     @Override
     protected void initData() {
 //        Glide.with(this).load(url).into(iv_banner);
-        Glide.with(this).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).priority(Priority.IMMEDIATE)
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).into(iv_banner);
+//        Glide.with(this).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).priority(Priority.IMMEDIATE)
+//                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).into(iv_banner);
+        Glide.with(this).load(url).into(iv_banner);
     }
 
     @Override

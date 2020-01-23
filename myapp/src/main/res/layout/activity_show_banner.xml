@@ -2,11 +2,11 @@
 <com.example.myapp.myapp.ui.view.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drag_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     android:gravity="center"
-    android:id="@+id/drag_layout"
     tools:context="com.example.myapp.myapp.ui.activity.ShowBannerActivity">
 
     <ImageView
@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:transitionName="bannerImage"
-        android:src="@mipmap/puppet" />
-
+        android:transitionName="bannerImage" />
 
 
 </com.example.myapp.myapp.ui.view.DragLayout>

@@ -36,7 +36,7 @@
                     android:layout_marginRight="16dp"
                     android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                     android:textColor="@color/colorTextDark"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/tv_collect_date"
@@ -45,13 +45,13 @@
                     android:layout_marginTop="4dp"
                     android:text="yyyyyyyyyyyy"
                     android:textColor="@color/colorTextDark2nd"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp_10" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_del"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22"
                 android:src="@mipmap/login_chazi" />
 
 

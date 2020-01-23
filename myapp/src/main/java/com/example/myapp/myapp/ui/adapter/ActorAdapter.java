@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myapp.R;
 import com.example.myapp.myapp.component.movie.detail.FilmDetailActivity;
+import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.activity.WebActivity;
 
 import java.util.List;
@@ -46,8 +47,8 @@ public class ActorAdapter extends RecyclerView.Adapter {
         ViewHolder holder = (ViewHolder) viewHolder;
         holder.setData(filmPeople);
         if (filmPeople.getAvatars()!= null) {
-//            GlideContext.loadCommon(mctx, filmPeople.getAvatars().getLarge(), holder.iv_actor);
-            Glide.with(mctx).load(filmPeople.getAvatars().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.iv_actor);
+            GlideContext.loadCommon(mctx, filmPeople.getAvatars().getLarge(), holder.iv_actor);
+//            Glide.with(mctx).load(filmPeople.getAvatars().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(holder.iv_actor);
         }
 
 

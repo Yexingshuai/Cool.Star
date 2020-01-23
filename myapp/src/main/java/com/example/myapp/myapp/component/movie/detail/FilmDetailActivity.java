@@ -125,11 +125,13 @@ public class FilmDetailActivity extends BaseActivity implements View.OnClickList
     public void setFilmDetailInfo(FilmDetail filmDetail) {
         loadingStatusLayout.setStatus(LoadingStatusLayout.SUCCESS_STATUS);
         if (filmDetail.getImages() != null && filmDetail.getImages().getLarge() != null) {
-            Glide.with(FilmDetailActivity.this).load(filmDetail.getImages().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(iv_film);
+            Glide.with(FilmDetailActivity.this).load(filmDetail.getImages().getLarge())
+//                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .into(iv_film);
 //            Glide.with(FilmDetailActivity.this).load(filmDetail.getImages().getLarge()).diskCacheStrategy(DiskCacheStrategy.RESULT).into(iv_background);
             Glide.with(FilmDetailActivity.this)
                     .load(filmDetail.getImages().getLarge())
-                    .transform(new BlurTransformation(this, 10))
+//                    .transform(new BlurTransformation(this, 10))
                     .into(iv_background);
             iv_background.setAlpha(0.6f);
         }

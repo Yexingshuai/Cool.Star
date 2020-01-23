@@ -4,16 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.myapp.R;
-import com.example.myapp.myapp.component.life.entity.JokeBean;
+import com.example.myapp.myapp.data.bean.JokeBean;
 import com.example.myapp.myapp.di.glide.GlideContext;
 import com.example.myapp.myapp.ui.view.CircleImageView;
 
@@ -67,22 +62,7 @@ public class VideoRVHolder extends BaseViewHolder {
             GlideContext.loadCommon(mContext, dataBean.header, icon, R.mipmap.icon_head2);
         }
         if (!TextUtils.isEmpty(dataBean.thumbnail)) {
-//            Glide.with(mContext).load(dataBean.thumbnail).asBitmap().listener(new RequestListener() {
-//                @Override
-//                public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
-//                    img_content.setVisibility(View.GONE);
-//                    img_default.setVisibility(View.GONE);
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                    img_content.setVisibility(View.VISIBLE);
-//                    img_default.setVisibility(View.GONE);
-//                    return false;
-//                }
-//
-//            }).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_content);
+
             if (!TextUtils.isEmpty(dataBean.video)) {
                 jzvdStd.setUp(dataBean.video, dataBean.text);
                 GlideContext.loadCommon(mContext, dataBean.thumbnail, jzvdStd.thumbImageView);
