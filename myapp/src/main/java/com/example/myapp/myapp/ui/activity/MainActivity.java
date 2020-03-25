@@ -78,8 +78,6 @@ public class MainActivity extends BaseActivity implements BaseView<MainPresenter
         mUserName = headerView.findViewById(R.id.tv_username);
         logoutMenuItem = mNavigationView.getMenu().findItem(R.id.navigation_item_logout);
         Utils.setDarkStatusIcon(this, true);
-
-//        BottomGridDialog bottomGridDialog = new BottomGridDialog(this);bottomGridDialog.show();
     }
 
     @Override

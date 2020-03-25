@@ -56,7 +56,7 @@ public class MainPresenter implements BasePresenter {
         //新闻
         NewsFragment newsFragment = NewsFragment.newInstance();
         new NewsFragmentPresenter(newsFragment, new NewsFragmentRepository());
-        fragmentList.add(newsFragment);
+//        fragmentList.add(newsFragment);
         //生活
         LifeFragment lifeFragment = LifeFragment.newInstance();
         new LifeFragmentPresenter(new LifeFragmentRepository(), lifeFragment);
@@ -72,7 +72,7 @@ public class MainPresenter implements BasePresenter {
         List<String> titleList = new ArrayList<>();
         titleList.add("学习");
         titleList.add("影评");
-        titleList.add("新闻");
+//        titleList.add("新闻");
         titleList.add("生活");
 
         return titleList;
@@ -82,7 +82,7 @@ public class MainPresenter implements BasePresenter {
         List<Integer> mTabImg = new ArrayList<>();
         mTabImg.add(R.drawable.tab_home_btn);
         mTabImg.add(R.drawable.tab_sm_btn);
-        mTabImg.add(R.drawable.tab_news_btn);
+//        mTabImg.add(R.drawable.tab_news_btn);
         mTabImg.add(R.drawable.tab_shopping_btn);
         return mTabImg;
     }
